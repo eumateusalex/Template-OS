@@ -1,0 +1,559 @@
+/* ios-core-design v1.0 — GERADO, não editar à mão */
+/*
+ * O que este arquivo tem: as cores (light e dark), a tipografia, os raios, as
+ * medidas, o movimento, a base mínima (§4: caixa previsível, foco, host fix do
+ * <select>), os utilitários de texto (§5) e os MATERIAIS de vidro (§5b:
+ * .ios-glass Regular, .ios-glass--clear com dimming, fallback opaco
+ * automático por @supports e prefers-reduced-transparency, e o data-glass,
+ * a tradução web do slider de intensidade do iOS 27: regular | frosted |
+ * solid). Botão é cápsula (--ios-radius-button aponta pra --ios-radius-pill);
+ * vidro flutua com sombra própria (--ios-glass-shadow).
+ */
+/*
+ * tokens.css — a fonte de verdade do design system Liquid Glass (iOS 26/27) pra web.
+ *
+ * Regras deste arquivo:
+ *  - Todo valor visual do sistema mora aqui. Componente nunca usa hex direto — só var(--ios-*).
+ *  - O espelho legível por máquina é o tokens.json (mesma pasta). Mudou um, muda o outro.
+ *  - Existe UMA cópia deliberada deste arquivo: o bloco de tokens INLINE do
+ *    assets/app-shell-template.html (arquivo único não pode ter <link>).
+ *    MUDOU AQUI, RECOPIA LÁ — o aviso vale nos dois sentidos.
+ *  - Light é o padrão (:root). Dark entra de dois jeitos, com o mesmo bloco de valores:
+ *      1. @media (prefers-color-scheme: dark) — segue o sistema operacional;
+ *      2. [data-theme="dark"] — override manual, em qualquer elemento (página ou painel).
+ *    [data-theme="light"] força light mesmo com o sistema em dark.
+ *  - Fontes dos valores: paleta e escala tipográfica oficiais Apple (não mudaram
+ *    no Liquid Glass); raios card/input/badge do guia técnico de adoção. A Apple
+ *    NÃO publica o vidro em números de CSS: todo valor de material marcado
+ *    "tradução web calibrada" é derivação nossa, calibrada no PREVIEW — a tabela
+ *    completa com a justificativa de cada um vive em references/materials.md.
+ *    O que não tem fonte nem calibragem registrada vira TODO — nunca chute.
+ */
+
+/* ============================================================
+   1 · CORES — LIGHT (padrão)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Acentos de sistema (inalterados no Liquid Glass) */
+  --ios-blue:   #007AFF; /* ação, links, interativo padrão */
+  --ios-green:  #34C759; /* sucesso, confirmação */
+  --ios-indigo: #5856D6;
+  --ios-orange: #FF9500; /* atenção */
+  --ios-pink:   #FF2D55;
+  --ios-purple: #AF52DE;
+  --ios-red:    #FF3B30; /* destrutivo, erro */
+  --ios-teal:   #5AC8FA;
+  --ios-yellow: #FFCC00;
+
+  /* Cinzas de sistema */
+  --ios-gray:  #8E8E93;
+  --ios-gray2: #AEAEB2;
+  --ios-gray3: #C7C7CC;
+  --ios-gray4: #D1D1D6;
+  --ios-gray5: #E5E5EA;
+  --ios-gray6: #F2F2F7;
+
+  /* Fundos — tela plana (conteúdo corrido, sem lista agrupada) */
+  --ios-bg:           #FFFFFF;
+  --ios-bg-secondary: #F2F2F7;
+  --ios-bg-tertiary:  #FFFFFF;
+
+  /* Fundos — tela agrupada (listas inset grouped, estilo Ajustes) */
+  --ios-bg-grouped:           #F2F2F7;
+  --ios-bg-grouped-secondary: #FFFFFF;
+
+  /* Labels — 4 níveis de hierarquia de texto */
+  --ios-label:            rgba(0, 0, 0, 1);
+  --ios-label-secondary:  rgba(0, 0, 0, 0.6);
+  --ios-label-tertiary:   rgba(0, 0, 0, 0.3);
+  --ios-label-quaternary: rgba(0, 0, 0, 0.18);
+
+  /* Separadores */
+  --ios-separator:        rgba(60, 60, 67, 0.36); /* padrão, translúcido */
+  --ios-separator-opaque: #C6C6C8;                /* quando não pode haver transparência */
+
+  /* Fills — preenchimentos de controle (track de switch, fundo de segmented,
+     campo de busca). Valores oficiais Apple (UIKit systemFill). */
+  --ios-fill:            rgba(120, 120, 128, 0.20);
+  --ios-fill-secondary:  rgba(120, 120, 128, 0.16);
+  --ios-fill-tertiary:   rgba(120, 120, 128, 0.12);
+  --ios-fill-quaternary: rgba(120, 120, 128, 0.08);
+
+  /* Lavagem do azul — fundo do botão tinted (~15%, guia técnico: tint só em
+     ação primária, nunca decoração) */
+  --ios-blue-tint: rgba(0, 122, 255, 0.15);
+
+  /* Lavagens dos demais acentos — chip/badge de ESTADO (15% do acento no
+     fundo, acento cheio no texto). A dupla declaração é o fallback: sem
+     color-mix o chip degrada pra cinza (fill) e só o texto carrega a cor —
+     degradação REGISTRADA, não bug. color-mix resolve var(--ios-red) na
+     hora do uso, então estas três NÃO precisam de bloco dark: trocam
+     sozinhas junto com o acento. */
+  --ios-tint-red:    var(--ios-fill-secondary);
+  --ios-tint-red:    color-mix(in srgb, var(--ios-red) 15%, transparent);
+  --ios-tint-orange: var(--ios-fill-secondary);
+  --ios-tint-orange: color-mix(in srgb, var(--ios-orange) 15%, transparent);
+  --ios-tint-green:  var(--ios-fill-secondary);
+  --ios-tint-green:  color-mix(in srgb, var(--ios-green) 15%, transparent);
+
+  /* Thumb do segmented control */
+  --ios-segment: #FFFFFF;
+
+  /* Texto sobre cor cheia (botão filled, badge) — branco nos DOIS temas */
+  --ios-on-accent: #FFFFFF;
+
+  /* Véus de overlay */
+  --ios-scrim:      rgba(0, 0, 0, 0.4);
+  --ios-scrim-menu: rgba(0, 0, 0, 0.1); /* context menu: véu leve */
+
+  /* --- MATERIAL — vidro Regular (tradução web calibrada) ----------
+     A anatomia completa e a justificativa de cada número:
+     references/materials.md. O vidro se monta na classe .ios-glass (§5b);
+     estas vars são os ingredientes por tema.                        */
+  --ios-glass-bg:         rgba(255, 255, 255, 0.55); /* corpo do vidro */
+  --ios-glass-bg-frosted: rgba(255, 255, 255, 0.80); /* estado frosted do data-glass */
+  --ios-glass-stroke:     rgba(255, 255, 255, 0.35); /* lensing: borda de luz 1px */
+  --ios-glass-glint:      rgba(255, 255, 255, 0.60); /* realce especular do topo */
+  --ios-glass-shadow:     0 4px 16px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06); /* vidro flutua */
+  --ios-glass-solid:      #FFFFFF; /* extremo opaco: fallback e data-glass="solid" */
+}
+
+/* ============================================================
+   2 · TOKENS QUE NÃO MUDAM COM O TEMA
+   (declarados uma vez, herdados por tudo)
+   ============================================================ */
+:root {
+  /* --- Tipografia ------------------------------------------------
+     Stack: SF Pro nos aparelhos Apple (de graça, via -apple-system),
+     fonte do sistema no resto, Inter como preferência web se o projeto
+     a carregar. NUNCA fazer self-host de SF Pro (licença da Apple).
+     A escala Dynamic Type não mudou no Liquid Glass.                */
+  --ios-font-text: -apple-system, "SF Pro Text", "SF Pro Display", "Inter", system-ui, sans-serif;
+
+  /* Escala Dynamic Type (tamanho Large) — 11 estilos.
+     Regra do tracking: tamanho ≥ 20px → -0.4px (simula SF Pro Display);
+     abaixo de 20px → 0. Peso não citado = regular (400).              */
+  --ios-text-large-title-size:     34px;
+  --ios-text-large-title-leading:  41px;
+  --ios-text-large-title-weight:   700;
+  --ios-text-large-title-tracking: -0.4px;
+
+  --ios-text-title1-size:     28px;
+  --ios-text-title1-leading:  34px;
+  --ios-text-title1-weight:   400;
+  --ios-text-title1-tracking: -0.4px;
+
+  --ios-text-title2-size:     22px;
+  --ios-text-title2-leading:  28px;
+  --ios-text-title2-weight:   400;
+  --ios-text-title2-tracking: -0.4px;
+
+  --ios-text-title3-size:     20px;
+  --ios-text-title3-leading:  25px;
+  --ios-text-title3-weight:   400;
+  --ios-text-title3-tracking: -0.4px;
+
+  --ios-text-headline-size:     17px;
+  --ios-text-headline-leading:  22px;
+  --ios-text-headline-weight:   600;
+  --ios-text-headline-tracking: 0;
+
+  --ios-text-body-size:     17px;
+  --ios-text-body-leading:  22px;
+  --ios-text-body-weight:   400;
+  --ios-text-body-tracking: 0;
+
+  --ios-text-callout-size:     16px;
+  --ios-text-callout-leading:  21px;
+  --ios-text-callout-weight:   400;
+  --ios-text-callout-tracking: 0;
+
+  --ios-text-subheadline-size:     15px;
+  --ios-text-subheadline-leading:  20px;
+  --ios-text-subheadline-weight:   400;
+  --ios-text-subheadline-tracking: 0;
+
+  --ios-text-footnote-size:     13px;
+  --ios-text-footnote-leading:  18px;
+  --ios-text-footnote-weight:   400;
+  --ios-text-footnote-tracking: 0;
+
+  --ios-text-caption1-size:     12px;
+  --ios-text-caption1-leading:  16px;
+  --ios-text-caption1-weight:   400;
+  --ios-text-caption1-tracking: 0;
+
+  --ios-text-caption2-size:     11px;
+  --ios-text-caption2-leading:  13px;
+  --ios-text-caption2-weight:   400;
+  --ios-text-caption2-tracking: 0;
+
+  /* Tracking de cabeçalho uppercase (header de card/lista/seção).
+     Em em, não px: escala com o corpo.                              */
+  --ios-tracking-caps: 0.06em;
+
+  /* --- Raios — por papel, nunca por gosto ------------------------
+     Cápsula é a forma padrão de controle no Liquid Glass; os cantos
+     são CONCÊNTRICOS: raio interno = raio externo − padding (nunca
+     abaixo de 8px em superfície tocável). Fórmula e exemplos:
+     foundations.md §3.
+     card/input/badge: guia técnico de adoção. alert/sheet: a Apple
+     não publica — tradução web calibrada.                           */
+  --ios-radius-pill:   999px;
+  --ios-radius-button: var(--ios-radius-pill); /* botão é CÁPSULA, sem escape */
+  --ios-radius-card:   16px;
+  --ios-radius-input:  12px;
+  --ios-radius-badge:  8px;
+  --ios-radius-alert:  26px;  /* tradução web calibrada */
+  --ios-radius-sheet:  20px;  /* tradução web calibrada — só no topo */
+
+  /* --- Alvo de toque --------------------------------------------- */
+  --ios-touch-min: 44px; /* mínimo 44×44px, sempre — padding invisível conta */
+
+  /* --- Alturas e geometria de referência ------------------------- */
+  --ios-h-navbar:       44px;
+  --ios-h-navbar-large: 96px;  /* nav bar com large title expandido */
+  --ios-h-tabbar:       49px;  /* conteúdo da cápsula flutuante */
+  --ios-h-row:          44px;  /* linha de lista padrão */
+  --ios-h-row-large:    60px;  /* linha de lista com subtítulo */
+  --ios-h-button:       50px;  /* botão primário */
+
+  /* Barra flutuante: o vidro não encosta na borda da tela — flutua
+     com margem própria (tradução web calibrada da geometria iOS 26) */
+  --ios-bar-inset: 12px;
+
+  /* Safe area inferior — 34px é a referência de hardware (iPhone com
+     Face ID); na web o valor real vem do env(), com 0 de fallback.
+     Exige <meta name="viewport" ... viewport-fit=cover>.            */
+  --ios-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* --- Espaçamento — grid de 8pt (4px só como meio-passo) -------- */
+  --ios-margin:       16px; /* margem de layout, mobile */
+  --ios-margin-wide:  20px; /* margem de layout, ≥768px */
+  --ios-section-gap:  32px; /* espaço entre seções */
+  --ios-card-padding: 16px; /* padding interno de card */
+
+  /* --- MATERIAL — ingredientes que não mudam com o tema -----------
+     (tradução web calibrada; o Clear NÃO adapta ao tema de propósito,
+     e isso é spec — ele existe pra deixar a mídia atravessar)       */
+  --ios-glass-blur:     20px;  /* iOS 27 difunde mais que o 26 — knob único */
+  --ios-glass-saturate: 180%;
+  --ios-glass-clear-bg: rgba(255, 255, 255, 0.12); /* vidro Clear: só sobre mídia */
+  --ios-glass-dim:      rgba(0, 0, 0, 0.35);       /* dimming OBRIGATÓRIO sob o Clear */
+
+  /* --- Movimento --------------------------------------------------
+     Springs do Liquid Glass: 0.3 é o response padrão, 0.5 a entrada
+     (damping 0.8). O bounce é a assinatura do vidro interativo.     */
+  --ios-duration:       0.3s;  /* transição padrão */
+  --ios-duration-press: 0.1s;  /* press state */
+  --ios-duration-hover: 0.15s; /* hover ease-in-out */
+  --ios-duration-enter: 0.5s;  /* entrada de sheet/modal */
+  --ios-ease:        cubic-bezier(0.25, 0.1, 0.25, 1);   /* padrão */
+  --ios-ease-spring: cubic-bezier(0.32, 0.72, 0, 1);     /* sheets/modais */
+  --ios-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);  /* vidro interativo (tradução web calibrada) */
+}
+
+/* ============================================================
+   3 · CORES — DARK
+   Par oficial Apple (paleta inalterada no Liquid Glass). Dois
+   gatilhos, mesmo bloco: o sistema operacional (media query) ou
+   o data-theme manual.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --ios-blue:   #0A84FF;
+    --ios-green:  #30D158;
+    --ios-indigo: #5E5CE6;
+    --ios-orange: #FF9F0A;
+    --ios-pink:   #FF375F;
+    --ios-purple: #BF5AF2;
+    --ios-red:    #FF453A;
+    --ios-teal:   #64D2FF;
+    --ios-yellow: #FFD60A;
+
+    --ios-gray:  #8E8E93; /* o único cinza igual nos dois temas */
+    --ios-gray2: #636366;
+    --ios-gray3: #48484A;
+    --ios-gray4: #3A3A3C;
+    --ios-gray5: #2C2C2E;
+    --ios-gray6: #1C1C1E;
+
+    --ios-bg:           #000000;
+    --ios-bg-secondary: #1C1C1E;
+    --ios-bg-tertiary:  #2C2C2E;
+
+    --ios-bg-grouped:           #000000;
+    --ios-bg-grouped-secondary: #1C1C1E;
+
+    /* Quaternary dark oficial é 16% (não 18% como no light) */
+    --ios-label:            rgba(255, 255, 255, 1);
+    --ios-label-secondary:  rgba(235, 235, 245, 0.6);
+    --ios-label-tertiary:   rgba(235, 235, 245, 0.3);
+    --ios-label-quaternary: rgba(235, 235, 245, 0.16);
+
+    --ios-separator:        rgba(84, 84, 88, 0.65);
+    --ios-separator-opaque: #38383A;
+
+    --ios-fill:            rgba(120, 120, 128, 0.36);
+    --ios-fill-secondary:  rgba(120, 120, 128, 0.32);
+    --ios-fill-tertiary:   rgba(120, 120, 128, 0.24);
+    --ios-fill-quaternary: rgba(120, 120, 128, 0.18);
+
+    --ios-blue-tint: rgba(10, 132, 255, 0.15);
+    --ios-segment: #636366;
+
+    --ios-on-accent: #FFFFFF;
+    --ios-scrim:      rgba(0, 0, 0, 0.6); /* 40% sobre fundo preto não separa nada */
+    --ios-scrim-menu: rgba(0, 0, 0, 0.25);
+
+    /* MATERIAL — vidro Regular no dark (tradução web calibrada) */
+    --ios-glass-bg:         rgba(28, 28, 30, 0.55);
+    --ios-glass-bg-frosted: rgba(28, 28, 30, 0.80);
+    --ios-glass-stroke:     rgba(255, 255, 255, 0.15);
+    --ios-glass-glint:      rgba(255, 255, 255, 0.25);
+    --ios-glass-shadow:     0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+    --ios-glass-solid:      #1C1C1E;
+  }
+}
+
+/* Espelho do bloco dark acima — override manual, vale em qualquer
+   elemento (página inteira via <html data-theme="dark"> ou um painel).
+   Mudou lá, muda aqui. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ios-blue:   #0A84FF;
+  --ios-green:  #30D158;
+  --ios-indigo: #5E5CE6;
+  --ios-orange: #FF9F0A;
+  --ios-pink:   #FF375F;
+  --ios-purple: #BF5AF2;
+  --ios-red:    #FF453A;
+  --ios-teal:   #64D2FF;
+  --ios-yellow: #FFD60A;
+
+  --ios-gray:  #8E8E93;
+  --ios-gray2: #636366;
+  --ios-gray3: #48484A;
+  --ios-gray4: #3A3A3C;
+  --ios-gray5: #2C2C2E;
+  --ios-gray6: #1C1C1E;
+
+  --ios-bg:           #000000;
+  --ios-bg-secondary: #1C1C1E;
+  --ios-bg-tertiary:  #2C2C2E;
+
+  --ios-bg-grouped:           #000000;
+  --ios-bg-grouped-secondary: #1C1C1E;
+
+  --ios-label:            rgba(255, 255, 255, 1);
+  --ios-label-secondary:  rgba(235, 235, 245, 0.6);
+  --ios-label-tertiary:   rgba(235, 235, 245, 0.3);
+  --ios-label-quaternary: rgba(235, 235, 245, 0.16);
+
+  --ios-separator:        rgba(84, 84, 88, 0.65);
+  --ios-separator-opaque: #38383A;
+
+  --ios-fill:            rgba(120, 120, 128, 0.36);
+  --ios-fill-secondary:  rgba(120, 120, 128, 0.32);
+  --ios-fill-tertiary:   rgba(120, 120, 128, 0.24);
+  --ios-fill-quaternary: rgba(120, 120, 128, 0.18);
+
+  --ios-blue-tint: rgba(10, 132, 255, 0.15);
+  --ios-segment: #636366;
+
+  --ios-on-accent: #FFFFFF;
+  --ios-scrim:      rgba(0, 0, 0, 0.6);
+  --ios-scrim-menu: rgba(0, 0, 0, 0.25);
+
+  --ios-glass-bg:         rgba(28, 28, 30, 0.55);
+  --ios-glass-bg-frosted: rgba(28, 28, 30, 0.80);
+  --ios-glass-stroke:     rgba(255, 255, 255, 0.15);
+  --ios-glass-glint:      rgba(255, 255, 255, 0.25);
+  --ios-glass-shadow:     0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+  --ios-glass-solid:      #1C1C1E;
+}
+
+/* ============================================================
+   4 · BASE MÍNIMA
+   É este bloco que "instala" a stack de fontes no projeto:
+   importou o arquivo, o body já fala SF Pro.
+   ============================================================ */
+
+/* Caixa previsível: sem isto, todo width:100% com padding estoura a
+   largura, e uma sidebar inteira sai desalinhada.
+   A régua de margens do produto.md §4 DEPENDE desta linha. */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--ios-bg);
+  color: var(--ios-label);
+  font-family: var(--ios-font-text);
+  font-size: var(--ios-text-body-size);
+  line-height: var(--ios-text-body-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  accent-color: var(--ios-blue); /* checkbox/radio/range nativos no azul do sistema */
+}
+
+/* Anel de foco de teclado — adaptação web obrigatória (accessibility.md §3).
+   :focus-visible: toque/clique não mostra anel; teclado mostra. */
+:focus-visible {
+  outline: 2px solid var(--ios-blue);
+  outline-offset: 2px;
+}
+
+/* Host fix (color.md §7): o menu aberto do <select> é do navegador.
+   O color-scheme dos blocos de tema cuida do chrome (scrollbar, caret,
+   moldura do dropdown); a COR das opções precisa ser dita aqui, senão o
+   tema escuro forçado via data-theme abre um dropdown claro do sistema. */
+select option {
+  background: var(--ios-bg-grouped-secondary);
+  color: var(--ios-label);
+}
+
+/* ============================================================
+   5 · UTILITÁRIOS DE TIPOGRAFIA (fallback CSS puro)
+   Um por estilo da escala. Em projeto Tailwind existe o
+   equivalente text-ios-* — mesmos valores, mesma fonte de verdade.
+   ============================================================ */
+.ios-text-large-title { font-size: var(--ios-text-large-title-size); line-height: var(--ios-text-large-title-leading); font-weight: var(--ios-text-large-title-weight); letter-spacing: var(--ios-text-large-title-tracking); }
+.ios-text-title1      { font-size: var(--ios-text-title1-size);      line-height: var(--ios-text-title1-leading);      font-weight: var(--ios-text-title1-weight);      letter-spacing: var(--ios-text-title1-tracking); }
+.ios-text-title2      { font-size: var(--ios-text-title2-size);      line-height: var(--ios-text-title2-leading);      font-weight: var(--ios-text-title2-weight);      letter-spacing: var(--ios-text-title2-tracking); }
+.ios-text-title3      { font-size: var(--ios-text-title3-size);      line-height: var(--ios-text-title3-leading);      font-weight: var(--ios-text-title3-weight);      letter-spacing: var(--ios-text-title3-tracking); }
+.ios-text-headline    { font-size: var(--ios-text-headline-size);    line-height: var(--ios-text-headline-leading);    font-weight: var(--ios-text-headline-weight);    letter-spacing: var(--ios-text-headline-tracking); }
+.ios-text-body        { font-size: var(--ios-text-body-size);        line-height: var(--ios-text-body-leading);        font-weight: var(--ios-text-body-weight);        letter-spacing: var(--ios-text-body-tracking); }
+.ios-text-callout     { font-size: var(--ios-text-callout-size);     line-height: var(--ios-text-callout-leading);     font-weight: var(--ios-text-callout-weight);     letter-spacing: var(--ios-text-callout-tracking); }
+.ios-text-subheadline { font-size: var(--ios-text-subheadline-size); line-height: var(--ios-text-subheadline-leading); font-weight: var(--ios-text-subheadline-weight); letter-spacing: var(--ios-text-subheadline-tracking); }
+.ios-text-footnote    { font-size: var(--ios-text-footnote-size);    line-height: var(--ios-text-footnote-leading);    font-weight: var(--ios-text-footnote-weight);    letter-spacing: var(--ios-text-footnote-tracking); }
+.ios-text-caption1    { font-size: var(--ios-text-caption1-size);    line-height: var(--ios-text-caption1-leading);    font-weight: var(--ios-text-caption1-weight);    letter-spacing: var(--ios-text-caption1-tracking); }
+.ios-text-caption2    { font-size: var(--ios-text-caption2-size);    line-height: var(--ios-text-caption2-leading);    font-weight: var(--ios-text-caption2-weight);    letter-spacing: var(--ios-text-caption2-tracking); }
+
+/* ============================================================
+   5b · MATERIAIS LIQUID GLASS (fallback CSS puro)
+   O coração da linguagem. Dois materiais, nunca misturados:
+   - .ios-glass          → Regular: o padrão de barra, controle e
+                           card flutuante. Adapta ao tema.
+   - .ios-glass--clear   → Clear: mais transparente, NÃO adapta,
+                           só sobre mídia e SEMPRE com .ios-glass-dim
+                           como irmão por baixo.
+   Regra de spec: vidro não amostra vidro — NUNCA aninhar .ios-glass
+   dentro de .ios-glass (na web o backdrop-filter amostra o que
+   estiver atrás, inclusive outro vidro, e o resultado é lama).
+   Anatomia e justificativa dos valores: references/materials.md.
+   ============================================================ */
+.ios-glass {
+  background: var(--ios-glass-bg);
+  -webkit-backdrop-filter: blur(var(--ios-glass-blur)) saturate(var(--ios-glass-saturate));
+  backdrop-filter: blur(var(--ios-glass-blur)) saturate(var(--ios-glass-saturate));
+  box-shadow:
+    inset 0 1px 0 var(--ios-glass-glint),    /* realce especular do topo */
+    inset 0 0 0 1px var(--ios-glass-stroke), /* lensing: borda de luz 1px */
+    var(--ios-glass-shadow);                 /* flutuação */
+}
+.ios-glass--clear {
+  background: var(--ios-glass-clear-bg);
+}
+.ios-glass-dim {
+  /* camada de dimming: irmã por baixo do vidro Clear, cobrindo a mídia */
+  background: var(--ios-glass-dim);
+}
+.ios-glass--interactive {
+  /* vidro interativo: o press "acende" (frosted) e a volta assenta em bounce.
+     Aplicar JUNTO com .ios-glass no controle que É vidro (botão glass, thumb).
+     Mora aqui (e não em utilitária Tailwind) porque o background de .ios-glass
+     é CSS sem camada — utilitária em @layer não o vence com garantia. */
+  transition:
+    background var(--ios-duration) var(--ios-ease),
+    transform var(--ios-duration) var(--ios-ease-bounce);
+}
+.ios-glass--interactive:active {
+  background: var(--ios-glass-bg-frosted);
+  transform: scale(0.97);
+  transition:
+    background var(--ios-duration-press) var(--ios-ease),
+    transform var(--ios-duration-press) var(--ios-ease);
+}
+
+/* --- data-glass — a tradução web do slider de intensidade do iOS 27.
+   Põe no <html> (ou em qualquer contêiner): sem atributo = regular;
+   "frosted" = vidro mais fosco; "solid" = extremo opaco manual.
+   Funciona por indireção de var — nenhum seletor por cima da classe.
+   (:root[data-glass] existe pra empatar com o :root:not([data-theme])
+   do bloco dark; na dúvida de cascata, quem vem depois vence — e este
+   bloco vem depois.) */
+:root[data-glass="frosted"],
+[data-glass="frosted"] {
+  --ios-glass-bg: var(--ios-glass-bg-frosted);
+  --ios-glass-clear-bg: var(--ios-glass-bg-frosted);
+}
+:root[data-glass="solid"],
+[data-glass="solid"] {
+  --ios-glass-bg: var(--ios-glass-solid);
+  --ios-glass-clear-bg: var(--ios-glass-solid);
+  --ios-glass-blur: 0px;
+  --ios-glass-saturate: 100%;
+}
+
+/* --- Fallback opaco AUTOMÁTICO — dois gatilhos, mesmo destino do
+   data-glass="solid". É o extremo opaco do slider do iOS 27:
+   1. navegador sem backdrop-filter;
+   2. usuário pedindo menos transparência (acessibilidade).
+   O override é na CLASSE (não em var no :root) de propósito: assim
+   nenhum bloco de tema, por mais específico, devolve a transparência. */
+@supports not (backdrop-filter: blur(1px)) {
+  .ios-glass,
+  .ios-glass--clear {
+    background: var(--ios-glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .ios-glass,
+  .ios-glass--clear {
+    background: var(--ios-glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ============================================================
+   5c · DIÁLOGOS (base dos overlays: alerta, sheet, popover, menu)
+   O <dialog> nativo dá véu, Esc, foco preso e inert do fundo.
+   O painel do overlay é vidro (.ios-glass no elemento do painel);
+   o véu é COR, nunca blur de tela inteira (web-translation.md §8).
+   ============================================================ */
+.ios-dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+}
+.ios-dialog::backdrop {
+  background: var(--ios-scrim, rgba(0, 0, 0, 0.4)); /* véu padrão de overlay */
+}
+.ios-dialog--menu::backdrop {
+  background: var(--ios-scrim-menu, rgba(0, 0, 0, 0.1)); /* véu leve do context menu */
+}
+
+/* ============================================================
+   6 · MOVIMENTO REDUZIDO
+   Regra inviolável nº 7: quem pede menos movimento, recebe menos.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

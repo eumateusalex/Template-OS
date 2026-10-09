@@ -1,0 +1,35 @@
+{
+  "versao": "1.0.0",
+  "base": {
+    "principios": 231,
+    "arquivos": 12,
+    "imagens": 85
+  },
+  "orfas_esperadas": [
+    "ai-era-differentiation/generic-ai-purple-gradient-landing.jpg",
+    "checkout-and-forms/avoid-dropdown-use-button-group.jpg",
+    "checkout-and-forms/card-deck-store-checkout.jpg",
+    "checkout-and-forms/conversion-by-select-boxes-chart.png",
+    "checkout-and-forms/register-cta-microcopy-good-bad.png",
+    "conversion-and-landing-pages/checkout-button-refund-rate-microcopy.jpg",
+    "conversion-and-landing-pages/conversion-doubles-profit-4x-chart.jpg",
+    "conversion-and-landing-pages/five-stages-of-a-market-infographic.jpg",
+    "conversion-and-landing-pages/vodafone-italy-offer-and-callback-modal.png",
+    "dashboards-and-data-viz/recurring-expenses-before-after-app.jpg",
+    "metrics-and-experimentation/brax-landing-heatmap.jpg",
+    "metrics-and-experimentation/cancel-plan-confirmation-modal.jpg",
+    "onboarding-and-activation/empty-dashboard-zero-state.jpg",
+    "onboarding-and-activation/first-run-setup-cards-dashboard.jpg",
+    "onboarding-and-activation/first-work-order-celebration-screen.jpg",
+    "onboarding-and-activation/flow-onboarding-practice-step.jpg",
+    "positioning-icp-and-gtm/tesla-cybercab-own-vs-sell-fleet.jpg",
+    "pricing-and-monetization/busuu-free-language-limit-ab-test.jpg",
+    "pricing-and-monetization/chatgpt-out-of-images-limit-card.png",
+    "pricing-and-monetization/decoy-three-tier-pricing-page.jpg",
+    "product-strategy-and-features/bulk-rename-utility-window.png",
+    "product-strategy-and-features/five-ways-100m-business-arpa-chart.png",
+    "product-strategy-and-features/porsche-quarterly-margin-collapse.png",
+    "product-strategy-and-features/repair-shop-loops-intake-flowchart.jpg"
+  ],
+  "entradas": []
+}

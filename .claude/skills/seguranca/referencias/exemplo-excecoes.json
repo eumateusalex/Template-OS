@@ -1,0 +1,57 @@
+{
+  "_leia": [
+    "Modelo do arquivo .seguranca-excecoes.json. Copiar para a RAIZ do projeto auditado.",
+    "",
+    "Para que serve: registrar que um controle NÃO foi implementado por decisão",
+    "consciente, e não por esquecimento. A auditoria lê este arquivo antes de",
+    "reportar, e trata o que está aqui como registro em vez de achado.",
+    "",
+    "Por que importa: auditoria que reporta como falha algo que já foi decidido",
+    "perde a credibilidade na primeira execução e vira ruído. Sem este arquivo,",
+    "toda decisão consciente reaparece como problema em cada auditoria.",
+    "",
+    "Regras:",
+    "  1. Exceção tem dono, motivo e prazo. Sem os três, é esquecimento com nome bonito.",
+    "  2. Prazo vencido volta a ser achado, com a severidade original.",
+    "  3. Exceção não se aplica a requisito crítico sem aprovação de quem responde pelo sistema.",
+    "  4. O motivo descreve a razão técnica ou de negócio, não 'não deu tempo'.",
+    "  5. Este arquivo é público dentro do projeto. Não colocar segredo nele.",
+    "",
+    "OS NOMES DE CAMPO, e por que existem dois conjuntos:",
+    "",
+    "  Canônico (use este):  id · motivo · decididoPor · decididoEm · revisarEm · riscoAceito",
+    "  Também aceito:        requisito · dono · aceito_em · revisar_em · severidade_original",
+    "",
+    "O leitor entende os dois e avisa quando encontra o segundo. A tolerância",
+    "existe porque a alternativa é pior: um leitor que procura só o nome",
+    "canônico tem as exceções escritas com a outra grafia DESCARTADAS EM",
+    "SILÊNCIO — sem erro, sem aviso, com 'vencida' falso para sempre. E a",
+    "auditoria passa a reportar como falha exatamente o que já foi decidido,",
+    "que é o que mais rápido destrói a credibilidade de",
+    "um relatório.",
+    "",
+    "Dois campos NÃO são opcionais, e a falta de cada um é avisada:",
+    "  · sem identificador de requisito, a exceção não casa com nada",
+    "  · sem data de revisão, ela nunca vence — e é o jeito mais comum de uma",
+    "    decisão temporária virar permanente sem ninguém decidir isso."
+  ],
+
+  "excecoes": [
+    {
+      "id": "NET-04",
+      "motivo": "A página tem script embutido e uma política de conteúdo mal calibrada quebra a renderização em silêncio. Entra depois, testada, e não junto com os demais cabeçalhos.",
+      "decididoPor": "responsável pelo projeto",
+      "decididoEm": "2026-07-30",
+      "revisarEm": "2026-10-30",
+      "riscoAceito": "baixo: conteúdo estático, sem sessão e sem dado de terceiro"
+    },
+    {
+      "id": "IDN-04",
+      "motivo": "Segundo fator ainda não implementado. O sistema tem um único operador e nenhum dado de terceiro nesta fase.",
+      "decididoPor": "responsável pelo projeto",
+      "decididoEm": "2026-08-02",
+      "revisarEm": "2026-09-02",
+      "riscoAceito": "médio: aceito apenas enquanto não houver segundo usuário. Entra antes do primeiro cliente."
+    }
+  ]
+}

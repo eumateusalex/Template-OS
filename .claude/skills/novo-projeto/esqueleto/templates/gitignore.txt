@@ -1,0 +1,14 @@
+# fundação
+# O que o build, o teste de tela e as fotos deixam para trás. Nada disso se
+# versiona: tudo se refaz com um comando.
+.next/
+out/
+next-env.d.ts
+test-results/
+playwright-report/
+blob-report/
+.fotos/
+*.tsbuildinfo
+.env
+.env.*
+!.env*.example

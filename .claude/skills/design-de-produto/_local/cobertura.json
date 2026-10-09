@@ -1,0 +1,6 @@
+{
+  "fuso": "-03:00",
+  "fuso_nota": "Fuso do dono (±HH:MM), so para as datas de calendario que a captura escreve (o dia do post no galeria.json, o dia da captura na fonte). A janela continua em UTC. Lido pelo janela.mjs; sem o campo vale -03:00.",
+  "referencias": {},
+  "referencias_nota": "Uma entrada por perfil publico do X que voce escolher acompanhar, pela chave do @ sem a arroba: { \"nome\": \"como chamar\", \"triado_ate\": \"<ISO, UTC>\", \"ate\": null }. triado_ate: tudo da referencia ate este instante foi capturado e julgado; na entrada nova, e o instante a partir do qual capturar. ate: instante do post mais novo da referencia cujo conteudo entrou na biblioteca (null enquanto nada entrou). O confere-biblioteca.mjs confere os dois contra fontes/. Roteiro: atualizar.md, passo 2."
+}

@@ -1,0 +1,10 @@
+<!-- ios-core-design v1.0 — sprite Phosphor pra shell de app (o texto que acompanha
+     os ícones está em LICENSE-phosphor.txt, nesta pasta).
+     20 symbols #ph-*: colar o SUBSET que o projeto usa dentro do body, como
+     <svg style="display:none" aria-hidden="true"><defs>…</defs></svg>.
+     style="display:none" é OBRIGATORIO: hidden não vale pra <svg> e o sprite
+     vira item de grid (web-translation.md §8c). Consumo: <svg class="ic"><use href="#ph-x"/></svg>.
+     Pares regular/fill (clock, kanban, chart-bar) existem pra tab bar (regular→fill no ativo). -->
+<svg style="display:none" aria-hidden="true"><defs>
+{{simbolos}}
+</defs></svg>

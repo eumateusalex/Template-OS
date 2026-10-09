@@ -1,0 +1,190 @@
+/* ==========================================================================
+   TOKENS: O ÚNICO ARQUIVO QUE MUDA NUMA MARCA NOVA
+   ==========================================================================
+   O que este arquivo é: as 8 cores e as 3 fontes da marca, e tudo que o kit
+   deriva delas. Ler na entrevista, e quando uma cor sair errada na peça.
+
+   ESTADO: nao-configurado
+
+   Este é o MOLDE. A skill copia ele pra `marca/tokens.css` na primeira vez, e
+   é o `tokens.css` que a entrevista preenche (blocos 1 e 2) e de onde o
+   marcador sai. O `tokens.css` é seu e se versiona com o workspace. Dá pra
+   preencher à mão também, seguindo os comentários.
+
+   Bloco 1 (PALETA) e bloco 2 (TIPOGRAFIA) são pra editar.
+   Os blocos 3 e 4 são derivados: não precisam ser tocados, se recalculam
+   sozinhos a partir dos canais RGB do bloco 1.
+
+   Por que canais RGB soltos (`0,74,173`) e não hex? Porque assim a mesma cor
+   serve pra fundo sólido `rgb(var(--c-accent))` e pra transparência
+   `rgba(var(--c-accent),.13)`. Com hex, cada borda e sombra viraria um valor
+   fixo que escapa da troca de paleta.
+
+   A paleta abaixo é de DEMONSTRAÇÃO (grafite e um acento quente), só pra o
+   catálogo abrir antes da entrevista. Ela não é a marca de ninguém.
+   ========================================================================== */
+
+/* As três famílias. Troque a URL inteira ao trocar de fonte: o modelo e o
+   catálogo não carregam fonte por conta própria, só daqui. Os pares prontos
+   estão em referencias/trocar-de-marca.md. */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root{
+
+  /* ---- 1. PALETA: 8 papéis, mapeados por PAPEL e não por cor ---------- */
+  /* A pergunta certa pra cada slot está em referencias/trocar-de-marca.md.
+     O erro clássico: pôr "a cor mais escura" no --c-dark sem perguntar se
+     ela é a PRINCIPAL. O --c-dark manda no fundo escuro E no texto sobre o
+     claro, então é a cor que domina a peça, como a principal deve dominar. */
+
+  --c-dark:        28,28,32;     /* COR PRINCIPAL da marca (mesmo que não seja
+                                    escura): fundo escuro + texto sobre claro */
+  --c-light:       244,243,240;  /* fundo claro. Nunca branco puro           */
+  --c-accent:      214,120,48;   /* acento: o que puxa o olho, CTA, régua    */
+  --c-support-1:   70,70,80;     /* apoio: acompanha a principal sem competir */
+  --c-support-2:   228,228,225;  /* lavado: card e respiro sobre o claro     */
+  --c-rare:        90,90,90;     /* acento raro, máx. 8% da peça             */
+
+  --c-abyss:       14,14,18;     /* a mais fechada: fundo do terminal e do
+                                    fecho `.cta.abismo`. Nunca preto puro    */
+  --c-ok:          140,190,150;  /* "concluído" no terminal                  */
+
+
+  /* ---- 2. TIPOGRAFIA: as três famílias e os três pesos ---------------- */
+
+  /* display: headline forte e geométrica; carrega quase tudo              */
+  --f-display: 'Bricolage Grotesque', Arial, sans-serif;
+  /* serif: só o trecho de destaque dentro do título, sempre itálico       */
+  --f-serif:   'Instrument Serif', Georgia, serif;
+  /* mono: tag, kicker, contador, terminal, chips, microtexto técnico      */
+  --f-mono:    'JetBrains Mono', Consolas, monospace;
+
+  --w-display-bold: 800;   /* peso das headlines                           */
+  --w-display-med:  500;   /* peso do corpo e itens de lista               */
+  --w-mono-med:     600;   /* peso da tag e dos rótulos mono               */
+
+
+  /* ==== DAQUI PRA BAIXO É DERIVADO: não precisa editar ================ */
+
+  /* ---- 3. CORES RESOLVIDAS ------------------------------------------- */
+
+  --bg-dark:        rgb(var(--c-dark));
+  --bg-light:       rgb(var(--c-light));
+  --bg-abyss:       rgb(var(--c-abyss));
+  --accent:         rgb(var(--c-accent));
+  --support-1:      rgb(var(--c-support-1));
+  --support-2:      rgb(var(--c-support-2));
+  --rare:           rgb(var(--c-rare));
+  --ok:             rgb(var(--c-ok));
+
+  /* texto sobre fundo escuro */
+  --on-dark:        rgb(var(--c-light));
+  --on-dark-90:     rgba(var(--c-light),.90);
+  --on-dark-82:     rgba(var(--c-light),.82);
+  --on-dark-74:     rgba(var(--c-light),.74);
+  --on-dark-60:     rgba(var(--c-light),.60);
+  --on-dark-55:     rgba(var(--c-light),.55);
+  --on-dark-50:     rgba(var(--c-light),.50);
+  --on-dark-40:     rgba(var(--c-light),.40);
+
+  /* texto sobre fundo claro */
+  --on-light:       rgb(var(--c-dark));
+  --on-light-82:    rgba(var(--c-dark),.82);
+  --on-light-72:    rgba(var(--c-dark),.72);
+  --on-light-66:    rgba(var(--c-dark),.66);
+  --on-light-50:    rgba(var(--c-dark),.50);
+  --on-light-45:    rgba(var(--c-dark),.45);
+
+  /* bordas */
+  --line-dark:        rgba(var(--c-light),.13);
+  --line-dark-soft:   rgba(var(--c-light),.09);
+  --line-dark-strong: rgba(var(--c-light),.17);
+  --line-light:        rgba(var(--c-dark),.13);
+  --line-light-soft:   rgba(var(--c-dark),.10);
+  --line-light-strong: rgba(var(--c-dark),.15);
+
+  /* derivados do acento */
+  --accent-line:  rgba(var(--c-accent),.55);  /* borda do card em foco    */
+  --accent-ring:  rgba(var(--c-accent),.28);  /* anel decorativo          */
+  --accent-halo:  rgba(var(--c-accent),.50);  /* halo da estrela          */
+
+  /* trilhos e véus */
+  --track-dark:   rgba(var(--c-light),.16);
+  --track-light:  rgba(var(--c-dark),.13);
+  --scrim:        rgba(var(--c-dark),.45);
+  --veil-bottom:  rgba(var(--c-dark),.55);  /* véu chapado do .slide.photo */
+
+  /* sombras */
+  --shadow-dark:  0 24px 45px rgba(0,0,0,.26);
+  --shadow-light: 0 18px 45px rgba(var(--c-dark),.10);
+
+  /* Fundo de slide é cor chapada, sem degradê. Estes dois nomes vêm de uma
+     versão antiga que usava gradiente; hoje são sólidos.                   */
+  --grad-cta:   rgb(var(--c-dark));      /* fundo do fecho: a COR PRINCIPAL.
+                                            Variante mais fechada:
+                                            `.slide.cta.abismo`                */
+  --grad-brand: rgb(var(--c-support-1)); /* fundo do frame de mídia          */
+
+  /* A regra "sem gradiente" vale pra FUNDO DE SLIDE, não pro véu da capa.
+     O véu da `.slide.cover` é um degradê de propósito (topo quase limpo,
+     base escura), porque ali ele é recurso de LEGIBILIDADE: chapado, ele
+     apagaria a imagem inteira. Ver `.slide.cover` no componentes.css.      */
+
+  /* semáforos do macOS: chrome de sistema, NÃO são cor de marca.
+     Fixos de propósito: o Mac é o Mac. Não trocam na troca de paleta.      */
+  --mac-r: #ff5f57;
+  --mac-y: #febc2e;
+  --mac-g: #28c840;
+
+  /* grade técnica de fundo (o "quadriculado") */
+  --grid-dark:  rgba(var(--c-light),.07);
+  --grid-light: rgba(var(--c-dark),.07);
+
+
+  /* ---- 4. MEDIDAS E ESCALA ------------------------------------------- */
+
+  /* canvas 4:5, o formato do feed. Render em 2x = 2160x2700              */
+  --canvas-w: 1080px;
+  --canvas-h: 1350px;
+
+  --pad-x:      90px;   /* margem lateral, igual em toda a sequência      */
+  --pad-top:    84px;
+  --pad-bottom: 74px;
+  --pad-post:   92px;   /* post único usa padding uniforme                */
+
+  /* escala tipográfica */
+  --fs-h1:       82px;  --lh-h1: 1.02;  --ls-h1: -.035em;
+  --fs-h1-post:  88px;
+  --fs-h1-cta:   76px;
+  --fs-h2:       62px;  --lh-h2: 1.05;  --ls-h2: -.03em;
+  --fs-lead:     30px;
+  --fs-sub:      28px;
+  --fs-list:     33px;
+  --fs-kicker:   20px;
+  --fs-tag:      19px;
+  --fs-handle:   21px;
+  --fs-count:    18px;
+  --fs-term:     25px;
+  --fs-num:     280px;
+  --fs-btn:      24px;
+
+  /* larguras máximas de texto: o que impede a linha de esticar demais    */
+  --max-h1:   900px;
+  --max-h2:   860px;
+  --max-sub:  820px;
+  --max-body: 840px;
+  --max-term: 880px;
+
+  /* raios */
+  --r-card:    16px;
+  --r-card-lg: 18px;
+  --r-button:  10px;
+  --r-chip:    10px;
+  --r-bar:      3px;
+
+  /* trackings mono */
+  --ls-tag:    .28em;
+  --ls-kicker: .28em;
+  --ls-count:  .12em;
+  --ls-label:  .22em;
+}

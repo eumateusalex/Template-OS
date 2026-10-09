@@ -1,0 +1,6 @@
+{
+  "fuso": "-03:00",
+  "fuso_nota": "Fuso das datas de calendario (data de captura, nome da pasta da captura). A janela de captura do X e sempre UTC.",
+  "fontes": [],
+  "fontes_nota": "As fontes que a skill acompanha, escolhidas por quem usa: perfil do X, perfil do LinkedIn, site ou boletim, arquivo local. Grave e consulte pelo captura/fontes.mjs (adiciona, avanca, remove). Cada fonte guarda ate onde ja foi lida (triado_ate no X, lido_ate nas outras): a proxima captura dela comeca dali."
+}

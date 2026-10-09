@@ -1,0 +1,22 @@
+{
+  "formato": "carrossel",
+  "tamanhos": { "titulo": 72 },
+  "elementos": {
+    "p": { "tipo": "pessoa", "texto": "cliente", "x": 800, "y": 480 },
+    "n1": { "tipo": "no", "texto": "pedido de orçamento", "x": 160, "y": 380, "largura": 380 },
+    "s0": { "tipo": "seta", "de": "p", "para": "n1", "rotulo": "pede" },
+    "n2": { "tipo": "no", "texto": "você monta a proposta", "x": 160, "y": 620, "largura": 380 },
+    "s1": { "tipo": "seta", "de": "n1", "para": "n2" },
+    "a2": { "tipo": "anotacao", "texto": "medida e material", "x": 580, "y": 820, "largura": 420, "aponta": "n2" },
+    "n3": { "tipo": "no", "texto": "proposta chega", "x": 160, "y": 930, "largura": 380 },
+    "s2": { "tipo": "seta", "de": "n2", "para": "n3", "rotulo": "dias depois" },
+    "a1": { "tipo": "anotacao", "texto": "já pediu preço a outra loja", "x": 640, "y": 950, "largura": 360, "aponta": "n3" },
+    "s3": { "tipo": "seta", "de": "n2", "para": "p", "tinta": "solucao", "rotulo": "dá a data", "lado": "abaixo" }
+  },
+  "quadros": [
+    { "papel": "capa", "titulo": "Onde sua marcenaria perde o cliente", "mostrar": ["p", "n1", "n2", "n3", "s0", "s1", "s2"] },
+    { "papel": "meio", "titulo": "Você calcula o valor", "mostrar": ["p", "s0", "n1", "s1", "n2", "a2"] },
+    { "papel": "ponto", "titulo": "A espera esfria o cliente", "mostrar": ["s2", "n3", "a1"], "destaque": { "tipo": "foco", "alvo": "n3" } },
+    { "papel": "fecho", "titulo": "Responda o pedido no mesmo dia", "mostrar": ["s3"], "frase": "Diga ao cliente em que dia a proposta chega." }
+  ]
+}

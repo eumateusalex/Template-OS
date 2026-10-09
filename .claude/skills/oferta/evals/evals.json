@@ -1,0 +1,47 @@
+{
+  "skill_name": "oferta",
+  "evals": [
+    {
+      "id": 1,
+      "name": "auditoria-oferta-do-usuario",
+      "prompt": "/oferta audita a minha oferta principal. Quero saber o que o método diria e o que eu mudo primeiro.",
+      "expected_output": "Lê _memoria/empresa.md e estrategia.md (com a memória em branco, marca a oferta, o preço e o fechamento como faltando e pede os dados em vez de inventar), entrega no molde da auditoria: o veredito na primeira frase, o que se sabe com confirmado/deduzido/faltando, as 3 travas em ordem com o que o método diz (o arquivo de metodo/ e, com o acervo montado, a citação com o arquivo do acervo) separado da leitura, e um próximo passo só, ajustado à restrição de tempo registrada em empresa.md. Usa a régua de LTV:CAC pelo número de etapas com gente. Nada para publicar citando o método ou o acervo.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "conselho-avaliacao-gratis-ou-paga",
+      "prompt": "tenho uma clínica de fisioterapia. devia cobrar a avaliação ou dar de graça? responde rápido",
+      "expected_output": "Abre pela resposta direta (sem anunciar o modo), em até 120 palavras porque pediu rápido, no molde do conselho: as duas fontes que mais pesam (o arquivo do método e, com o acervo montado, a citação do acervo; sem ele, a linha que diz que não há fonte do acervo) e a leitura separada, ligada ao caso da clínica (a isca vendida pelo resultado, não pelo nome, e as três saídas). Em português.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "comecar-cafe-para-empresas",
+      "prompt": "/oferta tenho uma padaria e vou começar a vender café da manhã para empresas, me ajuda a montar a oferta",
+      "expected_output": "Conduz no ritmo de uma pergunta por vez com a resposta recomendada (no teste, sem quem pediu, segue a recomendada e registra a pergunta), passa pelos cinco passos da oferta irresistível de metodo/oferta.md e pelo enriquecimento, e termina com a oferta montada num arquivo em saidas/: sonho, problemas por etapa, soluções, forma de entrega, cortar e empilhar, preço pela lógica de valor, escassez e urgência reais, garantia com X, prazo e consequência, e nome pelo MAGIC.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "relatorio-clinica-estetica",
+      "prompt": "/oferta relatorio da clínica da minha cliente. Dados: clínica de estética em Curitiba, 2 sócias, faturamento de R$ 85 mil/mês, margem de 30%, vende procedimento avulso (botox R$ 1.200, preenchimento R$ 1.800), 70% dos clientes vêm do Instagram orgânico e 30% de indicação, fecha 55% das avaliações, 40% das clientes voltam em 6 meses, as sócias atendem todas as avaliações e a agenda está lotada. A meta é R$ 150 mil/mês em 12 meses. Considere esses dados confirmados.",
+      "expected_output": "Com o acervo montado, gera saidas/oferta-<assunto>-<data>/relatorio.json com cada citação copiada do --json da busca (file e, quando o trecho traz, url) e roda o scripts/oferta/relatorio.py com saída 0 (citações conferidas no acervo), com as três travas em ordem e impacto distinto, de 5 a 8 seções, entre 2 e 6 mil palavras, o que o acervo diz separado da leitura, e o relatorio.md ao lado. Sem o acervo, não gera o relatório: oferece a auditoria e o passo de montar o acervo.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "conselho-contato-frio-no-brasil",
+      "prompt": "contato frio funciona pra vender serviço B2B aqui no Brasil? li que é spam e não funciona aqui",
+      "expected_output": "Abre pela resposta direta, sem anunciar o modo. Mostra as duas posições com a fonte: o contato frio como o jogo do iniciante e o conteúdo junto para dar pulso (o mapa de metodo/aquisicao.md), e a ressalva de que contato frio mal feito vira spam e queima o nome (a seção Na prática do mesmo módulo), com a citação do acervo quando houver; e dá a recomendação para o caso (serviço B2B pede contato um a um, com lista limpa e oferta forte), sem apagar nenhuma das duas.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "auditoria-sequencia-de-ofertas-cliente",
+      "prompt": "/oferta minha cliente tem um estúdio de pilates, vende plano mensal de R$ 390 e aula avulsa de R$ 80. Entram uns 20 alunos novos por mês e saem uns 15. O que falta na sequência de ofertas dela?",
+      "expected_output": "Audita por metodo/monetizacao.md e pelos números: identifica que a trava é retenção (churn alto, metodo/retencao.md), nomeia as quatro ofertas (atração, upsell, downsell, continuidade) e as variações nomeadas que cabem, com fonte, e dá um próximo passo só. Marca o que falta como faltando, sem inventar margem nem CAC.",
+      "files": []
+    }
+  ]
+}

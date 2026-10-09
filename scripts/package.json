@@ -1,0 +1,14 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Utilitários que as skills acionam: gerar imagem e vídeo por IA, ler site de terceiro, prévia de PDF, JPEG e folha de contato, medir tela (Node), transcrever áudio/vídeo (Python 3.12, ver requirements.txt e o README desta pasta), cortar vídeo em Reels, desenhar à mão (roughjs) e o motor GPT opcional do gerar-imagem (openai-oauth). O render de carrossel tem as dependências dele dentro da própria skill.",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "openai-oauth": "2.0.0",
+    "pdfjs-dist": "^4.10.38",
+    "playwright": "^1.61.1",
+    "roughjs": "4.6.6"
+  }
+}

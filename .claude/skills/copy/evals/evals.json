@@ -1,0 +1,101 @@
+{
+  "skill_name": "copy",
+  "evals": [
+    {
+      "id": 1,
+      "name": "pagina-servico-da-marca",
+      "modulo": "pagina",
+      "prompt": "/copy escreve a copy da página da avaliação gratuita do meu negócio",
+      "expected_output": "Lê as regras do projeto (o CLAUDE.md e a _memoria) e passa os portões com o que o workspace tem: a oferta lida de _memoria/empresa.md, a prova pela regra de _memoria/prova.md, a caixa e o vocabulário de _memoria/escrita-publica.md. Faz o diagnóstico de consciência e sofisticação, o menu de ideias com a recomendação, e entrega o arquivo no formato da /copy (módulo pagina, tipo servico) que passa na régua da marca. Com a memória em branco, para antes do texto e aponta o /instalar.",
+      "expectations": [
+        "a oferta vem de _memoria/empresa.md, sem oferta inventada; com a memória em branco, para antes do texto e diz que o /instalar vem antes",
+        "o arquivo está no formato da /copy, com módulo pagina e tipo servico",
+        "a régua da marca (scripts/copy/conferir.mjs) sai 0 e diz a caixa que aplicou, a mesma da linha **Caixa:** de _memoria/escrita-publica.md",
+        "há o diagnóstico de consciência e sofisticação, com a abertura escolhida",
+        "há três ideias ou títulos de ângulos diferentes, com um recomendado",
+        "a prova segue o prova.md: cena com nome genérico, sem a palavra case nem a palavra garantia",
+        "a entrega começa pelo veredito e diz o que depende de quem pediu"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "anuncio-padaria",
+      "modulo": "resposta-direta",
+      "prompt": "/copy escreve um anúncio de Instagram pra minha padaria vender bolo de encomenda pro fim de ano; as encomendas fecham dia 10 de dezembro e chegam pelo WhatsApp",
+      "expected_output": "Anúncio no módulo resposta-direta, tipo anuncio: vários ganchos com a dor nas palavras de quem encomenda bolo e um recomendado, o gancho em até 125 caracteres, o corpo que mostra valor, uma ação só (a conversa no WhatsApp) com a urgência real (a data de fechamento). Passa na régua da marca.",
+      "expectations": [
+        "o arquivo está no formato da /copy, com módulo resposta-direta e tipo anuncio",
+        "a régua da marca sai 0",
+        "há vários ganchos (pelo menos três) com um recomendado, e o recomendado cabe em 125 caracteres",
+        "o gancho fala do problema de quem encomenda em palavra de balcão, sem jargão",
+        "a urgência é a data real de fechamento das encomendas, com o número e a fonte no rastro",
+        "o que falta na oferta (o risco, o preço) vai na entrega como pergunta, com o /oferta recomendado"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "slogan-oficina",
+      "modulo": "marca",
+      "prompt": "/copy me dá opções de slogan pra uma oficina de bicicleta de bairro que conserta no mesmo dia",
+      "expected_output": "Módulo marca, tipo slogan: de cinco a oito opções em ângulos diferentes, a recomendada com o teste da troca de nome contra o concorrente mais parecido, escrito na nota do topo.",
+      "expectations": [
+        "o arquivo está no formato da /copy, com módulo marca e tipo slogan",
+        "a régua portátil sai 0",
+        "há de cinco a oito opções em ângulos diferentes, com uma recomendada",
+        "a recomendação passa pelo teste da troca de nome, contra o concorrente mais parecido nomeado na nota",
+        "nenhuma opção usa hype nem frase que qualquer oficina assinaria"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "pagina-cliente-clinica",
+      "modulo": "pagina",
+      "prompt": "/copy página de serviço da minha cliente, clínica de estética: botox e preenchimento, avaliação de graça, agenda pelo WhatsApp, 4,9 no Google com 312 avaliações. Ela ainda não tem pasta aqui.",
+      "expected_output": "Trata como página de cliente: sem pasta nem guia, trabalha com o pedido e marca o que falta; não aplica a régua da marca do workspace nem a caixa dela e diz isso; usa como prova a nota e o número de avaliações com fonte, e o depoimento de exemplo, se entrar, vai na lista de troca; pesquisa a regra do conselho para estética (gratuidade, o nome do procedimento) e ajusta; entrega a copy por função, com a oferta como veio e o que falta.",
+      "expectations": [
+        "trata como cliente e não aplica a régua da marca do workspace nem a caixa dela, dizendo isso",
+        "a prova medida do pedido (4,9 e 312 avaliações) tem fonte no rastro, e todo depoimento de exemplo está na lista de troca e respeita a norma do conselho",
+        "pesquisa a norma do conselho de classe e ajusta o que ela proíbe, com a fonte",
+        "a régua portátil sai 0",
+        "escreve com a oferta como veio e lista o que falta na entrega"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "manifesto-da-marca",
+      "modulo": "marca",
+      "prompt": "/copy escreve um manifesto da minha marca",
+      "expected_output": "Módulo marca, tipo manifesto: o mundo, a tensão, a crença, o que a marca faz e a assinatura, cada frase uma verdade da tese de _memoria/empresa.md, sem pompa nem frase que qualquer empresa assinaria. Vai como proposta. Com a memória em branco, para antes do texto e aponta o /instalar.",
+      "expectations": [
+        "o arquivo está no formato da /copy, com módulo marca e tipo manifesto",
+        "a régua da marca sai 0",
+        "tem os blocos o mundo, a tensão, a crença, o que faz e a assinatura",
+        "cada afirmação sai da tese e da oferta de _memoria/empresa.md, sem prometer o que a oferta não cumpre; sem tese na memória, para e diz isso",
+        "entrega como proposta e diz que a frase de topo da marca é redação de quem pediu",
+        "não usa hype nem pompa corporativa"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "vsl-curso-online",
+      "modulo": "resposta-direta",
+      "prompt": "/copy escreve o roteiro de uma VSL de 3 minutos pro meu curso online de confeitaria para iniciantes, R$ 297, com 7 dias pra pedir o dinheiro de volta",
+      "expected_output": "Módulo resposta-direta, tipo vsl: vários ganchos para os primeiros segundos com um recomendado, a abertura que confirma o lugar certo, promessa, prova e dor, a oferta inteira com o risco resolvido (os 7 dias, nunca menos que o direito de arrependimento), e uma ação só. A prova segue _memoria/prova.md.",
+      "expectations": [
+        "o arquivo está no formato da /copy, com módulo resposta-direta e tipo vsl",
+        "a régua portátil sai 0",
+        "há vários ganchos (pelo menos três) com um recomendado",
+        "a oferta tem promessa, prazo e o risco resolvido, e o risco não promete menos que os 7 dias da lei",
+        "a prova segue _memoria/prova.md, sem a palavra case",
+        "o roteiro cabe em cerca de 3 minutos falados (entre 380 e 520 palavras de fala)",
+        "uma ação só"
+      ],
+      "files": []
+    }
+  ]
+}

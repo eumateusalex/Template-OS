@@ -1,0 +1,7 @@
+# Os achados do gitleaks que não são segredo, declarados pela impressão digital
+# (commit:arquivo:regra:linha). Nada se isenta por pasta: um achado novo no
+# mesmo arquivo, noutro commit, continua reprovando.
+#
+# Caso plantado de propósito (a chave falsa que um teste precisa achar) leva
+# `gitleaks:allow` na própria linha, e aí nem precisa entrar aqui. Esta lista é
+# para o que já está no histórico e não dá mais para marcar.

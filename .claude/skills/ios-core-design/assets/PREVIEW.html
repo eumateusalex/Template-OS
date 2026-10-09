@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ios-core-design v1.0 — preview Liquid Glass</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  /* ============================================================
+     PREVIEW v1.0 — tokens + os 28 componentes em CSS PURO, na
+     linguagem Liquid Glass, light × dark lado a lado.
+     Estrutura: as amostras vivem num <template> e são clonadas nos
+     dois painéis (paridade por construção).
+     .pv-* = infraestrutura do preview · .c-* = componente CSS puro.
+     Glifos de ícone são placeholders geométricos; no código real é
+     o Phosphor (references/icons.md).
+     O vidro de verdade está no demo de rolagem do topo; o toggle do
+     cabeçalho aplica o data-glass (slider de intensidade do iOS 27).
+     ============================================================ */
+
+  /* box-sizing e host fixes vêm do tokens.css §4 (linkado acima) —
+     aqui só o zero de margens que o preview precisa */
+  * { margin: 0; padding: 0; }
+
+  .pv-header { padding: 20px var(--ios-margin); border-bottom: 1px solid var(--ios-separator); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  .pv-header h1 { font-size: var(--ios-text-title2-size); font-weight: 700; }
+  .pv-header p { color: var(--ios-label-secondary); font-size: var(--ios-text-footnote-size); }
+  .pv-glass-toggle { display: flex; gap: 4px; background: var(--ios-fill-secondary); border-radius: var(--ios-radius-pill); padding: 2px; }
+  .pv-glass-toggle button { border: 0; background: transparent; color: var(--ios-label); font: inherit; font-size: var(--ios-text-footnote-size); padding: 6px 14px; border-radius: var(--ios-radius-pill); cursor: pointer; min-height: 32px; }
+  .pv-glass-toggle button[aria-pressed="true"] { background: var(--ios-segment); font-weight: 600; }
+
+  .pv-panes { display: grid; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 980px) { .pv-panes { grid-template-columns: 1fr; } }
+  .pv-pane { padding: 24px var(--ios-margin) 64px; background: var(--ios-bg-grouped); color: var(--ios-label); }
+  .pv-pane + .pv-pane { border-left: 1px solid var(--ios-separator); }
+  .pv-pane-title { font-size: var(--ios-text-headline-size); font-weight: 600; margin-bottom: 16px; }
+  .pv-section { font-size: var(--ios-text-footnote-size); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ios-tracking-caps); color: var(--ios-label-secondary); margin: 32px 0 12px; }
+  .pv-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .pv-stack { display: grid; gap: 12px; }
+  .pv-stack--tight { gap: 4px; }
+  .pv-mt { margin-top: 12px; }
+  .pv-note { font-size: var(--ios-text-caption1-size); color: var(--ios-label-tertiary); margin-top: 8px; }
+
+  /* Glifos placeholder */
+  .g { display: inline-block; width: 22px; height: 22px; border: 2px solid currentColor; border-radius: 6px; }
+  .g--round { border-radius: 50%; }
+  .g--fill { background: currentColor; }
+  .g--caret { width: 10px; height: 10px; border: 0; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); }
+  .g--sm { width: 16px; height: 16px; }
+
+  /* ---------- DEMO DE VIDRO: aparelho com conteúdo rolando ---------- */
+  .c-device { position: relative; height: 520px; border-radius: 40px; overflow: hidden; border: 1px solid var(--ios-separator); background: var(--ios-bg); }
+  .c-device-scroll { height: 100%; overflow-y: auto; padding: 72px 16px 96px; display: grid; gap: 12px; }
+  .c-device-stripe { height: 88px; border-radius: var(--ios-radius-card); }
+  /* faixas coloridas: são CONTEÚDO passando por baixo do vidro */
+  .c-device-stripe:nth-child(6n+1) { background: linear-gradient(120deg, var(--ios-blue), var(--ios-teal)); }
+  .c-device-stripe:nth-child(6n+2) { background: linear-gradient(120deg, var(--ios-orange), var(--ios-yellow)); }
+  .c-device-stripe:nth-child(6n+3) { background: linear-gradient(120deg, var(--ios-purple), var(--ios-pink)); }
+  .c-device-stripe:nth-child(6n+4) { background: var(--ios-bg-grouped-secondary); }
+  .c-device-stripe:nth-child(6n+5) { background: linear-gradient(120deg, var(--ios-green), var(--ios-teal)); }
+  .c-device-stripe:nth-child(6n+6) { background: var(--ios-bg-grouped-secondary); }
+
+  /* nav bar de vidro do demo — absolute no topo, conteúdo rola por baixo;
+     hairline de scroll-edge por baixo do vidro (navigation-bar.md) */
+  .c-navbar { position: absolute; top: 0; left: 0; right: 0; height: var(--ios-h-navbar); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--ios-margin); z-index: 2; border-bottom: 1px solid var(--ios-separator); }
+  .c-navbar strong { font-size: var(--ios-text-headline-size); font-weight: 600; }
+
+  /* tab bar cápsula flutuante do demo */
+  .c-tabbar { position: absolute; left: var(--ios-bar-inset); right: var(--ios-bar-inset); bottom: var(--ios-bar-inset); height: var(--ios-h-tabbar); border-radius: var(--ios-radius-pill); display: flex; align-items: stretch; justify-content: space-around; z-index: 2; }
+  .c-tabbar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--ios-gray); text-decoration: none; font-size: var(--ios-text-caption2-size); min-width: 64px; }
+  .c-tabbar a[aria-current="page"] { color: var(--ios-blue); }
+  .c-tabbar a[aria-current="page"] .g { background: currentColor; }
+
+  /* toolbar de rodapé: ilha flutuante */
+  .c-toolbar { height: var(--ios-h-navbar); border-radius: var(--ios-radius-pill); display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; }
+  .c-toolbar button { border: 0; background: transparent; color: var(--ios-blue); font: inherit; min-width: var(--ios-touch-min); min-height: var(--ios-touch-min); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  .c-toolbar .destructive { color: var(--ios-red); }
+
+  /* ---------- Botões ---------- */
+  .c-btn { border: 0; font: inherit; font-size: var(--ios-text-body-size); font-weight: 600; cursor: pointer; border-radius: var(--ios-radius-button); min-height: var(--ios-h-button); padding: 0 24px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: transform var(--ios-duration-press) var(--ios-ease), opacity var(--ios-duration-press) var(--ios-ease); }
+  .c-btn:active { transform: scale(0.97); opacity: 0.7; }
+  .c-btn--filled { background: var(--ios-blue); color: var(--ios-on-accent); }
+  .c-btn--tinted { background: var(--ios-blue-tint); color: var(--ios-blue); }
+  .c-btn--gray { background: var(--ios-gray5); color: var(--ios-blue); }
+  .c-plain { background: transparent; border: 0; color: var(--ios-blue); font: inherit; font-size: var(--ios-text-body-size); cursor: pointer; min-height: var(--ios-touch-min); display: inline-flex; align-items: center; padding: 0 8px; }
+  /* botão de vidro: cromo flutuante — o press vem de .ios-glass--interactive
+     (tokens.css); aqui só a cor do rótulo e o opacity do press genérico anulado */
+  .c-btn--glass { color: var(--ios-label); }
+  .c-btn--glass:active { opacity: 1; }
+  .c-btn--sm { min-height: 32px; padding: 0 14px; font-size: var(--ios-text-subheadline-size); }
+
+  /* ---------- Segmented / Switch / Stepper ---------- */
+  .c-seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--ios-fill-secondary); border-radius: var(--ios-radius-pill); padding: 2px; min-height: 32px; }
+  .c-seg button { border: 0; background: transparent; color: var(--ios-label); font: inherit; font-size: var(--ios-text-subheadline-size); border-radius: var(--ios-radius-pill); padding: 4px 16px; cursor: pointer; }
+  .c-seg button[aria-selected="true"] { font-weight: 600; }
+  /* o thumb de vidro entra via .ios-glass no botão ativo (ver script) */
+
+  .c-switch { position: relative; width: 51px; height: 31px; border: 0; border-radius: var(--ios-radius-pill); background: var(--ios-fill); cursor: pointer; transition: background var(--ios-duration) var(--ios-ease); }
+  .c-switch[aria-checked="true"] { background: var(--ios-green); }
+  .c-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; transition: transform var(--ios-duration) var(--ios-ease); }
+  .c-switch[aria-checked="true"]::after { transform: translateX(20px); }
+
+  .c-stepper { display: inline-flex; background: var(--ios-fill-secondary); border-radius: var(--ios-radius-pill); overflow: hidden; }
+  .c-stepper button { border: 0; background: transparent; color: var(--ios-label); font-size: 20px; width: var(--ios-touch-min); min-height: 32px; cursor: pointer; }
+  .c-stepper button:first-child { border-right: 1px solid var(--ios-separator); }
+  .c-stepper-value { min-width: 40px; display: inline-flex; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Slider ---------- */
+  .c-slider { -webkit-appearance: none; appearance: none; width: 220px; height: 4px; border-radius: 2px; background: linear-gradient(to right, var(--ios-blue) 50%, var(--ios-fill) 50%); outline-offset: 8px; }
+  .c-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid var(--ios-separator); box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer; }
+  .c-slider-ticks { position: relative; display: inline-block; }
+  .c-slider-ticks .ticks { position: absolute; inset: 10px 14px auto; display: flex; justify-content: space-between; pointer-events: none; }
+  .c-slider-ticks .ticks i { width: 2px; height: 8px; border-radius: 1px; background: var(--ios-fill); }
+
+  /* ---------- Campos ---------- */
+  .c-field { display: block; width: 100%; max-width: 320px; min-height: var(--ios-touch-min); border: 0; border-radius: var(--ios-radius-input); background: var(--ios-fill-tertiary); color: var(--ios-label); font: inherit; font-size: var(--ios-text-body-size); padding: 10px 12px; }
+  .c-field::placeholder { color: var(--ios-label-tertiary); }
+  textarea.c-field { min-height: 88px; resize: vertical; }
+  select.c-field, input[type="date"].c-field { max-width: 200px; }
+  /* a cor das <option> vem do host fix global do tokens.css §4 */
+  .c-search { display: flex; align-items: center; gap: 6px; max-width: 320px; min-height: 36px; border-radius: var(--ios-radius-pill); background: var(--ios-fill-tertiary); padding: 0 12px; color: var(--ios-label-tertiary); }
+  .c-search input { border: 0; background: transparent; color: var(--ios-label); font: inherit; font-size: var(--ios-text-body-size); width: 100%; outline: none; }
+
+  /* ---------- Lista inset ---------- */
+  .c-list { list-style: none; background: var(--ios-bg-grouped-secondary); border-radius: var(--ios-radius-card); overflow: hidden; max-width: 420px; }
+  .c-list li { display: flex; align-items: center; gap: 12px; min-height: var(--ios-h-row); padding: 0 var(--ios-margin); }
+  .c-list li + li { border-top: 1px solid var(--ios-separator); margin-left: var(--ios-margin); padding-left: 0; }
+  .c-list .value { margin-left: auto; color: var(--ios-label-secondary); }
+  .c-list .chev { color: var(--ios-gray2); }
+
+  /* ---------- Card / Avatar / Disclosure ---------- */
+  .c-card { background: var(--ios-bg-grouped-secondary); border-radius: var(--ios-radius-card); padding: var(--ios-card-padding); max-width: 420px; }
+  .c-card h4 { margin-bottom: 4px; font-size: var(--ios-text-footnote-size); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ios-tracking-caps); color: var(--ios-label-secondary); }
+  .c-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--ios-indigo); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; }
+  .c-disc--in-row { flex: 1; padding-top: 0; padding-bottom: 0; }
+  .c-disc .disc-body { padding-bottom: 16px; color: var(--ios-label-secondary); }
+  .c-disc summary { list-style: none; display: flex; align-items: center; justify-content: space-between; min-height: var(--ios-h-row); cursor: pointer; font-weight: 600; }
+  .c-disc summary::-webkit-details-marker { display: none; }
+  .c-disc .g--caret { transition: transform var(--ios-duration) var(--ios-ease); }
+  .c-disc[open] .g--caret { transform: rotate(45deg); }
+
+  /* ---------- Overlays (mostrados abertos, estáticos, sobre "mídia") ---------- */
+  .c-overlay-stage { position: relative; border-radius: var(--ios-radius-card); background: linear-gradient(120deg, var(--ios-blue), var(--ios-purple)); min-height: 200px; display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; gap: 16px; flex-wrap: wrap; }
+  .c-overlay-stage--low { min-height: 96px; }
+  .c-alert { width: 270px; border-radius: var(--ios-radius-alert); overflow: hidden; text-align: center; }
+  .c-alert-body { padding: 20px 16px; }
+  .c-alert-body strong { display: block; font-size: var(--ios-text-headline-size); }
+  .c-alert-body span { font-size: var(--ios-text-footnote-size); color: var(--ios-label-secondary); }
+  .c-alert-actions { display: flex; border-top: 1px solid var(--ios-separator); }
+  .c-alert-actions button { flex: 1; border: 0; background: transparent; color: var(--ios-blue); font: inherit; font-size: var(--ios-text-body-size); min-height: var(--ios-touch-min); cursor: pointer; }
+  .c-alert-actions button + button { border-left: 1px solid var(--ios-separator); font-weight: 600; }
+
+  .c-sheet { border-radius: var(--ios-radius-sheet) var(--ios-radius-sheet) 0 0; padding: 8px 16px 24px; width: 100%; max-width: 320px; align-self: flex-end; }
+  .c-sheet p { margin-top: 8px; color: var(--ios-label-secondary); }
+  .c-overlay-stage--sheet { align-items: flex-end; padding-bottom: 0; }
+  .c-grabber { width: 36px; height: 5px; border-radius: var(--ios-radius-pill); background: var(--ios-gray3); margin: 0 auto 12px; }
+  .c-action-sheet { display: grid; gap: 8px; width: 100%; max-width: 320px; align-self: flex-end; }
+  .c-action-block { border-radius: var(--ios-radius-sheet); overflow: hidden; display: grid; }
+  .c-action-block button { border: 0; background: transparent; color: var(--ios-blue); font: inherit; font-size: var(--ios-text-title3-size); min-height: 56px; cursor: pointer; }
+  .c-action-block button + button { border-top: 1px solid var(--ios-separator); }
+  .c-action-block .destructive { color: var(--ios-red); }
+  .c-action-block .cancel { font-weight: 600; }
+
+  .c-menu { width: 250px; border-radius: var(--ios-radius-card); overflow: hidden; }
+  .c-menu button { display: flex; width: 100%; align-items: center; justify-content: space-between; border: 0; background: transparent; color: var(--ios-label); font: inherit; font-size: var(--ios-text-body-size); min-height: var(--ios-touch-min); padding: 0 16px; cursor: pointer; }
+  .c-menu button + button { border-top: 1px solid var(--ios-separator); }
+  .c-menu .destructive { color: var(--ios-red); }
+  .c-popover { width: 280px; border-radius: var(--ios-radius-card); padding: 16px; }
+  .c-popover p { margin-top: 4px; color: var(--ios-label-secondary); font-size: var(--ios-text-footnote-size); }
+
+  /* ---------- Feedback ---------- */
+  .c-spinner { width: 22px; height: 22px; border-radius: 50%; border: 2.5px solid var(--ios-fill); border-top-color: var(--ios-gray); animation: pv-spin 0.8s steps(8, end) infinite; }
+  @keyframes pv-spin { to { transform: rotate(360deg); } }
+  .c-progress { width: 220px; height: 4px; border-radius: 2px; background: var(--ios-fill); overflow: hidden; }
+  .c-progress i { display: block; height: 100%; width: 60%; background: var(--ios-blue); border-radius: 2px; }
+  .c-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; border-radius: var(--ios-radius-pill); background: var(--ios-red); color: var(--ios-on-accent); font-size: var(--ios-text-caption1-size); font-weight: 600; padding: 0 6px; }
+  .c-chip { display: inline-flex; align-items: center; border-radius: var(--ios-radius-badge); background: var(--ios-blue-tint); color: var(--ios-blue); font-size: var(--ios-text-caption1-size); font-weight: 600; padding: 3px 8px; }
+  /* chips de ESTADO: os tints oficiais (color.md §1) */
+  .c-chip--red { background: var(--ios-tint-red); color: var(--ios-red); }
+  .c-chip--orange { background: var(--ios-tint-orange); color: var(--ios-orange); }
+  .c-chip--green { background: var(--ios-tint-green); color: var(--ios-green); }
+  .c-toast { display: inline-flex; align-items: center; gap: 8px; border-radius: var(--ios-radius-pill); padding: 10px 20px; font-size: var(--ios-text-subheadline-size); font-weight: 600; }
+  .c-toast .toast-ok { color: var(--ios-green); }
+
+  /* ---------- Notice / Action tiles / Empty ---------- */
+  .c-notice { display: flex; gap: 12px; background: var(--ios-bg-grouped-secondary); border-radius: var(--ios-radius-card); padding: var(--ios-card-padding); max-width: 420px; }
+  .c-notice .icon { color: var(--ios-orange); flex-shrink: 0; }
+  .c-notice strong { display: block; font-size: var(--ios-text-subheadline-size); }
+  .c-notice span span { font-size: var(--ios-text-footnote-size); color: var(--ios-label-secondary); }
+  .c-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 420px; }
+  .c-tiles button { border: 0; background: var(--ios-bg-grouped-secondary); border-radius: var(--ios-radius-input); color: var(--ios-blue); font: inherit; font-size: var(--ios-text-caption1-size); display: grid; gap: 4px; justify-items: center; padding: 12px 8px; min-height: var(--ios-touch-min); cursor: pointer; }
+  /* section header standalone (section-header.md) */
+  .c-shdr { display: block; margin-bottom: 8px; font-size: var(--ios-text-footnote-size); line-height: var(--ios-text-footnote-leading); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ios-tracking-caps); color: var(--ios-label-secondary); padding: 0 var(--ios-margin); }
+  .c-empty { text-align: center; padding: 32px 16px; max-width: 320px; margin: 0 auto; }
+  .c-empty .g { width: 44px; height: 44px; color: var(--ios-gray2); margin-bottom: 12px; }
+  .c-empty h4 { margin-bottom: 4px; font-size: var(--ios-text-title3-size); font-weight: 600; }
+  .c-empty p { margin-bottom: 16px; color: var(--ios-label-secondary); font-size: var(--ios-text-subheadline-size); }
+</style>
+</head>
+<body>
+<header class="pv-header">
+  <div>
+    <h1>ios-core-design v1.0 — Liquid Glass</h1>
+    <p>Tokens e os 28 componentes em CSS puro, light × dark. Ícones são placeholders geométricos; no uso real, Phosphor.</p>
+  </div>
+  <div class="pv-glass-toggle" role="group" aria-label="Intensidade do vidro (data-glass)">
+    <button type="button" data-glass-set="" aria-pressed="true">Vidro</button>
+    <button type="button" data-glass-set="frosted" aria-pressed="false">Fosco</button>
+    <button type="button" data-glass-set="solid" aria-pressed="false">Opaco</button>
+  </div>
+</header>
+
+<template id="pv-samples">
+  <h2 class="pv-section">O vidro — conteúdo rolando por baixo</h2>
+  <div class="c-device">
+    <div class="c-navbar ios-glass"><strong>Início</strong><button class="c-plain">Editar</button></div>
+    <div class="c-device-scroll">
+      <div class="c-device-stripe"></div><div class="c-device-stripe"></div><div class="c-device-stripe"></div>
+      <div class="c-device-stripe"></div><div class="c-device-stripe"></div><div class="c-device-stripe"></div>
+      <div class="c-device-stripe"></div><div class="c-device-stripe"></div><div class="c-device-stripe"></div>
+      <div class="c-device-stripe"></div><div class="c-device-stripe"></div><div class="c-device-stripe"></div>
+    </div>
+    <nav class="c-tabbar ios-glass" aria-label="Principal">
+      <a href="#" aria-current="page"><span class="g g--sm g--round"></span>Início</a>
+      <a href="#"><span class="g g--sm g--round"></span>Busca</a>
+      <a href="#"><span class="g g--sm g--round"></span>Perfil</a>
+    </nav>
+  </div>
+  <p class="pv-note">Role o conteúdo: a nav bar e a cápsula da tab bar são .ios-glass — borda de luz, realce especular, sombra de flutuação e o fundo atravessando borrado e saturado.</p>
+
+  <h2 class="pv-section">Tokens — acentos</h2>
+  <div class="pv-row">
+    <span class="g g--fill" style="color: var(--ios-blue)"></span>
+    <span class="g g--fill" style="color: var(--ios-green)"></span>
+    <span class="g g--fill" style="color: var(--ios-indigo)"></span>
+    <span class="g g--fill" style="color: var(--ios-orange)"></span>
+    <span class="g g--fill" style="color: var(--ios-pink)"></span>
+    <span class="g g--fill" style="color: var(--ios-purple)"></span>
+    <span class="g g--fill" style="color: var(--ios-red)"></span>
+    <span class="g g--fill" style="color: var(--ios-teal)"></span>
+    <span class="g g--fill" style="color: var(--ios-yellow)"></span>
+  </div>
+
+  <h2 class="pv-section">Tokens — tipografia (11 estilos)</h2>
+  <div class="pv-stack pv-stack--tight">
+    <span class="ios-text-large-title">Large Title 34</span>
+    <span class="ios-text-title1">Title 1 · 28</span>
+    <span class="ios-text-title2">Title 2 · 22</span>
+    <span class="ios-text-title3">Title 3 · 20</span>
+    <span class="ios-text-headline">Headline 17</span>
+    <span class="ios-text-body">Body 17</span>
+    <span class="ios-text-callout">Callout 16</span>
+    <span class="ios-text-subheadline">Subheadline 15</span>
+    <span class="ios-text-footnote">Footnote 13</span>
+    <span class="ios-text-caption1">Caption 1 · 12</span>
+    <span class="ios-text-caption2">Caption 2 · 11</span>
+  </div>
+
+  <h2 class="pv-section">Button — cápsula sempre (filled / tinted / gray / plain / glass)</h2>
+  <div class="pv-row">
+    <button class="c-btn c-btn--filled">Continuar</button>
+    <button class="c-btn c-btn--tinted">Saber mais</button>
+    <button class="c-btn c-btn--gray">Opções</button>
+    <button class="c-plain">Cancelar</button>
+  </div>
+  <div class="c-overlay-stage c-overlay-stage--low pv-mt">
+    <button class="c-btn c-btn--sm c-btn--glass ios-glass ios-glass--interactive">Botão de vidro</button>
+  </div>
+  <p class="pv-note">O glass é cromo: flutua sobre conteúdo/mídia. Pressione: acende (frosted) e volta em bounce.</p>
+
+  <h2 class="pv-section">Segmented / Switch / Stepper</h2>
+  <div class="pv-row">
+    <div class="c-seg" role="tablist" aria-label="Período">
+      <button role="tab" aria-selected="true" class="ios-glass">Dia</button>
+      <button role="tab" aria-selected="false">Semana</button>
+      <button role="tab" aria-selected="false">Mês</button>
+    </div>
+    <button class="c-switch" role="switch" aria-checked="true" aria-label="Notificações"></button>
+    <div class="c-stepper">
+      <button type="button" aria-label="Diminuir">−</button>
+      <span class="c-stepper-value">2</span>
+      <button type="button" aria-label="Aumentar">+</button>
+    </div>
+  </div>
+  <p class="pv-note">O thumb do segmented é vidro (o track de fill não é — sem vidro sobre vidro).</p>
+
+  <h2 class="pv-section">Slider — e com tick marks</h2>
+  <div class="pv-stack">
+    <input type="range" class="c-slider" min="0" max="100" value="50" aria-label="Valor">
+    <span class="c-slider-ticks">
+      <input type="range" class="c-slider" min="0" max="100" value="50" step="25" aria-label="Valor com marcas">
+      <span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </span>
+  </div>
+
+  <h2 class="pv-section">Campos — texto, área de texto, busca (cápsula), select, data</h2>
+  <div class="pv-stack">
+    <input class="c-field" placeholder="Nome completo">
+    <textarea class="c-field" rows="3" placeholder="Observações" aria-label="Observações"></textarea>
+    <div class="c-search"><span class="g g--sm g--round" aria-hidden="true"></span><input type="search" placeholder="Buscar" aria-label="Buscar"></div>
+    <select class="c-field" aria-label="Categoria"><option>Trabalho</option><option>Pessoal</option></select>
+    <input class="c-field" type="date" aria-label="Data">
+  </div>
+
+  <h2 class="pv-section">Section header + List — inset grouped (raio 16)</h2>
+  <span class="c-shdr">Preferências</span>
+  <ul class="c-list">
+    <li><span class="g g--sm" style="color: var(--ios-blue)"></span> Geral <span class="value">Ativado</span> <span class="g--caret chev"></span></li>
+    <li><span class="g g--sm" style="color: var(--ios-green)"></span> Notificações <span class="value">3</span> <span class="g--caret chev"></span></li>
+    <li><span class="g g--sm" style="color: var(--ios-orange)"></span> Armazenamento <span class="value">82 GB</span> <span class="g--caret chev"></span></li>
+  </ul>
+
+  <h2 class="pv-section">Card / Avatar / Disclosure</h2>
+  <div class="c-card">
+    <h4>Resumo</h4>
+    <p>Card de conteúdo é sólido: eleva por cor, sem vidro e sem sombra.</p>
+  </div>
+  <div class="pv-row pv-mt">
+    <span class="c-avatar">MA</span>
+    <details class="c-disc c-card c-disc--in-row">
+      <summary>Detalhes do pedido <span class="g--caret"></span></summary>
+      <p class="disc-body">Conteúdo expandido do grupo.</p>
+    </details>
+  </div>
+
+  <h2 class="pv-section">Toolbar — ilha flutuante de rodapé</h2>
+  <div class="c-overlay-stage c-overlay-stage--low">
+    <div class="c-toolbar ios-glass" role="toolbar" aria-label="Ações">
+      <button aria-label="Compor"><span class="g g--sm"></span></button>
+      <button aria-label="Mover"><span class="g g--sm g--round"></span></button>
+      <button class="destructive" aria-label="Apagar"><span class="g g--sm"></span></button>
+    </div>
+  </div>
+
+  <h2 class="pv-section">Alert — vidro, raio 26</h2>
+  <div class="c-overlay-stage">
+    <div class="c-alert ios-glass" role="alertdialog" aria-label="Exemplo">
+      <div class="c-alert-body"><strong>Apagar rascunho?</strong><span>Essa ação não pode ser desfeita.</span></div>
+      <div class="c-alert-actions"><button>Cancelar</button><button style="color: var(--ios-red)">Apagar</button></div>
+    </div>
+  </div>
+
+  <h2 class="pv-section">Action Sheet — blocos de vidro flutuantes</h2>
+  <div class="c-overlay-stage" style="align-items: flex-end;">
+    <div class="c-action-sheet">
+      <div class="c-action-block ios-glass"><button>Compartilhar</button><button class="destructive">Apagar</button></div>
+      <div class="c-action-block ios-glass"><button class="cancel">Cancelar</button></div>
+    </div>
+  </div>
+
+  <h2 class="pv-section">Modal Sheet — vidro, raio 20 no topo</h2>
+  <div class="c-overlay-stage c-overlay-stage--sheet">
+    <div class="c-sheet ios-glass">
+      <div class="c-grabber" aria-hidden="true"></div>
+      <strong>Filtrar</strong>
+      <p>O painel do sheet é vidro; o véu atrás é cor (--ios-scrim).</p>
+    </div>
+  </div>
+
+  <h2 class="pv-section">Popover / Context Menu — vidro, raio 16</h2>
+  <div class="c-overlay-stage">
+    <div class="c-popover ios-glass"><strong>Popover</strong><p>Ancorado em quem o abriu.</p></div>
+    <div class="c-menu ios-glass" role="menu">
+      <button role="menuitem">Copiar <span class="g g--sm" aria-hidden="true"></span></button>
+      <button role="menuitem">Favoritar <span class="g g--sm g--round" aria-hidden="true"></span></button>
+      <button role="menuitem" class="destructive">Apagar <span class="g g--sm" aria-hidden="true"></span></button>
+    </div>
+  </div>
+
+  <h2 class="pv-section">Spinner / Progress / Badge / Chips de estado / Toast</h2>
+  <div class="pv-row">
+    <span class="c-spinner" role="status" aria-label="Carregando"></span>
+    <span class="c-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><i></i></span>
+    <span class="c-badge">3</span>
+    <span class="c-chip">Novo</span>
+    <span class="c-chip c-chip--red">Atrasado</span>
+    <span class="c-chip c-chip--orange">Vence hoje</span>
+    <span class="c-chip c-chip--green">Confirmado</span>
+  </div>
+  <p class="pv-note">Chips de estado usam os tints oficiais (--ios-tint-*): 15% do acento no fundo, acento cheio no texto — o dark troca sozinho.</p>
+  <div class="c-overlay-stage c-overlay-stage--low pv-mt">
+    <span class="c-toast ios-glass" role="status"><span class="g g--sm g--round toast-ok" aria-hidden="true"></span> Salvo</span>
+  </div>
+
+  <h2 class="pv-section">Notice / Action tiles / Empty State</h2>
+  <div class="c-notice">
+    <span class="icon g g--sm" aria-hidden="true"></span>
+    <span><strong>Backup pendente</strong><span>O último backup foi há 8 dias.</span></span>
+  </div>
+  <div class="c-tiles pv-mt">
+    <button><span class="g g--sm"></span>mensagem</button>
+    <button><span class="g g--sm g--round"></span>ligar</button>
+    <button><span class="g g--sm"></span>e-mail</button>
+  </div>
+  <div class="c-empty">
+    <span class="g g--round" aria-hidden="true"></span>
+    <h4>Sem resultados</h4>
+    <p>Tente ajustar a busca ou os filtros.</p>
+    <button class="c-btn c-btn--tinted c-btn--sm">Limpar filtros</button>
+  </div>
+</template>
+
+<main class="pv-panes">
+  <section class="pv-pane" data-theme="light" aria-label="Tema claro"><h3 class="pv-pane-title">Light</h3></section>
+  <section class="pv-pane" data-theme="dark" aria-label="Tema escuro"><h3 class="pv-pane-title">Dark</h3></section>
+</main>
+
+<script>
+/* Clona o mesmo template nos dois painéis — paridade light/dark por construção */
+const tpl = document.getElementById("pv-samples");
+document.querySelectorAll(".pv-pane").forEach((pane) => {
+  pane.appendChild(tpl.content.cloneNode(true));
+});
+
+/* Toggle data-glass — a tradução web do slider de intensidade do iOS 27 */
+document.querySelectorAll("[data-glass-set]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const value = btn.getAttribute("data-glass-set");
+    document.querySelectorAll(".pv-pane").forEach((pane) => {
+      if (value) pane.setAttribute("data-glass", value);
+      else pane.removeAttribute("data-glass");
+    });
+    document.querySelectorAll("[data-glass-set]").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+  });
+});
+
+/* Demos interativas (delegação por painel) */
+document.querySelectorAll(".pv-pane").forEach((pane) => {
+  pane.addEventListener("click", (e) => {
+    const sw = e.target.closest(".c-switch");
+    if (sw) sw.setAttribute("aria-checked", sw.getAttribute("aria-checked") === "true" ? "false" : "true");
+    const seg = e.target.closest('.c-seg [role="tab"]');
+    if (seg) {
+      seg.closest(".c-seg").querySelectorAll('[role="tab"]').forEach((t) => {
+        const on = t === seg;
+        t.setAttribute("aria-selected", String(on));
+        t.classList.toggle("ios-glass", on); /* o thumb de vidro acompanha a seleção */
+      });
+    }
+    const step = e.target.closest(".c-stepper button");
+    if (step) {
+      const value = step.parentElement.querySelector(".c-stepper-value");
+      value.textContent = Math.max(0, Number(value.textContent) + (step.textContent === "+" ? 1 : -1));
+    }
+    const tab = e.target.closest(".c-tabbar a");
+    if (tab) {
+      e.preventDefault();
+      tab.closest(".c-tabbar").querySelectorAll("a").forEach((a) => {
+        if (a === tab) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+    }
+  });
+  /* Slider: gradiente acompanha o valor (mesma técnica do Slider.tsx) */
+  pane.addEventListener("input", (e) => {
+    const slider = e.target.closest(".c-slider");
+    if (!slider) return;
+    const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.background = `linear-gradient(to right, var(--ios-blue) ${percent}%, var(--ios-fill) ${percent}%)`;
+  });
+});
+</script>
+</body>
+</html>

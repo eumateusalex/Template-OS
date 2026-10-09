@@ -1,0 +1,102 @@
+/* novo-projeto: semente · é seu
+   O TEMA DO SHADCN NA MARCA DESTE PROJETO. Os papéis que o CLI declara no
+   `globals.css` (fundo, texto, cartão, primário, borda, anel...), preenchidos
+   com os canais de `tokens.css`. O componente do registry não sabe que existe
+   marca: ele pede o papel, e o papel vem daqui.
+
+   🚨 TODO PAPEL DO CLI É REDEFINIDO, no claro e no escuro: é o que impede o
+   oklch do CLI (o cinza e o vermelho do shadcn) de chegar à tela. O conferidor
+   `marca` reprova papel esquecido, valor fora dos canais e par abaixo de 4,5:1.
+
+   🚨 SEM CAMADA E EM `:root`, de propósito. O CLI escreve
+   `@theme inline { --font-sans: var(--font-sans) }`, um ciclo que só funciona
+   quando o `next/font` põe a classe na `<html>`. Declarado aqui, fora de
+   camada, este arquivo vence a camada `theme` do Tailwind sem depender de ordem.
+
+   ⚠️ O RAIO NÃO SE MUDA AQUI: o Tailwind inlina o valor na hora do build, e o
+   raio entra pelas linhas `--radius-*` do `globals.css`. O `--radius` abaixo é
+   só para quem o pede direto.
+
+   Mudou uma cor? Mude em `tokens.css` (ou rode o gerador de novo): este arquivo
+   só diz qual canal cada papel usa. */
+
+:root {
+  --font-sans: var(--f-display);
+
+  --background: rgb(var(--c-fundo));
+  --foreground: rgb(var(--c-texto));
+  --card: rgb(var(--c-superficie));
+  --card-foreground: rgb(var(--c-texto));
+  --popover: rgb(var(--c-fundo));
+  --popover-foreground: rgb(var(--c-texto));
+  --primary: rgb(var(--c-primaria));
+  --primary-foreground: rgb(var(--c-primaria-texto));
+  --secondary: rgb(var(--c-superficie));
+  --secondary-foreground: rgb(var(--c-texto));
+  --muted: rgb(var(--c-superficie));
+  --muted-foreground: rgb(var(--c-apagado));
+  --accent: rgb(var(--c-superficie-2));
+  --accent-foreground: rgb(var(--c-texto));
+  --destructive: rgb(var(--c-erro));
+  --border: rgb(var(--c-borda));
+  --input: rgb(var(--c-borda));
+  --ring: rgb(var(--c-primaria));
+  --chart-1: rgb(var(--c-primaria));
+  --chart-2: rgb(var(--c-primaria-escuro));
+  --chart-3: rgb(var(--c-apagado));
+  --chart-4: rgb(var(--c-borda));
+  --chart-5: rgb(var(--c-texto));
+  --radius: var(--r-md);
+  --sidebar: rgb(var(--c-superficie));
+  --sidebar-foreground: rgb(var(--c-texto));
+  --sidebar-primary: rgb(var(--c-primaria));
+  --sidebar-primary-foreground: rgb(var(--c-primaria-texto));
+  --sidebar-accent: rgb(var(--c-superficie-2));
+  --sidebar-accent-foreground: rgb(var(--c-texto));
+  --sidebar-border: rgb(var(--c-borda));
+  --sidebar-ring: rgb(var(--c-primaria));
+
+  /* O ACENTO, o papel que o shadcn não tem: a palavra, o link, o traço. O
+     `--accent` do shadcn é outra coisa, o fundo do hover. */
+  --acento: rgb(var(--c-primaria));
+  --acento-fg: rgb(var(--c-primaria-texto));
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: rgb(var(--c-fundo-escuro));
+  --foreground: rgb(var(--c-texto-escuro));
+  --card: rgba(var(--c-texto-escuro), 0.06);
+  --card-foreground: rgb(var(--c-texto-escuro));
+  --popover: rgb(var(--c-fundo-escuro));
+  --popover-foreground: rgb(var(--c-texto-escuro));
+  --primary: rgb(var(--c-primaria-escuro));
+  --primary-foreground: rgb(var(--c-primaria-escuro-texto));
+  --secondary: rgba(var(--c-texto-escuro), 0.1);
+  --secondary-foreground: rgb(var(--c-texto-escuro));
+  --muted: rgba(var(--c-texto-escuro), 0.06);
+  --muted-foreground: rgb(var(--c-apagado-escuro));
+  --accent: rgba(var(--c-texto-escuro), 0.1);
+  --accent-foreground: rgb(var(--c-texto-escuro));
+  --destructive: rgb(var(--c-erro-escuro));
+  --border: rgba(var(--c-texto-escuro), 0.14);
+  --input: rgba(var(--c-texto-escuro), 0.17);
+  --ring: rgb(var(--c-primaria-escuro));
+  --chart-1: rgb(var(--c-primaria-escuro));
+  --chart-2: rgb(var(--c-primaria));
+  --chart-3: rgb(var(--c-apagado-escuro));
+  --chart-4: rgba(var(--c-texto-escuro), 0.3);
+  --chart-5: rgb(var(--c-texto-escuro));
+  --sidebar: rgba(var(--c-texto-escuro), 0.06);
+  --sidebar-foreground: rgb(var(--c-texto-escuro));
+  --sidebar-primary: rgb(var(--c-primaria-escuro));
+  --sidebar-primary-foreground: rgb(var(--c-primaria-escuro-texto));
+  --sidebar-accent: rgba(var(--c-texto-escuro), 0.1);
+  --sidebar-accent-foreground: rgb(var(--c-texto-escuro));
+  --sidebar-border: rgba(var(--c-texto-escuro), 0.14);
+  --sidebar-ring: rgb(var(--c-primaria-escuro));
+
+  --acento: rgb(var(--c-primaria-escuro));
+  --acento-fg: rgb(var(--c-primaria-escuro-texto));
+}

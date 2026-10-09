@@ -1,0 +1,306 @@
+{
+  "versao": "1.0.0",
+  "data": "2026-10-09",
+  "arquivos": {
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/LEIA-ME.md": {
+      "sha": "d287434bcdffd7fc69f4b4c7f49200d01e7b8c0fe606143c52b987d067a3116c",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/base.css": {
+      "sha": "b4cf5d9bc90f4080987adcfb699f5ed3b0b808806c1ecc309aecfd958a213613",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/arquivos.mjs": {
+      "sha": "7942dfd1aabc846239c09263ac199432306cd9b21441cb1c3416b8877bba4943",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/casca.mjs": {
+      "sha": "d9509159eb6a793470a9b0f61d40f2f5939a8a612cde6090d8943d31e67bfa4c",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/cor.mjs": {
+      "sha": "f2a9067c0f564278354b9f7573c26d0b83a5191a63a77d73fea9e65561d679ec",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/isencao.mjs": {
+      "sha": "b7dbf945914216699d16337d9787e66df0f5bf482c3b7b0c60409be9e574d68b",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/runner.mjs": {
+      "sha": "57642b0063f467a1aa044b3edd8be0e8a91eed07c0077bfdf561117430cfcf97",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/saida.mjs": {
+      "sha": "79f3a48fe1369e5a1a00a9de9667ad9332decdf5363bd75c9e4e3191e840215f",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/lib/temporaria.mjs": {
+      "sha": "665d864d4038531d6d5373cf50c27b1d9b6f1a3fa7c8698f66188db2b9640066",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/portao/auditar-ui.mjs": {
+      "sha": "0a669f08ce50ef6bc081f93a6a68aa1a7ad5d3c4278194197e36af045141c054",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/portao/fundacao.mjs": {
+      "sha": "ebf884dab7e9bd66885c0c9e0328eb5c5fbca7ed1172b3556548b320fec8d9b8",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/portao/marca.mjs": {
+      "sha": "7987023773b6417b49f64e87df81dc2e8888c9398f744d746ca2858e7aef9da4",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/portao/tela.mjs": {
+      "sha": "496a6dc5e96ec3a0456ae948d229844dceebd73aefa0bd08084929174181acad",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/provas/auditar-ui.mjs": {
+      "sha": "aae7ac49339e1af1c9ae0c4188588fd774a7d160c0191f2f2a82e2616dfd2adc",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/provas/fundacao.mjs": {
+      "sha": "d06f150dfb08f85ec6df33786b72325d96758e47c16b8971258ddc0d30e146ae",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/provas/marca.mjs": {
+      "sha": "49dd4b6abc62d3dc1b16979dcca8d230d31ebefa397812bf7808ef64a9ee6dcf",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/provas/tela.mjs": {
+      "sha": "77ea52e9e30cee55c202ce4e519eed6602e96098aa966ad83992609bd8e0041f",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/conferido/teste-portao.mjs": {
+      "sha": "645b6bffc167f2635e75eec70887b9fd9c85da520963871f58708fd54fdc6ebf",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/.dockerignore": {
+      "sha": "8399c2d2514597b68a62f1ebed017064fbc92f0622b7c5bafcf24b64afd05388",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/.env.example": {
+      "sha": "c5db5782592c1cb0d7148af4cae69364ed14324b3923348011e34192e97e25b9",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/.prettierignore": {
+      "sha": "1e5f4b0a4e4af94b560fbb05ec49651f22d049a1a0a9d5d2bbf8f1c464b4fcf5",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/.prettierrc": {
+      "sha": "3744221987387d04024a30ce08eadee1437ac0f21bcf57c4bc9457a37e33e662",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/Dockerfile": {
+      "sha": "806404f6173f7cca28e629b6181f7cc30735c18a4d0ba2f05dc21b2064d3651f",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/README.md": {
+      "sha": "01e4b2d0c90c9028f020332502b814c2a9800613f86a0d17ccefcadce732db91",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/components.json": {
+      "sha": "7f89b1e9e3995be8620be3162df8e08b7dd512f894fb0accb559193138fdc390",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/eslint.config.mjs": {
+      "sha": "b6e922fa101b1d69105a50dbad3907ba0ce4ced848afc95d4c0cfeee825cb08a",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/next.config.ts": {
+      "sha": "eb11d9cff676aff7b76c1bb6ae2afbbcdeba5341ceded38462eedb959b2be5d6",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/package.json": {
+      "sha": "c017909c628771fa0d4562a1c933df757552f30ea38a3ce1028f98d694e7eb80",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/playwright.config.ts": {
+      "sha": "2e5c8331bb1c48470f9d9975977e388a0236c41b320740d6116e138acf05d455",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/postcss.config.mjs": {
+      "sha": "7c013693fe1a211c61c8825d2f24a55435a81f48f03dd5affdbdad5679fd17cd",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/sem-telemetria.mjs": {
+      "sha": "728e96993fcba4ff225c3aefd4aabc5296684960ef735cc47071622b62e73575",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/conteudo/estados.ts": {
+      "sha": "e9e4f41db70b0d5d701a3f8c8b8393edc79f01bf36ab9eee8225574f7b35464a",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/conteudo/perguntas.ts": {
+      "sha": "d44622b1a2f3d7aa145bb398ef5e76f10622e4a6aa3d3905eb3ea4ce17ed383b",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/conteudo/site.ts": {
+      "sha": "1a7916a21a9e8b578ea437c80d107795fe6dc51a16c01ce61c9968f789af0825",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/conteudo/vitrine.ts": {
+      "sha": "74a111b11024eabcac304996df2e70675b61e5afcbb74cdac20deec4f008a342",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/perguntas-dado.ts": {
+      "sha": "626a6a93bbbd6c2e3c6aca17b4cf4991791e06bb318efc910298a6a2eb6106f8",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/perguntas.test.ts": {
+      "sha": "c471cfed711b25fb817d1a8671676bf85784d8a6a8680d2d1c442b14513035aa",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/perguntas.tsx": {
+      "sha": "7d032635a7fca57a8f363b5e0d4a308ae3c1ff1d117e2de49cab484a3d0a0724",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/(site)/secao.tsx": {
+      "sha": "ff79d4dd025442b01bfcec6c0ae1ac61b7e723aaf16f89be923bc198f57ee7eb",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/error.tsx": {
+      "sha": "6a97bfa9daca7b2058881852d9802ef2e6f62bc607a170b8856e706658d5e298",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/global-error.tsx": {
+      "sha": "e2e00e35620ab6d2f76c4cd3110c5480394d4ae762e1cb46ac2549d6e78db9a4",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/globals.css": {
+      "sha": "fd92e1c476a660bfac7a0b027e40793a1420beb6cc6637d7de7d21f67695633c",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/layout.tsx": {
+      "sha": "4c3dd434616b432f5b162ba4928dd33e835bee7f5185693a4b99b688e11be250",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/not-found.tsx": {
+      "sha": "cbd5c21fc373f2da88b0190255172a13f6bcba0ce192d6c304e1eb0fb4413afd",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/page.tsx": {
+      "sha": "fd6a54d1ac8ee54daef137d4465e457c747d602751752830dcf84a23411b8c9b",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/vitrine/page.tsx": {
+      "sha": "04ef17b29f10fe38fa09231f11acedbdcec493907c093a4ed253cb4767a8c11a",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/app/vitrine/pecas.tsx": {
+      "sha": "c0c20cc265e8d63de67e7e5a272d9470b1a0bf10282122755e9e38f986098de3",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/components/estado-vazio.tsx": {
+      "sha": "bf688065286bcf076738345faadc4e2bbf5d5509d5803ddaae9249aae691deea",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/components/revela.tsx": {
+      "sha": "665df7d44190f28e1c801b28d8bb3e02db58a35cf47242199113966d76a36cd5",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/components/tela-de-erro.tsx": {
+      "sha": "4e35388836ec68616880a9a8fa25971daa306db5cac64572b9b70599e88ac43d",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/cookies.test.ts": {
+      "sha": "9e6aa1ea607d45add3a056f3c8f897567fb922e8f37f3f0ff487a7e96d775005",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/cookies.ts": {
+      "sha": "1f2dc22cddcc79fce9ca5664f70a0f5b0a084d92eaa30ca22648e6e7d92f9e71",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/navegador.test.ts": {
+      "sha": "244e13f4f6b51f95aa1ff1c57a4ad80c95fe517236eb67483f1cb793a738406a",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/navegador.ts": {
+      "sha": "d46e7fed4035cee6ea52640e33c9a7440646cbcc2884e8f3250d07a1474be2d1",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/servidor.test.ts": {
+      "sha": "a93eb28b92e374c518fdc0a2d13079027a42ce28b75ec897a25b1b3658d8cd3b",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/servidor.ts": {
+      "sha": "16d60ab6e189c046b70e4cc0f6bde3edd6e826c5f0088866dd86998547675238",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/sessao.test.ts": {
+      "sha": "0959bc236cab1e51fcce34f86a780ccea6b7e0e0316253a81b9aa5aea2ceedbe",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/banco/sessao.ts": {
+      "sha": "2e52fe6e64ae97baf4c8afc36fe1cef77da7db3c15673750ebcbf1c7370b87f4",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/formato.test.ts": {
+      "sha": "267b833efa09a88905aff9099c861f3e7f118be374fb6a3cf8238c3ee9784ecc",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/formato.ts": {
+      "sha": "c2709d140427c36e9868b0d0c7bf21095a0981acb948d914f324fb482e7e7619",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/tipos/banco.ts": {
+      "sha": "a341078541789f35d0b5bb3a137e719a8229f270e9f418175936599bccfad685",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/lib/utils.ts": {
+      "sha": "14300d758170c270c75b057f38fedb3793a5920ea872f0477e29fb131185e8a7",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/proxy.ts": {
+      "sha": "3b60247fbcdde690e0fceb1790535149c2df70a6ef9e848589c714f096e1521a",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/styles/escala.css": {
+      "sha": "9c119dfdfb9b75f9765970f5dd3d12bff908400f09adc101888215da2601110f",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/src/styles/pagina.css": {
+      "sha": "32178adb1d4f10eefb0afbe9f84ade6576a6dde96c167be988acde328e9804e5",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/tela/servir.mjs": {
+      "sha": "45d9d1dba3b577145b60c8ebff5a4a6a1c6619702fd1203ef91d8cdb08a5082e",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/tela/vitrine.spec.ts": {
+      "sha": "63ace2d0f65dae57578ff5f56e4795c4e61f0914db7637e08af9fe65d02e973b",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/testes/next-config.test.ts": {
+      "sha": "b4f76df8bbe342bb5fbb689705a8b5e3eeb1bb532ea2f828fef7e3a2552e4f71",
+      "mudouEm": "próxima"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/testes/vazio.ts": {
+      "sha": "2273bc75e45d36a1e6fae066fbd55e8ffbdaca231b0b6f5c3c080e0da96e9bb5",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/tsconfig.json": {
+      "sha": "5a5ae659a1f48d5d76f04b62245a402fd17e181c97bad8d409a5bac65693b191",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/kit/semente/app/vitest.config.mts": {
+      "sha": "fe145e629f9f7d9609cff1963a7f29c4076024822cc1d9488df083c410bfdf46",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/templates/icone.casa.svg": {
+      "sha": "c1006b3a1f4c5757112149ee19fe14053f89a95c904a28b1407e86847002e746",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/templates/marca.casa.css": {
+      "sha": "29487c8ad8aaa21160ddf3ef0c3ef8f3ab5d7d528c7646d4efecd2961114c835",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/templates/marca.projeto.css": {
+      "sha": "9d764be3e849dc3431a206debb0e8968613ea07e47708f69a062463887ba168b",
+      "mudouEm": "1.0.0"
+    },
+    ".claude/skills/novo-projeto/esqueleto/templates/tema.projeto.css": {
+      "sha": "ef242e11d8d67d2f6c9630c17d688ee4b865fb1d45049cc751a00ece559a4329",
+      "mudouEm": "1.0.0"
+    }
+  }
+}

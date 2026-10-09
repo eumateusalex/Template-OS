@@ -1,0 +1,179 @@
+# Segredos — NUNCA versionar.
+.env
+.env.*
+# ⚠️ A negação TEM que ser `!.env*.example`, com asterisco. Sem ele, ela casa só
+# o nome exato `.env.example`, e os templates de conta específica
+# (`.env.<conta>.example`) ficam de fora do repositório sem ninguém perceber.
+!.env*.example
+*.pem
+*.key
+credentials.json
+token.json
+# Chave de conta de serviço do Google e afins: o guia da Vertex manda criar uma,
+# e o nome que o comando sugere cai na raiz, onde a sessão abre.
+chave.json
+*-sa.json
+service-account*.json
+client_secret*.json
+gcp-oauth.keys.json
+*.p12
+*.pfx
+id_rsa*
+# Só o da raiz: é onde um token de registro costuma parar. Os `.npmrc` dos
+# modelos do Remotion são configuração do projeto de exemplo, e continuam.
+/.npmrc
+# Os nomes próprios que a /seguranca procura: nome de cliente é dado de terceiro.
+.claude/skills/seguranca/nomes.local.json
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+
+# Claude Code (sessões locais, não devem ir pro repo)
+.claude/projects/
+.claude/sessions/
+.claude/shell-snapshots/
+.claude/telemetry/
+.claude/file-history/
+.claude/backups/
+# Permissões e ajustes da sua máquina — pessoais por definição
+.claude/settings.local.json
+
+# Dependências
+node_modules/
+
+# Python e teste: caches que se refazem sozinhos
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+
+# Playwright MCP: a saída dele mora em .claude/playwright/ (é o --output-dir do
+# .mcp.json). O /*.png pega o print que cair na raiz por engano: a raiz é onde você
+# navega, e print solto ali vira lixo que ninguém apaga.
+.claude/playwright/
+.playwright-mcp/
+/*.png
+
+# O /novo-projeto grava aqui a prova da última instalação do esqueleto
+.claude/skills/novo-projeto/esqueleto/kit/.ultima-prova.json
+
+# Arquivos temporários
+*.log
+*.tmp
+# o teste do instagram-publisher grava .tmp-<pid>-<timestamp>, que o *.tmp acima
+# NÃO pega (o sufixo vem depois do ponto-tmp)
+*.tmp-*
+.tmp-teste/
+
+# Drop zone do usuário (só o README vai versionado)
+dados/*
+!dados/README.md
+
+# Rascunho — área momentânea, não versiona
+rascunho/*
+!rascunho/README.md
+
+# Lixeira da /sanitizacao (descarte em quarentena — o material descartado não vai
+# versionado, mas o README e o MANIFESTO vão)
+#
+# ⚠️ O `_manifesto.md` é a trilha de auditoria de tudo que já foi descartado, e
+# o README desta pasta manda consultá-lo pra restaurar item. Sem a negação
+# abaixo ele vive em cópia única DENTRO da pasta que existe justamente pra ser
+# esvaziada: esvaziar a lixeira apagaria o registro do que havia nela.
+lixeira/*
+!lixeira/README.md
+!lixeira/_manifesto.md
+
+# Cada cliente e cada projeto pessoal tem Git PRÓPRIO, aninhado.
+# Se eles não estivessem aqui, um commit na raiz "salvaria" o trabalho do
+# cliente sem erro nenhum, e ele não estaria salvo em lugar nenhum.
+clientes/*
+!clientes/README.md
+projetos-pessoais/*
+!projetos-pessoais/README.md
+
+# Saída de trabalho pesada do /clonar-site (projetos Next inteiros)
+.claude/skills/clonar-site/clones/
+
+# Pasta de trabalho do pipeline do Instagram: download regenerável, e o arquivo
+# de cookies (se você usar a rota do Playwright) é CREDENCIAL. Nunca versionar.
+marketing/instagram/.tmp/
+
+# Render e saídas pesadas. Se precisar versionar um render específico,
+# force com `git add -f <arquivo>`.
+*.mp4
+*.mov
+*.webm
+# A capa do Reel do /cortes (modo gravação) sai de novo da montagem.
+saidas/reel-*/*.png
+# Os JPEGs do /carrossel saem de novo do render (o HTML, o roteiro e a legenda versionam).
+carrosseis/*/instagram/*.jpg
+
+# Prospecção (agente estrategista): a pasta inteira tem dado de terceiro (o dossiê,
+# a abordagem, a medição bruta, os prints). Fica só no disco: o git não esquece, e
+# `git rm` não tira do histórico nem do remoto. Para versionar um dossiê de propósito,
+# force com `git add -f` sabendo disso.
+saidas/prospeccao-*/
+saidas/vertical-*/
+
+# /oferta: o acervo de transcrições mora fora do workspace; a regra abaixo protege
+# quem o montar aqui dentro por engano e o painel HTML gerado. O relatorio.json e o
+# relatorio.md ao lado são texto pequeno e vão versionados.
+acervo-oferta/
+saidas/oferta-*/*.html
+
+# /guardanapo: o render é gerado de novo pelo render.mjs a partir da cena.json
+# (10 PNGs grandes por peça). Quem quiser versionar a peça aprovada tira estas linhas.
+saidas/**/quadro-[0-9][0-9].png
+saidas/**/medidas.json
+
+# /design-de-produto: o que o medidor grava ao lado de cada tela (refaz com
+# .claude/skills/design-de-produto/scripts/medir-tela.cjs)
+*-desktop-claro.png
+*-desktop-escuro.png
+*-celular-claro.png
+*-celular-escuro.png
+*-medidas.json
+
+# /cortes e transcrição: o que o yt-dlp baixa e o áudio intermediário. O trabalho
+# mora em rascunho/ (já ignorado); isto pega o que cair fora dele.
+*.mkv
+*.m4a
+*.wav
+*.gancho.png
+
+# /video: o estúdio tem o .gitignore dele; isto é reforço para o que é pesado
+.claude/video/node_modules/
+.claude/video/previa/
+.claude/video/out/
+
+# As peças de terceiro: o `node scripts/terceiros/instalar.mjs` as baixa da fonte
+# oficial, no caminho que o workspace cita (o `scripts/terceiros/manifesto.json`
+# diz cada uma). Nenhuma entra no git; a lista acompanha o manifesto, e o
+# `scripts/terceiros/teste-instalar.mjs` confere que cada destino está aqui.
+/.claude/skills/gsap/
+/.claude/skills/remotion/
+/.claude/skills/motion/
+/.claude/skills/react-best-practices/
+/.claude/video/html/_vendor/
+/.claude/skills/guardanapo/fontes/
+/.claude/skills/design-de-produto/assets/vendor/
+/.claude/skills/ios-core-design/assets/phosphor-sprite.svg
+/.claude/skills/ios-core-design/assets/LICENSE-phosphor.txt
+/.claude/skills/novo-projeto/esqueleto/fixtures/fontes/
+/.claude/skills/novo-projeto/esqueleto/fixtures/marca-web/fontes/
+/.claude/skills/novo-projeto/esqueleto/fixtures/app-minimo/src/components/ui/
+
+# Login do Codex/ChatGPT (motor GPT do gerar-imagem): se CODEX_HOME apontar para dentro
+# do workspace, o token da conta não pode ser rastreado
+auth.json
+.codex/

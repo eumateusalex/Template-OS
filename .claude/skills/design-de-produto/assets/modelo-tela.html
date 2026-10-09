@@ -1,0 +1,468 @@
+<!doctype html>
+<!--
+  MODELO DA SKILL /design-de-produto · CLARO
+  Modelo de PAINEL, revisado em fidelidade, regras e texto e com o medidor verde nas quatro combinações.
+  Estrutura do Permitly, com o conteúdo de uma conta fictícia (Traço Arquitetura) como EXEMPLO: troque
+  o conteúdo pelo cenário da sua tela (escreva o cenario.md antes, no formato do SKILL.md), mantenha os
+  tokens e a escala, e meça de novo com scripts/medir-tela.cjs.
+  Os caminhos vendor/ apontam para assets/vendor/: copie a pasta junto se mudar o arquivo de lugar.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelo de tela · claro</title>
+<!--
+  Cópia FIEL, versão clara: a tela inicial de um produto real montada só com a composição e os
+  componentes do Permitly (o produto de referência do design system publicado). Um produto só por
+  tela, como manda o método. A versão escura é outro arquivo (modelo-tela-escuro.html), na composição do
+  AgentPay. Tudo local (./vendor). ?limpo esconde o botão de prévia.
+  Fidelidade: medidas tiradas do original em escala 3x e conferidas contra a
+  folha de tipografia do original, que usa as MESMAS palavras da tela ("Package compliance" = display/20,
+  "Permit AI" = display/16, "128" = number/32, "Requirements" = medium/13, "PERMITTING" = label/11).
+  Composição: linha 1 = cartão com imagem (424) + "Números da conta"; linha 2 = tabela + coluna de 320
+  com o painel preto da IA em cima e o medidor lima embaixo.
+  O corpo de texto segue a medida pela largura da palavra (12 e 13, um px abaixo do que o olho estima),
+  o KPI fecha em 100, a lateral no passo de 39, e os respiros de 14 em volta da imagem. O funil segue por CONTAGEM (4:7:5), como o Permitly, e o
+  título diz isso: "Negócios por etapa". As 290 são "arquivadas" e as 268 "só a IA respondeu".
+-->
+<style>
+@font-face { font-family:"Geist"; src:url("vendor/Geist-Variable.woff2") format("woff2"); font-weight:100 900; }
+@font-face { font-family:"Geist Mono"; src:url("vendor/GeistMono-Variable.woff2") format("woff2"); font-weight:100 900; }
+@font-face { font-family:"Inter"; src:url("vendor/inter-variavel-latin.woff2") format("woff2"); font-weight:100 900; unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family:"Inter"; src:url("vendor/inter-variavel-latin-ext.woff2") format("woff2"); font-weight:100 900; unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+
+/* ===== Tokens do Permitly, hex escritos na folha do design system publicado ===== */
+:root {
+  --bg-canvas:#EFEEF4; --bg-panel:#FFFFFF; --bg-card:#F4F4F8; --bg-hover:#E9E8F0; --bg-sunken:#E3E2EC;
+  --text-primary:#111116; --text-secondary:#55545F; --text-muted:#8A8996; --text-inverse:#FFFFFF; --text-on-accent:#141805;
+  --line-soft:#E3E2EC; --line-strong:#D2D1DD; --line-hatch:#CFCEDB;
+  --lime-500:#C9F24C; --lime-300:#DDF78E; --lime-tint:#F0FBCD; --lime-700:#5F7A0E;
+  --clay-500:#E1543A; --clay-tint:#FBE3DE; --clay-700:#A33420;
+  --amber-500:#EDA122; --amber-tint:#FCEFD8; --amber-700:#8A5A05;
+  --on-inverse-2:rgb(255 255 255 / .64); --on-inverse-3:rgb(255 255 255 / .86);
+  /* espaço: "0 to 120. Every padding and gap in the file is bound." */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px;
+  /* raio: "Panels 32, cards 24, tiles 16 and 20, pills full." */
+  --r-panel:32px; --r-card:24px; --r-tile-lg:20px; --r-tile:16px; --r-12:12px; --r-10:10px; --r-8:8px; --r-pill:999px;
+  --f-display:"Geist", system-ui, sans-serif; --f-body:"Inter", system-ui, sans-serif; --f-mono:"Geist Mono", ui-monospace, monospace;
+}
+
+/* ===== Tipografia: os tokens da folha publicada ===== */
+.display-32 { font:500 32px/1.15 var(--f-display); letter-spacing:-.02em; }
+.display-20 { font:500 20px/1.25 var(--f-display); letter-spacing:-.01em; }
+.display-16 { font:500 16px/1.3 var(--f-display); letter-spacing:-.01em; }
+.number-40 { font:400 40px/1 var(--f-display); letter-spacing:-.02em; }
+.number-32 { font:400 32px/1 var(--f-display); letter-spacing:-.02em; }
+.body-14 { font:400 14px/20px var(--f-body); } .body-12 { font:400 12px/16px var(--f-body); }
+.medium-14 { font:500 14px/20px var(--f-body); } .medium-13 { font:500 13px/18px var(--f-body); }
+.label-11 { font:600 11px/14px var(--f-body); letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); }
+.mono-13 { font:400 13px/18px var(--f-mono); } .mono-11 { font:400 11px/14px var(--f-mono); }
+/* dois tamanhos que a tela original usa e a parte visível da folha não lista (a folha diz 33 tokens e
+   mostra 24): o título do cartão flutuante ("1254 Oak Street", medido 18) e o texto de 13 regular
+   (cabeçalho da tabela e rótulo do funil, medidos 13) */
+.display-18 { font:500 18px/24px var(--f-display); letter-spacing:-.01em; }
+.body-13 { font:400 13px/18px var(--f-body); }
+/* o 12 em peso 500 (chip, selo de risco, rodapés), medido pela largura da palavra */
+.medium-12 { font:500 12px/16px var(--f-body); }
+.num { font-variant-numeric:tabular-nums; }
+.sec { color:var(--text-secondary); } .mut { color:var(--text-muted); }
+
+* { box-sizing:border-box; }
+html, body { margin:0; }
+body { background:var(--bg-canvas); color:var(--text-primary); font:400 14px/20px var(--f-body); -webkit-font-smoothing:antialiased; }
+svg.lucide { width:20px; height:20px; stroke-width:1.5; flex-shrink:0; }
+button { font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0; }
+a { color:inherit; text-decoration:none; }
+
+/* ===== Casca: a lateral é um painel; o resto fica direto no canvas, cada módulo no seu painel ===== */
+.casca { display:grid; grid-template-columns:240px minmax(0,1fr); gap:var(--s-4); padding:var(--s-4); min-height:100vh; }
+
+/* lateral (C13): padding 12, menu 38 em medium-13 no passo de 39 (38 + 1), conta 6/16/6/6 */
+.lateral { background:var(--bg-panel); border-radius:var(--r-panel); display:flex; flex-direction:column; gap:1px; padding:var(--s-3); }
+.marca { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-1) var(--s-1) var(--s-3) 6px; }
+.logo { width:32px; height:32px; border-radius:var(--r-8); background:var(--text-primary); display:grid; grid-template-columns:repeat(2,8px); gap:var(--s-1); place-content:center; flex-shrink:0; }
+.logo i { width:8px; height:8px; border-radius:2px; background:var(--bg-panel); } .logo i:nth-child(2) { background:var(--lime-500); }
+.circulo { width:40px; height:40px; border-radius:var(--r-pill); background:var(--bg-card); display:grid; place-items:center; color:var(--text-secondary); flex-shrink:0; }
+.c32 { width:32px; height:32px; } .c32 svg.lucide { width:16px; height:16px; }
+.c36 { width:36px; height:36px; } .c36 svg.lucide { width:18px; height:18px; }
+.marca .circulo { margin-left:auto; }
+.conta { display:flex; align-items:center; gap:var(--s-3); padding:6px var(--s-4) 6px 6px; border-radius:var(--r-pill); background:var(--bg-card); margin-bottom:var(--s-2); }
+.conta .circulo { background:var(--bg-panel); }
+.conta .nome { min-width:0; } .conta .nome div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.conta > svg.lucide { margin-left:auto; color:var(--text-muted); width:16px; height:16px; }
+.menu { display:flex; align-items:center; gap:10px; height:38px; padding:0 10px; white-space:nowrap; border-radius:var(--r-pill); color:var(--text-secondary); }
+.menu.ativo { background:var(--text-primary); color:var(--text-inverse); }
+.contador { margin-left:auto; min-width:28px; height:20px; padding:0 var(--s-2); border-radius:var(--r-pill); background:var(--bg-card); color:var(--text-secondary); text-align:center; font:400 12px/20px var(--f-body); }
+.grupo { padding:var(--s-4) var(--s-3) var(--s-1); }
+/* o cartão da IA no pé da lateral (Permit AI): círculo 32, chave 40 */
+.ia-lateral { margin-top:auto; border-radius:var(--r-card); background:var(--lime-500); color:var(--text-on-accent); padding:var(--s-3); display:grid; gap:var(--s-3); }
+.ia-lateral .linha { display:flex; align-items:center; gap:var(--s-3); }
+.ia-lateral .linha > div { min-width:0; white-space:nowrap; }
+.ia-lateral .circulo { background:var(--text-primary); color:var(--lime-500); }
+.chave { display:inline-block; flex-shrink:0; margin-left:auto; width:40px; height:24px; border-radius:var(--r-pill); background:var(--text-primary); position:relative; }
+.chave::after { content:""; position:absolute; top:var(--s-1); right:var(--s-1); width:16px; height:16px; border-radius:50%; background:var(--bg-panel); }
+.ia-lateral .rodape { background:var(--bg-panel); color:var(--text-primary); border-radius:var(--r-pill); height:36px; padding:0 var(--s-3) 0 var(--s-4); display:flex; align-items:center; justify-content:space-between; gap:var(--s-2); }
+.ia-lateral .rodape svg.lucide { width:16px; height:16px; }
+
+.principal { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s-4); align-content:start; min-width:0; }
+/* barra de cima (C12): sem padding extra; ⌘K de 32 */
+.topo { display:flex; align-items:center; gap:var(--s-4); flex-wrap:wrap; }
+.topo h1 { margin:0; }
+.pilula-lima { display:inline-flex; align-items:center; gap:var(--s-2); height:30px; padding:0 var(--s-4) 0 var(--s-3); border-radius:var(--r-pill); background:var(--lime-500); color:var(--text-on-accent); white-space:nowrap; }
+.pilula-lima svg.lucide { width:16px; height:16px; }
+.topo .direita { margin-left:auto; display:flex; align-items:center; gap:var(--s-2); }
+.busca { display:flex; align-items:center; gap:var(--s-2); height:48px; width:236px; padding:0 var(--s-2) 0 var(--s-4); border-radius:var(--r-pill); background:var(--bg-panel); color:var(--text-muted); white-space:nowrap; }
+.busca > span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.busca kbd { margin-left:auto; width:32px; height:26px; border-radius:var(--r-pill); background:var(--lime-500); color:var(--text-on-accent); font:500 11px/26px var(--f-body); text-align:center; }
+.sino { width:48px; height:48px; border-radius:var(--r-pill); background:var(--bg-panel); display:grid; place-items:center; position:relative; flex-shrink:0; }
+.sino::after { content:""; position:absolute; top:var(--s-3); right:var(--s-3); width:8px; height:8px; border-radius:50%; background:var(--clay-500); box-shadow:0 0 0 2px var(--bg-panel); }
+.botao-preto { display:inline-flex; align-items:center; gap:var(--s-2); height:48px; padding:0 var(--s-6) 0 var(--s-5); border-radius:var(--r-pill); background:var(--text-primary); color:var(--text-inverse); white-space:nowrap; }
+
+/* painel: superfícies internas a 8 da borda (C1); o título a 24 = 8 do painel + 16 do cabeçalho */
+.painel { background:var(--bg-panel); border-radius:var(--r-panel); padding:var(--s-2); min-width:0; }
+.cab { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-2) var(--s-4) var(--s-3); }
+.cab h2, .cab h3 { margin:0; }
+.cab .fim { margin-left:auto; display:flex; align-items:center; gap:var(--s-2); }
+.cab .titulo { min-width:0; }
+
+.linha1 { display:grid; grid-template-columns:424px minmax(0,1fr); gap:var(--s-4); }
+.linha2 { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:var(--s-4); align-items:start; }
+.coluna { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s-4); }
+
+/* ===== C2: o cartão com imagem. No lugar da foto do telhado, a planta baixa do projeto em traço fino ===== */
+.cartao-imagem { display:flex; }
+.planta { position:relative; flex:1; min-height:300px; border-radius:var(--r-card); overflow:hidden; background:var(--bg-card) linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 16px 16px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 16px 16px; background-color:var(--bg-card); }
+.planta svg.desenho { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.chip { position:absolute; top:14px; left:14px; display:inline-flex; align-items:center; gap:var(--s-2); height:30px; padding:0 var(--s-3) 0 var(--s-3); border-radius:var(--r-pill); background:var(--bg-panel); white-space:nowrap; }
+.chip svg.lucide { width:16px; height:16px; }
+.estado { position:absolute; top:14px; right:14px; display:inline-flex; align-items:center; gap:var(--s-2); height:26px; padding:0 var(--s-3) 0 10px; border-radius:var(--r-pill); background:var(--clay-700); color:var(--text-inverse); white-space:nowrap; }
+.estado::before { content:""; width:8px; height:8px; border-radius:50%; background:currentColor; }
+.flutuante { position:absolute; left:14px; right:14px; bottom:14px; background:var(--bg-panel); border-radius:var(--r-card); padding:var(--s-3); }
+.flutuante .topo-f { display:flex; align-items:flex-start; gap:var(--s-3); }
+.flutuante .topo-f > div { min-width:0; flex:1; }
+.flutuante .topo-f > div div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.progresso { display:flex; align-items:center; gap:var(--s-4); margin-top:var(--s-3); height:20px; padding-right:var(--s-5); }
+.progresso .trilho { flex:1; height:8px; border-radius:var(--r-pill); background:var(--bg-hover); overflow:hidden; }
+.progresso .trilho i { display:block; height:100%; border-radius:var(--r-pill); background:var(--text-primary); }
+.faixa { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); margin-top:var(--s-3); border-radius:var(--r-tile); box-shadow:inset 0 0 0 1px var(--line-soft); }
+.faixa > div { padding:var(--s-3); min-width:0; white-space:nowrap; }
+.faixa > div + div { box-shadow:inset 1px 0 0 var(--line-soft); }
+
+/* ===== "Números da conta" (Portfolio) ===== */
+.segmento { display:flex; gap:var(--s-1); padding:var(--s-1); border-radius:var(--r-pill); background:var(--bg-card); }
+.segmento button { height:32px; padding:0 var(--s-4); border-radius:var(--r-pill); color:var(--text-secondary); white-space:nowrap; }
+.segmento .sim { background:var(--text-primary); color:var(--text-inverse); }
+/* KPI (C5): padding 16, gap 4, rótulo e contexto em 12, contexto numa linha; número em number/32 (C4)
+   com linha de 28, o que fecha o cartão em 100 como o original (16+16+4+28+4+16+16) */
+.kpis { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:var(--s-2); }
+.kpi { background:var(--bg-card); border-radius:var(--r-card); padding:var(--s-4); display:grid; gap:var(--s-1); align-content:start; min-width:0; }
+.kpi > span { white-space:nowrap; }
+.kpi .number-32 { line-height:28px; }
+/* "R$ 126,1 mil": algarismo proporcional (tabular dá 145 e o KPI tem 136; proporcional dá 132), e o
+   "mil" em 12 sem crescer a linha de 28 */
+.kpi .number-32 small { line-height:0; margin-left:3px; }
+.kpi.destaque { background:var(--text-primary); color:var(--text-inverse); }
+.kpi.destaque .sec { color:var(--on-inverse-2); }
+.kpi .ctx { display:flex; align-items:center; gap:var(--s-1); color:var(--text-secondary); }
+.kpi .ctx svg.lucide { width:14px; height:14px; }
+/* funil (C10): barras 30, raio 10, título medium-13, números 13, rótulos 12 */
+.funil { background:var(--bg-card); border-radius:var(--r-card); padding:var(--s-3) var(--s-4) var(--s-4); margin-top:var(--s-2); }
+.funil .cab-f { display:flex; align-items:center; gap:var(--s-3); flex-wrap:wrap; margin-bottom:var(--s-2); }
+.funil .cab-f .fim { margin-left:auto; display:flex; align-items:center; gap:var(--s-3); }
+.barras { display:grid; gap:var(--s-2); }
+.barras .trilho, .barras .rot { display:flex; gap:var(--s-1); }
+.barras .trilho i { height:30px; border-radius:var(--r-10); background:var(--bg-hover); }
+.barras .trilho i.lima { background:var(--lime-500); }
+.barras .rot div { min-width:0; white-space:nowrap; }
+.barras .rot b { display:block; font:400 13px/18px var(--f-body); color:var(--text-primary); }
+.abrir { display:inline-flex; align-items:center; gap:var(--s-1); }
+.abrir svg.lucide { width:16px; height:16px; }
+
+/* ===== tabela (Needs attention), C8: cabeçalho 10/16 em 12, células 14/16 em 13 (passo 63), selos 26 em 12, círculos 36 ===== */
+.tabela { width:100%; border-collapse:separate; border-spacing:0; table-layout:fixed; }
+.tabela col.c-motivo { width:168px; } .tabela col.c-risco { width:156px; } .tabela col.c-espera { width:96px; }
+.tabela thead th { background:var(--bg-card); color:var(--text-muted); font:400 12px/16px var(--f-body); text-align:left; padding:10px var(--s-4); }
+.tabela thead th:first-child { border-radius:var(--r-pill) 0 0 var(--r-pill); } .tabela thead th:last-child { border-radius:0 var(--r-pill) var(--r-pill) 0; }
+.tabela td { padding:14px var(--s-4); border-bottom:1px solid var(--line-soft); vertical-align:middle; }
+.tabela tbody tr:last-child td { border-bottom:0; }
+/* a linha inteira é o link (as tabelas do original não têm coluna de ação) */
+.tabela tbody tr { position:relative; }
+.tabela tbody tr:hover td { background:var(--bg-card); }
+.tabela .ir { display:block; min-width:0; }
+.tabela .ir::after { content:""; position:absolute; inset:0; }
+.tabela .ir div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pilula-neutra { display:inline-flex; align-items:center; height:26px; padding:0 var(--s-3); border-radius:var(--r-pill); background:var(--bg-card); color:var(--text-secondary); white-space:nowrap; }
+/* risco numa pílula própria, como o Risk do original: sólido para o que passou da meta (o High) */
+.risco { display:inline-flex; align-items:center; height:26px; padding:0 var(--s-3); border-radius:var(--r-pill); white-space:nowrap; }
+/* desvio proposital, medido: o "High" do original é branco sobre clay/500 e dá 3,80:1, abaixo
+   de 4,5. O sólido passa ao clay/700, que é do próprio sistema publicado. */
+.risco.alto { background:var(--clay-700); color:var(--text-inverse); }
+
+/* ===== painel preto da IA (Permit AI), C6: título display/16, manchete display/20, botão 40, pontos 8 ===== */
+.ia-preta { background:var(--text-primary); color:var(--text-inverse); border-radius:var(--r-panel); padding:var(--s-4); display:grid; gap:var(--s-3); align-content:start; }
+.ia-preta .cab-ia { display:flex; align-items:center; gap:var(--s-3); height:32px; padding-left:var(--s-2); }
+.ia-preta .cab-ia svg.lucide { color:var(--lime-500); width:16px; height:16px; }
+.ia-preta .cab-ia .fim { margin-left:auto; color:var(--on-inverse-2); }
+.ia-preta ul { margin:0; padding:0; list-style:none; display:grid; gap:var(--s-2); }
+.ia-preta li { display:flex; align-items:center; gap:var(--s-3); color:var(--on-inverse-3); }
+.ia-preta li i { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.botao-lima { justify-self:start; height:40px; padding:0 var(--s-4); margin-top:var(--s-3); border-radius:var(--r-pill); background:var(--lime-500); color:var(--text-on-accent); }
+
+/* ===== medidor de tiques sobre o lima (Package compliance), C11 e C14 ===== */
+.medidor-lima { background:var(--lime-500); border-radius:var(--r-card); padding:var(--s-4) var(--s-4) var(--s-4); display:grid; justify-items:center; }
+.medidor-lima svg { width:184px; height:96px; display:block; }
+.medidor-lima .valor { margin-top:-60px; text-align:center; color:var(--text-on-accent); }
+.medidor-lima .valor small { font:500 12px/1 var(--f-display); margin-left:2px; }
+.medidor-lima .rodape { margin-top:var(--s-4); width:100%; height:30px; background:var(--bg-panel); border-radius:var(--r-pill); padding:0 var(--s-4); display:flex; align-items:center; justify-content:space-between; gap:var(--s-2); }
+.seta { color:var(--text-primary); }
+
+/* ===== Celular (sem original): margem 20, uma coluna, alvo de toque de 44 ===== */
+.topo-celular { display:none; }
+@media (max-width:767px) {
+  .casca { grid-template-columns:minmax(0,1fr); padding:var(--s-5); }
+  .lateral { display:none; }
+  .topo-celular { display:flex; align-items:center; gap:var(--s-3); }
+  .topo-celular .display-20 { margin-right:auto; }
+  .topo-celular .circulo { width:44px; height:44px; background:var(--bg-panel); }
+  .topo h1 { width:100%; }
+  .topo .direita { margin-left:0; width:100%; }
+  .busca { flex:1; width:auto; min-width:0; }
+  .busca kbd { display:none; }
+  .botao-preto { padding:0 var(--s-4); }
+  .botao-preto span { display:none; }
+  .linha1, .linha2 { grid-template-columns:minmax(0,1fr); }
+  .planta { min-height:380px; }
+  .cab { flex-wrap:wrap; }
+  .cab .fim.segmento { margin-left:0; }
+  .flutuante .topo-f > div div { white-space:normal; }
+  .kpis { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  /* "R$ 126,1 mil" mede 133 e o KPI de 390 tem 131 por dentro: 12 à direita só neste cartão */
+  .kpi.destaque { padding-right:var(--s-3); }
+  /* M3: o rótulo do funil cabe; o "3 em risco" já está no KPI e no painel da IA */
+  .barras .rot .extra { display:none; }
+  .funil .cab-f .fim .mut { display:none; }
+  /* M2: os dois círculos ficam ao lado do título, nunca embaixo */
+  .cab-tabela { flex-wrap:nowrap; align-items:flex-start; }
+  /* M1: a linha vira grade; nada encavala */
+  .tabela { table-layout:auto; } .tabela colgroup, .tabela thead { display:none; }
+  .tabela tr { display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; gap:var(--s-2) var(--s-3); padding:var(--s-3) var(--s-2); border-bottom:1px solid var(--line-soft); }
+  .tabela tbody tr:last-child { border-bottom:0; }
+  .tabela td { display:block; padding:0; border:0; }
+  .tabela td.cliente { grid-column:1 / -1; }
+  .tabela .ir { min-height:44px; display:flex; flex-direction:column; justify-content:center; }
+  .tabela td.motivo { white-space:normal; }
+  .botao-lima { height:44px; }
+  .segmento button, .c36, .c32, .abrir { position:relative; }
+  .segmento button::after { content:""; position:absolute; inset:-6px 0; }
+  .c36::after { content:""; position:absolute; inset:-4px; }
+  .abrir::after { content:""; position:absolute; inset:-13px -8px; }
+}
+</style>
+<script src="vendor/lucide.min.js"></script>
+</head>
+<body>
+<div class="casca">
+
+  <aside class="lateral">
+    <div class="marca">
+      <span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="display-20">Traço</span>
+      <span class="circulo c32"><i data-lucide="panel-left"></i></span>
+    </div>
+    <div class="conta">
+      <span class="circulo"><i data-lucide="drafting-compass"></i></span>
+      <div class="nome"><div class="medium-13">Traço Arquitetura</div><div class="body-12 mut">São Paulo, SP</div></div>
+      <i data-lucide="chevron-down"></i>
+    </div>
+    <a class="menu ativo medium-13"><i data-lucide="layout-grid"></i>Início</a>
+    <a class="menu medium-13"><i data-lucide="bell"></i>Avisos<span class="contador num">4</span></a>
+    <div class="grupo label-11">Módulos</div>
+    <a class="menu medium-13"><i data-lucide="handshake"></i>CRM<span class="contador num">2</span></a>
+    <a class="menu medium-13"><i data-lucide="message-circle"></i>Atendimento<span class="contador num">3</span></a>
+    <div class="grupo label-11">Conta</div>
+    <a class="menu medium-13"><i data-lucide="settings"></i>Configuração da conta</a>
+    <div class="ia-lateral">
+      <div class="linha">
+        <span class="circulo c32"><i data-lucide="sparkles"></i></span>
+        <div><div class="medium-13">Agente de IA</div><div class="body-12">Ligado · WhatsApp</div></div>
+        <span class="chave" role="img" aria-label="ligado"></span>
+      </div>
+      <a class="rodape medium-12" href="#fila">3 conversas sem dono<i data-lucide="chevron-right"></i></a>
+    </div>
+  </aside>
+
+  <main class="principal">
+    <div class="topo-celular">
+      <span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="display-20">Traço</span>
+      <a class="circulo" href="#menu" aria-label="menu"><i data-lucide="menu"></i></a>
+    </div>
+
+    <!-- saudação no canvas + pílula de acento ("7 projects need attention") + busca, sino e ação preta -->
+    <div class="topo">
+      <h1 class="display-32">Bom dia, Carla</h1>
+      <span data-selo class="pilula-lima medium-13"><i data-lucide="triangle-alert"></i>3 conversas esperam alguém da equipe</span>
+      <div class="direita">
+        <label class="busca body-14"><i data-lucide="search"></i><span>Buscar na conta</span><kbd>⌘K</kbd></label>
+        <span class="sino" role="img" aria-label="avisos"><i data-lucide="bell"></i></span>
+        <a class="botao-preto medium-14" href="#atendimento" aria-label="Abrir o Atendimento"><i data-lucide="message-circle"></i><span>Abrir o Atendimento</span></a>
+      </div>
+    </div>
+
+    <!-- LINHA 1: o cartão com imagem (PL-2841) + "Números da conta" (Portfolio) -->
+    <div class="linha1">
+      <section class="painel cartao-imagem" aria-label="Negócio em foco">
+        <div class="planta">
+          <!-- planta baixa da Casa Almeida em traço fino: parede dupla, portas com arco, janelas em três linhas -->
+          <svg class="desenho" viewBox="0 14 408 320" preserveAspectRatio="xMidYMin meet" aria-hidden="true" fill="none" stroke-linecap="square">
+            <g stroke="var(--text-secondary)" stroke-width="1.5">
+              <!-- parede externa, dupla -->
+              <rect x="60" y="60" width="288" height="236"/>
+              <rect x="66" y="66" width="276" height="224"/>
+              <!-- paredes internas -->
+              <path d="M198 66V120M198 144V176"/>
+              <path d="M66 176H150M174 176H254M278 176H342"/>
+              <path d="M254 176V290"/>
+              <path d="M130 176V230M130 254V290"/>
+            </g>
+            <g stroke="var(--text-secondary)" stroke-width="1">
+              <!-- portas: folha e arco -->
+              <path d="M198 120L222 120M198 144A24 24 0 0 1 222 120"/>
+              <path d="M150 176V152M174 176A24 24 0 0 0 150 152"/>
+              <path d="M254 176H278M278 176A24 24 0 0 0 254 200" />
+              <path d="M130 230H106M130 254A24 24 0 0 1 106 230"/>
+              <!-- janelas: três linhas cortando a parede -->
+              <path d="M96 60H168M96 63H168M96 66H168"/>
+              <path d="M230 60H310M230 63H310M230 66H310"/>
+              <path d="M348 204V262M345 204V262M342 204V262"/>
+              <path d="M60 96V150M63 96V150M66 96V150"/>
+              <!-- bancada e ilha da cozinha -->
+              <path d="M206 72H334V92H206"/>
+              <rect x="244" y="118" width="64" height="28" rx="2"/>
+              <!-- cama e sofá -->
+              <rect x="282" y="206" width="52" height="68" rx="3"/><path d="M282 222H334"/>
+              <rect x="80" y="84" width="24" height="68" rx="3"/>
+              <rect x="138" y="196" width="104" height="80" rx="2" stroke-dasharray="3 3"/>
+            </g>
+          </svg>
+          <span data-selo class="chip medium-12"><i data-lucide="file-text"></i>Maior valor em risco</span>
+          <span data-selo class="estado body-12">Crítico</span>
+          <div class="flutuante">
+            <div class="topo-f">
+              <div><div class="display-18">Casa Almeida</div><div class="body-12 mut">Proposta desde 10/09 · sem próximo passo marcado</div></div>
+              <a class="circulo c36 seta" href="#negocio-casa-almeida" aria-label="abrir o negócio"><i data-lucide="arrow-up-right"></i></a>
+            </div>
+            <div class="progresso" title="Novo, Contato feito, Proposta, Ganho: está no 3º passo"><span class="trilho"><i style="width:75%"></i></span><span class="body-12 num">etapa 3 de 4</span></div>
+            <div class="faixa">
+              <div><div class="body-12 mut">Valor</div><div class="body-13 num">R$ 14,2 mil</div></div>
+              <div><div class="body-12 mut">Etapa</div><div class="body-13">Proposta</div></div>
+              <div><div class="body-12 mut">Parado há</div><div class="body-13 num">12 dias</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio: o seletor de período vale para este painel inteiro, e só para ele -->
+      <section class="painel">
+        <div class="cab">
+          <h2 class="display-20 titulo">Números da conta</h2>
+          <div class="fim segmento body-13"><button>7 dias</button><button class="sim">30 dias</button><button>90 dias</button></div>
+        </div>
+        <div class="kpis">
+          <div class="kpi destaque"><span class="body-12 sec">Em aberto</span><span class="number-32">R$ 126,1<small class="body-12">mil</small></span><span class="body-12 sec">em 16 negócios</span></div>
+          <div class="kpi"><span class="body-12 sec">Ganhos</span><span class="number-32 num">10</span><span class="body-12 ctx"><i data-lucide="arrow-down-right"></i>11 nos 30 dias antes</span></div>
+          <div class="kpi"><span class="body-12 sec">Só pela IA</span><span class="number-32 num">268</span><span class="body-12 ctx">de 290 arquivadas</span></div>
+          <div class="kpi"><span class="body-12 sec">Em risco</span><span class="number-32 num">3</span><span class="body-12 ctx">sem próximo passo</span></div>
+        </div>
+        <div class="funil">
+          <div class="cab-f"><h3 class="medium-13" style="margin:0">Negócios por etapa</h3><span class="fim"><span class="body-12 mut">R$ 126,1 mil em 16 negócios</span><a class="abrir medium-13" href="#crm">Abrir o CRM<i data-lucide="chevron-right"></i></a></span></div>
+          <div class="barras">
+            <div class="trilho"><i style="flex:4"></i><i style="flex:7"></i><i class="lima" style="flex:5"></i></div>
+            <div class="rot body-12 mut"><div style="flex:4"><b class="num">4</b>Novo</div><div style="flex:7"><b class="num">7</b>Contato feito</div><div style="flex:5"><b class="num">5</b>Proposta<span class="extra">, 3 em risco</span></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- LINHA 2: a tabela + a coluna de 320 (IA em cima, medidor embaixo) -->
+    <div class="linha2">
+      <section class="painel" id="fila">
+        <div class="cab cab-tabela">
+          <div class="titulo"><h2 class="display-20">Ninguém pegou ainda</h2><div class="body-13 sec">3 sem dono · meta de 30 min no horário de atendimento · último atraso avisado às <span class="mono-13">09:00</span></div></div>
+          <span class="fim"><button class="circulo c36" aria-label="filtrar"><i data-lucide="sliders-horizontal"></i></button><button class="circulo c36" aria-label="mais"><i data-lucide="ellipsis"></i></button></span>
+        </div>
+        <!-- a ordem é por tempo de espera (quem espera há mais tempo primeiro), não pela IA: por isso não há pílula "ordenado pela IA" -->
+        <table class="tabela body-13"><colgroup><col><col class="c-motivo"><col class="c-risco"><col class="c-espera"></colgroup>
+          <thead><tr><th>Contato</th><th>Motivo</th><th>Meta</th><th>Espera</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="cliente"><a class="ir" href="#conversa-vila-ipe"><div class="body-13">Condomínio Vila Ipê</div><div class="body-12 mut">"Vocês fazem laudo técnico para reforma de fachada?"</div></a></td>
+              <td class="motivo">Fora do material</td>
+              <td><span data-selo class="risco alto medium-12">Passou da meta</span></td>
+              <td class="mono-13 num">1 h 05</td>
+            </tr>
+            <tr>
+              <td class="cliente"><a class="ir" href="#conversa-diego"><div class="body-13">Diego Moura</div><div class="body-12 mut">"Quero falar com a arquiteta antes de fechar a planta."</div></a></td>
+              <td class="motivo">Pediu uma pessoa</td>
+              <td><span data-selo class="risco alto medium-12">Passou da meta</span></td>
+              <td class="mono-13 num">34 min</td>
+            </tr>
+            <tr>
+              <td class="cliente"><a class="ir" href="#conversa-renata"><div class="body-13">Renata Paiva</div><div class="body-12 mut">"Consegue fazer o projeto de interiores por R$ 9 mil?"</div></a></td>
+              <td class="motivo">Negociação</td>
+              <td><span data-selo class="pilula-neutra body-12">No prazo</span></td>
+              <td class="mono-13 num">12 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="coluna">
+        <!-- Permit AI: o painel preto da IA, EM CIMA (C7) -->
+        <section class="ia-preta">
+          <div class="cab-ia"><i data-lucide="sparkles"></i><span class="display-16">Agente de IA</span><span class="fim body-12">atualizado há <span class="mono-11">6 min</span></span></div>
+          <div class="display-20">3 negócios em risco</div>
+          <ul class="body-13">
+            <li><i style="background:var(--clay-500)"></i>2 parados há mais de 10 dias</li>
+            <li><i style="background:var(--amber-500)"></i>1 parado há 8 dias</li>
+            <li><i style="background:var(--lime-500)"></i>Os 3 somam R$ 31,6 mil</li>
+          </ul>
+          <button class="botao-lima medium-14">Ver os 3 negócios</button>
+        </section>
+
+        <!-- Package compliance: o medidor de tiques sobre o lima, EMBAIXO -->
+        <section class="painel">
+          <div class="cab" style="align-items:flex-start">
+            <div class="titulo"><h2 class="display-20">Atendimento do agente</h2><div class="body-12 mut">Arquivadas nos últimos 30 dias</div></div>
+            <a class="fim circulo c36 seta" href="#desempenho" aria-label="abrir o desempenho do agente"><i data-lucide="arrow-up-right"></i></a>
+          </div>
+          <div class="medidor-lima">
+            <svg viewBox="0 0 184 96" id="tiques" aria-hidden="true"></svg>
+            <div class="valor"><span class="number-40 num">92</span><small>%</small><div class="body-12">só a IA respondeu</div></div>
+            <div class="rodape"><span class="medium-12">Últimos 30 dias</span><span class="mono-11 sec num">268 / 290</span></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<a id="previa" href="modelo-tela-escuro.html" style="position:fixed;bottom:var(--s-4);right:var(--s-4);height:40px;padding:0 var(--s-4);display:flex;align-items:center;border-radius:var(--r-pill);background:var(--text-primary);color:var(--text-inverse);font:500 13px/1 var(--f-body)">Ver a versão escura (AgentPay)</a>
+<script>
+  // medidor de tiques do Package compliance: 46 tiques em meia-lua (o original tem ~46).
+  // 268 / 290 = 92,4% → 42 cheios (arredondado para baixo, para o desenho nunca prometer mais que o número)
+  const s = document.getElementById('tiques'), n = 46, cheios = Math.floor(n * 268 / 290), cx = 92, cy = 92;
+  for (let i = 0; i < n; i++) {
+    const a = Math.PI + i / (n - 1) * Math.PI, r1 = 70, r2 = 90;
+    const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    l.setAttribute('x1', cx + r1 * Math.cos(a)); l.setAttribute('y1', cy + r1 * Math.sin(a));
+    l.setAttribute('x2', cx + r2 * Math.cos(a)); l.setAttribute('y2', cy + r2 * Math.sin(a));
+    l.setAttribute('stroke', i < cheios ? 'var(--text-on-accent)' : 'var(--lime-300)');
+    l.setAttribute('stroke-width', '3'); l.setAttribute('stroke-linecap', 'butt');
+    s.appendChild(l);
+  }
+  if (new URLSearchParams(location.search).has('limpo')) document.getElementById('previa').remove();
+  lucide.createIcons();
+</script>
+</body>
+</html>

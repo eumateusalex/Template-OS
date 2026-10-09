@@ -1,0 +1,105 @@
+# Metrics, Experimentation & Business Math
+
+> Each entry is a reusable principle: the trigger that calls it, the concrete move, and the evidence when there is any.
+
+## MRR reports what happened two months ago; last week's cohort activation forecasts next month
+**Principle.** MRR tells you what happened two or three months ago; activation tells you what will happen next month. Steering by MRR is like driving a Kombi with half a turn of play in the steering wheel. Conversion to paid, LTV and CAC are all born from the activation number.
+**Apply when.** Choosing the number the team opens every week, or when revenue is the only metric anyone reviews.
+**The move.** Define activation as how many of those who signed up reached first value within a time window, and open it every week for the cohort that signed up the week before: it is the number there is still time to act on. Almost every founder opens revenue at the start of the week; few open last week's cohort activation. If you cannot answer what it was, the problem is not the interface: you have not yet defined what counts as first value.
+**Evidence.** Amplitude benchmark: average 7-day activation is 6.8%, about 6 in every 100 signups.
+**In one line.** "If almost nobody activates, there's no money."
+
+## Count the action that predicts next month's invoice, not the login, and date churn by when value stopped
+**Principle.** "Active users = whoever logged in" tells a story the churn report later contradicts: a login often only measures how well the engagement e-mail brings the user back, not how useful the product is in their life. The same blindness hits churn dated by the cancellation: the user disappears months before cancelling, piling up micro-frustrations (too many menus, an empty dashboard), stops coming in, and only remembers paying you when the receipt e-mail arrives.
+**Apply when.** Defining "active", building a retention dashboard, or reading churn by cancellation date.
+**The move.** Pick the action correlated with the value the user cares about and that justifies the next invoice. A SaaS for auto repair shops ignores login and measures service orders created, because that is what tracks each workshop's continued use and success; time-in-tool is tempting and is vanity, since at month end the workshop measures revenue, profit and cars serviced. For churn, read D60 by whether the user reached first value, not by the day of cancellation: someone who never reached it was never really a user, and a report that only records the formal exit arrives too late to save the account.
+**In one line.** "If your D60 only marks the day of churn, you're seeing the exit, not the moment they gave up."
+
+## Judge acquisition by CAC payback, not by a low CAC
+**Principle.** A low CAC is the favourite metric of whoever has not yet looked at how long the money takes to come back. Payback, the months until a customer returns what it cost to acquire them, is what decides whether to cut or double a channel. LTV:CAC does not fix it, because LTV is a projection built on old-cohort churn with most of the value pushed to the end.
+**Apply when.** The board celebrates a low CAC, or the team defends a channel with a 3:1 LTV:CAC.
+**The move.** Open the last quarter's cohort and measure how long the customer takes to pay back what they cost. Two companies selling almost the same thing: the first pays R$200 per customer and takes two and a half years to recover it; the second pays R$2,000 and recovers in three months. The first has the CAC every board applauds and should turn media off tomorrow; the second should double the budget in the same channel, even paying 10x more per customer. Part of payback is not in marketing's hands: it only closes while the customer pays, and a customer who never reaches first value pays one month and disappears with their media already spent. If the payback is bad, the problem is closer to the first screen than to Meta Ads; a well-made onboarding is the ultimate weapon for CAC payback.
+**In one line.** "A 3:1 LTV:CAC that only closes in year five is a loan you took from yourself without knowing the interest rate."
+
+## In a product sold to companies, measure activation per account, not per user
+**Principle.** Measuring activation at the user level in a product that sells to companies lets the denominator hide a dead account: the account grows while the team inside it is dead.
+**Apply when.** Building the activation metric or dashboard of a B2B product.
+**The move.** Define activation at the level of the customer who pays, the company. Pair it with the signup question that defines who counts in the denominator, which is why that question is worth its friction. It is the mistake that shows up most often in founders' dashboards.
+**In one line.** "The account grows, the team is dead, and the denominator hides it."
+
+## Ask the magic-wand question in user research
+**Principle.** "If you had a magic wand with no resource limits, what would you change in the product?" is one of the best questions in user research, because it lets the user think outside the box. If they play along, they answer something that sounds absurd but delivers exactly the value they expect to reach: not with your product, but for real.
+**Apply when.** Running interviews or calls with active users, and the answers stay at "I like it / I don't like it".
+**The move.** Put the magic-wand question into the script and read the answer as a statement of the outcome the user wants, not as a feature request. That is the qualitative data that leads to a far deeper insight than whether they like the product or not.
+
+## Don't speculate — state the hypothesis, name the metrics both ways, and document the miss
+**Principle.** The alternative to arguing about what a change will do is a small, explicit contract written before the change ships: what you are testing, which metrics you expect it to move up, and which you expect it to move down. Naming the negative side is what separates a hypothesis from a wish.
+**Apply when.** A change is being debated on intuition, or a past change quietly disappeared from the conversation because nobody agreed in advance what would count as failure.
+**The move.** Write the hypothesis with both lists of metrics before shipping. If it worked, carry on. **If it did not, document it** — an undocumented miss will be re-proposed within the year by someone who never heard it failed. Note the boundary this respects: limiting something you genuinely offer is a legitimate lever to test, while limiting something you promised and do not deliver is not a test, it is a broken promise.
+**In one line.** "I don't speculate about that, I measure."
+
+## Past R$1M ARR a bad funnel bills you wholesale — measure three things before you scale
+**Principle.** While the product is small a mistake costs little. Past roughly R$1M ARR every decision costs tens or hundreds of thousands: more media, a sales hire, a bigger team, a new market launch — and only afterwards does anyone discover the product does not convert or retain as well as assumed. Growing messily is normal when you are riding a market wave; the danger is finding the defect after you scaled it.
+**Apply when.** An investment increase is on the table — media, headcount, a new market — and nobody has mapped the real funnel first.
+**The move.** Map the real funnel, find the behavioural bottlenecks, and validate the fixes before scaling the spend. Three numbers to read today: **(1) campaigns before the scale** — a 3x ROAS is great pre-scale because it tends to fall as investment rises, but if you are already at 1.5x or below before scaling, it will not hold; **(2) what reaches the page** — how much converts, and how much leaks into contact-with-sales, which signals either something missing on the page or an ICP that needs maturation time to buy; **(3) registration is only half the job** on freemium or trial — freemium closing 2–5% of entrants is the market average, while trial usually converts well above that. Then mine what you already own: TTV and support data, plus your competitors' complaints on consumer-complaint sites. For one repair-shop SaaS, a scrape of more than 3,000 complaints about competitors turned into copy, features and the sales script used by support.
+**In one line.** "Retention is adequate onboarding + fit between product and pain + support. Support can hold someone with direction instead of friction, but that only postpones the cancellation."
+
+## Duolingo's lesson: optimize the metric that moves DAU, not the borrowed mechanic
+**Principle.** Duolingo copied game mechanics twice and failed both (a Gardenscapes moves-counter: neutral; a referral program copied from Uber: +3% because the reward excluded the best users). They stopped picking mechanics and modeled which number to move: bucketing users by engagement and simulating +2%/quarter for 3 years, CURR (current-user retention rate) had ~5x the impact of the next-best metric. Then gamification worked: CURR +21% over 4 years, daily churn of best users −40%+, DAU ×4.5. Leaderboards alone +17% total learning time and tripled highly-engaged learners — because they switched to competing with users of *similar prior-week engagement* (auto opt-in = default effect, no extra tasks).
+**Apply when.** Adding gamification by copying a mechanic instead of finding your CURR.
+**The move.** Find the single retention metric that compounds your DAU before choosing mechanics. PBL (points, badges, leaderboards) is only the free sample — a full catalogue of gamification mechanics runs to hundreds (one practitioner's map lists ~290). Useful three: competition (defined start/middle/end missions), progress bars as trajectory achievement (not just onboarding), engagement-unlocked content (a forecast panel opens only after 30 real entries — blocked as a ladder, not a paywall).
+**Visual.** Duolingo's DAU curve from mid-2018 to mid-2022, marked "Started working on CURR" at the inflection, with a 4.5× arrow from there to the top right — `../assets/metrics-and-experimentation/duolingo-dau-curr-chart.png`
+
+## Heatmaps: the question is not which tool, it is what to look for inside it
+**Principle.** Free tools already give you gold in heatmaps, so the tool choice is not the decision. What separates a heatmap you read from one you glance at is knowing the four things to look for and having benchmarks to judge them against.
+**Apply when.** You have Clarity, PostHog or similar installed and the heatmap is being looked at without a question attached.
+**The move.** Read four things. **(1) The formed pattern** — usually an F-shaped shadow weighted left, unless a figure genuinely pulls the eye; a human figure directs attention for real, especially the face and where the eyes point. Fighting the pattern is possible but needs very strong contrast or a figure of equal weight. The anomaly is the finding: where attention concentrates, and what gets ignored exactly where you wanted it seen. **(2) Scroll depth** — genuinely interested or more technical profiles go deeper. **(3) Dead clicks** — users click anything that looks interactive: an eyebrow that looks like a button, a card that looks like it hides behaviour. Two exits only: make it clickable and deliver something, or redesign it so it stops looking clickable, because dead clicks stack micro-frustration. **(4) Rage clicks** — repeated fast clicks on one point, almost always a loader, a form or an unresponsive button, signalling a bug; the user is literally pointing at where it hurts.
+**Evidence.** Scroll benchmarks from years of Clarity: **>80% reaching 25% of the page is excellent; 60–75% reaching 50% is good; 35–50% reaching 75% is normal; under 10% reaching the end is common on a long page.** As targets: more than 85% should see the value proposition, more than 70% should reach the first social proof, and more than 60% should see at least one strong CTA. The most valuable reading is not the percentage itself but the view rate of strategic sections: a guarantee seen by 4% of users is working as a footer — move it up the page and measure again.
+
+## Synthetic users are not research, because they cannot reach the part that surprises you
+**Principle.** A synthetic user is an average of what has already been written about people who resemble your audience, chewed and spat back out by a model. It is not research, because research has to touch reality, and real people are unpredictable in ways that never entered the training data.
+**Apply when.** A team proposes replacing user interviews with AI-generated participants because real research reads as slow and expensive.
+**The move.** Run the real thing, and design the incentive so people are not performing. Cash turns the session into a transaction: the participant weighs the amount against their time and starts saying whatever they think gets them paid fastest. Swap the money for something small and human, then go where the people already are rather than recruiting them into a lab. And listen for the answer that no model would generate, because that is the one worth the whole study.
+**Evidence.** A user-research program for a large insurer, budgeted in the millions, was ready to pay up to R$250 per interview; cutting the cash incentive and offering a box of chocolates to people leaving the metro station produced a far larger response than the R$250 had. In one interview a construction foreman, with income that most tables would file as upper class, was asked how he searches for insurers, typed, looked at the screen and said he picks the sponsored links, because "they're paying, and if they're paying it's because they want to work; the others I don't know." Most people will swear they never click ads. Nielsen Norman Group's own study of synthetic users found the data too shallow to use, praising concepts that real users generally questioned.
+**In one line.** "Real people are a wildly unpredictable business."
+
+## The PMF signal is other people's mouths — referrals, unpaid inbound, and NRR above 100%
+**Principle.** You do not decide you reached product-market fit; the market starts telling you. The signals are referrals arriving on their own, inbound you did not pay for, and expansion showing up as NRR above 100%. Revenue figures are a reference, not the signal.
+**Apply when.** Someone claims PMF from a revenue milestone, or the team needs a test that is harder to fool than MRR.
+**The move.** Run the Sean Ellis test and aim for the threshold: **around 40% of users answering "very disappointed" if the product disappeared** marks the beginning of PMF. Use revenue only as a rough band — roughly R$120k to R$600k ARR for B2C, and at least three times that for B2B — while the real signal stays qualitative: acquisition channels becoming steadily more predictable, and users bringing in other users. Measure retention by cohort **and by source**, because at this point stark differences appear from nothing more than changing the positioning or the channel.
+
+## Don't mistake signups for traction
+**Principle.** Signups are the cheapest action a user takes, so they measure curiosity, not value — especially in freemium. Real growth is whether people come back and do the action that delivers value.
+**Apply when.** A rising signup curve on the dashboard feels like proof of traction, particularly under a freemium model.
+**The move.** Treat signups as top-of-funnel only — never stop reading there. Track who returns on day 2 and day 7 (D1/D7 retention) and how many complete the value-delivering action (activation). Paid media can inflate signups while real retention stays flat.
+**In one line.** "The signup curve climbs with paid traffic, but usage and activation only climb with a good product."
+
+## Don't bet your product on an underpowered A/B test
+**Principle.** Most A/B tests in small SaaS lack the volume to prove anything, yet founders swap the whole product on the result. Testing without enough sample to conclude is the trap: measuring a 2% lift on an already-low conversion safely takes thousands of visitors per variant, a volume that a SaaS in traction rarely has (let alone one in survival).
+**Apply when.** You're in traction or survival stage, ran a test for a week, saw "variant B won by 12%," and want to ship it everywhere.
+**The move.** Before running, compute the minimum sample size (free calculators exist); if you can't hit that floor in reasonable time, don't start. Test big things (headline, offer, pricing structure, onboarding) since large effects need less sample. Never stop a test because the number looked pretty mid-way. With no volume, decide by qualitative research — five good interviews beat an underpowered A/B test. Beware the law of small numbers and confirmation bias.
+**Evidence.** ProfitWell is categorical: don't A/B test price — you'll never have the volume or context for it to mean anything.
+
+## Celebrate signal quality, not list size
+**Principle.** A waitlist exists to validate that a pain is one people pay to solve — not to sell. Absolute size is a vanity metric; conversion-weighted quality is the real signal.
+**Apply when.** You launch a waitlist and feel tempted to celebrate raw headcount.
+**The move.** Convert size to expected customers before reacting: a good waitlist converts 15–20% to paying, above 30% is excellent. 53 people at 20% = 10 customers; 1,000 people at 1% = 10 customers — same result, different perception. Until there's a transaction, there's no validated hypothesis.
+**In one line.** "Founders celebrate the size of the list when they should celebrate the quality of the signal."
+
+## Translate churn points into LTV, not percentages
+**Principle.** Most people watch churn %, but few compute what each point costs in accumulated LTV over 12 months. Cutting churn is a cash lever that needs no price hike or new acquisition.
+**Apply when.** You're staring at a churn percentage and treating it as a vanity number rather than money.
+**The move.** Do the churn→LTV math: at 25% monthly churn on 1,000 users you must add 250 new users/month just to break even — kill paid traffic and the product dies in ~4 months. Then improve retention without Figma: define the Aha Moment, measure time-to-value (TTV) from signup to it, ask "how do I deliver this faster?", break it into micro-wins if you can't, then test, measure, repeat.
+**Evidence.** Finance SaaS, ARPU R$120: cutting churn 5 points (25%→20%) is +R$72,000/year in cash, with no price change and no extra acquisition.
+
+## Scheduled research buys polite lies — talk to people who have an urgent problem instead
+**Principle.** Formal research produces cordiality, not truth. Book an interview, bring a script and a recorder, and people soften the failures: knowing they are observed, they perform politeness. The posture changes completely when you are utility rather than curiosity — someone with an urgent problem performs nothing.
+**Apply when.** Choosing a research method, or explaining why a round of well-run interviews validated a product that then failed in the market.
+**The move.** Put yourself where the problem is live and you can solve it: support calls, the help channel, the moment of failure. An elderly user will not tell a researcher holding a clipboard that the interface is confusing — she will shout "my internet doesn't work!" at whoever can fix it right now, and that sentence carries the diagnosis. Treat this as a method choice with a measurable consequence: in a bank's payroll-loan product for retirees, the squad on live calls iterated in days while the neighbouring squad ran six-month formal research cycles, and the gap was not coding speed but the speed of discovering what not to code.
+**Evidence.** In that bank, traditional research (scheduled interview, script, recording) was tried first and abandoned after producing "polite lies" — the mirror effect of being observed.
+**In one line.** "In support there was no performance. There was an urgent problem and real emotion."
+
+## Nine product metrics, each telling one thing
+**Principle.** ARR = size (not necessarily health). Burn rate = risk (time until death). CAC = efficiency (but obsessing over lowering it can worsen conversion with a less-qualified cohort). DAU/MAU = engagement (<20% = bad sign). LTV = product (does the customer see value?). Churn = fit (user doesn't understand or see value → cancels). NRR = real growth (>100% = good). Gross margin = model (<70% in SaaS = problem, except AI wrappers). Runway = survival (<12 months = danger). Metrics are like a blood panel — one bad reading is critical, but all-good is real health.
+**Apply when.** A founder fixates on one number or conflates what each metric diagnoses.
+**The move.** Use each metric as a diagnostic for its matching layer, then read the full panel before prescribing a fix: ARR alone cannot prove health, low CAC can hide a weak cohort, and strong growth without margin or runway can still be fatal. Treat one bad result as a specific warning and the bundle as the business's health check.

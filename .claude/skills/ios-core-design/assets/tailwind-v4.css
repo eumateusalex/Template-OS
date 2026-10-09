@@ -1,0 +1,206 @@
+/* ios-core-design v1.0 — GERADO, não editar à mão */
+/* As lavagens de estado são tokens (bg-ios-tint-red/orange/green).
+   box-sizing, color-scheme e o host fix do select vêm do ios-tokens.css,
+   que este arquivo EXIGE como import anterior. */
+/*
+ * tailwind-v4.css — o caminho Tailwind v4 (CSS-first, sem tailwind.config).
+ *
+ * Como usar (o install.sh faz isso sozinho):
+ *   No CSS principal do projeto, DEPOIS de @import "tailwindcss":
+ *     @import "./ios-tokens.css";
+ *     @import "./ios-theme.css";   <- este arquivo, renomeado na instalação
+ *
+ * Gera as MESMAS utilitárias do tailwind.preset.js (v3):
+ * bg-ios-blue, text-ios-label, text-ios-body, rounded-ios-button,
+ * h-ios-navbar, shadow-ios-glass, ease-ios, animate-ios-spin...
+ * Os componentes .tsx funcionam idênticos nos dois caminhos.
+ *
+ * @theme inline: os valores referenciam as CSS vars do tokens.css,
+ * então light/dark resolvem em runtime, sem dark: espalhado. Isso vale
+ * pra TUDO (raios, medidas, sombra, curvas, tipografia): a fonte de
+ * verdade propaga sozinha.
+ *
+ * O VIDRO não tem utilitária Tailwind de propósito: material se aplica
+ * com a classe .ios-glass do tokens.css (references/materials.md).
+ */
+@theme inline {
+  /* --- Cores — bg-ios-blue, text-ios-label, border-ios-separator... --- */
+  --color-ios-blue: var(--ios-blue);
+  --color-ios-green: var(--ios-green);
+  --color-ios-indigo: var(--ios-indigo);
+  --color-ios-orange: var(--ios-orange);
+  --color-ios-pink: var(--ios-pink);
+  --color-ios-purple: var(--ios-purple);
+  --color-ios-red: var(--ios-red);
+  --color-ios-teal: var(--ios-teal);
+  --color-ios-yellow: var(--ios-yellow);
+  --color-ios-gray: var(--ios-gray);
+  --color-ios-gray2: var(--ios-gray2);
+  --color-ios-gray3: var(--ios-gray3);
+  --color-ios-gray4: var(--ios-gray4);
+  --color-ios-gray5: var(--ios-gray5);
+  --color-ios-gray6: var(--ios-gray6);
+  --color-ios-bg: var(--ios-bg);
+  --color-ios-bg-secondary: var(--ios-bg-secondary);
+  --color-ios-bg-tertiary: var(--ios-bg-tertiary);
+  --color-ios-bg-grouped: var(--ios-bg-grouped);
+  --color-ios-bg-grouped-secondary: var(--ios-bg-grouped-secondary);
+  --color-ios-label: var(--ios-label);
+  --color-ios-label-secondary: var(--ios-label-secondary);
+  --color-ios-label-tertiary: var(--ios-label-tertiary);
+  --color-ios-label-quaternary: var(--ios-label-quaternary);
+  --color-ios-separator: var(--ios-separator);
+  --color-ios-separator-opaque: var(--ios-separator-opaque);
+  --color-ios-fill: var(--ios-fill);
+  --color-ios-fill-secondary: var(--ios-fill-secondary);
+  --color-ios-fill-tertiary: var(--ios-fill-tertiary);
+  --color-ios-fill-quaternary: var(--ios-fill-quaternary);
+  --color-ios-blue-tint: var(--ios-blue-tint);
+  --color-ios-tint-red: var(--ios-tint-red);
+  --color-ios-tint-orange: var(--ios-tint-orange);
+  --color-ios-tint-green: var(--ios-tint-green);
+  --color-ios-segment: var(--ios-segment);
+  --color-ios-on-accent: var(--ios-on-accent);
+  --color-ios-scrim: var(--ios-scrim);
+  --color-ios-scrim-menu: var(--ios-scrim-menu);
+  --color-ios-glass-dim: var(--ios-glass-dim);
+  --color-ios-glass-solid: var(--ios-glass-solid);
+
+  /* --- Fonte — font-ios --- */
+  --font-ios: -apple-system, "SF Pro Text", "SF Pro Display", "Inter", system-ui, sans-serif;
+
+  /* --- Escala Dynamic Type (Large) — text-ios-body, text-ios-title1... ---
+     Tracking ≥20px → -0.4px; peso embutido no estilo. */
+  --text-ios-large-title: var(--ios-text-large-title-size);
+  --text-ios-large-title--line-height: var(--ios-text-large-title-leading);
+  --text-ios-large-title--letter-spacing: var(--ios-text-large-title-tracking);
+  --text-ios-large-title--font-weight: var(--ios-text-large-title-weight);
+  --text-ios-title1: var(--ios-text-title1-size);
+  --text-ios-title1--line-height: var(--ios-text-title1-leading);
+  --text-ios-title1--letter-spacing: var(--ios-text-title1-tracking);
+  --text-ios-title1--font-weight: var(--ios-text-title1-weight);
+  --text-ios-title2: var(--ios-text-title2-size);
+  --text-ios-title2--line-height: var(--ios-text-title2-leading);
+  --text-ios-title2--letter-spacing: var(--ios-text-title2-tracking);
+  --text-ios-title2--font-weight: var(--ios-text-title2-weight);
+  --text-ios-title3: var(--ios-text-title3-size);
+  --text-ios-title3--line-height: var(--ios-text-title3-leading);
+  --text-ios-title3--letter-spacing: var(--ios-text-title3-tracking);
+  --text-ios-title3--font-weight: var(--ios-text-title3-weight);
+  --text-ios-headline: var(--ios-text-headline-size);
+  --text-ios-headline--line-height: var(--ios-text-headline-leading);
+  --text-ios-headline--letter-spacing: var(--ios-text-headline-tracking);
+  --text-ios-headline--font-weight: var(--ios-text-headline-weight);
+  --text-ios-body: var(--ios-text-body-size);
+  --text-ios-body--line-height: var(--ios-text-body-leading);
+  --text-ios-body--letter-spacing: var(--ios-text-body-tracking);
+  --text-ios-body--font-weight: var(--ios-text-body-weight);
+  --text-ios-callout: var(--ios-text-callout-size);
+  --text-ios-callout--line-height: var(--ios-text-callout-leading);
+  --text-ios-callout--letter-spacing: var(--ios-text-callout-tracking);
+  --text-ios-callout--font-weight: var(--ios-text-callout-weight);
+  --text-ios-subheadline: var(--ios-text-subheadline-size);
+  --text-ios-subheadline--line-height: var(--ios-text-subheadline-leading);
+  --text-ios-subheadline--letter-spacing: var(--ios-text-subheadline-tracking);
+  --text-ios-subheadline--font-weight: var(--ios-text-subheadline-weight);
+  --text-ios-footnote: var(--ios-text-footnote-size);
+  --text-ios-footnote--line-height: var(--ios-text-footnote-leading);
+  --text-ios-footnote--letter-spacing: var(--ios-text-footnote-tracking);
+  --text-ios-footnote--font-weight: var(--ios-text-footnote-weight);
+  --text-ios-caption1: var(--ios-text-caption1-size);
+  --text-ios-caption1--line-height: var(--ios-text-caption1-leading);
+  --text-ios-caption1--letter-spacing: var(--ios-text-caption1-tracking);
+  --text-ios-caption1--font-weight: var(--ios-text-caption1-weight);
+  --text-ios-caption2: var(--ios-text-caption2-size);
+  --text-ios-caption2--line-height: var(--ios-text-caption2-leading);
+  --text-ios-caption2--letter-spacing: var(--ios-text-caption2-tracking);
+  --text-ios-caption2--font-weight: var(--ios-text-caption2-weight);
+
+  /* --- Tracking de cabeçalho uppercase — tracking-ios-caps --- */
+  --tracking-ios-caps: var(--ios-tracking-caps);
+
+  /* --- Raios — rounded-ios-button (cápsula), rounded-ios-card... --- */
+  --radius-ios-button: var(--ios-radius-button); /* cápsula, sem escape */
+  --radius-ios-card: var(--ios-radius-card);
+  --radius-ios-input: var(--ios-radius-input);
+  --radius-ios-badge: var(--ios-radius-badge);
+  --radius-ios-alert: var(--ios-radius-alert);
+  --radius-ios-sheet: var(--ios-radius-sheet); /* só no topo (rounded-t-ios-sheet) */
+  --radius-ios-pill: var(--ios-radius-pill);
+
+  /* --- Medidas — h-ios-navbar, min-h-ios-touch, px-ios-margin, pb-ios-safe-bottom... --- */
+  --spacing-ios-touch: var(--ios-touch-min);
+  --spacing-ios-navbar: var(--ios-h-navbar);
+  --spacing-ios-navbar-large: var(--ios-h-navbar-large);
+  --spacing-ios-tabbar: var(--ios-h-tabbar);
+  --spacing-ios-bar-inset: var(--ios-bar-inset);
+  --spacing-ios-row: var(--ios-h-row);
+  --spacing-ios-row-large: var(--ios-h-row-large);
+  --spacing-ios-button: var(--ios-h-button);
+  --spacing-ios-margin: var(--ios-margin);
+  --spacing-ios-margin-wide: var(--ios-margin-wide);
+  --spacing-ios-section: var(--ios-section-gap);
+  --spacing-ios-card: var(--ios-card-padding);
+  --spacing-ios-safe-bottom: var(--ios-safe-bottom);
+
+  /* --- Sombra de flutuação do vidro — shadow-ios-glass (parte EXTERNA;
+         o vidro completo, com glint e stroke, é a classe .ios-glass) --- */
+  --shadow-ios-glass: var(--ios-glass-shadow);
+
+  /* --- Movimento — ease-ios, ease-ios-spring, ease-ios-bounce (durações:
+         usar as nativas duration-300 / duration-100 / duration-150 / duration-500) --- */
+  --ease-ios: var(--ios-ease);
+  --ease-ios-spring: var(--ios-ease-spring);
+  --ease-ios-bounce: var(--ios-ease-bounce);
+
+  /* --- Animações prontas — animate-ios-spin, animate-ios-sheet-up...
+         (exclusivas desta camada: durações/curvas ficam literais aqui) --- */
+  /* 0.8s steps(8) — calibrado no PREVIEW */
+  --animate-ios-spin: ios-spin-steps 0.8s steps(8, end) infinite;
+  --animate-ios-sheet-up: ios-sheet-up 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-ios-fade-in: ios-fade-in 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --animate-ios-toast-in: ios-toast-in 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --animate-ios-alert-in: ios-alert-in 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  @keyframes ios-spin-steps {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes ios-sheet-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes ios-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes ios-alert-in {
+    from {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes ios-toast-in {
+    from {
+      transform: translateY(calc(-100% - 8px));
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}

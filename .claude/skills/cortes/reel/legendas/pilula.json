@@ -1,0 +1,18 @@
+{
+  "nome": "pilula",
+  "origem": "a legenda em caixa branca: preto sobre branco, sem contorno, na fonte da marca, e o destaque no acento da marca",
+  "fonte": "marca",
+  "peso": "var(--w-display-bold)",
+  "tamanho": 66,
+  "cor": "#000000",
+  "contorno": 0,
+  "contorno_cor": "#000000",
+  "sombra": "0 6px 18px rgba(0,0,0,.18)",
+  "fundo": "#ffffff",
+  "caixa": "normal",
+  "posicao_y": 1330,
+  "largura": 960,
+  "max_palavras": 3,
+  "entrada": "pop",
+  "destaque": { "cor": "var(--accent)", "italico": false, "sublinhado": false, "sublinhado_cor": "var(--accent)", "escala": 1 }
+}

@@ -1,0 +1,86 @@
+/* fundação: conferido v1 · o ajuste mora no CSS do projeto, nunca aqui
+   ==========================================================================
+   O QUE A MARCA EXIGE DE TODO COMPONENTE DA PÁGINA
+   ==========================================================================
+   Duas partes, e a diferença entre elas é a camada.
+
+   1 · DENTRO DE `@layer base`: o padrão para quem não desenha nada (link,
+       `summary`, elemento nativo). Na camada base, o componente que desenha o
+       próprio estilo continua mandando.
+
+   2 · FORA DE CAMADA: o que a marca não negocia, nem com o componente do
+       registry. Regra sem camada vence qualquer utilidade do Tailwind, e é por
+       isso que só entra aqui o que foi MEDIDO reprovando nos dez componentes,
+       na vitrine:
+       · o foco: o anel do registry (3px a 50%) dá 2,09 a 2,93:1 contra o
+         fundo, abaixo dos 3:1 da WCAG 1.4.11; o contorno de 2px sólido na cor
+         do anel dá 4,7:1 no claro e 6,96:1 no escuro
+       · o alvo de toque: seis de oito botões e os campos têm 32px no
+         celular; com ponteiro grosso, todo controle ganha 44px
+       · o campo: o `md:text-sm` do registry o leva a 14px a partir de 768px,
+         e abaixo de 16px o iPhone dá zoom sozinho ao tocar
+       · o movimento: com a preferência de menos movimento, o esqueleto ainda
+         pulsa e o sinal do FAQ ainda gira
+       · a curva: o registry usa a curva padrão do Tailwind; a página inteira
+         usa a da marca (`--ease-brand`, `--dur-click`)
+       · a hairline do cartão: `ring-foreground/10` dá um cinza fora da
+         paleta; o cartão usa a borda da marca, como o resto
+   ========================================================================== */
+@layer base {
+  :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--ring, currentColor);
+    outline-offset: 2px;
+  }
+
+  :where(h1, h2, h3) {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--ring, currentColor) 18%, transparent);
+  }
+}
+
+/* ── fora de camada: vence o componente do registry ─────────────────────── */
+
+:root {
+  --default-transition-timing-function: var(--ease-brand);
+  --default-transition-duration: var(--dur-click);
+}
+
+:where([data-slot]):focus-visible {
+  outline: 2px solid var(--ring, currentColor);
+  outline-offset: 2px;
+  --tw-ring-shadow: 0 0 transparent;
+}
+
+:where([data-slot="card"]) {
+  --tw-ring-color: var(--border);
+}
+
+:where(input, textarea, select) {
+  font-size: max(1rem, 1em);
+}
+
+@media (pointer: coarse) {
+  /* ⚠️ Só controle de UMA linha: o campo de várias linhas já nasce maior, e
+     esta regra fora de camada venceria o `min-h-16` dele (o piso viraria
+     teto). */
+  :where([data-slot="button"], [data-slot="input"], [data-slot="select-trigger"]) {
+    min-height: 44px;
+  }
+  :where([data-slot="button"]) {
+    min-width: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

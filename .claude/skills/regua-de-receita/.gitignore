@@ -1,0 +1,7 @@
+# OS / editor cruft — the skill content (references/, assets/, _local/) is intentionally tracked
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

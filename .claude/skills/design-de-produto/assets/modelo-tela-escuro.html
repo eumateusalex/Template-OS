@@ -1,0 +1,340 @@
+<!doctype html>
+<!--
+  MODELO DA SKILL /design-de-produto · ESCURO (grafite, regra 16)
+  Modelo de PAINEL, revisado em fidelidade, regras e texto e com o medidor verde nas quatro combinações.
+  Estrutura do AgentPay, com o conteúdo de uma conta fictícia (Traço Arquitetura) como EXEMPLO: troque
+  o conteúdo pelo cenário da sua tela (escreva o cenario.md antes, no formato do SKILL.md), mantenha os
+  tokens e a escala, e meça de novo com scripts/medir-tela.cjs.
+  Os caminhos vendor/ apontam para assets/vendor/: copie a pasta junto se mudar o arquivo de lugar.
+-->
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelo de tela · escuro</title>
+<!--
+  Cópia FIEL, versão escura: a tela inicial de um produto real montada só com a composição e os
+  componentes do AgentPay (o produto escuro do design system publicado). Um produto por tela:
+  a versão clara é o Permitly (modelo-tela.html). Tudo local (./vendor). ?limpo esconde o botão de prévia.
+  Fidelidade: tamanhos medidos no original em escala 3x (a escala se prova
+  pelo tile de ícone, que dá 32, um dos cinco tamanhos que a folha permite) e conferidos de dois jeitos:
+  a altura da maiúscula contra a folha de tipografia do original, e a largura de cada palavra renderizada
+  nas fontes locais. Os dois dão o mesmo: saudação display/24, marca display/20, título de cartão
+  display/16, menu e controles 13, seletor de período 12, selo 12, cabeçalho da tabela 11, KPI 28,
+  número grande 32, espera em mono 11.
+  Os vãos: ícone→texto de 8 no menu e no KPI, logo 28, topo dos cartões da coluna
+  direita a 24, passo da lista "Precisam de você" em 68-69, tabela com o tile a 8 da faixa.
+  Selo NEUTRO para "No prazo" e "Ao vivo": só o que pede ação ganha cor (cenário). A mensagem do
+  cliente quebra em vez de cortar. Mantido de propósito, contra a revisão: "Avisos" fica FORA do
+  grupo "Módulos", porque Avisos não é módulo da conta (os módulos são CRM e Atendimento).
+-->
+<style>
+@font-face { font-family:"Geist"; src:url("vendor/Geist-Variable.woff2") format("woff2"); font-weight:100 900; }
+@font-face { font-family:"Geist Mono"; src:url("vendor/GeistMono-Variable.woff2") format("woff2"); font-weight:100 900; }
+@font-face { font-family:"Inter"; src:url("vendor/inter-variavel-latin.woff2") format("woff2"); font-weight:100 900; unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family:"Inter"; src:url("vendor/inter-variavel-latin-ext.woff2") format("woff2"); font-weight:100 900; unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+
+/* ===== Tokens do AgentPay: hex medidos na folha publicada e na tela ===== */
+/* DESVIO DECLARADO (regra 16 da skill): a escada de superfícies está no DEGRAU 2,
+   "grafite", e não no quase preto do original. O original (canvas #08090B, painel #14171C, texto apagado
+   #646E7C a 3,48:1) é o degrau 0 da tabela "Os quatro degraus do escuro" do SKILL.md, e o registro
+   fiel do original está em biblioteca/01-sistema-visual/tokens.css. Superfícies, linhas, texto apagado e o
+   vermelho do selo sobem juntos; o resto do sistema publicado fica igual. */
+:root {
+  --bg-canvas:#181A1F; --bg-shell:#1D2025; --bg-panel:#23272E; --bg-raised:#2A2F37; --bg-hover:#333943;
+  --text-primary:#F4F6F9; --text-secondary:#AAB3C0; --text-muted:#8A93A0; --text-inverse:#0B0D10; --text-on-accent:#FFFFFF;
+  --line-soft:#31353D; --line-strong:#42464F; --line-hard:#585D66;
+  --blue-300:#A9C2FF; --blue-400:#6C95FF; --blue-500:#2F6BFF; --blue-600:#1E4FD9; --blue-700:#122C78;
+  /* bordas a 40% em rgb com alfa, como o vermelho: ficam certas em qualquer degrau da escada */
+  --green-400:#3FCF8E; --green-tint:rgb(63 207 142 / .14); --green-border:rgb(63 207 142 / .40);
+  --amber-400:#F2B347; --amber-tint:rgb(242 179 71 / .14); --amber-border:rgb(242 179 71 / .40);
+  /* o grupo vermelho está cortado na folha: valor medido na tela do AgentPay (barra "Blocked by policy") */
+  --red-400:#FF8A8A; --red-tint:rgb(255 107 107 / .14); --red-border:rgb(255 107 107 / .40);
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-8:32px; --s-10:40px;
+  /* raio: "Cards 16, controls 8 to 12, pills full." */
+  --r-card:16px; --r-12:12px; --r-10:10px; --r-8:8px; --r-pill:999px;
+  --f-display:"Geist", system-ui, sans-serif; --f-body:"Inter", system-ui, sans-serif; --f-mono:"Geist Mono", ui-monospace, monospace;
+}
+/* ===== Tipografia do AgentPay, só tokens da escala publicada (display 24/20/16, number 32/28/24, body 14/13/12, medium 13/12/11) ===== */
+.display-24 { font:600 24px/1.2 var(--f-display); letter-spacing:-.02em; }
+/* a marca "AgentPay": maiúscula de 44 px no shot = display/20 da folha */
+.display-20 { font:600 20px/1.2 var(--f-display); letter-spacing:-.02em; }
+.display-16 { font:600 16px/1.3 var(--f-display); letter-spacing:-.02em; }
+.number-32 { font:500 32px/1 var(--f-display); letter-spacing:-.02em; }
+.number-28 { font:500 28px/1 var(--f-display); letter-spacing:-.02em; }
+.body-14 { font:400 14px/20px var(--f-body); } .body-13 { font:400 13px/18px var(--f-body); } .body-12 { font:400 12px/16px var(--f-body); }
+.medium-13 { font:500 13px/18px var(--f-body); } .medium-12 { font:500 12px/16px var(--f-body); } .medium-11 { font:500 11px/16px var(--f-body); }
+.label-11 { font:600 11px/14px var(--f-body); letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); }
+/* "Geist Mono for money, IDs and time": a parte da folha com os tamanhos de mono está cortada; 13 e 12 medidos na tela */
+.mono-13 { font:400 13px/18px var(--f-mono); } .mono-12 { font:400 12px/16px var(--f-mono); }
+.num { font-variant-numeric:tabular-nums; }
+.sec { color:var(--text-secondary); } .mut { color:var(--text-muted); }
+
+* { box-sizing:border-box; }
+html, body { margin:0; }
+body { background:var(--bg-canvas); color:var(--text-primary); font:400 14px/20px var(--f-body); -webkit-font-smoothing:antialiased; }
+svg.lucide { width:20px; height:20px; stroke-width:1.5; flex-shrink:0; }
+button { font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0; }
+a { color:inherit; text-decoration:none; }
+
+/* ===== Casca: a lateral de 248 colada em bg/shell, divisória de 1 px, o conteúdo no canvas (E4) ===== */
+.casca { display:grid; grid-template-columns:248px minmax(0,1fr); min-height:100vh; }
+.lateral { background:var(--bg-shell); box-shadow:inset -1px 0 0 var(--line-soft); display:flex; flex-direction:column; gap:2px; padding:var(--s-4) 14px; }
+.marca { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-1) var(--s-1) var(--s-5); }
+.logo { width:28px; height:28px; border-radius:var(--r-8); background:var(--blue-500); color:var(--text-on-accent); display:grid; place-items:center; flex-shrink:0; }
+.logo svg.lucide { width:16px; height:16px; stroke-width:2; }
+.marca > svg.lucide { margin-left:auto; color:var(--text-secondary); }
+/* E5: menu inativo em text/secondary com ícone muted */
+.menu { display:flex; align-items:center; gap:var(--s-2); height:36px; padding:0 var(--s-3); border-radius:var(--r-8); color:var(--text-secondary); white-space:nowrap; }
+.menu svg.lucide { color:var(--text-muted); }
+.menu.ativo { background:var(--bg-raised); box-shadow:inset 0 0 0 1px var(--line-strong); color:var(--text-primary); }
+.menu.ativo svg.lucide { color:var(--text-primary); }
+.contador { margin-left:auto; min-width:20px; height:20px; padding:0 6px; border-radius:var(--r-pill); background:var(--blue-500); color:var(--text-on-accent); text-align:center; font:600 11px/20px var(--f-body); }
+.grupo { padding:var(--s-5) var(--s-2) var(--s-2); }
+.emergencia { margin-top:auto; display:flex; align-items:center; gap:var(--s-2); height:38px; padding:0 var(--s-3); border-radius:var(--r-8); background:var(--red-tint); box-shadow:inset 0 0 0 1px var(--red-border); color:var(--red-400); white-space:nowrap; }
+.emergencia svg.lucide { width:18px; height:18px; }
+
+.lado { display:grid; grid-template-rows:auto 1fr; grid-template-columns:minmax(0,1fr); min-width:0; }
+/* E2: barra 60, busca 36×340 raio 10, status 28, quadrado 36 */
+.barra-topo { display:flex; align-items:center; gap:var(--s-3); height:60px; padding:0 var(--s-6); box-shadow:inset 0 -1px 0 var(--line-soft); }
+.busca { display:flex; align-items:center; gap:var(--s-2); height:36px; width:340px; padding:0 var(--s-2) 0 var(--s-3); border-radius:var(--r-10); background:var(--bg-panel); box-shadow:inset 0 0 0 1px var(--line-soft); color:var(--text-muted); white-space:nowrap; }
+.busca svg.lucide { width:16px; height:16px; }
+.busca span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.busca kbd { margin-left:auto; height:20px; padding:0 6px; border-radius:6px; background:var(--bg-raised); color:var(--text-secondary); font:500 11px/20px var(--f-body); }
+.barra-topo .direita { margin-left:auto; display:flex; align-items:center; gap:var(--s-3); }
+.status { display:inline-flex; align-items:center; gap:var(--s-2); height:30px; padding:0 var(--s-3); border-radius:var(--r-pill); background:var(--bg-panel); box-shadow:inset 0 0 0 1px var(--line-strong); white-space:nowrap; }
+.status i { width:8px; height:8px; border-radius:50%; background:var(--green-400); }
+.quadrado { width:36px; height:36px; border-radius:var(--r-10); background:var(--bg-panel); box-shadow:inset 0 0 0 1px var(--line-strong); display:grid; place-items:center; position:relative; flex-shrink:0; }
+.quadrado svg.lucide { width:18px; height:18px; }
+.quadrado.aviso::before { content:""; position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:50%; background:var(--blue-500); }
+
+/* E4: conteúdo com padding 24; entre colunas 16; entre faixas 20 (medido: 20,9 px, abaixo) */
+.conteudo { padding:var(--s-6); display:grid; grid-template-columns:minmax(0,1fr); row-gap:var(--s-5); align-content:start; }
+.saudacao { display:flex; align-items:flex-end; gap:var(--s-4); flex-wrap:wrap; }
+.saudacao h1 { margin:0 0 var(--s-2); }
+.saudacao .acoes { margin-left:auto; display:flex; gap:var(--s-3); }
+/* E2: controles 36 */
+.controle { display:inline-flex; align-items:center; gap:var(--s-2); height:36px; padding:0 var(--s-3); border-radius:var(--r-10); background:var(--bg-panel); box-shadow:inset 0 0 0 1px var(--line-strong); white-space:nowrap; }
+.controle svg.lucide { color:var(--text-secondary); width:16px; height:16px; }
+.controle.azul { background:var(--blue-500); box-shadow:none; color:var(--text-on-accent); padding:0 var(--s-4) 0 var(--s-3); height:38px; }
+/* o seletor de período é o único controle em 12 e com 34 de altura, como o "This month" do original */
+.controle.periodo { height:34px; }
+.controle.azul svg.lucide { color:var(--text-on-accent); }
+
+.cartao { background:var(--bg-panel); border-radius:var(--r-card); box-shadow:inset 0 0 0 1px var(--line-soft); padding:var(--s-5); min-width:0; }
+/* E3: KPI com padding 16; selo e valor na mesma linha do rodapé */
+.kpis { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:var(--s-4); }
+.kpi { padding:var(--s-4); display:grid; gap:var(--s-3); align-content:start; }
+.kpi .cab { display:flex; align-items:center; gap:var(--s-2); color:var(--text-secondary); }
+.kpi .valor { white-space:nowrap; }
+/* E2: tile 32 com ícone 16 ("the icon is always half the tile") */
+.tile { width:32px; height:32px; border-radius:var(--r-8); background:var(--bg-raised); display:grid; place-items:center; flex-shrink:0; }
+.tile svg.lucide { width:16px; height:16px; color:var(--text-secondary); }
+.kpi .rodape { display:flex; align-items:center; gap:var(--s-2); flex-wrap:wrap; min-height:24px; }
+.delta { display:inline-flex; align-items:center; gap:2px; }
+.delta svg.lucide { width:14px; height:14px; stroke-width:2; }
+.delta.baixa { color:var(--red-400); }
+
+/* selo: tint + borda + ponto (Needs you, Auto approved, Blocked); E2: 24 de altura */
+.selo { display:inline-flex; align-items:center; gap:var(--s-2); height:24px; padding:0 var(--s-3) 0 10px; border-radius:var(--r-pill); white-space:nowrap; }
+.selo::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.s-verde { background:var(--green-tint); box-shadow:inset 0 0 0 1px var(--green-border); color:var(--green-400); }
+.s-ambar { background:var(--amber-tint); box-shadow:inset 0 0 0 1px var(--amber-border); color:var(--amber-400); }
+.s-vermelho { background:var(--red-tint); box-shadow:inset 0 0 0 1px var(--red-border); color:var(--red-400); }
+/* neutro: o que está dentro do combinado não pede ação, então não ganha cor ("No prazo", "Ao vivo") */
+.s-neutro { background:var(--bg-raised); box-shadow:inset 0 0 0 1px var(--line-strong); color:var(--text-secondary); }
+
+.grade { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); gap:var(--s-4); align-items:start; }
+.pilha { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s-4); }
+.pilha .cartao { padding-top:var(--s-6); }
+.cartao-cab { display:flex; align-items:flex-start; gap:var(--s-3); margin-bottom:var(--s-5); }
+.cartao-cab h2 { margin:0 0 2px; }
+.cartao-cab .fim { margin-left:auto; display:flex; gap:var(--s-2); align-items:center; }
+
+/* ===== Agent activity: cabeçalho do cartão com divisória, tabela com margem 12 (E7) ===== */
+.atividade { padding:0 0 var(--s-2); }
+.atividade .cartao-cab { padding:var(--s-5) var(--s-5) var(--s-4); margin:0; box-shadow:inset 0 -1px 0 var(--line-soft); }
+.tabela { width:calc(100% - 2 * var(--s-3)); margin:var(--s-2) var(--s-3) 0; border-collapse:separate; border-spacing:0; table-layout:fixed; }
+.tabela col.c-motivo { width:148px; } .tabela col.c-meta { width:148px; } .tabela col.c-espera { width:80px; }
+/* E7: cabeçalho 8/16 em muted, na faixa escura */
+.tabela thead th { background:var(--bg-canvas); color:var(--text-muted); text-align:left; padding:var(--s-2) var(--s-4); font-weight:500; line-height:18px; }
+.tabela thead th:first-child { border-radius:var(--r-10) 0 0 var(--r-10); padding-left:56px; } .tabela thead th:last-child { border-radius:0 var(--r-10) var(--r-10) 0; text-align:right; }
+/* E6: a linha divisória logo abaixo do cabeçalho */
+.tabela tbody tr:first-child td { border-top:1px solid var(--line-soft); }
+.tabela td { padding:var(--s-3) var(--s-4); border-bottom:1px solid var(--line-soft); vertical-align:middle; }
+.tabela tbody tr:last-child td { border-bottom:0; }
+.tabela td:first-child { padding-left:var(--s-2); }
+.tabela td.espera { text-align:right; font-size:11px; }
+/* a linha inteira é o link (a tabela do original não tem coluna de ação) */
+.tabela tbody tr { position:relative; }
+.tabela tbody tr:hover td { background:var(--bg-raised); }
+.contato { display:flex; align-items:center; gap:var(--s-3); min-width:0; }
+.contato .ir { display:block; min-width:0; }
+.contato .ir::after { content:""; position:absolute; inset:0; }
+.contato .ir div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.contato .ir .medium-13 { line-height:20px; }
+/* a mensagem do cliente quebra em vez de cortar: na Renata o corte levava o "R$ 9 mil" */
+.contato .ir div + div { white-space:normal; text-wrap:balance; }
+
+/* ===== Decision split ===== */
+.grande { display:flex; align-items:baseline; gap:var(--s-2); margin-bottom:var(--s-5); }
+.barra { display:flex; gap:2px; height:10px; margin-bottom:var(--s-4); }
+.barra i { border-radius:var(--r-pill); display:block; }
+.lista { display:grid; gap:var(--s-2); }
+.lista div { display:flex; align-items:center; gap:var(--s-3); color:var(--text-secondary); line-height:20px; }
+.lista .ponto { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.lista b { margin-left:auto; color:var(--text-primary); font-weight:500; }
+.lista small { width:36px; text-align:right; color:var(--text-muted); }
+
+/* ===== Waiting on you: E9, itens com padding 12 ===== */
+.espera-lista { display:grid; }
+.espera-lista .item { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-3) 0; border-bottom:1px solid var(--line-soft); }
+.espera-lista .item:first-child { padding-top:0; }
+.espera-lista .item:last-child { border-bottom:0; }
+.espera-lista .item > div:nth-child(2) { min-width:0; flex:1; }
+.espera-lista .item .dir { display:grid; justify-items:end; gap:var(--s-1); }
+/* passo de 68-69 como o do original: bloco da esquerda 44 (20 + 4 + 20) = bloco da direita 44 (16 + 4 + 24) */
+.espera-lista .item .medium-13 { line-height:20px; margin-bottom:4px; }
+.espera-lista .item .body-12 { line-height:20px; }
+.espera-lista .dir .mono-13 { line-height:16px; }
+.link-azul { display:inline-flex; align-items:center; gap:var(--s-1); color:var(--blue-400); margin-top:var(--s-3); }
+.link-azul svg.lucide { width:16px; height:16px; }
+
+/* ===== Celular (sem original): a lateral some, margem 20, uma coluna, toque de 44 ===== */
+@media (max-width:767px) {
+  .casca { grid-template-columns:minmax(0,1fr); }
+  .lateral { display:none; }
+  .barra-topo { padding:0 var(--s-5); }
+  .busca { width:auto; flex:1; min-width:0; height:44px; }
+  .busca kbd, .status { display:none; }
+  .quadrado { width:44px; height:44px; }
+  .conteudo { padding:var(--s-5); row-gap:var(--s-4); }
+  .saudacao .acoes { margin-left:0; width:100%; flex-direction:column; }
+  .saudacao .acoes .controle { justify-content:center; height:44px; }
+  .kpis { grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--s-3); }
+  .kpi { padding:var(--s-3); }
+  /* M4: "R$ 126,1" e "mil" na mesma linha: o número desce a number/24, que é da escala publicada */
+  .number-28 { font-size:24px; }
+  .kpi .cab { flex-direction:column; align-items:flex-start; gap:var(--s-2); }
+  .grade { grid-template-columns:minmax(0,1fr); }
+  .cartao { padding:var(--s-4); }
+  .atividade { padding:0 0 var(--s-2); }
+  .atividade .cartao-cab { padding:var(--s-4); }
+  /* M1: a mesma grade do desktop escuro, com o motivo, o selo e a espera numa linha própria */
+  .tabela { table-layout:auto; width:100%; margin:0; }
+  .tabela colgroup, .tabela thead { display:none; }
+  .tabela tr { display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; gap:var(--s-2) var(--s-3); padding:var(--s-3) var(--s-4); border-bottom:1px solid var(--line-soft); }
+  .tabela tbody tr:last-child { border-bottom:0; }
+  .tabela tbody tr:first-child td { border-top:0; }
+  .tabela td { display:block; padding:0; border:0; }
+  .tabela td:first-child { grid-column:1 / -1; padding-left:0; }
+  .contato .ir { min-height:44px; display:flex; flex-direction:column; justify-content:center; }
+  .link-azul { position:relative; } .link-azul::after { content:""; position:absolute; inset:-13px -4px; }
+}
+</style>
+<script src="vendor/lucide.min.js"></script>
+</head>
+<body>
+<div class="casca">
+  <aside class="lateral">
+    <div class="marca"><span class="logo"><i data-lucide="building-2"></i></span><span class="display-20">Traço</span><i data-lucide="panel-left"></i></div>
+    <a class="menu ativo medium-13"><i data-lucide="layout-grid"></i>Início</a>
+    <a class="menu medium-13"><i data-lucide="bell"></i>Avisos<span class="contador num">4</span></a>
+    <div class="grupo label-11">Módulos</div>
+    <a class="menu medium-13"><i data-lucide="handshake"></i>CRM<span class="contador num">2</span></a>
+    <a class="menu medium-13"><i data-lucide="message-circle"></i>Atendimento<span class="contador num">3</span></a>
+    <div class="grupo label-11">Conta</div>
+    <a class="menu medium-13"><i data-lucide="settings"></i>Configuração da conta</a>
+    <a class="emergencia medium-13"><i data-lucide="octagon-pause"></i>Pausar o agente de IA</a>
+  </aside>
+
+  <div class="lado">
+    <header class="barra-topo">
+      <label class="busca body-13"><i data-lucide="search"></i><span>Buscar conversas e negócios</span><kbd>⌘K</kbd></label>
+      <div class="direita">
+        <span class="status medium-12"><i></i>Agente de IA ligado</span>
+        <a class="quadrado aviso" href="#avisos" aria-label="avisos"><i data-lucide="bell"></i></a>
+      </div>
+    </header>
+
+    <main class="conteudo">
+      <div class="saudacao">
+        <div><h1 class="display-24">Bom dia, Carla</h1><div class="body-14 sec">3 conversas esperam alguém da equipe.</div></div>
+        <div class="acoes">
+          <button class="controle periodo medium-12"><i data-lucide="calendar"></i>Últimos 30 dias<i data-lucide="chevron-down"></i></button>
+          <a class="controle azul medium-13" href="#atendimento"><i data-lucide="message-circle"></i>Abrir o Atendimento</a>
+        </div>
+      </div>
+
+      <!-- os números do período (o seletor acima vale para esta faixa) -->
+      <div class="kpis">
+        <div class="cartao kpi"><div class="cab"><span class="tile"><i data-lucide="wallet"></i></span><span class="body-13">Em aberto</span></div><span class="valor num"><span class="number-28">R$ 126,1</span> <span class="body-14 mut">mil</span></span><div class="rodape body-12 mut">em 16 negócios</div></div>
+        <div class="cartao kpi"><div class="cab"><span class="tile"><i data-lucide="handshake"></i></span><span class="body-13">Ganhos</span></div><span class="valor number-28 num">10</span><div class="rodape body-12"><span class="delta baixa medium-12"><i data-lucide="chevron-down"></i>−9%</span><span class="mut">eram 11 nos 30 dias antes</span></div></div>
+        <div class="cartao kpi"><div class="cab"><span class="tile"><i data-lucide="sparkles"></i></span><span class="body-13">Só pela IA</span></div><span class="valor num"><span class="number-28">268</span> <span class="body-14 mut">/ 290</span></span><div class="rodape body-12 mut">arquivadas, só a IA respondeu</div></div>
+        <div class="cartao kpi"><div class="cab"><span class="tile"><i data-lucide="shield-alert"></i></span><span class="body-13">Em risco</span></div><span class="valor number-28 num">3</span><div class="rodape body-12"><span class="selo s-ambar medium-12">Precisam de você</span><span class="mut num">R$ 31,6 mil</span></div></div>
+      </div>
+
+      <div class="grade">
+        <!-- Agent activity: a fila de conversas, agora -->
+        <section class="cartao atividade" id="fila">
+          <div class="cartao-cab"><div><h2 class="display-16">Ninguém pegou ainda</h2><div class="body-12 mut">3 sem dono · meta de 30 min no horário de atendimento · último atraso avisado às <span class="mono-12">09:00</span></div></div><span class="fim"><span class="selo s-neutro medium-12">Ao vivo</span></span></div>
+          <table class="tabela body-13"><colgroup><col><col class="c-motivo"><col class="c-meta"><col class="c-espera"></colgroup>
+            <thead><tr class="medium-11"><th>Contato</th><th>Motivo</th><th>Meta</th><th>Espera</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="contato"><span class="tile"><i data-lucide="building"></i></span><a class="ir" href="#conversa-vila-ipe"><div class="medium-13">Condomínio Vila Ipê</div><div class="body-12 mut">"Vocês fazem laudo técnico para reforma de fachada?"</div></a></div></td>
+                <td class="sec">Fora do material</td>
+                <td><span class="selo s-vermelho medium-12">Passou da meta</span></td>
+                <td class="espera mono-12 mut num">1 h 05</td>
+              </tr>
+              <tr>
+                <td><div class="contato"><span class="tile"><i data-lucide="user"></i></span><a class="ir" href="#conversa-diego"><div class="medium-13">Diego Moura</div><div class="body-12 mut">"Quero falar com a arquiteta antes de fechar a planta."</div></a></div></td>
+                <td class="sec">Pediu uma pessoa</td>
+                <td><span class="selo s-vermelho medium-12">Passou da meta</span></td>
+                <td class="espera mono-12 mut num">34 min</td>
+              </tr>
+              <tr>
+                <td><div class="contato"><span class="tile"><i data-lucide="user"></i></span><a class="ir" href="#conversa-renata"><div class="medium-13">Renata Paiva</div><div class="body-12 mut">"Consegue fazer o projeto de interiores por R$ 9 mil?"</div></a></div></td>
+                <td class="sec">Negociação</td>
+                <td><span class="selo s-neutro medium-12">No prazo</span></td>
+                <td class="espera mono-12 mut num">12 min</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <div class="pilha">
+          <!-- Decision split -->
+          <section class="cartao">
+            <div class="cartao-cab"><div><h2 class="display-16">Como o agente de IA atendeu</h2><div class="body-12 mut">Últimos 30 dias</div></div></div>
+            <div class="grande"><span class="number-32 num">290</span><span class="body-12 mut">conversas arquivadas</span></div>
+            <div class="barra"><i style="flex:268;background:var(--blue-500)"></i><i style="flex:22;background:var(--bg-hover)"></i></div>
+            <div class="lista body-13">
+              <div><span class="ponto" style="background:var(--blue-500)"></span>Só a IA respondeu<b class="num">268</b><small class="body-12 num">92%</small></div>
+              <div><span class="ponto" style="background:var(--bg-hover)"></span>A equipe respondeu<b class="num">22</b><small class="body-12 num">8%</small></div>
+            </div>
+          </section>
+
+          <!-- Waiting on you -->
+          <section class="cartao">
+            <div class="cartao-cab" style="margin-bottom:var(--s-3)"><h2 class="display-16">Precisam de você</h2><span class="fim"><span class="selo s-ambar medium-12">3 em risco</span></span></div>
+            <div class="espera-lista">
+              <div class="item"><span class="tile"><i data-lucide="file-text"></i></span><div><div class="medium-13">Casa Almeida</div><div class="body-12 sec">Proposta · parado há 12 dias</div></div><div class="dir"><span class="mono-13 num">R$ 14,2 mil</span><span class="selo s-vermelho medium-12">Crítico</span></div></div>
+              <div class="item"><span class="tile"><i data-lucide="file-text"></i></span><div><div class="medium-13">Apartamento Jardins</div><div class="body-12 sec">Proposta · parado há 11 dias</div></div><div class="dir"><span class="mono-13 num">R$ 9,8 mil</span><span class="selo s-vermelho medium-12">Crítico</span></div></div>
+              <div class="item"><span class="tile"><i data-lucide="file-text"></i></span><div><div class="medium-13">Loja Vila Nova</div><div class="body-12 sec">Proposta · parado há 8 dias</div></div><div class="dir"><span class="mono-13 num">R$ 7,6 mil</span><span class="selo s-ambar medium-12">Em risco</span></div></div>
+            </div>
+            <a class="link-azul medium-13" href="#negocios">Ver os 3 negócios<i data-lucide="chevron-right"></i></a>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<a id="previa" href="modelo-tela.html" style="position:fixed;bottom:var(--s-4);right:var(--s-4);height:40px;padding:0 var(--s-4);display:flex;align-items:center;border-radius:var(--r-10);background:var(--bg-raised);box-shadow:inset 0 0 0 1px var(--line-strong);color:var(--text-primary);font:500 13px/1 var(--f-body)">Ver a versão clara (Permitly)</a>
+<script>
+  if (new URLSearchParams(location.search).has('limpo')) document.getElementById('previa').remove();
+  lucide.createIcons();
+</script>
+</body>
+</html>

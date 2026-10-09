@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>App Shell — ios-core-design v1.0</title>
+<!-- ============================================================
+     app-shell-template.html — o CHASSI dos DOIS caminhos da skill.
+     Retrofit: cole, renomeie as views demo (a/b/c) e migre o sistema
+     pra dentro conforme references/rebrand.md. Produto novo (ideia no
+     papel): parta daqui direto, conforme produto.md §1. Os ids do shell
+     (#vtitle #tot #q #fbtn #side #grab #tema #sheet [data-v]
+     [data-qn]) são a fiação — não renomear sem motivo.
+     Auto-contido: abre por file://. Zero domínio.
+     ============================================================ -->
+<style>
+/* >>> ios-core-design v1.0 — TOKENS INLINE (arquivo único).
+   Cópia literal de assets/tokens.css: mudou lá, recopia aqui. <<< */
+/* ios-core-design v1.0 — GERADO, não editar à mão */
+/*
+ * O que este arquivo tem: as cores (light e dark), a tipografia, os raios, as
+ * medidas, o movimento, a base mínima (§4: caixa previsível, foco, host fix do
+ * <select>), os utilitários de texto (§5) e os MATERIAIS de vidro (§5b:
+ * .ios-glass Regular, .ios-glass--clear com dimming, fallback opaco
+ * automático por @supports e prefers-reduced-transparency, e o data-glass,
+ * a tradução web do slider de intensidade do iOS 27: regular | frosted |
+ * solid). Botão é cápsula (--ios-radius-button aponta pra --ios-radius-pill);
+ * vidro flutua com sombra própria (--ios-glass-shadow).
+ */
+/*
+ * tokens.css — a fonte de verdade do design system Liquid Glass (iOS 26/27) pra web.
+ *
+ * Regras deste arquivo:
+ *  - Todo valor visual do sistema mora aqui. Componente nunca usa hex direto — só var(--ios-*).
+ *  - O espelho legível por máquina é o tokens.json (mesma pasta). Mudou um, muda o outro.
+ *  - Existe UMA cópia deliberada deste arquivo: o bloco de tokens INLINE do
+ *    assets/app-shell-template.html (arquivo único não pode ter <link>).
+ *    MUDOU AQUI, RECOPIA LÁ — o aviso vale nos dois sentidos.
+ *  - Light é o padrão (:root). Dark entra de dois jeitos, com o mesmo bloco de valores:
+ *      1. @media (prefers-color-scheme: dark) — segue o sistema operacional;
+ *      2. [data-theme="dark"] — override manual, em qualquer elemento (página ou painel).
+ *    [data-theme="light"] força light mesmo com o sistema em dark.
+ *  - Fontes dos valores: paleta e escala tipográfica oficiais Apple (não mudaram
+ *    no Liquid Glass); raios card/input/badge do guia técnico de adoção. A Apple
+ *    NÃO publica o vidro em números de CSS: todo valor de material marcado
+ *    "tradução web calibrada" é derivação nossa, calibrada no PREVIEW — a tabela
+ *    completa com a justificativa de cada um vive em references/materials.md.
+ *    O que não tem fonte nem calibragem registrada vira TODO — nunca chute.
+ */
+
+/* ============================================================
+   1 · CORES — LIGHT (padrão)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Acentos de sistema (inalterados no Liquid Glass) */
+  --ios-blue:   #007AFF; /* ação, links, interativo padrão */
+  --ios-green:  #34C759; /* sucesso, confirmação */
+  --ios-indigo: #5856D6;
+  --ios-orange: #FF9500; /* atenção */
+  --ios-pink:   #FF2D55;
+  --ios-purple: #AF52DE;
+  --ios-red:    #FF3B30; /* destrutivo, erro */
+  --ios-teal:   #5AC8FA;
+  --ios-yellow: #FFCC00;
+
+  /* Cinzas de sistema */
+  --ios-gray:  #8E8E93;
+  --ios-gray2: #AEAEB2;
+  --ios-gray3: #C7C7CC;
+  --ios-gray4: #D1D1D6;
+  --ios-gray5: #E5E5EA;
+  --ios-gray6: #F2F2F7;
+
+  /* Fundos — tela plana (conteúdo corrido, sem lista agrupada) */
+  --ios-bg:           #FFFFFF;
+  --ios-bg-secondary: #F2F2F7;
+  --ios-bg-tertiary:  #FFFFFF;
+
+  /* Fundos — tela agrupada (listas inset grouped, estilo Ajustes) */
+  --ios-bg-grouped:           #F2F2F7;
+  --ios-bg-grouped-secondary: #FFFFFF;
+
+  /* Labels — 4 níveis de hierarquia de texto */
+  --ios-label:            rgba(0, 0, 0, 1);
+  --ios-label-secondary:  rgba(0, 0, 0, 0.6);
+  --ios-label-tertiary:   rgba(0, 0, 0, 0.3);
+  --ios-label-quaternary: rgba(0, 0, 0, 0.18);
+
+  /* Separadores */
+  --ios-separator:        rgba(60, 60, 67, 0.36); /* padrão, translúcido */
+  --ios-separator-opaque: #C6C6C8;                /* quando não pode haver transparência */
+
+  /* Fills — preenchimentos de controle (track de switch, fundo de segmented,
+     campo de busca). Valores oficiais Apple (UIKit systemFill). */
+  --ios-fill:            rgba(120, 120, 128, 0.20);
+  --ios-fill-secondary:  rgba(120, 120, 128, 0.16);
+  --ios-fill-tertiary:   rgba(120, 120, 128, 0.12);
+  --ios-fill-quaternary: rgba(120, 120, 128, 0.08);
+
+  /* Lavagem do azul — fundo do botão tinted (~15%, guia técnico: tint só em
+     ação primária, nunca decoração) */
+  --ios-blue-tint: rgba(0, 122, 255, 0.15);
+
+  /* Lavagens dos demais acentos — chip/badge de ESTADO (15% do acento no
+     fundo, acento cheio no texto). A dupla declaração é o fallback: sem
+     color-mix o chip degrada pra cinza (fill) e só o texto carrega a cor —
+     degradação REGISTRADA, não bug. color-mix resolve var(--ios-red) na
+     hora do uso, então estas três NÃO precisam de bloco dark: trocam
+     sozinhas junto com o acento. */
+  --ios-tint-red:    var(--ios-fill-secondary);
+  --ios-tint-red:    color-mix(in srgb, var(--ios-red) 15%, transparent);
+  --ios-tint-orange: var(--ios-fill-secondary);
+  --ios-tint-orange: color-mix(in srgb, var(--ios-orange) 15%, transparent);
+  --ios-tint-green:  var(--ios-fill-secondary);
+  --ios-tint-green:  color-mix(in srgb, var(--ios-green) 15%, transparent);
+
+  /* Thumb do segmented control */
+  --ios-segment: #FFFFFF;
+
+  /* Texto sobre cor cheia (botão filled, badge) — branco nos DOIS temas */
+  --ios-on-accent: #FFFFFF;
+
+  /* Véus de overlay */
+  --ios-scrim:      rgba(0, 0, 0, 0.4);
+  --ios-scrim-menu: rgba(0, 0, 0, 0.1); /* context menu: véu leve */
+
+  /* --- MATERIAL — vidro Regular (tradução web calibrada) ----------
+     A anatomia completa e a justificativa de cada número:
+     references/materials.md. O vidro se monta na classe .ios-glass (§5b);
+     estas vars são os ingredientes por tema.                        */
+  --ios-glass-bg:         rgba(255, 255, 255, 0.55); /* corpo do vidro */
+  --ios-glass-bg-frosted: rgba(255, 255, 255, 0.80); /* estado frosted do data-glass */
+  --ios-glass-stroke:     rgba(255, 255, 255, 0.35); /* lensing: borda de luz 1px */
+  --ios-glass-glint:      rgba(255, 255, 255, 0.60); /* realce especular do topo */
+  --ios-glass-shadow:     0 4px 16px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06); /* vidro flutua */
+  --ios-glass-solid:      #FFFFFF; /* extremo opaco: fallback e data-glass="solid" */
+}
+
+/* ============================================================
+   2 · TOKENS QUE NÃO MUDAM COM O TEMA
+   (declarados uma vez, herdados por tudo)
+   ============================================================ */
+:root {
+  /* --- Tipografia ------------------------------------------------
+     Stack: SF Pro nos aparelhos Apple (de graça, via -apple-system),
+     fonte do sistema no resto, Inter como preferência web se o projeto
+     a carregar. NUNCA fazer self-host de SF Pro (licença da Apple).
+     A escala Dynamic Type não mudou no Liquid Glass.                */
+  --ios-font-text: -apple-system, "SF Pro Text", "SF Pro Display", "Inter", system-ui, sans-serif;
+
+  /* Escala Dynamic Type (tamanho Large) — 11 estilos.
+     Regra do tracking: tamanho ≥ 20px → -0.4px (simula SF Pro Display);
+     abaixo de 20px → 0. Peso não citado = regular (400).              */
+  --ios-text-large-title-size:     34px;
+  --ios-text-large-title-leading:  41px;
+  --ios-text-large-title-weight:   700;
+  --ios-text-large-title-tracking: -0.4px;
+
+  --ios-text-title1-size:     28px;
+  --ios-text-title1-leading:  34px;
+  --ios-text-title1-weight:   400;
+  --ios-text-title1-tracking: -0.4px;
+
+  --ios-text-title2-size:     22px;
+  --ios-text-title2-leading:  28px;
+  --ios-text-title2-weight:   400;
+  --ios-text-title2-tracking: -0.4px;
+
+  --ios-text-title3-size:     20px;
+  --ios-text-title3-leading:  25px;
+  --ios-text-title3-weight:   400;
+  --ios-text-title3-tracking: -0.4px;
+
+  --ios-text-headline-size:     17px;
+  --ios-text-headline-leading:  22px;
+  --ios-text-headline-weight:   600;
+  --ios-text-headline-tracking: 0;
+
+  --ios-text-body-size:     17px;
+  --ios-text-body-leading:  22px;
+  --ios-text-body-weight:   400;
+  --ios-text-body-tracking: 0;
+
+  --ios-text-callout-size:     16px;
+  --ios-text-callout-leading:  21px;
+  --ios-text-callout-weight:   400;
+  --ios-text-callout-tracking: 0;
+
+  --ios-text-subheadline-size:     15px;
+  --ios-text-subheadline-leading:  20px;
+  --ios-text-subheadline-weight:   400;
+  --ios-text-subheadline-tracking: 0;
+
+  --ios-text-footnote-size:     13px;
+  --ios-text-footnote-leading:  18px;
+  --ios-text-footnote-weight:   400;
+  --ios-text-footnote-tracking: 0;
+
+  --ios-text-caption1-size:     12px;
+  --ios-text-caption1-leading:  16px;
+  --ios-text-caption1-weight:   400;
+  --ios-text-caption1-tracking: 0;
+
+  --ios-text-caption2-size:     11px;
+  --ios-text-caption2-leading:  13px;
+  --ios-text-caption2-weight:   400;
+  --ios-text-caption2-tracking: 0;
+
+  /* Tracking de cabeçalho uppercase (header de card/lista/seção).
+     Em em, não px: escala com o corpo.                              */
+  --ios-tracking-caps: 0.06em;
+
+  /* --- Raios — por papel, nunca por gosto ------------------------
+     Cápsula é a forma padrão de controle no Liquid Glass; os cantos
+     são CONCÊNTRICOS: raio interno = raio externo − padding (nunca
+     abaixo de 8px em superfície tocável). Fórmula e exemplos:
+     foundations.md §3.
+     card/input/badge: guia técnico de adoção. alert/sheet: a Apple
+     não publica — tradução web calibrada.                           */
+  --ios-radius-pill:   999px;
+  --ios-radius-button: var(--ios-radius-pill); /* botão é CÁPSULA, sem escape */
+  --ios-radius-card:   16px;
+  --ios-radius-input:  12px;
+  --ios-radius-badge:  8px;
+  --ios-radius-alert:  26px;  /* tradução web calibrada */
+  --ios-radius-sheet:  20px;  /* tradução web calibrada — só no topo */
+
+  /* --- Alvo de toque --------------------------------------------- */
+  --ios-touch-min: 44px; /* mínimo 44×44px, sempre — padding invisível conta */
+
+  /* --- Alturas e geometria de referência ------------------------- */
+  --ios-h-navbar:       44px;
+  --ios-h-navbar-large: 96px;  /* nav bar com large title expandido */
+  --ios-h-tabbar:       49px;  /* conteúdo da cápsula flutuante */
+  --ios-h-row:          44px;  /* linha de lista padrão */
+  --ios-h-row-large:    60px;  /* linha de lista com subtítulo */
+  --ios-h-button:       50px;  /* botão primário */
+
+  /* Barra flutuante: o vidro não encosta na borda da tela — flutua
+     com margem própria (tradução web calibrada da geometria iOS 26) */
+  --ios-bar-inset: 12px;
+
+  /* Safe area inferior — 34px é a referência de hardware (iPhone com
+     Face ID); na web o valor real vem do env(), com 0 de fallback.
+     Exige <meta name="viewport" ... viewport-fit=cover>.            */
+  --ios-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* --- Espaçamento — grid de 8pt (4px só como meio-passo) -------- */
+  --ios-margin:       16px; /* margem de layout, mobile */
+  --ios-margin-wide:  20px; /* margem de layout, ≥768px */
+  --ios-section-gap:  32px; /* espaço entre seções */
+  --ios-card-padding: 16px; /* padding interno de card */
+
+  /* --- MATERIAL — ingredientes que não mudam com o tema -----------
+     (tradução web calibrada; o Clear NÃO adapta ao tema de propósito,
+     e isso é spec — ele existe pra deixar a mídia atravessar)       */
+  --ios-glass-blur:     20px;  /* iOS 27 difunde mais que o 26 — knob único */
+  --ios-glass-saturate: 180%;
+  --ios-glass-clear-bg: rgba(255, 255, 255, 0.12); /* vidro Clear: só sobre mídia */
+  --ios-glass-dim:      rgba(0, 0, 0, 0.35);       /* dimming OBRIGATÓRIO sob o Clear */
+
+  /* --- Movimento --------------------------------------------------
+     Springs do Liquid Glass: 0.3 é o response padrão, 0.5 a entrada
+     (damping 0.8). O bounce é a assinatura do vidro interativo.     */
+  --ios-duration:       0.3s;  /* transição padrão */
+  --ios-duration-press: 0.1s;  /* press state */
+  --ios-duration-hover: 0.15s; /* hover ease-in-out */
+  --ios-duration-enter: 0.5s;  /* entrada de sheet/modal */
+  --ios-ease:        cubic-bezier(0.25, 0.1, 0.25, 1);   /* padrão */
+  --ios-ease-spring: cubic-bezier(0.32, 0.72, 0, 1);     /* sheets/modais */
+  --ios-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);  /* vidro interativo (tradução web calibrada) */
+}
+
+/* ============================================================
+   3 · CORES — DARK
+   Par oficial Apple (paleta inalterada no Liquid Glass). Dois
+   gatilhos, mesmo bloco: o sistema operacional (media query) ou
+   o data-theme manual.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --ios-blue:   #0A84FF;
+    --ios-green:  #30D158;
+    --ios-indigo: #5E5CE6;
+    --ios-orange: #FF9F0A;
+    --ios-pink:   #FF375F;
+    --ios-purple: #BF5AF2;
+    --ios-red:    #FF453A;
+    --ios-teal:   #64D2FF;
+    --ios-yellow: #FFD60A;
+
+    --ios-gray:  #8E8E93; /* o único cinza igual nos dois temas */
+    --ios-gray2: #636366;
+    --ios-gray3: #48484A;
+    --ios-gray4: #3A3A3C;
+    --ios-gray5: #2C2C2E;
+    --ios-gray6: #1C1C1E;
+
+    --ios-bg:           #000000;
+    --ios-bg-secondary: #1C1C1E;
+    --ios-bg-tertiary:  #2C2C2E;
+
+    --ios-bg-grouped:           #000000;
+    --ios-bg-grouped-secondary: #1C1C1E;
+
+    /* Quaternary dark oficial é 16% (não 18% como no light) */
+    --ios-label:            rgba(255, 255, 255, 1);
+    --ios-label-secondary:  rgba(235, 235, 245, 0.6);
+    --ios-label-tertiary:   rgba(235, 235, 245, 0.3);
+    --ios-label-quaternary: rgba(235, 235, 245, 0.16);
+
+    --ios-separator:        rgba(84, 84, 88, 0.65);
+    --ios-separator-opaque: #38383A;
+
+    --ios-fill:            rgba(120, 120, 128, 0.36);
+    --ios-fill-secondary:  rgba(120, 120, 128, 0.32);
+    --ios-fill-tertiary:   rgba(120, 120, 128, 0.24);
+    --ios-fill-quaternary: rgba(120, 120, 128, 0.18);
+
+    --ios-blue-tint: rgba(10, 132, 255, 0.15);
+    --ios-segment: #636366;
+
+    --ios-on-accent: #FFFFFF;
+    --ios-scrim:      rgba(0, 0, 0, 0.6); /* 40% sobre fundo preto não separa nada */
+    --ios-scrim-menu: rgba(0, 0, 0, 0.25);
+
+    /* MATERIAL — vidro Regular no dark (tradução web calibrada) */
+    --ios-glass-bg:         rgba(28, 28, 30, 0.55);
+    --ios-glass-bg-frosted: rgba(28, 28, 30, 0.80);
+    --ios-glass-stroke:     rgba(255, 255, 255, 0.15);
+    --ios-glass-glint:      rgba(255, 255, 255, 0.25);
+    --ios-glass-shadow:     0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+    --ios-glass-solid:      #1C1C1E;
+  }
+}
+
+/* Espelho do bloco dark acima — override manual, vale em qualquer
+   elemento (página inteira via <html data-theme="dark"> ou um painel).
+   Mudou lá, muda aqui. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ios-blue:   #0A84FF;
+  --ios-green:  #30D158;
+  --ios-indigo: #5E5CE6;
+  --ios-orange: #FF9F0A;
+  --ios-pink:   #FF375F;
+  --ios-purple: #BF5AF2;
+  --ios-red:    #FF453A;
+  --ios-teal:   #64D2FF;
+  --ios-yellow: #FFD60A;
+
+  --ios-gray:  #8E8E93;
+  --ios-gray2: #636366;
+  --ios-gray3: #48484A;
+  --ios-gray4: #3A3A3C;
+  --ios-gray5: #2C2C2E;
+  --ios-gray6: #1C1C1E;
+
+  --ios-bg:           #000000;
+  --ios-bg-secondary: #1C1C1E;
+  --ios-bg-tertiary:  #2C2C2E;
+
+  --ios-bg-grouped:           #000000;
+  --ios-bg-grouped-secondary: #1C1C1E;
+
+  --ios-label:            rgba(255, 255, 255, 1);
+  --ios-label-secondary:  rgba(235, 235, 245, 0.6);
+  --ios-label-tertiary:   rgba(235, 235, 245, 0.3);
+  --ios-label-quaternary: rgba(235, 235, 245, 0.16);
+
+  --ios-separator:        rgba(84, 84, 88, 0.65);
+  --ios-separator-opaque: #38383A;
+
+  --ios-fill:            rgba(120, 120, 128, 0.36);
+  --ios-fill-secondary:  rgba(120, 120, 128, 0.32);
+  --ios-fill-tertiary:   rgba(120, 120, 128, 0.24);
+  --ios-fill-quaternary: rgba(120, 120, 128, 0.18);
+
+  --ios-blue-tint: rgba(10, 132, 255, 0.15);
+  --ios-segment: #636366;
+
+  --ios-on-accent: #FFFFFF;
+  --ios-scrim:      rgba(0, 0, 0, 0.6);
+  --ios-scrim-menu: rgba(0, 0, 0, 0.25);
+
+  --ios-glass-bg:         rgba(28, 28, 30, 0.55);
+  --ios-glass-bg-frosted: rgba(28, 28, 30, 0.80);
+  --ios-glass-stroke:     rgba(255, 255, 255, 0.15);
+  --ios-glass-glint:      rgba(255, 255, 255, 0.25);
+  --ios-glass-shadow:     0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+  --ios-glass-solid:      #1C1C1E;
+}
+
+/* ============================================================
+   4 · BASE MÍNIMA
+   É este bloco que "instala" a stack de fontes no projeto:
+   importou o arquivo, o body já fala SF Pro.
+   ============================================================ */
+
+/* Caixa previsível: sem isto, todo width:100% com padding estoura a
+   largura, e uma sidebar inteira sai desalinhada.
+   A régua de margens do produto.md §4 DEPENDE desta linha. */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--ios-bg);
+  color: var(--ios-label);
+  font-family: var(--ios-font-text);
+  font-size: var(--ios-text-body-size);
+  line-height: var(--ios-text-body-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  accent-color: var(--ios-blue); /* checkbox/radio/range nativos no azul do sistema */
+}
+
+/* Anel de foco de teclado — adaptação web obrigatória (accessibility.md §3).
+   :focus-visible: toque/clique não mostra anel; teclado mostra. */
+:focus-visible {
+  outline: 2px solid var(--ios-blue);
+  outline-offset: 2px;
+}
+
+/* Host fix (color.md §7): o menu aberto do <select> é do navegador.
+   O color-scheme dos blocos de tema cuida do chrome (scrollbar, caret,
+   moldura do dropdown); a COR das opções precisa ser dita aqui, senão o
+   tema escuro forçado via data-theme abre um dropdown claro do sistema. */
+select option {
+  background: var(--ios-bg-grouped-secondary);
+  color: var(--ios-label);
+}
+
+/* ============================================================
+   5 · UTILITÁRIOS DE TIPOGRAFIA (fallback CSS puro)
+   Um por estilo da escala. Em projeto Tailwind existe o
+   equivalente text-ios-* — mesmos valores, mesma fonte de verdade.
+   ============================================================ */
+.ios-text-large-title { font-size: var(--ios-text-large-title-size); line-height: var(--ios-text-large-title-leading); font-weight: var(--ios-text-large-title-weight); letter-spacing: var(--ios-text-large-title-tracking); }
+.ios-text-title1      { font-size: var(--ios-text-title1-size);      line-height: var(--ios-text-title1-leading);      font-weight: var(--ios-text-title1-weight);      letter-spacing: var(--ios-text-title1-tracking); }
+.ios-text-title2      { font-size: var(--ios-text-title2-size);      line-height: var(--ios-text-title2-leading);      font-weight: var(--ios-text-title2-weight);      letter-spacing: var(--ios-text-title2-tracking); }
+.ios-text-title3      { font-size: var(--ios-text-title3-size);      line-height: var(--ios-text-title3-leading);      font-weight: var(--ios-text-title3-weight);      letter-spacing: var(--ios-text-title3-tracking); }
+.ios-text-headline    { font-size: var(--ios-text-headline-size);    line-height: var(--ios-text-headline-leading);    font-weight: var(--ios-text-headline-weight);    letter-spacing: var(--ios-text-headline-tracking); }
+.ios-text-body        { font-size: var(--ios-text-body-size);        line-height: var(--ios-text-body-leading);        font-weight: var(--ios-text-body-weight);        letter-spacing: var(--ios-text-body-tracking); }
+.ios-text-callout     { font-size: var(--ios-text-callout-size);     line-height: var(--ios-text-callout-leading);     font-weight: var(--ios-text-callout-weight);     letter-spacing: var(--ios-text-callout-tracking); }
+.ios-text-subheadline { font-size: var(--ios-text-subheadline-size); line-height: var(--ios-text-subheadline-leading); font-weight: var(--ios-text-subheadline-weight); letter-spacing: var(--ios-text-subheadline-tracking); }
+.ios-text-footnote    { font-size: var(--ios-text-footnote-size);    line-height: var(--ios-text-footnote-leading);    font-weight: var(--ios-text-footnote-weight);    letter-spacing: var(--ios-text-footnote-tracking); }
+.ios-text-caption1    { font-size: var(--ios-text-caption1-size);    line-height: var(--ios-text-caption1-leading);    font-weight: var(--ios-text-caption1-weight);    letter-spacing: var(--ios-text-caption1-tracking); }
+.ios-text-caption2    { font-size: var(--ios-text-caption2-size);    line-height: var(--ios-text-caption2-leading);    font-weight: var(--ios-text-caption2-weight);    letter-spacing: var(--ios-text-caption2-tracking); }
+
+/* ============================================================
+   5b · MATERIAIS LIQUID GLASS (fallback CSS puro)
+   O coração da linguagem. Dois materiais, nunca misturados:
+   - .ios-glass          → Regular: o padrão de barra, controle e
+                           card flutuante. Adapta ao tema.
+   - .ios-glass--clear   → Clear: mais transparente, NÃO adapta,
+                           só sobre mídia e SEMPRE com .ios-glass-dim
+                           como irmão por baixo.
+   Regra de spec: vidro não amostra vidro — NUNCA aninhar .ios-glass
+   dentro de .ios-glass (na web o backdrop-filter amostra o que
+   estiver atrás, inclusive outro vidro, e o resultado é lama).
+   Anatomia e justificativa dos valores: references/materials.md.
+   ============================================================ */
+.ios-glass {
+  background: var(--ios-glass-bg);
+  -webkit-backdrop-filter: blur(var(--ios-glass-blur)) saturate(var(--ios-glass-saturate));
+  backdrop-filter: blur(var(--ios-glass-blur)) saturate(var(--ios-glass-saturate));
+  box-shadow:
+    inset 0 1px 0 var(--ios-glass-glint),    /* realce especular do topo */
+    inset 0 0 0 1px var(--ios-glass-stroke), /* lensing: borda de luz 1px */
+    var(--ios-glass-shadow);                 /* flutuação */
+}
+.ios-glass--clear {
+  background: var(--ios-glass-clear-bg);
+}
+.ios-glass-dim {
+  /* camada de dimming: irmã por baixo do vidro Clear, cobrindo a mídia */
+  background: var(--ios-glass-dim);
+}
+.ios-glass--interactive {
+  /* vidro interativo: o press "acende" (frosted) e a volta assenta em bounce.
+     Aplicar JUNTO com .ios-glass no controle que É vidro (botão glass, thumb).
+     Mora aqui (e não em utilitária Tailwind) porque o background de .ios-glass
+     é CSS sem camada — utilitária em @layer não o vence com garantia. */
+  transition:
+    background var(--ios-duration) var(--ios-ease),
+    transform var(--ios-duration) var(--ios-ease-bounce);
+}
+.ios-glass--interactive:active {
+  background: var(--ios-glass-bg-frosted);
+  transform: scale(0.97);
+  transition:
+    background var(--ios-duration-press) var(--ios-ease),
+    transform var(--ios-duration-press) var(--ios-ease);
+}
+
+/* --- data-glass — a tradução web do slider de intensidade do iOS 27.
+   Põe no <html> (ou em qualquer contêiner): sem atributo = regular;
+   "frosted" = vidro mais fosco; "solid" = extremo opaco manual.
+   Funciona por indireção de var — nenhum seletor por cima da classe.
+   (:root[data-glass] existe pra empatar com o :root:not([data-theme])
+   do bloco dark; na dúvida de cascata, quem vem depois vence — e este
+   bloco vem depois.) */
+:root[data-glass="frosted"],
+[data-glass="frosted"] {
+  --ios-glass-bg: var(--ios-glass-bg-frosted);
+  --ios-glass-clear-bg: var(--ios-glass-bg-frosted);
+}
+:root[data-glass="solid"],
+[data-glass="solid"] {
+  --ios-glass-bg: var(--ios-glass-solid);
+  --ios-glass-clear-bg: var(--ios-glass-solid);
+  --ios-glass-blur: 0px;
+  --ios-glass-saturate: 100%;
+}
+
+/* --- Fallback opaco AUTOMÁTICO — dois gatilhos, mesmo destino do
+   data-glass="solid". É o extremo opaco do slider do iOS 27:
+   1. navegador sem backdrop-filter;
+   2. usuário pedindo menos transparência (acessibilidade).
+   O override é na CLASSE (não em var no :root) de propósito: assim
+   nenhum bloco de tema, por mais específico, devolve a transparência. */
+@supports not (backdrop-filter: blur(1px)) {
+  .ios-glass,
+  .ios-glass--clear {
+    background: var(--ios-glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .ios-glass,
+  .ios-glass--clear {
+    background: var(--ios-glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ============================================================
+   5c · DIÁLOGOS (base dos overlays: alerta, sheet, popover, menu)
+   O <dialog> nativo dá véu, Esc, foco preso e inert do fundo.
+   O painel do overlay é vidro (.ios-glass no elemento do painel);
+   o véu é COR, nunca blur de tela inteira (web-translation.md §8).
+   ============================================================ */
+.ios-dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+}
+.ios-dialog::backdrop {
+  background: var(--ios-scrim, rgba(0, 0, 0, 0.4)); /* véu padrão de overlay */
+}
+.ios-dialog--menu::backdrop {
+  background: var(--ios-scrim-menu, rgba(0, 0, 0, 0.1)); /* véu leve do context menu */
+}
+
+/* ============================================================
+   6 · MOVIMENTO REDUZIDO
+   Regra inviolável nº 7: quem pede menos movimento, recebe menos.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   SHELL — sidebar Mail/Notas + toolbar de vidro + tab bar
+   cápsula + sheet. Só peças da skill; valores só por token.
+   As media queries moram no FIM (armadilha 2 do rebrand.md).
+   ============================================================ */
+/* box-sizing e host fixes vêm do §4 dos tokens acima — não redeclarar */
+html,body{height:100%}
+/* hidden vence display de classe (web-translation.md §8c) */
+[hidden]{display:none!important}
+body{margin:0;background:var(--ios-bg-secondary);font-variant-numeric:tabular-nums}
+
+/* Acabamento de produto (produto.md §3): press universal + hover discreto */
+.btn:active,.chip:active{transform:scale(0.97);opacity:.7;
+  transition:transform var(--ios-duration-press) var(--ios-ease),opacity var(--ios-duration-press) var(--ios-ease)}
+@media (hover:hover){
+  button.srow:hover{background:var(--ios-fill-quaternary)}
+  .srow.on:hover{background:var(--ios-blue-tint)}
+  .btn:hover,.chip:hover{filter:brightness(0.97)}
+}
+.ic-vazio{visibility:hidden} /* glifo invisível: linha sem ícone alinha com as que têm */
+input::placeholder{color:var(--ios-label-tertiary)}
+
+/* Ícones do sprite (icons.md §6): 1em, currentColor */
+.ic{width:1em;height:1em;fill:currentColor;flex:none;display:inline-block;vertical-align:-0.125em}
+.lbl{font-size:var(--ios-text-footnote-size);line-height:var(--ios-text-footnote-leading);font-weight:600;
+     letter-spacing:var(--ios-tracking-caps);text-transform:uppercase;color:var(--ios-label-secondary)}
+
+/* Scrollbar overlay + chrome não selecionável (web-translation §8b/8c) */
+*{scrollbar-width:thin;scrollbar-color:var(--ios-gray3) transparent}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:var(--ios-gray3);border-radius:var(--ios-radius-pill)}
+::-webkit-scrollbar-track{background:transparent}
+.side,.toolbar,.tabbar,.lbl,button{-webkit-user-select:none;user-select:none}
+
+/* Altura da toolbar: 44 no desktop; no celular a busca quebra pra uma
+   segunda linha de 52 (44 do campo + folga do grid). A base é o valor
+   MOBILE; a media ≥768 sobrescreve — definir só num breakpoint invalida o
+   calc() do outro e o padding das views vira 0 (app-shell.md §1). */
+:root{--tb-h:calc(env(safe-area-inset-top, 0px) + var(--ios-h-navbar) + 52px)}
+
+/* A margem de layout única (--pad): 16 no mobile, 20 em ≥768 — toolbar e
+   views usam a MESMA, senão a busca desalinha da coluna dos cards
+   (produto.md §4.2). */
+:root{--pad:var(--ios-margin)}
+@media (min-width:768px){ :root{--pad:var(--ios-margin-wide)} }
+
+body{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:100%;overflow:hidden}
+.app{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+
+/* ---------- sidebar (desktop: estrutura SÓLIDA; mobile: vira sheet de
+   vidro — a classe .ios-glass entra por JS, CSS não compõe classe) ---------- */
+.side{background:var(--ios-bg-secondary);display:flex;flex-direction:column;
+      gap:var(--ios-section-gap);padding:16px 12px;overflow-y:auto;overscroll-behavior:contain}
+.appname{margin:0;padding:0 12px;
+         font-size:var(--ios-text-title2-size);line-height:var(--ios-text-title2-leading);
+         letter-spacing:var(--ios-text-title2-tracking);font-weight:700}
+.sec{display:flex;flex-direction:column;gap:2px}
+.sec > .lbl{padding:0 12px;margin:0 0 8px;font-weight:600}
+.sec-rodape{margin-top:auto;gap:8px}
+.sec-rodape .btn{margin:0 12px}
+
+/* Linha da sidebar: célula de 44, raio de input (12), ativo = lavagem azul */
+.srow{display:flex;align-items:center;gap:10px;min-height:var(--ios-h-row);
+      padding:0 12px;border-radius:var(--ios-radius-input);width:100%;text-align:left;
+      border:0;background:none;cursor:pointer;font:inherit;
+      font-size:var(--ios-text-subheadline-size);line-height:var(--ios-text-subheadline-leading);
+      color:var(--ios-label)}
+.srow .ic{font-size:20px;color:var(--ios-blue)}
+.srow.on{background:var(--ios-blue-tint);color:var(--ios-blue);font-weight:600}
+button.srow:active{background:var(--ios-gray5)}
+.srow.late{color:var(--ios-red)} .srow.late .ic{color:var(--ios-red)}
+.srow.late.on{background:var(--ios-tint-red);color:var(--ios-red)}
+.srow.soon{color:var(--ios-orange)} .srow.soon .ic{color:var(--ios-orange)}
+.srow.soon.on{background:var(--ios-tint-orange);color:var(--ios-orange)}
+
+/* Contagem à direita da linha (badge.md) */
+.cnt{margin-left:auto;min-width:20px;height:20px;padding:0 6px;
+     border-radius:var(--ios-radius-pill);background:var(--ios-fill-secondary);
+     color:var(--ios-label-secondary);font-size:var(--ios-text-caption1-size);
+     line-height:20px;font-weight:600;text-align:center}
+.cnt.red{background:var(--ios-tint-red);color:var(--ios-red)}
+.cnt.orange{background:var(--ios-tint-orange);color:var(--ios-orange)}
+.cnt:empty{display:none}
+
+/* Aparência: segmented em cápsula, thumb SÓLIDO (--ios-segment) —
+   segmented-control.md: em superfície que pode virar vidro, não empilha */
+.segc{display:flex;background:var(--ios-fill-secondary);
+      border-radius:var(--ios-radius-pill);padding:2px;margin:0 12px}
+.sgi{flex:1;height:28px;border-radius:var(--ios-radius-pill);position:relative;border:0;background:none;cursor:pointer;font:inherit;
+     font-size:var(--ios-text-footnote-size);font-weight:400;color:var(--ios-label);
+     transition:background var(--ios-duration) var(--ios-ease)}
+.sgi::after{content:"";position:absolute;left:0;right:0;top:50%;
+            transform:translateY(-50%);height:var(--ios-touch-min)}
+.sgi.on{background:var(--ios-segment);font-weight:600}
+.sgi:active{opacity:.7}
+
+/* Select nativo com corpo de input (picker.md) + caret do sprite */
+.selwrap{position:relative;margin:0 12px}
+.selwrap .selcaret{position:absolute;right:16px;top:50%;transform:translateY(-50%);
+                   font-size:var(--ios-text-footnote-size);color:var(--ios-label-secondary);pointer-events:none}
+.selwrap select{appearance:none;-webkit-appearance:none;width:100%;
+                height:var(--ios-touch-min);border:0;border-radius:var(--ios-radius-input);
+                background:var(--ios-fill-tertiary);padding:0 40px 0 16px;color:var(--ios-label);
+                font:inherit;font-size:var(--ios-text-subheadline-size)}
+
+/* Botão (cápsula, button.md) */
+.btn{height:var(--ios-touch-min);padding:0 16px;border:1px solid var(--ios-separator);
+     border-radius:var(--ios-radius-pill);background:var(--ios-bg-grouped-secondary);
+     color:var(--ios-label);font:inherit;font-size:var(--ios-text-footnote-size);font-weight:600;cursor:pointer;
+     transition:transform var(--ios-duration-press) var(--ios-ease),opacity var(--ios-duration-press) var(--ios-ease)}
+.btn:active{transform:scale(.97);opacity:.7}
+.btn.primary{background:var(--ios-blue);border-color:var(--ios-blue);color:var(--ios-on-accent)}
+
+/* O grabber do sheet (modal-sheet.md) — só existe no mobile; regra base
+   ANTES da media query (armadilha 2) */
+.grab{display:none}
+
+/* ---------- toolbar: o vidro legítimo — as views rolam por baixo ----------
+   Hairline de scroll-edge POR BAIXO do vidro: a borda de luz do
+   material é invisível sobre fundo claro e não ancora nada — sem esta linha
+   o conteúdo "encosta" na barra e o canto perde o alinhamento a olho. */
+.toolbar{position:absolute;left:0;right:0;top:0;z-index:3;
+         padding-top:env(safe-area-inset-top, 0px);
+         border-bottom:1px solid var(--ios-separator)}
+.tb{display:flex;align-items:center;flex-wrap:wrap;gap:0 8px;
+    min-height:var(--ios-h-navbar);padding:0 var(--pad)}
+.tb-title{display:flex;align-items:baseline;gap:8px;min-width:0;white-space:nowrap;
+          overflow:hidden;text-overflow:ellipsis}
+#vtitle{font-size:var(--ios-text-headline-size);line-height:var(--ios-text-headline-leading);
+        font-weight:var(--ios-text-headline-weight)}
+#tot{font-size:var(--ios-text-footnote-size);color:var(--ios-label-secondary)}
+.tbtn{width:var(--ios-touch-min);height:var(--ios-touch-min);border:0;background:none;cursor:pointer;
+      display:grid;place-items:center;color:var(--ios-blue);font-size:22px}
+/* margin-block:0 é OBRIGATÓRIO aqui: <form> tem margem inferior de UA
+   (~17px) que engorda a barra e enfia o conteúdo por baixo do vidro */
+.tb-search{position:relative;margin-left:auto;flex:0 1 280px;margin-block:0}
+.tb-search .sic{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+                font-size:var(--ios-text-callout-size);color:var(--ios-label-tertiary);pointer-events:none}
+.tb-search #q{width:100%;height:36px;border:0;border-radius:var(--ios-radius-pill);
+              background:var(--ios-fill-tertiary);color:var(--ios-label);font:inherit;
+              font-size:var(--ios-text-subheadline-size);padding:0 12px 0 32px}
+/* a faixa de 44 repassa o clique (regra 1) */
+.tb-search{min-height:var(--ios-touch-min);display:flex;align-items:center;cursor:text}
+
+/* ---------- tab bar: CÁPSULA FLUTUANTE de vidro (tab-bar.md) ---------- */
+.tabbar{position:fixed;left:var(--ios-bar-inset);right:var(--ios-bar-inset);
+        bottom:calc(var(--ios-bar-inset) + var(--ios-safe-bottom));z-index:4;
+        display:flex;justify-content:space-around;height:var(--ios-h-tabbar);
+        border-radius:var(--ios-radius-pill)}
+.titem{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+       gap:2px;color:var(--ios-gray);border:0;background:none;cursor:pointer;font:inherit;min-width:64px}
+.titem:active{opacity:.7}
+.ticon{position:relative;font-size:24px;line-height:0}
+.ic-f{display:none}
+.titem.on{color:var(--ios-blue)}
+.titem.on .ic-f{display:inline-block}
+.titem.on .ic-r{display:none}
+.tlbl{font-size:var(--ios-text-caption2-size);line-height:var(--ios-text-caption2-leading)}
+.tbadge{position:absolute;top:-4px;right:-10px;min-width:16px;height:16px;padding:0 4px;
+        border-radius:var(--ios-radius-pill);background:var(--ios-red);
+        color:var(--ios-on-accent);font-size:var(--ios-text-caption2-size);
+        line-height:16px;font-weight:600;text-align:center}
+.tbadge:empty{display:none}
+
+/* ---------- views (conteúdo SÓLIDO — vidro é o cromo por cima) ---------- */
+main,section.view{flex:1;overflow-y:auto;padding:calc(var(--tb-h) + 16px) var(--pad) var(--ios-section-gap);
+                  background:var(--ios-bg-grouped);color:var(--ios-label);
+                  font-family:var(--ios-font-text);font-size:var(--ios-text-subheadline-size)}
+.view-card{background:var(--ios-bg-grouped-secondary);border-radius:var(--ios-radius-card);
+           padding:var(--ios-card-padding);margin-bottom:16px;max-width:560px}
+.view-card h3{margin:0 0 4px;font-size:var(--ios-text-footnote-size);font-weight:600;
+              text-transform:uppercase;letter-spacing:var(--ios-tracking-caps);color:var(--ios-label-secondary)}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.chip{flex:none;height:32px;padding:0 16px;display:inline-flex;align-items:center;position:relative;
+      border-radius:var(--ios-radius-pill);background:var(--ios-bg-grouped-secondary);
+      border:1px solid var(--ios-separator);font-size:var(--ios-text-caption1-size);font-weight:600}
+.chip::after{content:"";position:absolute;inset:-6px 0}
+
+/* ---------- overlays ---------- */
+.scrim{position:fixed;inset:0;background:var(--ios-scrim);opacity:0;pointer-events:none;
+       transition:opacity var(--ios-duration-hover);z-index:5}
+.scrim.on{opacity:1;pointer-events:auto}
+/* sheet-ficha: vidro; sobe da borda no mobile, painel direito no desktop */
+#sheet{position:fixed;left:0;right:0;bottom:0;max-height:85dvh;z-index:6;
+       display:flex;flex-direction:column;
+       border-radius:var(--ios-radius-sheet) var(--ios-radius-sheet) 0 0;
+       transform:translateY(100%);
+       transition:transform var(--ios-duration-enter) var(--ios-ease-spring)}
+#sheet.on{transform:none}
+.sh-h{padding:16px;border-bottom:1px solid var(--ios-gray5);display:flex;gap:10px;align-items:flex-start;flex:none;
+      font-family:var(--ios-font-text)}
+.sh-h h2{margin:0;font-size:var(--ios-text-headline-size);font-weight:700;line-height:1.25;color:var(--ios-label)}
+.x{width:28px;height:28px;border-radius:var(--ios-radius-pill);border:0;cursor:pointer;font:inherit;
+   font-size:17px;color:var(--ios-label-secondary);flex:none;margin-left:auto;position:relative;
+   background:var(--ios-fill-tertiary);display:grid;place-items:center}
+.x::after{content:"";position:absolute;inset:-8px}
+.sh-b{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px;color:var(--ios-label);
+      font-family:var(--ios-font-text);font-size:var(--ios-text-subheadline-size)}
+/* toast: cápsula de vidro — desce do topo como o banner do iOS */
+.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top, 0px));
+       transform:translate(-50%,-14px);color:var(--ios-label);font-family:var(--ios-font-text);
+       padding:8px 16px;border-radius:var(--ios-radius-pill);font-size:var(--ios-text-footnote-size);font-weight:600;
+       opacity:0;pointer-events:none;z-index:9;
+       transition:opacity var(--ios-duration) var(--ios-ease),transform var(--ios-duration) var(--ios-ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* alerta: <dialog> nativo, painel de vidro, raio 26 */
+dialog.al{border:0;padding:0;background:transparent;max-width:none}
+dialog.al::backdrop{background:var(--ios-scrim)}
+.al-painel{width:270px;border-radius:var(--ios-radius-alert);overflow:hidden;text-align:center;
+           font-family:var(--ios-font-text);color:var(--ios-label)}
+.al-b{padding:20px 16px}
+.al-b h3{margin:0;font-size:var(--ios-text-headline-size);
+         line-height:var(--ios-text-headline-leading);font-weight:var(--ios-text-headline-weight)}
+.al-b p{margin:4px 0 0;font-size:var(--ios-text-footnote-size);
+        line-height:var(--ios-text-footnote-leading);color:var(--ios-label-secondary)}
+.al-ok{display:block;width:100%;border:0;border-top:1px solid var(--ios-gray5);background:none;cursor:pointer;
+       color:var(--ios-blue);font:inherit;font-size:var(--ios-text-body-size);font-weight:600;min-height:var(--ios-touch-min)}
+
+/* ---------- breakpoints (NO FIM — armadilha 2 do rebrand.md) ---------- */
+@media (min-width:768px){
+  :root{--tb-h:calc(env(safe-area-inset-top, 0px) + var(--ios-h-navbar))}
+  body{grid-template-columns:280px minmax(0,1fr)}
+  #fbtn{display:none}
+  .side{border-right:1px solid var(--ios-separator)}
+  .tabbar{display:none}
+  #sheet{left:auto;top:0;height:100%;max-height:none;width:min(430px,100%);
+         border-radius:0;transform:translateX(100%)}
+  #sheet.on{transform:none}
+}
+@media (max-width:767.98px){
+  .side{position:fixed;left:0;right:0;bottom:0;max-height:85dvh;z-index:6;
+        border-radius:var(--ios-radius-sheet) var(--ios-radius-sheet) 0 0;
+        padding-top:0;padding-bottom:calc(16px + var(--ios-safe-bottom));
+        transform:translateY(100%);
+        transition:transform var(--ios-duration-enter) var(--ios-ease-spring)}
+  .side.on{transform:none}
+  .side .sec-nav,.side .appname{display:none} /* a tab bar cobre a navegação */
+  .grab{display:grid;place-items:center;height:24px;position:relative;flex:none;
+        margin:0 -12px;border:0;background:none;cursor:pointer}
+  .grab::after{content:"";position:absolute;inset:0;height:var(--ios-touch-min)}
+  .grab i{width:36px;height:5px;border-radius:var(--ios-radius-pill);background:var(--ios-gray3)}
+  .tb-search{order:9;flex:1 1 100%;height:52px;margin-left:0}
+  main,section.view{padding-bottom:calc(var(--ios-section-gap) + var(--ios-h-tabbar) + var(--ios-bar-inset) + var(--ios-safe-bottom))}
+}
+</style>
+<!-- Tema salvo aplicado ANTES do primeiro paint (senão pisca). Renomear a
+     chave junto com TEMA_KEY no script do shell. -->
+<script>try{var _t=localStorage.getItem("app-tema");if(_t==="light"||_t==="dark")document.documentElement.dataset.theme=_t}catch(e){}</script>
+</head>
+<body>
+
+<!-- Sprite Phosphor — SUBSET de assets/phosphor-sprite.svg (icons.md §6).
+     style="display:none" é obrigatório: hidden não vale pra <svg>. -->
+<svg style="display:none" aria-hidden="true"><defs>
+<symbol id="ph-kanban" viewBox="0 0 256 256"><path d="M216,48H40a8,8,0,0,0-8,8V208a16,16,0,0,0,16,16H88a16,16,0,0,0,16-16V160h48v16a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V56A8,8,0,0,0,216,48ZM88,208H48V128H88Zm0-96H48V64H88Zm64,32H104V64h48Zm56,32H168V128h40Zm0-64H168V64h40Z"/></symbol>
+<symbol id="ph-kanban-fill" viewBox="0 0 256 256"><path d="M160,56v96a8,8,0,0,1-8,8H112a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8h40A8,8,0,0,1,160,56Zm64-8H184a8,8,0,0,0-8,8v52a4,4,0,0,0,4,4h48a4,4,0,0,0,4-4V56A8,8,0,0,0,224,48Zm4,80H180a4,4,0,0,0-4,4v44a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V132A4,4,0,0,0,228,128ZM80,48H40a8,8,0,0,0-8,8v52a4,4,0,0,0,4,4H84a4,4,0,0,0,4-4V56A8,8,0,0,0,80,48Zm4,80H36a4,4,0,0,0-4,4v76a16,16,0,0,0,16,16H72a16,16,0,0,0,16-16V132A4,4,0,0,0,84,128Z"/></symbol>
+<symbol id="ph-chart-bar" viewBox="0 0 256 256"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></symbol>
+<symbol id="ph-chart-bar-fill" viewBox="0 0 256 256"><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1,0-16h8V136a8,8,0,0,1,8-8H72a8,8,0,0,1,8,8v64H96V88a8,8,0,0,1,8-8h32a8,8,0,0,1,8,8V200h16V40a8,8,0,0,1,8-8h40a8,8,0,0,1,8,8V200h8A8,8,0,0,1,232,208Z"/></symbol>
+<symbol id="ph-clock" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol>
+<symbol id="ph-clock-fill" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></symbol>
+<symbol id="ph-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+<symbol id="ph-magnifying-glass" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></symbol>
+<symbol id="ph-faders-horizontal" viewBox="0 0 256 256"><path d="M176,80a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H184A8,8,0,0,1,176,80ZM40,88H144v16a8,8,0,0,0,16,0V56a8,8,0,0,0-16,0V72H40a8,8,0,0,0,0,16Zm176,80H120a8,8,0,0,0,0,16h96a8,8,0,0,0,0-16ZM88,144a8,8,0,0,0-8,8v16H40a8,8,0,0,0,0,16H80v16a8,8,0,0,0,16,0V152A8,8,0,0,0,88,144Z"/></symbol>
+<symbol id="ph-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol>
+</defs></svg>
+
+<aside class="side" id="side" aria-label="Navegação e filtros">
+  <button class="grab" id="grab" type="button" aria-label="Fechar filtros"><i></i></button>
+  <h1 class="appname"><span id="bname">Nome do App</span></h1>
+  <nav class="sec sec-nav" aria-label="Visões">
+    <button class="srow on" type="button" data-v="a" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#ph-kanban"/></svg>Visão A</button>
+    <button class="srow" type="button" data-v="b"><svg class="ic" aria-hidden="true"><use href="#ph-chart-bar"/></svg>Visão B</button>
+    <button class="srow" type="button" data-v="c"><svg class="ic" aria-hidden="true"><use href="#ph-clock"/></svg>Visão C<span class="cnt red" data-qn></span></button>
+  </nav>
+  <!-- SLOT: seções do domínio (filtros, estados, réguas) — uma .sec por grupo -->
+  <section class="sec">
+    <h2 class="lbl">Filtros</h2>
+    <div class="selwrap"><select aria-label="Exemplo de filtro"><option>Todos</option><option>Exemplo</option></select><svg class="ic selcaret" aria-hidden="true"><use href="#ph-caret-down"/></svg></div>
+  </section>
+  <section class="sec sec-theme">
+    <h2 class="lbl">Aparência</h2>
+    <div class="segc" id="tema" role="radiogroup" aria-label="Aparência">
+      <button type="button" class="sgi on" role="radio" aria-checked="true" data-t="auto">Auto</button>
+      <button type="button" class="sgi" role="radio" aria-checked="false" tabindex="-1" data-t="light">Claro</button>
+      <button type="button" class="sgi" role="radio" aria-checked="false" tabindex="-1" data-t="dark">Escuro</button>
+    </div>
+  </section>
+  <section class="sec sec-rodape">
+    <h2 class="lbl">Ações</h2>
+    <!-- SLOT: ações globais do domínio (conectar, atualizar, exportar) -->
+    <button class="btn" type="button" onclick="toast('Ação global')">Ação de exemplo</button>
+    <button class="btn primary" type="button" onclick="showAlert('Título', 'Corpo do alerta de exemplo.')">Alerta de exemplo</button>
+  </section>
+</aside>
+
+<div class="app">
+  <div class="toolbar ios-glass">
+    <div class="tb">
+      <button class="tbtn" id="fbtn" type="button" aria-label="Abrir filtros" aria-expanded="false"><svg class="ic" aria-hidden="true"><use href="#ph-faders-horizontal"/></svg></button>
+      <div class="tb-title"><span id="vtitle">Visão A</span><span id="tot"></span></div>
+      <form class="tb-search" role="search" onsubmit="return false">
+        <svg class="ic sic" aria-hidden="true"><use href="#ph-magnifying-glass"/></svg>
+        <input id="q" type="search" placeholder="Buscar" aria-label="Buscar">
+      </form>
+    </div>
+  </div>
+  <!-- As views: irmãs diretas, rolam POR BAIXO da toolbar.
+       View nova = registrar em VIEWS no script (armadilha 1 do rebrand.md). -->
+  <main id="v-a" class="view">
+    <div class="view-card"><h3>Conteúdo A</h3><p>Conteúdo é sólido; o vidro é o cromo por cima. Role pra ver a toolbar borrar isto aqui.</p></div>
+    <div class="view-card"><h3>Faixa com drag</h3>
+      <div class="strip" id="strip-demo">
+        <span class="chip">Um</span><span class="chip">Dois</span><span class="chip">Três</span><span class="chip">Quatro</span><span class="chip">Cinco</span><span class="chip">Seis</span><span class="chip">Sete</span><span class="chip">Oito</span><span class="chip">Nove</span><span class="chip">Dez</span>
+      </div>
+    </div>
+    <div class="view-card"><h3>Sheet</h3><button class="btn" type="button" onclick="openSheet()">Abrir ficha de exemplo</button></div>
+    <div class="view-card" style="height:420px"><h3>Rolagem</h3><p>Bloco alto só pra provar o vidro da toolbar.</p></div>
+  </main>
+  <section id="v-b" class="view" hidden><div class="view-card"><h3>Conteúdo B</h3><p>Segunda visão.</p></div></section>
+  <section id="v-c" class="view" hidden><div class="view-card"><h3>Conteúdo C</h3><p>Terceira visão (a do badge).</p></div></section>
+</div>
+
+<nav class="tabbar ios-glass" aria-label="Principal">
+  <button type="button" class="titem on" data-v="a" aria-current="page"><span class="ticon"><svg class="ic ic-r" aria-hidden="true"><use href="#ph-kanban"/></svg><svg class="ic ic-f" aria-hidden="true"><use href="#ph-kanban-fill"/></svg></span><span class="tlbl">Visão A</span></button>
+  <button type="button" class="titem" data-v="b"><span class="ticon"><svg class="ic ic-r" aria-hidden="true"><use href="#ph-chart-bar"/></svg><svg class="ic ic-f" aria-hidden="true"><use href="#ph-chart-bar-fill"/></svg></span><span class="tlbl">Visão B</span></button>
+  <button type="button" class="titem" data-v="c"><span class="ticon"><svg class="ic ic-r" aria-hidden="true"><use href="#ph-clock"/></svg><svg class="ic ic-f" aria-hidden="true"><use href="#ph-clock-fill"/></svg><span class="tbadge" data-qn></span></span><span class="tlbl">Visão C</span></button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+
+<aside id="sheet" class="ios-glass" role="dialog" aria-modal="true" aria-labelledby="sh-t" aria-hidden="true" inert>
+  <div class="sh-h"><div><h2 id="sh-t">Ficha de exemplo</h2></div><button class="x" id="sh-x" type="button" aria-label="Fechar"><svg class="ic" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
+  <div class="sh-b"><!-- SLOT: conteúdo da ficha do domínio -->O painel do sheet é vidro; o véu atrás é cor. No desktop ele vira painel direito; no celular sobe da borda.</div>
+</aside>
+
+<div class="toast ios-glass" id="toast" role="status" aria-live="polite"></div>
+
+<dialog class="al" id="alerta" role="alertdialog" aria-labelledby="al-t" aria-describedby="al-m">
+  <div class="al-painel ios-glass">
+    <div class="al-b"><h3 id="al-t"></h3><p id="al-m"></p></div>
+    <button class="al-ok" id="al-ok" type="button">OK</button>
+  </div>
+</dialog>
+
+<script>
+/* ============================================================
+   SHELL JS — fiação genérica (rebrand.md §2). Zero domínio.
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+/* ---------- views ----------
+   VIEWS registra cada view: seletor, título e o display dela
+   (armadilha 1: sem o display explícito, view nova nasce none). */
+const VIEWS = {
+  a: { el: "#v-a", titulo: "Visão A", display: "block" },
+  b: { el: "#v-b", titulo: "Visão B", display: "block" },
+  c: { el: "#v-c", titulo: "Visão C", display: "block" },
+};
+let view = "a";
+function setView(v){
+  view = v;
+  for (const [k, cfg] of Object.entries(VIEWS)) {
+    const el = $(cfg.el);
+    el.hidden = k !== v;
+    el.style.display = k === v ? cfg.display : "none";
+  }
+  $$("[data-v]").forEach(t => {
+    const on = t.dataset.v === v;
+    t.classList.toggle("on", on);
+    if (on) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current");
+  });
+  $("#vtitle").textContent = VIEWS[v].titulo;
+  closeSide(); /* trocar de view fecha o sheet de filtros */
+  document.body.className = document.body.className.replace(/\bv-\w+\b/g, "").trim();
+  document.body.classList.add("v-" + v);
+  /* SLOT: render sob demanda da view (relatórios, listas) entra aqui */
+}
+$$("[data-v]").forEach(t => t.onclick = () => setView(t.dataset.v));
+
+/* ---------- tema (Aparência) ---------- */
+const TEMA_KEY = "app-tema"; /* renomear por app — junto com o anti-flash do <head> */
+function aplicaTema(t){
+  if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  else delete document.documentElement.dataset.theme; /* auto = atributo removido */
+  $$("#tema [data-t]").forEach(b => {
+    const on = (b.dataset.t === t) || (b.dataset.t === "auto" && t !== "light" && t !== "dark");
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-checked", String(on));
+    b.tabIndex = on ? 0 : -1; /* radiogroup é um tabstop só */
+  });
+}
+$$("#tema [data-t]").forEach(b => b.onclick = () => {
+  const t = b.dataset.t === "auto" ? "" : b.dataset.t;
+  try { t ? localStorage.setItem(TEMA_KEY, t) : localStorage.removeItem(TEMA_KEY); } catch (e) {}
+  aplicaTema(t);
+});
+$("#tema").addEventListener("keydown", (e) => {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  const bs = [...$$("#tema [data-t]")];
+  const i = bs.findIndex(b => b.classList.contains("on"));
+  const alvo = bs[(i + (e.key === "ArrowRight" ? 1 : bs.length - 1)) % bs.length];
+  alvo.focus(); alvo.click();
+});
+try { aplicaTema(localStorage.getItem(TEMA_KEY) || ""); } catch (e) { aplicaTema(""); }
+
+/* ---------- sidebar-sheet (mobile) ---------- */
+const mqMobile = window.matchMedia("(max-width:767.98px)");
+function sideInerte(){ $("#side").inert = mqMobile.matches && !$("#side").classList.contains("on"); }
+function sideVidro(){
+  /* sheet é cromo (vidro); sidebar de desktop é estrutura (sólida).
+     CSS não compõe classe — o vidro entra/sai por JS no breakpoint. */
+  $("#side").classList.toggle("ios-glass", mqMobile.matches);
+}
+mqMobile.addEventListener("change", () => { sideInerte(); sideVidro(); });
+function openSide(){ $("#side").classList.add("on"); $("#scrim").classList.add("on");
+  $("#fbtn").setAttribute("aria-expanded", "true"); sideInerte(); $("#grab").focus(); }
+function closeSide(){ $("#side").classList.remove("on");
+  $("#fbtn") && $("#fbtn").setAttribute("aria-expanded", "false");
+  if (!$("#sheet").classList.contains("on")) $("#scrim").classList.remove("on");
+  sideInerte(); }
+$("#fbtn").onclick = () => $("#side").classList.contains("on") ? closeSide() : openSide();
+/* a faixa de 44 da busca repassa o clique (regra 1) */
+$(".tb-search").addEventListener("click", () => $("#q").focus());
+$("#grab").onclick = closeSide;
+/* arrasto do grabber: segue o dedo; soltar >60px fecha */
+(() => {
+  const side = $("#side"); let y0 = 0, drag = false;
+  $("#grab").addEventListener("pointerdown", (e) => { y0 = e.clientY; drag = true; try { e.target.setPointerCapture(e.pointerId); } catch (_) {} });
+  $("#grab").addEventListener("pointermove", (e) => {
+    if (!drag) return; const dy = Math.max(0, e.clientY - y0);
+    side.style.transition = "none"; side.style.transform = "translateY(" + dy + "px)";
+  });
+  const solta = (e) => { if (!drag) return; drag = false;
+    const dy = Math.max(0, e.clientY - y0);
+    side.style.transition = ""; side.style.transform = "";
+    if (dy > 60) closeSide(); };
+  $("#grab").addEventListener("pointerup", solta);
+  $("#grab").addEventListener("pointercancel", solta);
+})();
+sideInerte(); sideVidro();
+
+/* ---------- sheet-ficha ---------- */
+let sheetVolta = null;
+function openSheet(){
+  sheetVolta = document.activeElement;
+  const sh = $("#sheet");
+  sh.inert = false; sh.classList.add("on"); sh.setAttribute("aria-hidden", "false");
+  $("#scrim").classList.add("on");
+  $("#sh-x").focus(); /* foco entra no fechar */
+}
+function closeSheet(){
+  /* foco sai ANTES de aria-hidden/inert (senão o navegador bloqueia) */
+  if (sheetVolta && sheetVolta.isConnected) sheetVolta.focus();
+  const sh = $("#sheet");
+  if (sh.contains(document.activeElement)) document.activeElement.blur();
+  sh.classList.remove("on"); sh.setAttribute("aria-hidden", "true"); sh.inert = true;
+  if (!$("#side").classList.contains("on")) $("#scrim").classList.remove("on");
+  sheetVolta = null;
+}
+$("#sh-x").onclick = closeSheet;
+
+/* ---------- scrim e Esc fecham o que estiver aberto ---------- */
+$("#scrim").onclick = () => { closeSheet(); closeSide(); };
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeSheet(); closeSide(); } });
+
+/* ---------- badge multi-slot ---------- */
+function setBadge(n){ $$("[data-qn]").forEach(e => e.textContent = n ? n : ""); }
+setBadge(3); /* demo */
+
+/* ---------- toast e alerta ---------- */
+function toast(t){ const e = $("#toast"); e.textContent = t; e.classList.add("on");
+  clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove("on"), 1800); }
+function showAlert(t, m){ $("#al-t").textContent = t; $("#al-m").textContent = m; $("#alerta").showModal(); }
+$("#al-ok").onclick = () => $("#alerta").close();
+
+/* ---------- dragScroll genérico (web-translation §8b) ----------
+   eixo: "x" | "y" | "xy". innerSel (opcional): seletor do filho
+   rolável em Y sob o cursor (ex.: coluna de kanban). */
+function dragScroll(el, eixo, innerSel){
+  if (!el || el._drag) return; el._drag = true;
+  let x0 = 0, y0 = 0, sx = 0, sy = 0, inner = null, movido = false, ativo = false;
+  el.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    ativo = true; movido = false; x0 = e.clientX; y0 = e.clientY;
+    sx = el.scrollLeft; inner = innerSel ? e.target.closest(innerSel) : null;
+    sy = (inner || el).scrollTop;
+  });
+  el.addEventListener("pointermove", (e) => {
+    if (!ativo) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    if (!movido && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+    if (!movido) { movido = true; try { el.setPointerCapture(e.pointerId); } catch (_) {} }
+    if (eixo !== "y") el.scrollLeft = sx - dx;
+    if (eixo !== "x") (inner || el).scrollTop = sy - dy;
+  });
+  const stop = () => { ativo = false; };
+  el.addEventListener("pointerup", stop);
+  el.addEventListener("pointercancel", stop);
+  el.addEventListener("click", (e) => { if (movido) { e.stopPropagation(); e.preventDefault(); movido = false; } }, true);
+}
+dragScroll($("#strip-demo"), "x"); /* demo */
+
+/* ---------- boot ---------- */
+setView(view);
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<meta charset="utf-8">
+<!-- ==========================================================================
+     ESQUELETO DE CARROSSEL: duplicar por peça
+     ==========================================================================
+     O que este arquivo é: o modelo de 9 slides que toda peça copia. Ler ao
+     montar o HTML. O `data-slide-label` de cada slide é só um rótulo pra
+     quem lê o arquivo; nada o consome.
+
+     Copiar pra `carrosseis/<tema>-<data>/carrossel.html` na raiz do projeto
+     e trocar só o conteúdo. A estrutura já está certa.
+
+     Tem 9 páginas porque é o que cabe bem num tema de profundidade média.
+     Não é número mágico: tema mais raso pede menos; "10 coisas" pede 11 ou 12.
+     Tirou ou pôs slide? Rode `node .claude/skills/carrossel/render/linha-do-tempo.mjs
+     <este arquivo>` e a linha do tempo se reescreve sozinha.
+
+     ----------------------------------------------------------------------
+     AS QUATRO REGRAS QUE NÃO SE QUEBRA
+     ----------------------------------------------------------------------
+     1. NUNCA três slides de texto seguidos. Só isso: não é fórmula de dois
+        textos por imagem. Texto-imagem-texto-imagem vale, imagem-imagem-texto
+        vale. O ritmo varia conforme o tema; variar é o ponto.
+     2. IMAGEM A PESSOA DA MARCA TRAZ. O `.slot` tracejado marca o que vai ali
+        e o tamanho mínimo, e o `IMAGENS.md` da peça lista tudo.
+     3. FECHO EM COR CHEIA: a principal (`.slide.cta`) OU a mais fechada
+        (`.slide.cta.abismo`). Nunca as duas no mesmo slide: "mesclar" é
+        variar de peça pra peça.
+     4. CAPA É FOTO. Sem foto ainda, fica o slot.
+
+     ----------------------------------------------------------------------
+     CAMINHOS
+     ----------------------------------------------------------------------
+     Todo caminho é ABSOLUTO a partir da raiz do projeto (a pasta que contém
+     `.claude/`). O render serve a pasta desta peça (com as subpastas) e o
+     kit, então `/carrosseis/<peça>/capa.jpg` e `/.claude/skills/carrossel/...`
+     resolvem em qualquer máquina; imagem de outra pasta entra com
+     `--servir <pasta>`.
+
+     `--img` é custom property e a URL dentro dela resolve a partir do CSS,
+     não do HTML: caminho relativo ali aponta pro lugar errado e a imagem some
+     sem erro nenhum. Absoluto sempre.
+
+     Render:
+       node .claude/skills/carrossel/render/render-carrossel.js carrosseis/<peça>/carrossel.html
+
+     Este arquivo NÃO abre estilizado direto no navegador (os caminhos acima
+     são absolutos a partir da raiz do projeto, e só o servidor do render os
+     resolve). Pra conferir, olhe os JPEGs.
+     ========================================================================== -->
+<!-- o molde primeiro, a marca por cima: se marca/tokens.css ainda não existe, a peça abre na paleta de demonstração -->
+<link rel="stylesheet" href="/.claude/skills/carrossel/marca/tokens.molde.css">
+<link rel="stylesheet" href="/.claude/skills/carrossel/marca/tokens.css">
+<link rel="stylesheet" href="/.claude/skills/carrossel/kit/componentes.css">
+<!-- O fundo da PÁGINA (não do slide): o que aparece entre um slide e outro ao
+     conferir no navegador. Sai de token, nunca de cor escrita à mão. -->
+<style>html,body{margin:0;padding:0;background:var(--bg-abyss)}</style>
+
+
+<!-- 1 · IMAGEM · CAPA ========================================================
+     Imagem sangrando + véu que sobe de baixo pra cima (topo quase limpo).
+     Esse véu É degradê de propósito: é legibilidade, não enfeite.
+     O texto ancora embaixo: é o que dá o ar de capa de revista.           -->
+<!-- com a foto: style="--img:url('/carrosseis/<peça>/capa.jpg')" no div abaixo -->
+<div class="slide cover" data-slide-label="Capa">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <div class="kick">Editoria · Assunto</div>
+    <h1>A manchete que vende o clique, com <em>uma expressão</em> em serifada.</h1>
+    <div class="sub">A promessa em uma linha: o que a pessoa leva se deslizar.</div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="agora"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="count">1/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 2 · TEXTO · TESE =========================================================
+     O slide denso da peça: entrega o contexto todo de uma vez, cedo.
+     Combina lead (parágrafo), card tracejado e o acento raro (.alert).    -->
+<div class="slide light" data-slide-label="Tese">
+  <div class="grid"></div>
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <div class="kick">O que está em jogo</div>
+    <h2>A tese, com <em>o miolo dela</em> em serifada.</h2>
+    <div class="lead">O parágrafo que dá o contexto inteiro. Aqui pode respirar: é o único slide da peça em que ler três ou quatro linhas seguidas vale a pena.</div>
+    <div class="dashed">O card tracejado carrega a condição, o detalhe técnico ou a ressalva: o que não cabe no corpo principal sem atrapalhar a leitura.</div>
+    <div class="alert">O acento raro: um dado que muda o peso do que veio antes. Máximo um por peça.</div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="agora"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="count">2/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 3 · IMAGEM · CARDS ILUSTRADOS ============================================
+     `.imgcards.alta` = a foto ocupa 500px e MANDA no slide. Sem o `.alta` a
+     imagem fica pequena e o slide é lido como mais um slide de texto.
+     Dois cards no máximo: três espremem a legenda.                        -->
+<div class="slide dark" data-slide-label="Cards ilustrados">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <h2>Duas faces do mesmo <em>assunto</em>.</h2>
+    <div class="imgcards alta">
+      <div class="imgcard">
+        <div class="ph">
+          <!-- SLOT: trocar por <img src="/carrosseis/<peça>/03a.jpg" alt=""> quando a foto chegar -->
+          <div class="slot">
+            <b>IMG 03-A</b>
+            <span>O que precisa aparecer nessa imagem, em uma frase</span>
+            <i>mín. 900×1000 · em pé</i>
+          </div>
+        </div>
+        <div class="txt">
+          <div class="cn">RÓTULO EM MONO</div>
+          <div class="cd">A legenda do card: uma ou duas linhas, nunca um parágrafo.</div>
+        </div>
+      </div>
+      <div class="imgcard">
+        <div class="ph">
+          <div class="slot">
+            <b>IMG 03-B</b>
+            <span>O que precisa aparecer nessa imagem, em uma frase</span>
+            <i>mín. 900×1000 · em pé</i>
+          </div>
+        </div>
+        <div class="txt">
+          <div class="cn">RÓTULO EM MONO</div>
+          <div class="cd">A legenda do card: uma ou duas linhas, nunca um parágrafo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="count">3/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 4 · TEXTO · COMPARAÇÃO ===================================================
+     Dois lados, um deles com `.hero` (o que a peça defende). Prepara a
+     imagem cheia do 5: o slide seguinte ilustra o que este afirma.        -->
+<div class="slide light" data-slide-label="Comparação">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <div class="kick">O contraste</div>
+    <h2>Um lado contra <em>o outro</em>.</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="cn">Lado A</div><div class="cr">Situação</div>
+        <div class="cd">O que acontece deste lado, em uma ou duas linhas.</div>
+      </div>
+      <div class="card hero">
+        <div class="cn">Lado B</div><div class="cr">Situação</div>
+        <div class="cd">O lado em foco leva o `.hero`, que é o que a peça defende.</div>
+      </div>
+    </div>
+    <div class="dashed">A síntese do contraste, e o gancho que entrega a imagem do próximo slide.</div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i><i></i><i></i><i></i></div><span class="count">4/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 5 · IMAGEM · QUADRO INTEIRO ==============================================
+     Sem véu: a imagem ocupa tudo. Só o quadro fixo fica por cima, cada peça
+     com sua tarja sólida pra ler sobre qualquer foto.
+     Vem SEMPRE logo depois do slide que ela ilustra. Uma por peça.        -->
+<!-- com a foto: style="--img:url('/carrosseis/<peça>/meio.jpg')" no div abaixo -->
+<div class="slide full" data-slide-label="Imagem cheia">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body"></div>
+  <div class="cap">A legenda da imagem, com <b>o pedaço que importa</b> em acento.</div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i><i></i><i></i></div><span class="count">5/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 6 · TEXTO · PROCESSO =====================================================
+     Etapas numeradas, 3 a 5. Componente que não se repete em nenhum outro
+     slide da peça.                                                       -->
+<div class="slide light" data-slide-label="Processo">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <div class="kick">Como funciona</div>
+    <h2>A ordem em que <em>as coisas acontecem</em>.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div class="t">Primeira etapa<small>O detalhe que explica a etapa, em uma linha.</small></div></div>
+      <div class="step"><div class="n">2</div><div class="t">Segunda etapa<small>O detalhe que explica a etapa, em uma linha.</small></div></div>
+      <div class="step"><div class="n">3</div><div class="t">Terceira etapa<small>O detalhe que explica a etapa, em uma linha.</small></div></div>
+    </div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i><i></i></div><span class="count">6/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 7 · IMAGEM · JANELA DO MAC ===============================================
+     Enquadra print, frame de vídeo ou arte. Os semáforos são os reais do
+     macOS: chrome de sistema, não cor de marca, e não trocam na troca de
+     paleta. Máximo uma janela por peça (mesma regra do terminal).         -->
+<div class="slide dark" data-slide-label="Janela">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <div class="kick">A prova</div>
+    <h2>O que dá pra <em>ver com os olhos</em>.</h2>
+    <div class="mac">
+      <div class="mb"><i class="r"></i><i class="y"></i><i class="g"></i><span>origem · referência</span></div>
+      <div class="mv crop">
+        <div class="ph" style="height:400px">
+          <div class="slot">
+            <b>IMG 07</b>
+            <span>O que precisa aparecer nessa imagem, em uma frase</span>
+            <i>mín. 1600×800 · deitada</i>
+          </div>
+        </div>
+      </div>
+      <div class="mc">A legendinha da janela, embaixo, em corpo menor.</div>
+    </div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i></div><span class="count">7/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 8 · TEXTO · CONCLUSÃO ====================================================
+     O penúltimo é onde o raciocínio fecha, não o último. O último é o
+     fecho, e fecho que também precisa concluir não converte.              -->
+<div class="slide light" data-slide-label="Conclusão">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <div class="kick">O ponto</div>
+    <h2>A conclusão, com <em>o essencial</em> em serifada.</h2>
+    <div class="lead">O parágrafo que amarra o que veio antes e entrega o raciocínio inteiro, sem deixar ponta solta.</div>
+    <div class="aside">A frase que a pessoa printaria. Uma por peça, nunca duas.</div>
+    <div class="dashed">O fechamento do argumento: por que isso importa e o que muda a partir daqui.</div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i></div><span class="count">8/9</span><span class="chev">›</span></div>
+</div>
+
+
+<!-- 9 · FECHO ================================================================
+     DUAS OPÇÕES: a A está ativa; a B está logo abaixo, dentro de um
+     comentário. Não são dois slides, são duas versões da página 9. Fundo em
+     cor cheia: a principal (`.slide.cta`) ou a mais fechada
+     (`.slide.cta.abismo`), variando de peça pra peça.
+     Último traço aceso e sem seta: não tem próximo.
+
+     LOGO: com logo em marca/logo/, a linha do `.follow` leva
+       <img class="av" src="/.claude/skills/carrossel/marca/logo/logo-clara.png" alt="">
+     antes do texto. Sem logo, fica só o @.                                -->
+
+<!-- 9 · fecho A: palavra-gatilho -->
+<div class="slide cta" data-slide-label="Fecho A · palavra">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <h1>A pergunta que puxa <em>o comentário</em>.</h1>
+    <div class="word">
+      <div class="lb">COMENTA</div>
+      <b>PALAVRA</b>
+      <small>que eu te mando no direct</small>
+    </div>
+    <div class="follow">
+      <div>@SEU_PERFIL<small>segue pra não perder o próximo</small></div>
+    </div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i></div><span class="count">9/9</span></div>
+</div>
+
+<!-- 9 · fecho B: as quatro ações. Pra usar, tire este bloco do comentário e
+     apague o fecho A.
+<div class="slide cta abismo" data-slide-label="Fecho B · ações">
+  <div class="hdr"><span class="handle">@SEU_PERFIL</span></div>
+  <div class="body">
+    <h1>Se te serviu, <em>faz valer</em>.</h1>
+    <div class="acts">
+      <div class="act"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Curte</div>
+      <div class="act"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Comenta</div>
+      <div class="act"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Compartilha</div>
+      <div class="act"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>Salva</div>
+    </div>
+    <div class="follow">
+      <div>E segue o @SEU_PERFIL<small>tem post novo toda semana</small></div>
+    </div>
+  </div>
+  <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i></div><span class="count">9/9</span></div>
+</div>
+-->

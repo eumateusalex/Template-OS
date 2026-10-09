@@ -1,0 +1,27 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# o Remotion grava o vídeo de saída em out/ quando não se diz o destino
+out
+# o Chrome e o cache que o Remotion baixa, se um dia rodar daqui
+.remotion
+.cache
+
+# previa/: render de conferência. Pesa megas, se refaz com um comando e NÃO é
+# o vídeo final: o final vai para saidas/ do workspace
+previa
+
+# html/: as peças do HyperFrames. As junções (_vendor → html/_vendor, _marca →
+# a marca do workspace) não entram: o git segue junção e versionaria a marca
+# duas vezes. Snapshot e render são conferência.
+html/*/_vendor
+html/*/_marca
+html/*/snapshots
+html/*/renders
+# o áudio e as imagens derivadas de cada peça se refazem pelo ativos.sh dela
+html/*/ativos/*.wav
+html/*/ativos/*.mp3
+html/*/ativos/*.png
+*.mp4

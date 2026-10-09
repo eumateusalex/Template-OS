@@ -1,0 +1,15 @@
+{
+  "name": "carrossel-render",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render de carrossel: cada .slide vira um JPEG 2160x2700",
+  "type": "commonjs",
+  "scripts": {
+    "instalar": "npm install && npx playwright install chromium",
+    "checar": "node render-carrossel.js --checar",
+    "testar": "node --test teste-servidor.mjs && node teste-render.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.61.1"
+  }
+}

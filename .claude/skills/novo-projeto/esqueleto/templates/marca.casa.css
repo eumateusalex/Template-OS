@@ -1,0 +1,9 @@
+/* fundação: semente v1 · é seu
+   A ÚNICA ENTRADA DA MARCA NO PROJETO. O layout importa este arquivo, e ele
+   traz a marca da casa, que mora em fundacao/ (conferida, não se edita).
+   Para trocar de marca, este arquivo aponta para src/styles/ (a semente de
+   marca própria faz isso). A ordem importa: o tema vem depois dos tokens. */
+@import "../../fundacao/fontes.css";
+@import "../../fundacao/tokens.css";
+@import "../../fundacao/tema-shadcn.css";
+@import "../../fundacao/base.css";

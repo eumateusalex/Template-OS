@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Sistema visual do método, em variáveis CSS
+   --------------------------------------------------------------------------
+   Base: as folhas de variáveis do design system publicado
+     · Permitly, claro   -> hex escritos na folha
+     · AgentPay, escuro  -> hex medidos no pixel
+   Extensões marcadas [MEDIDO] saem das 22 telas de outros produtos
+   (ver README.md desta seção). [INFERIDO] = completa a regra sem amostra.
+   Nomes seguem os da folha: bg/canvas -> --bg-canvas, text/muted -> --text-muted.
+   ========================================================================== */
+
+:root {
+  /* ---------- Superfície (claro, Permitly) [CONFIRMADO] ---------- */
+  --bg-canvas:  #EFEEF4;   /* fundo do app, cinza-lavanda: hsl(250 21% 95%) */
+  --bg-panel:   #FFFFFF;   /* painel: sidebar, área de conteúdo */
+  --bg-card:    #F4F4F8;   /* cartão dentro do painel, sem borda */
+  --bg-hover:   #E9E8F0;   /* hover de item */
+  --bg-sunken:  #E3E2EC;   /* trilho, campo rebaixado */
+
+  /* ---------- Texto [CONFIRMADO] ---------- */
+  --text-primary:   #111116;  /* 18,8:1 no branco */
+  --text-secondary: #55545F;  /* 7,5:1 */
+  --text-muted:     #8A8996;  /* 3,4:1: só metadado, rótulo, eixo, placeholder */
+  --text-inverse:   #FFFFFF;
+  --text-on-accent: #141805;  /* preto esverdeado sobre o lima (14:1) */
+
+  /* ---------- Linha [CONFIRMADO] ---------- */
+  --line-soft:    #E3E2EC;                 /* borda de cartão, divisor (1,28:1 no branco) */
+  --line-strong:  #D2D1DD;                 /* input, botão contornado */
+  --line-hatch:   #CFCEDB;                 /* listras do slot vazio */
+  --line-inverse: rgb(255 255 255 / .16);  /* borda sobre fundo escuro */
+
+  /* ---------- Acento do produto: lima [CONFIRMADO] ---------- */
+  --accent-500:  #C9F24C;
+  --accent-300:  #DDF78E;
+  --accent-tint: #F0FBCD;
+  --accent-700:  #5F7A0E;
+  --action:      var(--text-primary);  /* ação primária é PRETA no Permitly (menu ativo, barra) [MEDIDO] */
+  --on-action:   var(--text-inverse);
+
+  /* ---------- Estado: trio 500 / tint / 700 [CONFIRMADO] ---------- */
+  --clay-500:  #E1543A;  --clay-tint:  #FBE3DE;  --clay-700:  #A33420;   /* erro, urgente */
+  --amber-500: #EDA122;  --amber-tint: #FCEFD8;  --amber-700: #8A5A05;   /* atenção */
+  --green-500: #2F9E5B;  --green-tint: #E1F5E8;  --green-700: #1E6B3D;   /* sucesso [INFERIDO pela regra do trio] */
+  --blue-500:  #2563EB;  --blue-tint:  #DBEAFE;  --blue-700:  #1D4ED8;   /* info [MEDIDO no OrchestrateIQ, = Tailwind] */
+  --neutral-tint: var(--bg-card); --neutral-700: var(--text-primary);  /* selo neutro [MEDIDO no Permitly] */
+  /* regra: tint = hsl(H 78-86% 89-93%); 700 = hsl(H 67-93% 27-38%); contraste 4,5 a 5,6:1 */
+
+  /* ---------- Espaço: grade de 4 [CONFIRMADO] ---------- */
+  --space-0: 0;     --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-10: 40px; --space-12: 48px;
+  --space-16: 64px;                   /* a folha clara vai até 120 */
+  --gap-panels: 16px;                 /* gap entre painéis em 10 de 10 produtos web [MEDIDO] */
+  --pad-panel: 24px;                  /* 24 no produto leve, 16 no denso [MEDIDO] */
+  --margin-mobile: 20px;              /* 4 de 5 apps [MEDIDO] */
+  --sidebar-w: 240px;                 /* 218 a 250 medidos; 240 no Permitly */
+
+  /* ---------- Raio, regime leve (Permitly) [CONFIRMADO] ---------- */
+  --radius-panel:   32px;   /* "Panels 32" */
+  --radius-card:    24px;   /* "cards 24" */
+  --radius-tile-lg: 20px;   /* "tiles 16 and 20" */
+  --radius-tile:    16px;
+  --radius-control: 12px;
+  --radius-sm:       8px;
+  --radius-pill:   999px;   /* "pills full": aba, chip, toggle, botão mobile */
+  /* aninhado: um degrau abaixo por nível (-8), NÃO raio concêntrico [MEDIDO em 7 casos] */
+
+  /* ---------- Elevação: só duas [CONFIRMADO o nome; perfil MEDIDO na folha] ---------- */
+  --shadow-soft: 0 1px 2px rgb(17 17 22 / .04), 0 2px 8px rgb(17 17 22 / .04);    /* ~4% na borda, some em 8 px */
+  --shadow-pop:  0 2px 6px rgb(17 17 22 / .06), 0 12px 32px -6px rgb(17 17 22 / .16); /* ~14% na borda, some em 25 px */
+  /* "Panels sit flat on the canvas; only the plan viewer lifts." */
+
+  /* ---------- Tipografia [CONFIRMADO] ---------- */
+  --font-display: "Geist", system-ui, sans-serif;           /* título e número */
+  --font-body:    "Inter", system-ui, sans-serif;           /* corpo até 16 */
+  --font-mono:    "Geist Mono", ui-monospace, monospace;    /* ID, hora, unidade, dinheiro */
+
+  --display-64: 400 64px/1.05 var(--font-display);  /* marca */
+  --display-40: 400 40px/1.1  var(--font-display);
+  --display-32: 500 32px/1.15 var(--font-display);  /* saudação da home */
+  --display-24: 500 24px/1.2  var(--font-display);  /* título de página */
+  --display-20: 500 20px/1.25 var(--font-display);  /* título de cartão */
+  --display-16: 500 16px/1.3  var(--font-display);
+  --number-48:  400 48px/1    var(--font-display);
+  --number-32:  500 32px/1    var(--font-display);
+  --body-16:    400 16px/24px var(--font-body);
+  --body-14:    400 14px/20px var(--font-body);
+  --body-13:    400 13px/18px var(--font-body);
+  --body-12:    400 12px/16px var(--font-body);
+  --medium-14:  500 14px/20px var(--font-body);      /* título de item de lista */
+  --medium-13:  500 13px/18px var(--font-body);      /* item de menu */
+  --label-11:   600 11px/14px var(--font-body);      /* caixa-alta, tracking abaixo */
+  --mono-13:    400 13px/18px var(--font-mono);
+  --mono-11:    400 11px/14px var(--font-mono);
+  --tracking-display: -0.02em;   /* [INFERIDO]: o site de vitrine usa -0,03em em 24 px */
+  --tracking-label:    0.07em;   /* [MEDIDO] em "PERMITTING" */
+  /* pesos e entrelinhas: pesos 400/500 MEDIDOS na folha; entrelinhas [INFERIDO] */
+
+  /* ---------- Ícone e tile [CONFIRMADO] ---------- */
+  --tile-24: 24px; --tile-32: 32px; --tile-40: 40px; --tile-48: 48px; --tile-64: 64px;
+  /* "The icon is always half the tile." Raio do tile ~ 1/4 do lado [MEDIDO] */
+  --icon-stroke: 1.5;   /* Hugeicons Stroke Rounded; use 2 se for Lucide */
+
+  /* ---------- Gráfico [MEDIDO] ---------- */
+  --chart-line: 2px;
+  --chart-bar-radius: 12px;
+  --chart-grid: var(--line-soft);           /* 1 px tracejada, só horizontal */
+  --chart-ramp-1: #DDD2FC; --chart-ramp-2: #C7B8F9; --chart-ramp-3: #AC97F4;
+  --chart-ramp-4: #8F76EC; --chart-ramp-5: #7556DF;   /* rampa do heatmap do medspa */
+  --chart-empty: #F3F3F5;
+  --chart-cat-1: #111116; --chart-cat-2: #68A5F8; --chart-cat-3: #B4F5AC;
+  --chart-cat-4: #F7D0EA; --chart-cat-5: #DFD4D9;       /* categórica do ResolveAI */
+  --hatch-bg: #EAEBF0; --hatch-line: var(--line-hatch);  /* hachura do OrchestrateIQ */
+
+  /* ---------- Cena da apresentação (fora do produto) [MEDIDO] ---------- */
+  --scene-light: #E4E4E4;   /* faixa medida: #D3D3D3 a #EEEEEE */
+  --scene-dark:  #1B1B1B;   /* faixa medida: #1B1B1B a #313131 */
+}
+
+/* ==========================================================================
+   Tema escuro (AgentPay). Hex medidos na folha; linhas e tints com alpha,
+   como a folha manda: "Tints and lines carry their own alpha".
+   ⚠️ É o REGISTRO FIEL do escuro da folha, quase preto, e NÃO é o escuro de tela nova.
+   Este degrau fica de fora: tela nova usa o grafite da regra 16
+   da skill /design-de-produto (fundo #181A1F, painel #23272E, texto apagado
+   #8A93A0, vermelho #FF8A8A), que está pronto em assets/modelo-tela-escuro.html.
+   Com estes valores, o medidor da skill reprova a tela (FUNDO QUASE PRETO).
+   ========================================================================== */
+[data-theme="dark"] {
+  --bg-canvas: #08090B;  --bg-shell: #0E1013;  --bg-panel: #14171C;
+  --bg-card:   #1A1E24;  /* bg/raised */
+  --bg-hover:  #232830;  --bg-sunken: #08090B;
+
+  --text-primary: #F4F6F9;  --text-secondary: #9BA5B4;  --text-muted: #646E7C;
+  --text-inverse: #0B0D10;  --text-on-accent: #FFFFFF;
+
+  --line-soft:   rgb(255 255 255 / .08);  /* #24272C sobre o painel [INFERIDO o alpha] */
+  --line-strong: rgb(255 255 255 / .14);  /* #33353A */
+  --line-hard:   rgb(255 255 255 / .24);  /* #484A4E */
+  --line-hatch:  rgb(255 255 255 / .10);
+
+  --accent-300: #A9C2FF; --accent-400: #6C95FF; --accent-500: #2F6BFF;
+  --accent-600: #1E4FD9; --accent-700: #122C78;
+  --accent-tint: rgb(47 107 255 / .14);    /* = #18233C no tile de ícone [MEDIDO] */
+  --action: var(--accent-500); --on-action: #FFFFFF;
+
+  /* estado: 400 sólido no texto, tint 14%, borda 40% [CONFIRMADO] */
+  /* tint-14 é alpha (a folha marca "alpha"); border-40 a folha marca "solid": é o hex de 40% da cor sobre o painel [MEDIDO] */
+  --green-400: #3FCF8E; --green-tint: rgb(63 207 142 / .14);  --green-border: #25614A;
+  --amber-400: #F2B347; --amber-tint: rgb(242 179 71 / .14);  --amber-border: #6D552D;
+  /* grupo vermelho cortado na folha: #FF6B6B medido na barra "Blocked by policy" do AgentPay. O #EB5957 do
+     AgentTrail dá 4,14:1 no selo e reprova. Borda = 40% sobre o painel. */
+  --red-400:   #FF6B6B; --red-tint:   rgb(255 107 107 / .14); --red-border:   #72393C;
+  --green-700: var(--green-400); --amber-700: var(--amber-400); --clay-700: var(--red-400);
+  --clay-tint: var(--red-tint);
+
+  /* raio, regime denso: "Cards 16, controls 8 to 12, pills full." [CONFIRMADO] */
+  --radius-panel: 16px; --radius-card: 16px; --radius-tile-lg: 16px; --radius-tile: 12px;
+  --radius-control: 10px; --radius-sm: 8px;
+
+  --display-32: 600 32px/1.15 var(--font-display);   /* no escuro o display sobe para 600 [OBSERVADO] */
+  --display-24: 600 24px/1.2  var(--font-display);
+  --display-20: 600 20px/1.25 var(--font-display);
+  --display-16: 600 16px/1.3  var(--font-display);
+
+  --chart-empty: #1C1B20;
+  --hatch-bg: #1C1B20;
+}
+
+/* ==========================================================================
+   Trocar de produto = trocar a matiz. Presets medidos nos outros produtos.
+   ========================================================================== */
+[data-product="orchestrateiq"] { --bg-canvas:#F8F9FB; --bg-card:#F6F7F9; --line-soft:#F0F0F2;
+  --text-primary:#18191E; --text-secondary:#6A6E7A;
+  --accent-500:#2563EB; --accent-tint:#DBEAFE; --accent-700:#1D4ED8; --action:#2563EB;
+  --radius-panel:28px; --radius-canvas:40px; --radius-card:16px; }                /* [MEDIDO] */
+[data-product="fixtrack"]      { --bg-canvas:#FFFFFF; --bg-card:#F8F3ED; --bg-sunken:#F4EFE9; --line-soft:#E8E4DF;
+  --text-primary:#112E24; --text-secondary:#5C6863; --text-muted:#A6ACA8;
+  --accent-500:#1F493B; --accent-tint:#DDEAE1; --accent-700:#396451; --action:#1F493B;
+  --clay-500:#E85F4C; --clay-tint:#FAE5E0; --clay-700:#8A382E;
+  --radius-panel:20px; --radius-card:12px; }                                     /* [MEDIDO] */
+[data-product="collectai"]     { --bg-canvas:#EFF1EA; --bg-card:#F6F7F2;
+  --text-primary:#101613; --text-secondary:#525C55; --text-muted:#828C84;
+  --accent-500:#3BD968; --accent-tint:#E2F3EA; --accent-700:#0E7A3C; --action:#101613;
+  --radius-panel:24px; --radius-card:16px; }                                     /* [MEDIDO] */
+[data-product="medspa"]        { --bg-canvas:#F3F3F5; --bg-card:#F3F3F5;
+  --text-primary:#101013; --text-secondary:#707076; --text-muted:#98989D;
+  --accent-500:#7556DF; --accent-300:#C7B8F9; --accent-tint:#DDD2FC; --accent-700:#6E5ABD; --action:#141318;
+  --radius-panel:24px; --radius-card:16px; }                                     /* [MEDIDO] */
+[data-product="agenttrail"][data-theme="dark"] { --bg-canvas:#0C0C0E; --bg-shell:#111113; --bg-panel:#151517;
+  --bg-card:#1C1B20; --bg-hover:#242328; --text-primary:#F8F7FC; --text-secondary:#A2A1A6; --text-muted:#6F6E74;
+  --accent-500:#7C6CF0; --accent-tint:#1E1A35; --accent-400:#AC9EFE; --action:#7C6CF0; }  /* [MEDIDO] */
+[data-product="torin"]         { --bg-canvas:#EEEEEC; --text-primary:#262625; --text-secondary:#575755; --text-muted:#727270;
+  --accent-500:#FF6B4B; --action:#272727; --radius-card:28px; }                  /* [MEDIDO] */
+
+/* ==========================================================================
+   Peças base
+   ========================================================================== */
+body            { background:var(--bg-canvas); color:var(--text-primary); font:var(--body-14); }
+.panel          { background:var(--bg-panel); border-radius:var(--radius-panel); padding:var(--pad-panel); }   /* chapado */
+.card           { background:var(--bg-card);  border-radius:var(--radius-card);  padding:var(--space-4); }
+.popover        { background:var(--bg-panel); border-radius:var(--radius-tile); box-shadow:var(--shadow-pop); }
+.badge          { display:inline-flex; align-items:center; gap:6px; height:22px; padding:0 10px; border-radius:var(--radius-pill);
+                  font:500 12px/1 var(--font-body); background:var(--amber-tint); color:var(--amber-700); }
+[data-theme="dark"] .badge { box-shadow:inset 0 0 0 1px var(--amber-border); }
+.badge::before  { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.label          { font:var(--label-11); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--text-muted); }
+.id             { font:var(--mono-13); color:var(--text-secondary); }
+.kpi            { font:var(--number-32); letter-spacing:var(--tracking-display); font-variant-numeric:tabular-nums; }
+.icon-tile      { width:var(--tile-40); height:var(--tile-40); border-radius:calc(var(--tile-40) / 4);
+                  display:grid; place-items:center; background:var(--accent-tint); color:var(--accent-700); }
+.icon-tile svg  { width:50%; height:50%; }
+.nav-item       { height:38px; padding:0 var(--space-3); border-radius:var(--radius-pill); font:var(--medium-13); color:var(--text-secondary); }
+.nav-item[aria-current] { background:var(--action); color:var(--on-action); }
+.btn-primary    { height:40px; padding:0 var(--space-4); border-radius:var(--radius-pill); background:var(--action); color:var(--on-action); font:var(--medium-14); }
+.hatch          { background:repeating-linear-gradient(135deg, var(--hatch-line) 0 1.5px, transparent 1.5px 6px), var(--hatch-bg); }

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- {{NOME}}: o roteiro, as batidas e a origem de cada ativo estão em roteiro.md -->
+<!--MARCA-->
+    <script src="_vendor/gsap.min.js"></script>
+    <script src="_vendor/CustomEase.min.js"></script>
+    <style>
+      /* Cor e fonte só pelos tokens da marca (bloco 3 do tokens.css: --bg-light,
+         --on-light, --accent...). Nada de cor escrita à mão: tom que falta se
+         pergunta ao usuário. Fundo, textura (a grade técnica --grid-light, uma
+         foto, um plano de cor) e registro claro ou escuro são da linguagem que
+         ele escolheu na prancha de direções (SKILL.md, seção 0). */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg-light); }
+      #root { position: relative; width: 1080px; height: 1920px; font-family: var(--f-display); color: var(--on-light); }
+      #palco { position: absolute; inset: 0; transform-origin: 540px 1100px; }
+      /* Instagram cobre ~220px em cima e ~380px embaixo: o texto mora entre 240 e 1540 */
+      .titulo { position: absolute; left: 96px; top: 240px; width: 888px; height: 260px; overflow: hidden; }
+      .titulo > span { display: block; font-size: 78px; font-weight: var(--w-display-bold); letter-spacing: -0.035em; line-height: 1.08; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1080" data-height="1920">
+      <!-- áudio: um <audio class="clip"> por faixa. Música com data-media-start (o recorte) e data-fade-out;
+           efeito com data-start = quadro do acerto / 30 - pico medido (medir_audio.py efeito) -->
+      <div id="palco" class="clip" data-start="0" data-duration="10" data-track-index="0">
+        <!-- títulos empilhados na mesma máscara: o check exige as duas marcas abaixo, e elas são verdade aqui -->
+        <div id="t1" class="titulo" data-layout-allow-overlap data-layout-allow-overflow><span data-layout-allow-overlap data-layout-allow-occlusion>Primeira frase.</span></div>
+        <div id="t2" class="titulo" data-layout-allow-overlap data-layout-allow-overflow><span data-layout-allow-overlap data-layout-allow-occlusion>Segunda frase.</span></div>
+      </div>
+    </div>
+    <script>
+      // Os números são QUADROS do roteiro.md (30 fps). Música a 120 BPM = batida a cada 15.
+      // Ajudantes como `function`, não arrow: o lint do check lê o corpo de uma arrow sem
+      // chaves até a próxima vírgula e acusa medida de leiaute onde não há.
+      function q(quadros) { return quadros / 30; }
+      // A curva padrão: sai rápido, assenta devagar. Se a marca tiver curva própria, troque aqui.
+      CustomEase.create("marca", "M0,0 C0.2,0.65 0.2,1 1,1");
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "marca" } });
+
+      // A frase escondida desce a ALTURA DA MÁSCARA (px), nunca yPercent: uma frase
+      // de 2 linhas numa máscara de 3 fica à vista embaixo com yPercent.
+      function fora(sel) { return document.querySelector(sel).offsetHeight + 20; }
+      ["#t2"].forEach((m) => gsap.set(`${m} > span`, { y: fora(m) }));
+      function troca(sai, entra, f) {
+        if (sai) tl.to(`${sai} > span`, { y: -fora(sai), duration: q(14) }, q(f));
+        if (entra) tl.to(`${entra} > span`, { y: 0, duration: q(14) }, q(f + 2));
+      }
+
+      // Regras que o render quadro a quadro cobra (o `check` pega as duas primeiras):
+      // - posição por x/y/scale, nunca left/top (arredondam para o pixel e engasgam no seek)
+      // - medida de leiaute (offset, getTotalLength) uma vez, fora do onUpdate, e de novo
+      //   em document.fonts.ready se depender de texto; nunca a cada quadro
+      // - nenhum Date.now, Math.random ou rede: o mesmo quadro sai igual em todo render
+
+      troca("#t1", "#t2", 133);
+      tl.set({}, {}, 10); // a linha do tempo tem a duração da peça
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

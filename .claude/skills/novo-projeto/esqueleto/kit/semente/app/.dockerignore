@@ -1,0 +1,21 @@
+# fundação: semente v1 · é seu
+node_modules
+.next
+.git
+.github
+coverage
+test-results
+playwright-report
+blob-report
+.fotos
+.env
+.env.*
+!.env.example
+fabrica
+fundacao/portao
+fundacao/provas
+fundacao/lib
+fundacao/teste-portao.mjs
+specs
+tela
+testes

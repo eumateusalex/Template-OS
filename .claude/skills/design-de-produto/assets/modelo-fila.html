@@ -1,0 +1,464 @@
+<!doctype html>
+<!--
+  Aprovações do Contábil Serra · CLARO (composição do Permitly, tokens da folha publicada)
+  Modelo de FILA com o item aberto, feito com a skill /design-de-produto a partir de assets/modelo-tela.html.
+  Os números do exemplo são de um cenário fictício: na sua tela, eles vêm do cenario.md da pasta dela.
+  A versão escura é outro arquivo (modelo-fila-escuro.html), na composição do AgentPay. Tudo local
+  (./vendor). ?limpo esconde o botão de prévia.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aprovações · Contábil Serra</title>
+<style>
+@font-face { font-family:"Geist"; src:url("vendor/Geist-Variable.woff2") format("woff2"); font-weight:100 900; }
+@font-face { font-family:"Geist Mono"; src:url("vendor/GeistMono-Variable.woff2") format("woff2"); font-weight:100 900; }
+@font-face { font-family:"Inter"; src:url("vendor/inter-variavel-latin.woff2") format("woff2"); font-weight:100 900; unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family:"Inter"; src:url("vendor/inter-variavel-latin-ext.woff2") format("woff2"); font-weight:100 900; unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+
+/* ===== Tokens do Permitly (folha publicada), iguais aos do modelo ===== */
+:root {
+  --bg-canvas:#EFEEF4; --bg-panel:#FFFFFF; --bg-card:#F4F4F8; --bg-hover:#E9E8F0; --bg-sunken:#E3E2EC;
+  --text-primary:#111116; --text-secondary:#55545F; --text-muted:#8A8996; --text-inverse:#FFFFFF; --text-on-accent:#141805;
+  --line-soft:#E3E2EC; --line-strong:#D2D1DD; --line-hatch:#CFCEDB;
+  --lime-500:#C9F24C; --lime-300:#DDF78E; --lime-tint:#F0FBCD; --lime-700:#5F7A0E;
+  --clay-500:#E1543A; --clay-tint:#FBE3DE; --clay-700:#A33420;
+  --amber-500:#EDA122; --amber-tint:#FCEFD8; --amber-700:#8A5A05;
+  --on-inverse-2:rgb(255 255 255 / .64); --on-inverse-3:rgb(255 255 255 / .86);
+  --s-px:1px; --s-0-5:2px; --s-1:4px; --s-1-5:6px; --s-2:8px; --s-2-5:10px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px;
+  --r-panel:32px; --r-card:24px; --r-tile-lg:20px; --r-tile:16px; --r-12:12px; --r-10:10px; --r-8:8px; --r-pill:999px;
+  --f-display:"Geist", system-ui, sans-serif; --f-body:"Inter", system-ui, sans-serif; --f-mono:"Geist Mono", ui-monospace, monospace;
+}
+
+.display-32 { font:500 32px/1.15 var(--f-display); letter-spacing:-.02em; }
+.display-20 { font:500 20px/1.25 var(--f-display); letter-spacing:-.01em; }
+.display-18 { font:500 18px/24px var(--f-display); letter-spacing:-.01em; }
+.display-16 { font:500 16px/1.3 var(--f-display); letter-spacing:-.01em; }
+.number-40 { font:400 40px/1 var(--f-display); letter-spacing:-.02em; }
+.number-32 { font:400 32px/1 var(--f-display); letter-spacing:-.02em; }
+.body-14 { font:400 14px/20px var(--f-body); } .body-13 { font:400 13px/18px var(--f-body); } .body-12 { font:400 12px/16px var(--f-body); }
+.medium-14 { font:500 14px/20px var(--f-body); } .medium-13 { font:500 13px/18px var(--f-body); } .medium-12 { font:500 12px/16px var(--f-body); }
+.label-11 { font:600 11px/14px var(--f-body); letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); }
+.mono-13 { font:400 13px/18px var(--f-mono); } .mono-11 { font:400 11px/14px var(--f-mono); }
+.num { font-variant-numeric:tabular-nums; }
+.sec { color:var(--text-secondary); } .mut { color:var(--text-muted); }
+
+* { box-sizing:border-box; }
+html, body { margin:0; }
+body { background:var(--bg-canvas); color:var(--text-primary); font:400 14px/20px var(--f-body); -webkit-font-smoothing:antialiased; }
+svg.lucide { width:20px; height:20px; stroke-width:1.5; flex-shrink:0; }
+button { font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0; }
+a { color:inherit; text-decoration:none; }
+h1, h2, h3, p, ol, ul { margin:0; }
+.inteiro { white-space:nowrap; }
+
+/* ===== Casca e lateral (do modelo) ===== */
+.casca { display:grid; grid-template-columns:240px minmax(0,1fr); gap:var(--s-4); padding:var(--s-4); min-height:100vh; }
+.lateral { background:var(--bg-panel); border-radius:var(--r-panel); display:flex; flex-direction:column; gap:var(--s-px); padding:var(--s-3); }
+.marca { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-1) var(--s-1) var(--s-3) var(--s-2); }
+.logo { width:32px; height:32px; border-radius:var(--r-8); background:var(--text-primary); display:grid; grid-template-columns:repeat(2,8px); gap:var(--s-1); place-content:center; flex-shrink:0; }
+.logo i { width:8px; height:8px; border-radius:var(--s-0-5); background:var(--bg-panel); } .logo i:nth-child(2) { background:var(--lime-500); }
+.circulo { width:40px; height:40px; border-radius:var(--r-pill); background:var(--bg-card); display:grid; place-items:center; color:var(--text-secondary); flex-shrink:0; }
+.c32 { width:32px; height:32px; } .c32 svg.lucide { width:16px; height:16px; }
+.c36 { width:36px; height:36px; } .c36 svg.lucide { width:18px; height:18px; }
+.marca .circulo { margin-left:auto; }
+.conta { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-2) var(--s-4) var(--s-2) var(--s-2); border-radius:var(--r-pill); background:var(--bg-card); margin-bottom:var(--s-2); }
+.conta .circulo { background:var(--bg-panel); }
+.conta .nome { min-width:0; } .conta .nome div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.conta > svg.lucide { margin-left:auto; color:var(--text-muted); width:16px; height:16px; }
+.menu { display:flex; align-items:center; gap:var(--s-3); height:38px; padding:0 var(--s-3); white-space:nowrap; border-radius:var(--r-pill); color:var(--text-secondary); }
+.menu.ativo { background:var(--text-primary); color:var(--text-inverse); }
+.contador { margin-left:auto; min-width:28px; height:20px; padding:0 var(--s-2); border-radius:var(--r-pill); background:var(--bg-card); color:var(--text-secondary); text-align:center; font:400 12px/20px var(--f-body); }
+.menu.ativo .contador { background:var(--lime-500); color:var(--text-on-accent); }
+.grupo { padding:var(--s-4) var(--s-3) var(--s-1); }
+.ia-lateral { margin-top:auto; border-radius:var(--r-card); background:var(--lime-500); color:var(--text-on-accent); padding:var(--s-3); display:grid; gap:var(--s-3); }
+.ia-lateral .linha { display:flex; align-items:center; gap:var(--s-3); }
+.ia-lateral .linha > div { min-width:0; white-space:nowrap; }
+.ia-lateral .circulo { background:var(--text-primary); color:var(--lime-500); }
+.chave { display:inline-block; flex-shrink:0; margin-left:auto; width:40px; height:24px; border-radius:var(--r-pill); background:var(--text-primary); position:relative; }
+.chave::after { content:""; position:absolute; top:var(--s-1); right:var(--s-1); width:16px; height:16px; border-radius:50%; background:var(--bg-panel); }
+.ia-lateral .rodape { background:var(--bg-panel); color:var(--text-primary); border-radius:var(--r-pill); height:36px; padding:0 var(--s-3) 0 var(--s-4); display:flex; align-items:center; justify-content:space-between; gap:var(--s-2); }
+.ia-lateral .rodape svg.lucide { width:16px; height:16px; }
+
+/* ===== Topo: título-frase + pílula de acento + busca, sino e ação preta ===== */
+.principal { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s-4); align-content:start; min-width:0; }
+.topo { display:flex; align-items:center; gap:var(--s-4); flex-wrap:wrap; }
+.pilula-lima { display:inline-flex; align-items:center; gap:var(--s-2); height:30px; padding:0 var(--s-4) 0 var(--s-3); border-radius:var(--r-pill); background:var(--lime-500); color:var(--text-on-accent); white-space:nowrap; }
+.pilula-lima svg.lucide { width:16px; height:16px; }
+.topo .direita { margin-left:auto; display:flex; align-items:center; gap:var(--s-2); }
+.busca { display:flex; align-items:center; gap:var(--s-2); height:48px; width:200px; padding:0 var(--s-2) 0 var(--s-4); border-radius:var(--r-pill); background:var(--bg-panel); color:var(--text-muted); white-space:nowrap; }
+.busca > span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.busca kbd { margin-left:auto; width:32px; height:26px; border-radius:var(--r-pill); background:var(--bg-card); color:var(--text-secondary); font:500 11px/26px var(--f-body); text-align:center; }
+.sino { width:48px; height:48px; border-radius:var(--r-pill); background:var(--bg-panel); display:grid; place-items:center; position:relative; flex-shrink:0; }
+.botao-preto { display:inline-flex; align-items:center; justify-content:center; gap:var(--s-2); height:48px; padding:0 var(--s-6) 0 var(--s-5); border-radius:var(--r-pill); background:var(--text-primary); color:var(--text-inverse); white-space:nowrap; }
+.botao-claro { display:inline-flex; align-items:center; justify-content:center; gap:var(--s-2); height:48px; padding:0 var(--s-5); border-radius:var(--r-pill); background:var(--bg-card); color:var(--text-primary); white-space:nowrap; }
+.botao-preto svg.lucide, .botao-claro svg.lucide { width:18px; height:18px; }
+/* o recibo, logo abaixo do título: fila + o que ele fez sozinho na mesma frase (padrão 07) */
+.recibo { margin-top:calc(-1 * var(--s-2)); }
+
+/* ===== Painel e cabeçalho (do modelo) ===== */
+.painel { background:var(--bg-panel); border-radius:var(--r-panel); padding:var(--s-2); min-width:0; }
+.cab { display:flex; align-items:center; gap:var(--s-3); padding:var(--s-2) var(--s-4) var(--s-3); }
+.cab .fim { margin-left:auto; display:flex; align-items:center; gap:var(--s-2); }
+.cab .titulo { min-width:0; }
+.linha1 { display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:var(--s-4); align-items:stretch; }
+.linha1 > .coluna:last-child { grid-template-rows:auto 1fr; }
+.linha2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--s-4); align-items:stretch; }
+.coluna { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s-4); }
+
+/* filtro pelos motivos, com contagem (padrão 07): o segmentado do Permitly */
+.segmento { display:flex; gap:var(--s-1); padding:var(--s-1); border-radius:var(--r-pill); background:var(--bg-card); }
+.segmento button { height:32px; padding:0 var(--s-3); border-radius:var(--r-pill); color:var(--text-secondary); white-space:nowrap; }
+.segmento .sim { background:var(--text-primary); color:var(--text-inverse); }
+
+/* ===== A fila (tabela "Needs attention" do Permitly) ===== */
+.tabela { width:100%; border-collapse:separate; border-spacing:0; table-layout:fixed; }
+.tabela col.c-motivo { width:184px; } .tabela col.c-valor { width:120px; } .tabela col.c-vence { width:92px; } .tabela col.c-espera { width:80px; }
+.tabela td.mono-13, .tabela td.vence { white-space:nowrap; }
+.tabela thead th { background:var(--bg-card); color:var(--text-muted); font:400 12px/16px var(--f-body); text-align:left; padding:var(--s-2-5) var(--s-4); }
+.tabela thead th:first-child { border-radius:var(--r-pill) 0 0 var(--r-pill); } .tabela thead th:last-child { border-radius:0 var(--r-pill) var(--r-pill) 0; }
+.tabela td { padding:var(--s-3) var(--s-4); border-bottom:1px solid var(--line-soft); vertical-align:middle; }
+.tabela tbody tr:last-child td { border-bottom:0; }
+.tabela tbody tr { position:relative; }
+.tabela tbody tr:hover td { background:var(--bg-card); }
+/* a linha aberta no painel ao lado */
+.tabela tbody tr[aria-current] td { background:var(--bg-card); }
+.tabela tbody tr[aria-current] td:first-child { border-radius:var(--r-12) 0 0 var(--r-12); box-shadow:inset 3px 0 0 var(--text-primary); }
+.tabela tbody tr[aria-current] td:last-child { border-radius:0 var(--r-12) var(--r-12) 0; }
+.tabela .ir { display:block; min-width:0; }
+.tabela .ir::after { content:""; position:absolute; inset:0; }
+.tabela .ir div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tabela .tipo { display:inline-flex; align-items:center; gap:var(--s-1); }
+.tabela .tipo svg.lucide { width:14px; height:14px; }
+.so-celular { display:none; }
+/* selo: tint + 700 (trio do Permitly); neutro para o que não tem risco */
+.selo { display:inline-flex; align-items:center; height:26px; padding:0 var(--s-3); border-radius:var(--r-pill); white-space:nowrap; }
+.s-ambar { background:var(--amber-tint); color:var(--amber-700); }
+.s-argila { background:var(--clay-tint); color:var(--clay-700); }
+.s-neutro { background:var(--bg-card); color:var(--text-secondary); }
+.tabela tbody tr[aria-current] .s-neutro { background:var(--bg-panel); }
+.pe-fila { display:flex; align-items:center; gap:var(--s-2); padding:var(--s-3) var(--s-4) var(--s-2); color:var(--text-secondary); }
+.pe-fila svg.lucide { width:16px; height:16px; color:var(--text-muted); }
+
+/* ===== O item aberto (painel do Rillo dentro da composição do Permitly) ===== */
+.detalhe { display:grid; gap:var(--s-2); }
+.detalhe .cab { align-items:flex-start; }
+.chip { display:inline-flex; align-items:center; gap:var(--s-2); height:30px; padding:0 var(--s-3); border-radius:var(--r-pill); background:var(--bg-card); white-space:nowrap; }
+.chip svg.lucide { width:16px; height:16px; }
+.faixa { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); margin:0; border-radius:var(--r-tile); box-shadow:inset 0 0 0 1px var(--line-soft); }
+.faixa > div { padding:var(--s-3) var(--s-4); min-width:0; white-space:nowrap; }
+.faixa > div + div { box-shadow:inset 1px 0 0 var(--line-soft); }
+.bloco { background:var(--bg-card); border-radius:var(--r-card); padding:var(--s-4); display:grid; gap:var(--s-2); }
+.bloco.ambar { background:var(--amber-tint); color:var(--amber-700); }
+.bloco.ambar .label-11 { color:var(--amber-700); }
+.confere { display:grid; gap:var(--s-2); list-style:none; padding:0; }
+.confere li { display:flex; gap:var(--s-2); align-items:flex-start; }
+.confere li svg.lucide { width:16px; height:16px; margin-top:2px; color:var(--lime-700); stroke-width:2; }
+.cab-bloco { display:flex; align-items:center; gap:var(--s-2); }
+.cab-bloco .fim { margin-left:auto; }
+.passos { display:grid; gap:var(--s-2); list-style:none; padding:0; counter-reset:p; }
+.passos li { display:flex; gap:var(--s-3); align-items:flex-start; counter-increment:p; }
+.passos li::before { content:counter(p); flex-shrink:0; width:20px; height:20px; border-radius:var(--r-pill); background:var(--text-primary); color:var(--text-inverse); font:500 11px/20px var(--f-body); text-align:center; }
+.decisao { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s-2); padding:var(--s-2) var(--s-2) var(--s-2); }
+
+/* ===== O que o agente fez sozinho (KPIs do Permitly) ===== */
+.kpis { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:var(--s-2); }
+.kpi { background:var(--bg-card); border-radius:var(--r-card); padding:var(--s-4); display:grid; gap:var(--s-1); align-content:start; min-width:0; }
+.kpi > span { white-space:nowrap; }
+.kpi .number-32 { line-height:28px; }
+.kpi.destaque { background:var(--text-primary); color:var(--text-inverse); }
+.kpi.destaque .sec { color:var(--on-inverse-2); }
+.divisao { background:var(--bg-card); border-radius:var(--r-card); padding:var(--s-3) var(--s-4) var(--s-4); margin-top:var(--s-2); display:grid; gap:var(--s-3); }
+.divisao .cab-f { display:flex; align-items:center; gap:var(--s-3); flex-wrap:wrap; }
+.divisao .cab-f .fim { margin-left:auto; }
+.barra { display:flex; gap:var(--s-1); }
+.barra i { height:30px; border-radius:var(--r-10); display:block; }
+.legenda { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--s-3); }
+.legenda > div { display:flex; align-items:baseline; gap:var(--s-2); min-width:0; }
+.legenda .ponto { width:8px; height:8px; border-radius:50%; flex-shrink:0; align-self:center; }
+.ultimas { list-style:none; padding:0 var(--s-4); margin-top:var(--s-2); }
+.ultimas li { display:grid; grid-template-columns:44px minmax(0,1fr); gap:var(--s-3); padding:var(--s-3) 0; border-bottom:1px solid var(--line-soft); }
+.ultimas li:last-child { border-bottom:0; }
+
+/* ===== O painel preto da IA (Permit AI): o que parou na regra ===== */
+.ia-preta { background:var(--text-primary); color:var(--text-inverse); border-radius:var(--r-panel); padding:var(--s-4); display:grid; gap:var(--s-3); align-content:start; }
+.ia-preta .cab-ia { display:flex; align-items:center; gap:var(--s-3); height:32px; padding-left:var(--s-2); }
+.ia-preta .cab-ia svg.lucide { color:var(--lime-500); width:16px; height:16px; }
+.ia-preta .cab-ia .fim { margin-left:auto; color:var(--on-inverse-2); }
+.ia-preta ul { list-style:none; padding:0; display:grid; gap:var(--s-2); }
+.ia-preta li { display:flex; align-items:baseline; gap:var(--s-3); color:var(--on-inverse-3); }
+.ia-preta li i { width:8px; height:8px; border-radius:50%; flex-shrink:0; background:var(--lime-500); transform:translateY(-1px); }
+.ia-preta .limite { color:var(--on-inverse-2); padding-left:var(--s-2); }
+/* os limites: uma faixa de 4 células ao lado do título */
+.limites { display:grid; grid-template-columns:220px minmax(0,1fr); align-items:center; }
+.limites .cab { padding:var(--s-2) var(--s-4); }
+.regras { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); background:var(--bg-card); border-radius:var(--r-card); }
+.regras > div { display:grid; gap:var(--s-1); align-content:start; padding:var(--s-3) var(--s-4); min-width:0; }
+.regras > div + div { box-shadow:inset 1px 0 0 var(--line-soft); }
+.abrir { display:inline-flex; align-items:center; gap:var(--s-1); }
+.abrir svg.lucide { width:16px; height:16px; }
+
+/* ===== Celular: margem 20, uma coluna, alvo de toque de 44 ===== */
+.topo-celular { display:none; }
+@media (max-width:767px) {
+  .casca { grid-template-columns:minmax(0,1fr); padding:var(--s-5); }
+  .lateral { display:none; }
+  .topo-celular { display:flex; align-items:center; gap:var(--s-3); }
+  .topo-celular .display-20 { margin-right:auto; }
+  .topo-celular .circulo { width:44px; height:44px; background:var(--bg-panel); }
+  .topo h1 { width:100%; }
+  .topo .direita { margin-left:0; width:100%; }
+  .busca { flex:1; width:auto; min-width:0; }
+  .busca kbd { display:none; }
+  .botao-preto.regras-btn { padding:0 var(--s-4); }
+  .botao-preto.regras-btn span { display:none; }
+  .recibo { margin-top:0; }
+  .linha1, .limites { grid-template-columns:minmax(0,1fr); }
+  .regras { grid-template-columns:minmax(0,1fr); }
+  .regras > div + div { box-shadow:inset 0 1px 0 var(--line-soft); }
+  .cab { flex-wrap:wrap; }
+  .cab .fim.segmento { margin-left:0; }
+  /* os quatro filtros não cabem em 302 px: viram chips que quebram linha, de 36 com toque de 44 */
+  .cab .fim.segmento { width:100%; flex-wrap:wrap; gap:var(--s-2); padding:0; background:none; }
+  .segmento button { position:relative; height:36px; background:var(--bg-card); }
+  .segmento button::after { content:""; position:absolute; inset:-4px 0; }
+  /* a linha vira grade: o item em cima, o motivo, o valor e a espera embaixo */
+  .tabela { table-layout:auto; } .tabela colgroup, .tabela thead { display:none; }
+  .tabela tr { display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; gap:var(--s-2) var(--s-3); padding:var(--s-3) var(--s-4); border-bottom:1px solid var(--line-soft); }
+  .tabela tbody tr:last-child { border-bottom:0; }
+  .tabela td { display:block; padding:0; border:0; }
+  .tabela tbody tr[aria-current] { background:var(--bg-card); box-shadow:inset 3px 0 0 var(--text-primary); }
+  .tabela tbody tr[aria-current] { border-radius:var(--r-12); border-bottom-color:transparent; }
+  .tabela tbody tr[aria-current] td, .tabela tbody tr[aria-current] td:first-child, .tabela tbody tr[aria-current] td:last-child { background:none; box-shadow:none; border-radius:0; }
+  .tabela td.vazio { display:none; }
+  .tabela td:last-child { grid-column:-2 / -1; text-align:right; }
+  .tabela td.item { grid-column:1 / -1; }
+  .tabela td.vence { display:none; }
+  .so-celular { display:inline; }
+  .tabela .ir { min-height:44px; display:flex; flex-direction:column; justify-content:center; }
+  .tabela .ir div { white-space:normal; }
+  .faixa > div { padding:var(--s-3) var(--s-2); }
+  .decisao { grid-template-columns:minmax(0,1fr); }
+  .kpis { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .legenda { grid-template-columns:minmax(0,1fr); gap:var(--s-2); }
+  .divisao .cab-f .fim { margin-left:0; }
+  .abrir { position:relative; } .abrir::after { content:""; position:absolute; inset:-13px -8px; }
+  .c36 { position:relative; } .c36::after { content:""; position:absolute; inset:-4px; }
+}
+</style>
+<script src="vendor/lucide.min.js"></script>
+</head>
+<body>
+<div class="casca">
+
+  <aside class="lateral">
+    <div class="marca">
+      <span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="display-20">Serra</span>
+      <span class="circulo c32"><i data-lucide="panel-left"></i></span>
+    </div>
+    <div class="conta">
+      <span class="circulo"><i data-lucide="calculator"></i></span>
+      <div class="nome"><div class="medium-13">Contábil Serra</div><div class="body-12 mut">Curitiba, PR</div></div>
+      <i data-lucide="chevron-down"></i>
+    </div>
+    <a class="menu medium-13"><i data-lucide="layout-grid"></i>Início</a>
+    <a class="menu ativo medium-13" aria-current="page"><i data-lucide="inbox"></i>Aprovações<span class="contador num">6</span></a>
+    <div class="grupo label-11">Módulos</div>
+    <a class="menu medium-13"><i data-lucide="receipt"></i>Guias</a>
+    <a class="menu medium-13"><i data-lucide="users"></i>Clientes</a>
+    <a class="menu medium-13"><i data-lucide="folder-open"></i>Documentos</a>
+    <div class="grupo label-11">Conta</div>
+    <a class="menu medium-13"><i data-lucide="sliders-horizontal"></i>Regras do agente</a>
+    <div class="ia-lateral">
+      <div class="linha">
+        <span class="circulo c32"><i data-lucide="sparkles"></i></span>
+        <div><div class="medium-13">Agente de IA</div><div class="body-12">Ligado</div></div>
+        <span class="chave" role="img" aria-label="ligado"></span>
+      </div>
+      <a class="rodape medium-12" href="#fila">54 ações hoje<i data-lucide="chevron-right"></i></a>
+    </div>
+  </aside>
+
+  <main class="principal">
+    <div class="topo-celular">
+      <span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="display-20">Serra</span>
+      <a class="circulo" href="#menu" aria-label="menu"><i data-lucide="menu"></i></a>
+    </div>
+
+    <div class="topo">
+      <h1 class="display-32">Decisões que esperam seu ok</h1>
+      <span data-selo class="pilula-lima medium-13"><i data-lucide="inbox"></i>6 · a mais antiga há <span class="mono-13">2 h 12</span></span>
+      <div class="direita">
+        <label class="busca body-14"><i data-lucide="search"></i><span>Buscar cliente</span><kbd>⌘K</kbd></label>
+        <span class="sino" role="img" aria-label="avisos"><i data-lucide="bell"></i></span>
+        <a class="botao-preto regras-btn medium-14" href="#regras" aria-label="Ver as regras do agente"><i data-lucide="sliders-horizontal"></i><span>Ver as regras</span></a>
+      </div>
+    </div>
+    <p class="recibo body-14 sec">Hoje o agente fez <b class="medium-14" style="color:var(--text-primary)">46</b> ações sozinho, parou <b class="medium-14" style="color:var(--text-primary)">6</b> para você e recusou <b class="medium-14" style="color:var(--text-primary)">2</b> que só gente faz, já com o Rafael. Atualizado às <span class="mono-13">10:24</span>.</p>
+
+    <!-- LINHA 1: à esquerda a fila e o recibo; à direita o item aberto -->
+    <div class="linha1">
+      <div class="coluna">
+      <section class="painel" id="fila">
+        <div class="cab">
+          <div class="titulo"><h2 class="display-20">Fila de aprovação</h2><div class="body-13 sec">Ordem: o que vence primeiro, depois quem espera há mais tempo</div></div>
+          <div class="fim segmento body-13" role="tablist" aria-label="filtrar por tipo"><button class="sim">Tudo 6</button><button>Guias 3</button><button>Respostas 2</button><button>Lembretes 1</button></div>
+        </div>
+        <table class="tabela body-13"><colgroup><col><col class="c-motivo"><col class="c-valor"><col class="c-vence"><col class="c-espera"></colgroup>
+          <thead><tr><th>O que o agente preparou</th><th>Por que parou</th><th>Valor</th><th>Vence</th><th>Espera</th></tr></thead>
+          <tbody>
+            <tr aria-current="true">
+              <td class="item"><a class="ir" href="#item-1"><div class="medium-13">DARF PIS/Cofins de agosto</div><div class="body-12 mut">Marcenaria Pinheiro Ltda · guia<span class="so-celular"> · vence <span class="mono-11">25/09</span></span></div></a></td>
+              <td><span data-selo class="selo s-ambar medium-12">Passa de R$ 5.000</span></td>
+              <td class="mono-13 num">R$ 7.842,16</td>
+              <td class="vence mono-13 num">25/09</td>
+              <td class="mono-13 num">2 h 12</td>
+            </tr>
+            <tr>
+              <td class="item"><a class="ir" href="#item-2"><div class="medium-13">DARF PIS/Cofins de agosto</div><div class="body-12 mut">Clínica Araucária · guia<span class="so-celular"> · vence <span class="mono-11">25/09</span></span></div></a></td>
+              <td><span data-selo class="selo s-ambar medium-12">Subiu 38% sobre julho</span></td>
+              <td class="mono-13 num">R$ 3.126,44</td>
+              <td class="vence mono-13 num">25/09</td>
+              <td class="mono-13 num">1 h 53</td>
+            </tr>
+            <tr>
+              <td class="item"><a class="ir" href="#item-3"><div class="medium-13">DARF IRPJ, 3ª quota</div><div class="body-12 mut">Transportes Iguaçu · guia<span class="so-celular"> · vence <span class="mono-11">30/09</span></span></div></a></td>
+              <td><span data-selo class="selo s-argila medium-12">2 notas sem arquivo</span></td>
+              <td class="mono-13 num">R$ 4.318,72</td>
+              <td class="vence mono-13 num">30/09</td>
+              <td class="mono-13 num">1 h 37</td>
+            </tr>
+            <tr>
+              <td class="item"><a class="ir" href="#item-4"><div class="medium-13">Resposta sobre a multa do DAS</div><div class="body-12 mut">Ana Beatriz Rocha · Ateliê Rocha</div></a></td>
+              <td><span data-selo class="selo s-ambar medium-12">Fala de multa</span></td>
+              <td class="body-12 mut vazio">sem valor</td>
+              <td class="vence body-12 mut">sem prazo</td>
+              <td class="mono-13 num">44 min</td>
+            </tr>
+            <tr>
+              <td class="item"><a class="ir" href="#item-5"><div class="medium-13">Resposta sobre o prazo da ECF</div><div class="body-12 mut">Gustavo Hartmann · Hartmann Engenharia</div></a></td>
+              <td><span data-selo class="selo s-ambar medium-12">Cita o prazo da ECF</span></td>
+              <td class="body-12 mut vazio">sem valor</td>
+              <td class="vence body-12 mut">sem prazo</td>
+              <td class="mono-13 num">26 min</td>
+            </tr>
+            <tr>
+              <td class="item"><a class="ir" href="#item-6"><div class="medium-13">Lembrete dos extratos de agosto</div><div class="body-12 mut">Padaria Vó Irene · 2 avisos já no mês</div></a></td>
+              <td><span data-selo class="selo s-neutro medium-12">Seria o 3º aviso</span></td>
+              <td class="body-12 mut vazio">sem valor</td>
+              <td class="vence body-12 mut">sem prazo</td>
+              <td class="mono-13 num">9 min</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pe-fila body-12"><i data-lucide="coins"></i><span>As 3 guias somam <span class="mono-11">R$ 15.287,32</span> e vencem até <span class="mono-11">30/09</span></span></div>
+      </section>
+
+      <section class="painel">
+        <div class="cab">
+          <div class="titulo"><h2 class="display-20">O que o agente fez sozinho</h2><div class="body-13 sec">Hoje, das <span class="mono-13">08:00</span> às <span class="mono-13">10:24</span></div></div>
+          <a class="fim abrir medium-13" href="#historico">Abrir o histórico<i data-lucide="chevron-right"></i></a>
+        </div>
+        <div class="kpis">
+          <div class="kpi destaque"><span class="body-12 sec">Sozinho</span><span class="number-32 num">46</span><span class="body-12 sec">das 54 ações de hoje</span></div>
+          <div class="kpi"><span class="body-12 sec">Guias</span><span class="number-32 num">12</span><span class="body-12 sec">geradas e enviadas</span></div>
+          <div class="kpi"><span class="body-12 sec">Respostas</span><span class="number-32 num">25</span><span class="body-12 sec">da base aprovada</span></div>
+          <div class="kpi"><span class="body-12 sec">Lembretes</span><span class="number-32 num">9</span><span class="body-12 sec">até 2 por cliente</span></div>
+        </div>
+        <div class="divisao">
+          <div class="cab-f"><h3 class="medium-13">Como as 54 ações de hoje terminaram</h3><span class="fim body-12 mut">base: 54 ações, <span class="mono-11">08:00</span> a <span class="mono-11">10:24</span></span></div>
+          <div class="barra" role="img" aria-label="46 sozinho, 6 esperam você, 2 parados na regra"><i style="flex:46;background:var(--text-primary)"></i><i style="flex:6;background:var(--lime-700)"></i><i style="flex:2;background:var(--text-muted)"></i></div>
+          <div class="legenda body-13">
+            <div><span class="ponto" style="background:var(--text-primary)"></span><b class="medium-13 num">46</b><span class="sec">sozinho · <span class="mono-11">85%</span></span></div>
+            <div><span class="ponto" style="background:var(--lime-700)"></span><b class="medium-13 num">6</b><span class="sec">esperam você · <span class="mono-11">11%</span></span></div>
+            <div><span class="ponto" style="background:var(--text-muted)"></span><b class="medium-13 num">2</b><span class="sec">parados na regra · <span class="mono-11">4%</span></span></div>
+          </div>
+        </div>
+        <ul class="ultimas body-13">
+          <li><span class="mono-13 sec">10:21</span><div><div class="medium-13">Resposta enviada · Prado Estética</div><div class="body-12 mut">Segunda via do boleto de honorários</div></div></li>
+          <li><span class="mono-13 sec">10:18</span><div><div class="medium-13">Guia gerada e enviada · Mercado Batel</div><div class="body-12 mut">DARF PIS/Cofins de agosto, <span class="mono-11">R$ 1.912,33</span> · <span class="mono-11">+3,6%</span> sobre julho · vence <span class="mono-11">25/09</span></div></div></li>
+          <li><span class="mono-13 sec">10:09</span><div><div class="medium-13">Lembrete enviado · Oficina Portão</div><div class="body-12 mut">Extrato bancário de agosto · 1º aviso do mês</div></div></li>
+        </ul>
+      </section>
+
+      </div>
+
+      <div class="coluna">
+      <!-- o item aberto: por que parou, o que conferiu, o que propõe, e o par de decisão -->
+      <section class="painel detalhe" id="item-1" aria-label="Item aberto">
+        <div class="cab">
+          <div class="titulo"><span class="chip medium-12"><i data-lucide="receipt"></i>Guia · 1 de 6</span></div>
+          <span class="fim"><a class="circulo c36" href="#item-2" aria-label="próximo item"><i data-lucide="chevron-down"></i></a></span>
+        </div>
+        <div style="padding:0 var(--s-4)"><h2 class="display-18">DARF PIS/Cofins de agosto</h2><div class="body-12 mut">Marcenaria Pinheiro Ltda · o agente parou às <span class="mono-11">08:12</span></div></div>
+        <div class="faixa">
+          <div><div class="body-12 mut">Valor</div><div class="mono-13 num">R$ 7.842,16</div></div>
+          <div><div class="body-12 mut">Vence</div><div class="mono-13 num">25/09</div></div>
+          <div><div class="body-12 mut">Espera</div><div class="mono-13 num">2 h 12</div></div>
+        </div>
+        <div class="bloco ambar">
+          <div class="label-11">Por que o agente parou</div>
+          <p class="body-13">A guia passa do teto de <span class="mono-13">R$ 5.000</span> que o escritório definiu para sair sem revisão.</p>
+        </div>
+        <div class="bloco">
+          <div class="cab-bloco"><span class="label-11">O que o agente conferiu</span><span class="fim medium-12">4 de 4</span></div>
+          <ul class="confere body-13">
+            <li><i data-lucide="check"></i><span>Apuração de agosto fechada</span></li>
+            <li><i data-lucide="check"></i><span>212 de 212 notas com arquivo</span></li>
+            <li><i data-lucide="check"></i><span><span class="mono-13">+4%</span> sobre julho (<span class="mono-13">R$ 7.540,54</span>), <span class="inteiro">dentro dos 10%</span></span></li>
+            <li><i data-lucide="check"></i><span>CNPJ e regime batem com o cadastro</span></li>
+          </ul>
+          <p class="body-12 sec">Base: 212 notas de agosto, lidas às <span class="mono-11">08:05</span>.</p>
+        </div>
+        <div class="bloco">
+          <span class="label-11">O que o agente propõe</span>
+          <ol class="passos body-13">
+            <li><span>Gerar o DARF com vencimento em <span class="mono-13">25/09</span></span></li>
+            <li><span>Enviar para a Sônia Pinheiro, do financeiro, por <span class="inteiro">e-mail</span></span></li>
+            <li><span>Lembrar a Sônia em <span class="mono-13">24/09</span> se o comprovante não chegar</span></li>
+          </ol>
+          <p class="body-12 sec">Cada passo pode ser editado antes de rodar. Nada foi enviado nem pago.</p>
+        </div>
+        <div class="decisao">
+          <button class="botao-preto medium-14"><i data-lucide="check"></i>Aprovar e enviar à Sônia</button>
+          <button class="botao-claro medium-14"><i data-lucide="corner-up-left"></i>Devolver ao agente…</button>
+        </div>
+      </section>
+          <section class="ia-preta">
+            <div class="cab-ia"><i data-lucide="sparkles"></i><span class="display-16">Agente de IA</span><span class="fim body-12">às <span class="mono-11">10:24</span></span></div>
+            <div class="display-20">2 pedidos parados na regra</div>
+            <ul class="body-13">
+              <li><i></i><span>Padaria Vó Irene pediu para transmitir a DCTFWeb de agosto (<span class="mono-11">09:12</span>)</span></li>
+              <li><i></i><span>Oficina Portão pediu para enviar uma admissão ao eSocial (<span class="mono-11">09:50</span>)</span></li>
+            </ul>
+            <p class="limite body-12">O agente nunca transmite nada à Receita nem ao eSocial. Os dois estão com o Rafael Moreira, do departamento pessoal.</p>
+          </section>
+
+      </div>
+    </div>
+
+    <!-- LINHA 2: os limites escritos -->
+      <section class="painel limites" id="regras">
+        <div class="cab">
+          <div class="titulo"><h2 class="display-16">Até onde o agente vai sozinho</h2><div class="body-12 mut">Passou disso, ele para e pede o seu ok</div></div>
+        </div>
+        <div class="regras body-13">
+          <div><span class="body-12 mut">Guia de imposto</span><span>até <span class="mono-13">R$ 5.000</span>, com todas as notas conferidas</span></div>
+          <div><span class="body-12 mut">Variação mensal</span><span>até <span class="mono-13">10%</span> sobre o mês anterior</span></div>
+          <div><span class="body-12 mut">Resposta a cliente</span><span>só da base aprovada, e nunca sobre multa, prazo ou valor</span></div>
+          <div><span class="body-12 mut">Lembretes</span><span><span class="mono-13">2</span> por cliente no mês</span></div>
+          <div><span class="body-12 mut">Nunca faz</span><span>pagar guia, transmitir à Receita ou ao eSocial, mudar cadastro</span></div>
+        </div>
+      </section>
+  </main>
+</div>
+
+<a id="previa" href="modelo-fila-escuro.html" style="position:fixed;bottom:var(--s-4);right:var(--s-4);height:40px;padding:0 var(--s-4);display:flex;align-items:center;border-radius:var(--r-pill);background:var(--text-primary);color:var(--text-inverse);font:500 13px/1 var(--f-body)">Ver a versão escura</a>
+<script>
+  if (new URLSearchParams(location.search).has('limpo')) document.getElementById('previa').remove();
+  lucide.createIcons();
+</script>
+</body>
+</html>

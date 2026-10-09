@@ -1,0 +1,6 @@
+<!-- fundação: semente v1 · é seu. O ícone da aba: sem ele, todo carregamento
+     pede /favicon.ico e o console mostra um 404. Troque pelo ícone do
+     projeto; o raio é o do botão da casa. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="8" fill="#2563eb"/>
+</svg>

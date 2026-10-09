@@ -1,0 +1,27 @@
+# Linhas que o kit da fábrica acrescenta ao .gitignore do alvo.
+# O instalador copia só as linhas que ainda não estiverem lá.
+
+coverage/
+.venv/
+fabrica/.ultimo-portao.json
+fabrica/.ultimo-teste-fabrica.json
+
+# 🚨 O segredo do projeto nunca entra no commit. Projeto que lê a chave do
+# ambiente guarda o valor num `.env`, e sem estas linhas ele entra no primeiro
+# `git add`. O conferidor `segredos` acusa DEPOIS do commit; esta linha impede
+# antes. O exemplo, sem valor de verdade, continua versionado.
+.env
+.env.*
+!.env*.example
+
+# 🚨 O lixo que o Python deixa: sem estas linhas, `__pycache__/` e `.coverage`
+# entram no commit, e
+# aí TODA execução de teste suja a árvore. Árvore suja derruba o `mutar.mjs`
+# (que se recusa a mutar sobre trabalho não salvo) e faz o revisor devolver
+# GATE VERMELHO. Custa uma linha aqui e custa uma rodada inteira lá.
+__pycache__/
+*.pyc
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

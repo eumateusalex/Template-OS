@@ -1,0 +1,21 @@
+# Normaliza quebras de linha. Sem isto, um repositório criado no Windows aparece
+# inteiro como "modificado" para quem clona no macOS ou Linux, e vice-versa.
+# Regra: LF no repositório, nativo no disco de cada pessoa.
+* text=auto eol=lf
+
+# Binários — nunca converter
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp4 binary
+*.mov binary

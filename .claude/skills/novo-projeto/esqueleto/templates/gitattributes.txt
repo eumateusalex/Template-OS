@@ -1,0 +1,11 @@
+# fundação
+# 🚨 O projeto inteiro fica em LF em qualquer checkout. O Prettier da semente
+# exige LF (`endOfLine: "lf"`), e num Windows com autocrlf o clone sairia em
+# CRLF: o passo `formatar` reprovaria arquivo que ninguém tocou (medido num
+# projeto de prova). As duas linhas de baixo repetem a
+# regra de propósito, para quem apagar a primeira: os conferidos e os
+# componentes do registry (sem elas o `shadcn add --diff` acusa os dez de
+# "editado", medido num projeto real).
+* text=auto eol=lf
+fundacao/** text eol=lf
+src/components/ui/*.tsx text eol=lf

@@ -1,0 +1,57 @@
+# Dependências Python do workspace, num lugar só: reinstalar a máquina começa
+# por aqui.
+#
+# As versões são fixadas de propósito: este arquivo é registro do que funciona
+# junto, não convite a atualizar. Subir versão é decisão à parte, com as suítes
+# rodadas depois.
+#
+#   python -m pip install -r scripts/requirements.txt
+#
+# ⚠️ No Windows, `python3` pode ser o atalho da Microsoft Store, que não roda.
+#    Use `python` (3.12), ou o caminho completo do executável.
+
+# --- Transcrição offline (scripts/lib/motor_whisper.py) -----------------------
+# O motor usado pelo scripts/transcrever.py, que o /converter e o /cortes chamam.
+# O numpy que ele importa vem junto com o faster-whisper. Precisa do ffmpeg no
+# PATH (ele lê o áudio). O arquivo NUNCA sai da máquina. É o que torna seguro
+# transcrever call de cliente, reunião e VSL. O modelo baixa na primeira vez
+# (o padrão, large-v3-turbo, tem cerca de 1,6 GB) para o cache do Hugging Face,
+# fora do projeto: não vai para o Git.
+faster-whisper==1.2.1
+ctranslate2==4.8.1
+
+# Aceleração por placa de vídeo NVIDIA. Sem elas, ou sem placa, o motor roda na
+# CPU (int8) e continua funcionando, só mais devagar: não são obrigatórias.
+# Somam perto de 2 GB instalados; quem não tem placa NVIDIA pode apagar estas
+# duas linhas antes de instalar.
+nvidia-cublas-cu12==12.9.2.10
+nvidia-cudnn-cu12==9.24.0.43
+
+# --- Conversão de documento (a skill /converter) ------------------------------
+# ⚠️ Instalado SEM o extra de áudio de propósito: o conversor de áudio do
+#    MarkItDown manda o arquivo pros servidores do Google. Áudio e vídeo ficam
+#    100% no transcrever.py, que é offline e melhor.
+markitdown[pdf,docx,pptx,xlsx,xls,outlook]==0.1.7
+
+# --- Vídeo (a /video: medir_audio.py e recorta_fundo.py; o modo gravação do
+# /cortes: scripts/reel-falado/) ----------------------------------------------
+numpy==2.5.2
+pillow==12.3.0
+# O corte da fala e o som do modo gravação (fala.py, som.py).
+scipy==1.18.1
+
+# --- O recorte da Inter 4 nas peças de fora (scripts/terceiros/instalar.mjs) ---
+# A fonte chega em dois subconjuntos (latin e latin-ext), recortados aqui. O
+# manifesto confere a impressão de cada arquivo, e outra versão destas duas
+# recorta outro byte: o instalador confere a versão antes de recortar.
+fonttools==4.65.0
+brotli==1.2.0
+
+# --- Baixar vídeo para o /cortes (opcional: só para cortar a partir de link) ---
+# Apague a linha se você nunca corta a partir de link.
+yt-dlp==2026.8.19
+
+# O `ler-mind.py` é stdlib pura: nada a declarar.
+#
+# ⚠️ Ao acrescentar script Python novo, conferir se ele precisa de dependência
+# aqui. Requisito não declarado só aparece na máquina de quem clonou.

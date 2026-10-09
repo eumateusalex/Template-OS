@@ -1,0 +1,1444 @@
+<!doctype html>
+<!-- ==========================================================================
+     O que este arquivo é: o catálogo visual do kit, ferramenta e não peça.
+     Ler no navegador, pra ver cada componente ao vivo e testar uma paleta.
+     Mostra cada componente do componentes.css ao vivo, com o HTML ao lado, e
+     tem um editor de paleta no topo que reescreve os tokens em tempo real (pra
+     testar uma marca nova em segundos). Abre direto no navegador, sem servidor.
+     O chrome desta página usa prefixo `k-` e NÃO faz parte do kit.
+     ========================================================================== -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit de carrossel: catálogo de componentes</title>
+<!-- o molde primeiro, a marca por cima: antes de configurar, marca/tokens.css
+     não existe (o navegador acusa um 404 no console, inofensivo) e o catálogo
+     abre na paleta de demonstração -->
+<link rel="stylesheet" href="../marca/tokens.molde.css">
+<link rel="stylesheet" href="../marca/tokens.css">
+<link rel="stylesheet" href="componentes.css">
+<style>
+/* ==========================================================
+   CHROME DO CATÁLOGO (prefixo k-): não faz parte do kit
+   ========================================================== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1218;color:#eef2f5;font-family:var(--f-display);-webkit-font-smoothing:antialiased}
+.k-wrap{max-width:1240px;margin:0 auto;padding:0 32px 120px}
+
+.k-hero{padding:70px 0 40px;border-bottom:1px solid rgba(255,255,255,.12)}
+.k-eyebrow{font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:14px}
+.k-eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.k-hero h1{font-size:clamp(36px,5vw,58px);font-weight:800;line-height:1.04;letter-spacing:-.035em;margin-top:20px;max-width:20ch}
+.k-hero h1 i{font-family:var(--f-serif);font-style:italic;font-weight:400;color:var(--accent)}
+.k-hero p{font-size:18px;line-height:1.55;color:rgba(238,242,245,.66);margin-top:20px;max-width:74ch}
+code{font-family:var(--f-mono);font-size:.86em;color:rgba(238,242,245,.9)}
+
+.k-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.k-toc a{font-family:var(--f-mono);font-size:12px;color:rgba(238,242,245,.7);text-decoration:none;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 13px;transition:.15s}
+.k-toc a:hover{border-color:var(--accent);color:var(--accent)}
+
+.k-sec{padding-top:74px}
+.k-sec > h2{font-size:30px;font-weight:800;letter-spacing:-.025em;display:flex;align-items:baseline;gap:15px}
+.k-sec > h2 .n{font-family:var(--f-mono);font-size:14px;font-weight:600;color:var(--accent);letter-spacing:.14em}
+.k-sec > p{font-size:16px;line-height:1.6;color:rgba(238,242,245,.62);margin-top:11px;max-width:80ch}
+.k-sec > p b{color:#fff;font-weight:700}
+.k-sec h3{margin-top:44px;font-size:20px;font-weight:800;letter-spacing:-.02em}
+.k-rule{height:1px;background:rgba(255,255,255,.12);margin-top:24px}
+
+.k-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:24px;align-items:start}
+.k-grid.wide{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+@media (max-width:1000px){.k-grid,.k-grid.wide{grid-template-columns:minmax(0,1fr)}}
+
+.k-panel{border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;background:#101720}
+.k-cap{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,242,245,.42);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.09)}
+pre{font-family:var(--f-mono);font-size:12.5px;line-height:1.75;color:rgba(238,242,245,.88);padding:18px;overflow-x:auto;white-space:pre;tab-size:2}
+pre b{color:var(--accent);font-weight:400}
+pre i{color:rgba(238,242,245,.38);font-style:normal}
+
+.k-note{border-left:2px solid var(--accent);padding:2px 0 2px 18px;margin-top:22px;font-size:15px;line-height:1.6;color:rgba(238,242,245,.7);max-width:80ch}
+.k-note b{color:#fff;font-weight:700}
+
+/* editor de paleta */
+.k-lab{border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:22px;margin-top:24px;background:#101720}
+.k-lab-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:18px}
+.k-lab-head b{font-size:15px}
+.k-lab-head span{font-size:13.5px;color:rgba(238,242,245,.55)}
+.k-presets{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
+.k-presets button{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:rgba(238,242,245,.8);background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.15s}
+.k-presets button:hover{border-color:var(--accent);color:var(--accent)}
+.k-presets button i{width:11px;height:11px;border-radius:50%;display:block}
+.k-pickers{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px}
+.k-pick{display:flex;align-items:center;gap:11px;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 12px}
+.k-pick input{width:34px;height:34px;padding:0;border:0;border-radius:8px;background:none;cursor:pointer;flex:none}
+.k-pick input::-webkit-color-swatch-wrapper{padding:0}
+.k-pick input::-webkit-color-swatch{border:1px solid rgba(255,255,255,.2);border-radius:8px}
+.k-pick div{min-width:0}
+.k-pick b{display:block;font-size:12.5px;font-weight:700}
+.k-pick span{display:block;font-family:var(--f-mono);font-size:10.5px;color:rgba(238,242,245,.45);margin-top:3px}
+.k-copy{margin-top:16px;font-family:var(--f-mono);font-size:11.5px;color:rgba(238,242,245,.55);white-space:pre-wrap;word-break:break-all}
+
+/* swatches */
+.k-sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:13px;margin-top:24px}
+.k-sw > div{border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden}
+.k-sw .k-chip{height:76px}
+.k-sw .k-meta{padding:12px 14px 15px}
+.k-sw .k-meta b{display:block;font-size:13.5px}
+.k-sw .k-meta span{display:block;font-family:var(--f-mono);font-size:11px;color:rgba(238,242,245,.5);margin-top:4px}
+
+/* escala tipográfica */
+.k-type{margin-top:24px;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden}
+.k-type .k-row{display:flex;align-items:baseline;gap:20px;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+.k-type .k-row:last-child{border-bottom:0}
+.k-type .k-lab{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);width:118px;flex:none}
+.k-type .k-spec{font-family:var(--f-mono);font-size:11.5px;color:rgba(238,242,245,.42);margin-left:auto;flex:none;text-align:right}
+.k-type .k-sample{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* palco */
+.k-stage{background:#14181d;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.13)}
+.k-stage.k-on-light{background:#dcdcda}
+.slide.k-zoom{height:auto;zoom:.5}
+.k-full{width:378px;height:473px;overflow:hidden;margin:0 auto;border-radius:10px}
+.k-full .slide{transform:scale(.35);transform-origin:0 0}
+.k-fullrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin-top:24px}
+.k-fullrow figure{background:#14181d;border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:20px}
+.k-fullrow figcaption{font-family:var(--f-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(238,242,245,.45);margin-top:15px;text-align:center}
+
+/* placeholders: o kit não carrega logo nem figura de marca nenhuma */
+.k-logo-ph{height:56px;width:150px;border:1.5px dashed var(--accent);border-radius:10px;display:grid;place-content:center;font-family:var(--f-mono);font-size:14px;letter-spacing:.16em;color:var(--accent);margin-bottom:38px;flex:none}
+.k-logo-ph.k-sm{height:46px;width:120px;font-size:12px;margin:0}
+.k-fig-ph{border:2px dashed var(--accent-line);border-radius:16px;display:grid;place-content:center;text-align:center;font-family:var(--f-mono);font-size:15px;letter-spacing:.1em;color:var(--accent);background:rgba(0,0,0,.15)}
+</style>
+</head>
+<body>
+<div class="k-wrap">
+
+<header class="k-hero">
+  <div class="k-eyebrow">Kit portável · estrutura de carrossel</div>
+  <h1>Componentes de carrossel, <i>sem marca embutida</i>.</h1>
+  <p>A estrutura de criação de carrossel e post 4:5, isolada de qualquer marca ou conteúdo. Todo componente puxa cor, fonte e medida de <code>marca/tokens.css</code>: nenhum valor fixo em <code>componentes.css</code>. Trocar de marca é editar <b>um bloco de 8 cores e 3 fontes</b>.</p>
+  <p>O cabeçalho carrega <b>só o @</b>, à direita. A logo entra na capa ou no fecho, nunca nos dois.</p>
+  <p>Canvas: <b>1080 × 1350</b> (4:5), exportado em 2× = 2160 × 2700. O texto abaixo é <b>placeholder</b>: serve pra mostrar o componente, não pra copiar.</p>
+  <nav class="k-toc">
+    <a href="#tokens">01 · Tokens</a>
+    <a href="#anatomia">02 · Anatomia</a>
+    <a href="#fixos">03 · Fixos</a>
+    <a href="#texto">04 · Kicker e título</a>
+    <a href="#lista">05 · Lista</a>
+    <a href="#terminal">06 · Terminal</a>
+    <a href="#cards">07 · Cards</a>
+    <a href="#numero">08 · Número</a>
+    <a href="#chips">09 · Chips</a>
+    <a href="#ficha">10 · Ficha</a>
+    <a href="#decor">11 · Decoração</a>
+    <a href="#frame">12 · Frame</a>
+    <a href="#destaques">13 · Destaques</a>
+    <a href="#processo">14 · Processo</a>
+    <a href="#cta">15 · CTA</a>
+    <a href="#mac-grade-capa">16 · Mac, grade e capa</a>
+    <a href="#imagem">17 · Imagem e fecho</a>
+    <a href="#figura">18 · Figura recortada</a>
+    <a href="#ampliacoes">19 · Ampliações</a>
+    <a href="#regras">20 · Regras</a>
+  </nav>
+</header>
+
+<!-- ============ 01 TOKENS ============ -->
+<section class="k-sec" id="tokens">
+  <h2><span class="n">01</span> Tokens</h2>
+  <p>As cores vivem como <b>canais RGB soltos</b> (<code>28,28,32</code>), não hex. É isso que permite a mesma cor virar fundo sólido <code>rgb(var(--c-dark))</code> e transparência <code>rgba(var(--c-dark),.13)</code>. Sem esse detalhe, cada borda e sombra vira um valor fixo que escapa da troca de paleta.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-lab">
+    <div class="k-lab-head">
+      <b>Trocar a paleta agora</b>
+      <span>mexe em tudo na página, ao vivo. É o teste de que o kit é mesmo portável</span>
+      <div class="k-presets" id="presets"></div>
+    </div>
+    <div class="k-pickers" id="pickers"></div>
+    <div class="k-copy" id="copia"></div>
+  </div>
+
+  <div class="k-sw">
+    <div><div class="k-chip" style="background:var(--bg-dark)"></div><div class="k-meta"><b>Cor principal</b><span>--c-dark</span></div></div>
+    <div><div class="k-chip" style="background:var(--bg-light)"></div><div class="k-meta"><b>Fundo claro</b><span>--c-light</span></div></div>
+    <div><div class="k-chip" style="background:var(--accent)"></div><div class="k-meta"><b>Acento</b><span>--c-accent</span></div></div>
+    <div><div class="k-chip" style="background:var(--support-1)"></div><div class="k-meta"><b>Apoio 1</b><span>--c-support-1</span></div></div>
+    <div><div class="k-chip" style="background:var(--support-2)"></div><div class="k-meta"><b>Apoio 2 (lavado)</b><span>--c-support-2</span></div></div>
+    <div><div class="k-chip" style="background:var(--rare)"></div><div class="k-meta"><b>Acento raro</b><span>--c-rare</span></div></div>
+    <div><div class="k-chip" style="background:var(--bg-abyss)"></div><div class="k-meta"><b>Abismo</b><span>--c-abyss · terminal e fecho</span></div></div>
+    <div><div class="k-chip" style="background:var(--ok)"></div><div class="k-meta"><b>Concluído</b><span>--c-ok · terminal</span></div></div>
+  </div>
+
+  <div class="k-type">
+    <div class="k-row"><span class="k-lab">Display</span><span class="k-sample" style="font-size:26px;font-weight:800;letter-spacing:-.035em">Headline forte e geométrica</span><span class="k-spec">--f-display · h1 82px</span></div>
+    <div class="k-row"><span class="k-lab">Serif</span><span class="k-sample" style="font-family:var(--f-serif);font-style:italic;font-size:28px;color:var(--accent)">destaque editorial</span><span class="k-spec">--f-serif · só o &lt;em&gt;</span></div>
+    <div class="k-row"><span class="k-lab">Mono</span><span class="k-sample" style="font-family:var(--f-mono);font-size:18px">tag · kicker · terminal</span><span class="k-spec">--f-mono</span></div>
+    <div class="k-row"><span class="k-lab">Corpo</span><span class="k-sample" style="font-size:19px;color:rgba(238,242,245,.74)">Parágrafo de apoio, peso 400</span><span class="k-spec">.sub 28 · .lead 30</span></div>
+  </div>
+
+  <div class="k-note"><b>Regra de mescla, o coração do estilo:</b> headline pesada na display + <b>um</b> trecho curto na serif itálica, na cor de acento. Nunca a serif em bold, nunca dois destaques no mesmo título. É esse contraste que dá o ar editorial; sem ele o layout vira slide comum.</div>
+</section>
+
+<!-- ============ 02 ANATOMIA ============ -->
+<section class="k-sec" id="anatomia">
+  <h2><span class="n">02</span> Anatomia do slide</h2>
+  <p>Três variantes de fundo e sempre a mesma estrutura vertical: cabeçalho no topo, corpo centralizado que estica, rodapé no fim.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-fullrow">
+    <figure>
+      <div class="k-stage k-full">
+        <div class="slide dark">
+          <div class="ring"></div><div class="star"></div>
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body">
+            <div class="kick">Kicker do slide</div>
+            <h1>Título da capa com um <em>destaque</em> curto.</h1>
+            <div class="sub">Linha de apoio: amplia o título sem repetir o que ele já disse.</div>
+          </div>
+          <div class="ftr"><div class="bar"><i class="agora"></i><i></i><i></i><i></i><i></i></div><span class="count">1/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.slide.dark · capa</figcaption>
+    </figure>
+
+    <figure>
+      <div class="k-stage k-full k-on-light">
+        <div class="slide light">
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body">
+            <div class="kick">Kicker do slide</div>
+            <h2>Título do slide interno.</h2>
+            <div class="cards">
+              <div class="card"><div class="cn">Opção A</div><div class="cr">Rótulo</div><div class="cd">Descrição curta da primeira opção.</div></div>
+              <div class="card"><div class="cn">Opção B</div><div class="cr">Rótulo</div><div class="cd">Descrição curta da segunda opção.</div></div>
+              <div class="card hero"><div class="cn">Opção C</div><div class="cr">Em foco</div><div class="cd">Descrição curta da opção destacada.</div></div>
+            </div>
+          </div>
+          <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i></div><span class="count">3/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.slide.light · interno</figcaption>
+    </figure>
+
+    <figure>
+      <div class="k-stage k-full">
+        <div class="slide cta">
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body">
+            <div class="k-logo-ph">LOGO</div>
+            <h1>Pergunta final que leva à ação.</h1>
+            <span class="btn">Texto do botão</span>
+          </div>
+          <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="feito"></i><i class="agora"></i></div><span class="count">5/5</span></div>
+        </div>
+      </div>
+      <figcaption>.slide.cta · fecho</figcaption>
+    </figure>
+  </div>
+
+  <div class="k-grid">
+    <div class="k-panel"><div class="k-cap">Estrutura mínima</div><pre>&lt;div class="slide dark"&gt;
+
+  &lt;div class="ring"&gt;&lt;/div&gt;      <i>decoração, opcional</i>
+
+  &lt;div class="hdr"&gt;             <i>fixo: topo</i>
+        &lt;span class="handle"&gt;@perfil&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;div class="body"&gt;            <i>estica e centraliza</i>
+    &lt;div class="kick"&gt;…&lt;/div&gt;
+    &lt;h1&gt;… &lt;em&gt;destaque&lt;/em&gt;&lt;/h1&gt;
+    &lt;div class="sub"&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="ftr"&gt;             <i>fixo: base</i>
+    &lt;div class="bar"&gt;&lt;i class="agora"&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;span class="count"&gt;1/5&lt;/span&gt;
+    &lt;span class="chev"&gt;›&lt;/span&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</pre></div>
+    <div class="k-panel"><div class="k-cap">Variantes e medidas</div><pre><b>.slide.dark</b>    fundo escuro (a cor principal)
+<b>.slide.light</b>   fundo claro
+<b>.slide.cta</b>     cor cheia de fecho
+<b>.slide.post</b>    padding uniforme (peça única)
+<b>.slide.photo</b>   imagem de fundo + véu
+<b>.slide.cover</b>   capa com imagem sangrando
+<b>.slide.full</b>    imagem inteira, sem véu
+
+<i>o pai é quem decide a cor do filho:</i>
+.slide.dark  .sub  usa --on-dark-74
+.slide.light .sub  usa --on-light-66
+
+<i>medidas, todas em tokens.css:</i>
+--canvas-w   1080px
+--canvas-h   1350px
+--pad-x        90px   <i>margem lateral</i>
+--pad-top      84px
+--pad-bottom   74px
+--max-h1      900px   <i>trava a linha do título</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 03 FIXOS ============ -->
+<section class="k-sec" id="fixos">
+  <h2><span class="n">03</span> Elementos fixos</h2>
+  <p>Aparecem em <b>todos</b> os slides, com margens idênticas na sequência inteira. São eles que fazem o carrossel parecer uma peça só.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="hdr"><span class="handle">@perfil</span></div>
+        <div style="height:56px"></div>
+        <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i></div><span class="count">3/5</span><span class="chev">›</span></div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.hdr e .ftr</div><pre>&lt;div class="hdr"&gt;
+    &lt;span class="handle"&gt;@perfil&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="ftr"&gt;
+  &lt;div class="bar"&gt;&lt;i class="feito"&gt;&lt;/i&gt;&lt;i class="feito"&gt;&lt;/i&gt;&lt;i class="agora"&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+  &lt;span class="count"&gt;3/5&lt;/span&gt;
+  &lt;span class="chev"&gt;›&lt;/span&gt;
+&lt;/div&gt;
+
+<i>· um traço por slide: .feito até o atual,
+  .agora no atual, sem classe no que falta
+· o último slide acende o último traço
+  e NÃO leva .chev
+· quem escreve isso é render/linha-do-tempo.mjs
+· o handle atenua, mas nunca some</i></pre></div>
+  </div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="footer" style="margin-top:0">
+          <div class="k-logo-ph k-sm">LOGO</div>
+          <div class="note">Nota de rodapé do post único, com um <b>trecho em destaque</b> no meio.</div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.footer · rodapé de peça única</div><pre>&lt;div class="footer"&gt;
+  &lt;img src="/.claude/skills/carrossel/marca/logo/logo-clara.png" alt=""&gt;
+  &lt;div class="note"&gt;
+    Nota com &lt;b&gt;trecho em destaque&lt;/b&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>sobre fundo claro a logo precisa de base
+escura pra não sumir:</i>
+
+&lt;div class="footer"&gt;
+  &lt;div class="<b>logochip</b>"&gt;&lt;img src="…/logo-clara.png"&gt;&lt;/div&gt;
+  &lt;div class="note"&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<!-- ============ 04 TEXTO ============ -->
+<section class="k-sec" id="texto">
+  <h2><span class="n">04</span> Kicker, título e corpo</h2>
+  <p>O kicker abre quase todo slide: diz o assunto <b>antes</b> do título, o que libera a headline pra ser curta.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">Kicker do slide</div>
+        <h1>Título da capa com um <em>destaque</em> curto.</h1>
+        <div class="sub">Linha de apoio da capa: amplia o título sem repetir o que ele já disse.</div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.kick · h1 · .sub</div><pre>&lt;div class="kick"&gt;Kicker do slide&lt;/div&gt;
+&lt;h1&gt;Título com um &lt;em&gt;destaque&lt;/em&gt; curto.&lt;/h1&gt;
+&lt;div class="sub"&gt;Linha de apoio.&lt;/div&gt;
+
+<i>escala (tokens.css):</i>
+--fs-h1       82px   <i>capa de carrossel</i>
+--fs-h1-post  88px   <i>peça única</i>
+--fs-h1-cta   76px   <i>fecho</i>
+--fs-h2       62px   <i>slide interno</i>
+--fs-sub      28px   <i>apoio da capa</i>
+--fs-lead     30px   <i>parágrafo interno</i>
+
+<i>a bolinha do kicker vem do ::before:
+10px na cor de acento, redonda.
+É bolinha e não régua porque um risco
+horizontal antes do rótulo lê como
+travessão no feed</i></pre></div>
+  </div>
+
+  <div class="k-stage k-on-light" style="margin-top:24px">
+    <div class="slide light k-zoom">
+      <div class="kick">Kicker do slide</div>
+      <h2>Título do slide interno, um pouco mais longo que o da capa.</h2>
+      <div class="lead">Parágrafo de apoio do slide interno. Mais presente que a linha da capa, porque aqui ele carrega o argumento. Duas ou três frases no máximo: passou disso, vira dois slides.</div>
+    </div>
+  </div>
+
+  <div class="k-note">Capa em <b>h1</b>, internos em <b>h2</b>. <code>.sub</code> é apoio de capa (mais atenuado), <code>.lead</code> é parágrafo interno (mais presente). Os <code>max-width</code> não são decoração: são o que impede a linha de esticar e quebrar o ritmo de leitura.</div>
+</section>
+
+<!-- ============ 05 LISTA ============ -->
+<section class="k-sec" id="lista">
+  <h2><span class="n">05</span> Lista</h2>
+  <p>Máximo <b>4 itens</b>. Se precisar de mais, o slide está tentando dizer duas coisas.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Kicker do slide</div>
+        <ul class="list">
+          <li>Primeiro item da lista</li>
+          <li>Segundo item da lista</li>
+          <li>Terceiro item da lista</li>
+        </ul>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">ul.list</div><pre>&lt;ul class="list"&gt;
+  &lt;li&gt;Primeiro item da lista&lt;/li&gt;
+  &lt;li&gt;Segundo item da lista&lt;/li&gt;
+  &lt;li&gt;Terceiro item da lista&lt;/li&gt;
+&lt;/ul&gt;
+
+<i>o marcador é um ::before circular de 12px
+na cor de acento: nunca bullet nativo,
+nunca ícone</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 06 TERMINAL ============ -->
+<section class="k-sec" id="terminal">
+  <h2><span class="n">06</span> Terminal</h2>
+  <p>Para processo, teste, checklist ou diagnóstico. Janela de texto, sempre escura: <b>no máximo uma aparição por peça</b>.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">Kicker do slide</div>
+        <div class="term">
+          <div class="tb"><i class="c1"></i><i class="c2"></i><i class="c3"></i><span>título da janela</span></div>
+          <div class="tbody">
+            <div><span class="p">›</span> comando --exemplo</div>
+            <div><span class="k">campo 1 ..</span> valor do primeiro campo</div>
+            <div><span class="k">campo 2 ..</span> valor do segundo campo</div>
+            <div><span class="k">campo 3 ..</span> <span class="ok">concluído</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.term</div><pre>&lt;div class="term"&gt;
+  &lt;div class="tb"&gt;
+    &lt;i class="c1"&gt;&lt;/i&gt;   <i>ponto: acento</i>
+    &lt;i class="c2"&gt;&lt;/i&gt;   <i>ponto: apoio 1</i>
+    &lt;i class="c3"&gt;&lt;/i&gt;   <i>ponto: apoio 2</i>
+    &lt;span&gt;título da janela&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="tbody"&gt;
+    &lt;div&gt;&lt;span class="<b>p</b>"&gt;›&lt;/span&gt; comando&lt;/div&gt;
+    &lt;div&gt;&lt;span class="<b>k</b>"&gt;campo ..&lt;/span&gt; valor&lt;/div&gt;
+    &lt;div&gt;&lt;span class="<b>ok</b>"&gt;concluído&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<b>.p</b>   prompt, na cor de acento
+<b>.k</b>   rótulo, atenuado
+<b>.ok</b>  estado concluído</pre></div>
+  </div>
+
+  <div class="k-note">Os pontinhos de alinhamento (<code>campo 1 ..</code>) fazem a coluna bater sem precisar de tabela: é um truque do componente, não enfeite. O fundo do terminal usa <code>--c-abyss</code>, um degrau abaixo do fundo escuro: se fosse a mesma cor, a janela sumiria.</div>
+</section>
+
+<!-- ============ 07 CARDS ============ -->
+<section class="k-sec" id="cards">
+  <h2><span class="n">07</span> Cards de comparação</h2>
+  <p>Mesma largura, critérios comparáveis. <code>.hero</code> marca o card em foco: mostrar critérios, não torcida.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <h2>Título do slide.</h2>
+        <div class="cards">
+          <div class="card"><div class="cn">Opção A</div><div class="cr">Rótulo</div><div class="cd">Descrição curta da primeira opção.</div></div>
+          <div class="card"><div class="cn">Opção B</div><div class="cr">Rótulo</div><div class="cd">Descrição curta da segunda opção.</div></div>
+          <div class="card hero"><div class="cn">Opção C</div><div class="cr">Em foco</div><div class="cd">Descrição curta da opção destacada.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.cards · compacta</div><pre>&lt;div class="cards"&gt;
+  &lt;div class="card"&gt;
+    &lt;div class="cn"&gt;Opção A&lt;/div&gt;
+    &lt;div class="cr"&gt;Rótulo&lt;/div&gt;
+    &lt;div class="cd"&gt;Descrição curta.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="card <b>hero</b>"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+<b>.cn</b>  nome, em mono
+<b>.cr</b>  rótulo, caixa alta e tracking aberto
+<b>.cd</b>  descrição
+
+<i>2 a 3 cards. Com 4 o texto fica ilegível
+no feed.</i></pre></div>
+  </div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="cards full">
+          <div class="card"><div class="cn">Opção A</div><div class="cr">Rótulo</div><div class="rule"></div><div class="cd">Descrição curta da primeira opção.</div></div>
+          <div class="card"><div class="cn">Opção B</div><div class="cr">Rótulo</div><div class="rule"></div><div class="cd">Descrição curta da segunda opção.</div></div>
+          <div class="card hero"><div class="cn">Opção C</div><div class="cr">Em foco</div><div class="rule"></div><div class="cd">Descrição curta da opção destacada.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.cards.full · completa</div><pre>&lt;div class="cards <b>full</b>"&gt;
+  &lt;div class="card"&gt;
+    &lt;div class="cn"&gt;Opção A&lt;/div&gt;
+    &lt;div class="cr"&gt;Rótulo&lt;/div&gt;
+    &lt;div class="<b>rule</b>"&gt;&lt;/div&gt;
+    &lt;div class="cd"&gt;Descrição curta.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>mesma estrutura, mais ar:
+· raio 18px em vez de 16px
+· sombra suave
+· .rule: régua divisória entre rótulo e
+  descrição; no card em foco vira acento
+
+usar na peça única, onde sobra espaço</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 08 NÚMERO ============ -->
+<section class="k-sec" id="numero">
+  <h2><span class="n">08</span> Número protagonista</h2>
+  <p>Número grande <b>sem contexto não se sustenta</b>: sempre com o título reduzido logo abaixo, e a fonte do dado na legenda.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Kicker do slide</div>
+        <div class="num">00%</div>
+        <h2>contexto do número, na linha logo abaixo.</h2>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.num</div><pre>&lt;div class="kick"&gt;Kicker&lt;/div&gt;
+&lt;div class="num"&gt;00%&lt;/div&gt;
+&lt;h2&gt;contexto do número.&lt;/h2&gt;
+
+<i>o h2 logo depois de .num já é reduzido
+automaticamente pela regra `.num + h2`:
+46px, max-width 760px</i>
+
+<i>variante editorial, na serif itálica:</i>
+&lt;div class="num <b>serif</b>"&gt;00%&lt;/div&gt;</pre></div>
+  </div>
+
+  <div class="k-stage k-on-light" style="margin-top:24px">
+    <div class="slide light k-zoom">
+      <div class="kick">Variante serif</div>
+      <div class="num serif">00%</div>
+      <h2>o mesmo dado, com peso mais editorial.</h2>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 CHIPS ============ -->
+<section class="k-sec" id="chips">
+  <h2><span class="n">09</span> Chips</h2>
+  <p>Especificações curtas. Rótulo na cor de acento, valor em texto normal: substitui uma lista técnica sem virar tabela.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Kicker do slide</div>
+        <h2>Título do slide.</h2>
+        <div class="chips">
+          <span class="chip"><b>rótulo:</b> valor do campo</span>
+          <span class="chip"><b>rótulo:</b> outro valor</span>
+          <span class="chip"><b>rótulo:</b> valor mais longo aqui</span>
+          <span class="chip"><b>rótulo:</b> valor final</span>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.chips</div><pre>&lt;div class="chips"&gt;
+  &lt;span class="chip"&gt;
+    &lt;b&gt;rótulo:&lt;/b&gt; valor do campo
+  &lt;/span&gt;
+  &lt;span class="chip"&gt;…&lt;/span&gt;
+&lt;/div&gt;
+
+<i>· o &lt;b&gt; é o rótulo, na cor de acento
+· quebra sozinho em várias linhas
+· funciona sobre fundo claro e escuro
+  (a borda troca pela variante do pai)</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 10 FICHA ============ -->
+<section class="k-sec" id="ficha">
+  <h2><span class="n">10</span> Ficha em colunas</h2>
+  <p>Alternativa ao terminal quando o dado é comparável e curto. Ancora no rodapé do bloco com <code>margin-top:auto</code>.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="ficha" style="margin-top:0">
+          <div class="col"><div class="lab">Campo 1</div><div class="val">Valor<small>complemento</small></div></div>
+          <div class="col"><div class="lab">Campo 2</div><div class="val">Valor · outro<small>complemento</small></div></div>
+          <div class="col"><div class="lab">Campo 3</div><div class="val">Valor<small>complemento curto</small></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.ficha</div><pre>&lt;div class="ficha"&gt;
+  &lt;div class="col"&gt;
+    &lt;div class="lab"&gt;Campo 1&lt;/div&gt;
+    &lt;div class="val"&gt;Valor
+      &lt;small&gt;complemento&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  …
+&lt;/div&gt;
+
+<i>· 3 colunas, divididas por linha fina
+· o margin-top:auto empurra pro rodapé
+· .ficha.junta encosta a ficha no texto
+· o &lt;small&gt; quebra pra segunda linha
+  sozinho</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 11 DECORAÇÃO ============ -->
+<section class="k-sec" id="decor">
+  <h2><span class="n">11</span> Decoração</h2>
+  <p>Sempre <b>atrás</b> do conteúdo (que fica em <code>z-index:3</code>) e sangrando pra fora do slide. Um elemento decorativo por peça.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-fullrow">
+    <figure>
+      <div class="k-stage k-full">
+        <div class="slide dark">
+          <div class="ring"></div><div class="star"></div>
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body"><div class="kick">Decoração</div><h1>Anel <em>e estrela</em>.</h1></div>
+          <div class="ftr"><div class="bar"><i class="agora"></i><i></i><i></i><i></i><i></i></div><span class="count">1/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.ring + .star (a estrela é acessório do anel)</figcaption>
+    </figure>
+    <figure>
+      <div class="k-stage k-full">
+        <div class="slide dark">
+          <div class="ring alt"></div>
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body"><div class="kick">Decoração</div><h1>Anel na <em>variante</em> inferior.</h1></div>
+          <div class="ftr"><div class="bar"><i class="agora"></i><i></i><i></i><i></i><i></i></div><span class="count">1/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.ring.alt</figcaption>
+    </figure>
+    <figure>
+      <div class="k-stage k-full">
+        <div class="slide dark">
+          <div class="glow"></div>
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body"><div class="kick">Decoração</div><h1>Disco <em>chapado</em> de capa.</h1></div>
+          <div class="ftr"><div class="bar"><i class="agora"></i><i></i><i></i><i></i><i></i></div><span class="count">1/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.glow</figcaption>
+    </figure>
+  </div>
+
+  <div class="k-note">A decoração é <b>ambiente, não logotipo</b>. Nunca reconstruir o símbolo da marca em CSS: a logo entra sempre como arquivo de imagem. O anel é uma forma geométrica genérica que só empresta a cor de acento; a estrela é acessório dele e não conta sozinha. A <b>grade</b> (seção 16) também conta como decoração.</div>
+</section>
+
+<!-- ============ 12 FRAME ============ -->
+<section class="k-sec" id="frame">
+  <h2><span class="n">12</span> Frame de mídia</h2>
+  <p>Mockup de player, pra conteúdo sobre vídeo, quando não se tem o frame real. É a <b>única</b> situação em que a cor de apoio ocupa área grande, e mesmo assim sob véu escuro.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="frame" style="margin-top:0">
+          <div class="grain"></div>
+          <div class="meta-l">00:00 / 00:00</div>
+          <div class="meta-r">16:9</div>
+          <div class="play"></div>
+          <div class="scrub"></div>
+        </div>
+        <div class="chips">
+          <span class="chip"><b>rótulo:</b> valor</span>
+          <span class="chip"><b>rótulo:</b> valor</span>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.frame</div><pre>&lt;div class="frame"&gt;
+  &lt;div class="grain"&gt;&lt;/div&gt;    <i>textura de linhas</i>
+  &lt;div class="meta-l"&gt;00:00&lt;/div&gt;
+  &lt;div class="meta-r"&gt;16:9&lt;/div&gt;
+  &lt;div class="play"&gt;&lt;/div&gt;     <i>triângulo em CSS</i>
+  &lt;div class="scrub"&gt;&lt;/div&gt;    <i>barra de progresso</i>
+&lt;/div&gt;
+
+<i>o fundo empilha duas camadas:
+1. véu escuro chapado
+2. --grad-brand: a cor de apoio 1, sólida
+   (o nome vem de uma versão antiga em
+   gradiente)
+
+por isso a peça continua legível mesmo
+com 384px de altura de cor</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 13 DESTAQUES ============ -->
+<section class="k-sec" id="destaques">
+  <h2><span class="n">13</span> Destaques de texto</h2>
+  <p>Três formas de tirar um trecho do fluxo: nota lateral, card tracejado e alerta. Nunca duas no mesmo slide.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Nota lateral</div>
+        <div class="aside" style="margin-top:20px">Um trecho que merece pausa, na serif itálica, sem card completo em volta.</div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.aside · .dashed · .alert</div><pre>&lt;div class="<b>aside</b>"&gt;
+  Citação ou comentário, em serif itálica.
+&lt;/div&gt;
+
+&lt;div class="<b>dashed</b>"&gt;
+  Aviso ou condição, em card tracejado.
+&lt;/div&gt;
+
+&lt;div class="<b>alert</b>"&gt;
+  Impacto ou alerta: usa o acento raro.
+&lt;/div&gt;
+
+<i>· .aside  barra vertical + serif, sem card;
+  uma por peça
+· .dashed borda tracejada, fundo transparente
+· .alert  acento raro; um por peça, e nunca
+  competindo com o acento principal no
+  mesmo elemento</i></pre></div>
+  </div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Card tracejado</div>
+        <div class="dashed" style="margin-top:20px">Uma condição ou aviso que precisa ficar visível, mas não deve tomar o slide inteiro.</div>
+      </div>
+    </div>
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Alerta</div>
+        <div class="alert" style="margin-top:20px">O ponto de atenção da peça: no máximo um por carrossel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 PROCESSO ============ -->
+<section class="k-sec" id="processo">
+  <h2><span class="n">14</span> Processo e mudança</h2>
+  <p>Três componentes pra sequência: etapas numeradas, fluxo horizontal e palavra grande.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">Etapas</div>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><div class="t">Primeira etapa<small>complemento curto da etapa</small></div></div>
+          <div class="step"><div class="n">2</div><div class="t">Segunda etapa<small>complemento curto da etapa</small></div></div>
+          <div class="step"><div class="n">3</div><div class="t">Terceira etapa<small>complemento curto da etapa</small></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.steps · .flow · .shift</div><pre>&lt;div class="<b>steps</b>"&gt;
+  &lt;div class="step"&gt;
+    &lt;div class="n"&gt;1&lt;/div&gt;
+    &lt;div class="t"&gt;Primeira etapa
+      &lt;small&gt;complemento&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="<b>flow</b>"&gt;
+  &lt;div class="node"&gt;Nó A&lt;/div&gt;
+  &lt;span class="arrow"&gt;→&lt;/span&gt;
+  &lt;div class="node"&gt;Nó B&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="<b>shift</b>"&gt;
+  &lt;b class="from"&gt;ESTADO ANTERIOR&lt;/b&gt;
+  &lt;i&gt;↓&lt;/i&gt;
+  &lt;b class="to"&gt;ESTADO NOVO&lt;/b&gt;
+&lt;/div&gt;
+
+<i>etapas: 3 a 5
+fluxo: 3 a 5 nós, relações reais
+palavra grande: só duas expressões</i></pre></div>
+  </div>
+
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Fluxo</div>
+        <div class="flow">
+          <div class="node">Nó A</div>
+          <span class="arrow">→</span>
+          <div class="node">Nó B</div>
+          <span class="arrow">→</span>
+          <div class="node">Nó C</div>
+        </div>
+      </div>
+    </div>
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">Palavra grande</div>
+        <div class="shift">
+          <b class="from">ESTADO ANTERIOR</b>
+          <i>↓</i>
+          <b class="to">ESTADO NOVO</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15 CTA ============ -->
+<section class="k-sec" id="cta">
+  <h2><span class="n">15</span> Slide de CTA</h2>
+  <p>Fecho: pergunta + <b>uma</b> ação primária. Último traço aceso, sem seta. Os dois fechos completos (palavra-gatilho e as quatro ações) estão na seção 17.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide cta k-zoom">
+        <div class="k-logo-ph">LOGO</div>
+        <h1 style="font-size:var(--fs-h1-cta)">Pergunta final que leva à ação.</h1>
+        <span class="btn" style="align-self:flex-start">Texto do botão</span>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.slide.cta</div><pre>&lt;div class="slide <b>cta</b>"&gt;
+  &lt;div class="hdr"&gt;…&lt;/div&gt;
+  &lt;div class="body"&gt;
+    &lt;img src="…/marca/logo/logo-clara.png" alt=""&gt;
+    &lt;h1&gt;Pergunta final.&lt;/h1&gt;
+    &lt;span class="btn"&gt;Texto do botão&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="ftr"&gt;
+    &lt;div class="bar"&gt;&lt;i class="feito"&gt;&lt;/i&gt;&lt;i class="feito"&gt;&lt;/i&gt;&lt;i class="feito"&gt;&lt;/i&gt;&lt;i class="feito"&gt;&lt;/i&gt;&lt;i class="agora"&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;span class="count"&gt;5/5&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>· o .body do CTA é o único centralizado
+  da peça (eixo)
+· UMA ação primária, nunca duas
+· sem .chev no último slide
+· a logo entra aqui OU na capa,
+  não nos dois
+· crédito de fonte vai na legenda; o
+  &lt;div class="ct"&gt;arte: Nome&lt;/div&gt;
+  só entra quando a arte é de terceiro
+  (ancora no pé do slide)</i></pre></div>
+  </div>
+</section>
+
+<!-- ============ 16 MAC, GRADE E CAPA ============ -->
+<section class="k-sec" id="mac-grade-capa">
+  <h2><span class="n">16</span> Janela do Mac, grade e capa</h2>
+  <p>Três componentes no mesmo contrato: nenhuma cor fixa, tudo <code>var()</code>. A exceção proposital são os semáforos do macOS: chrome de sistema, não cor de marca, então não mudam na troca de paleta.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="grid"></div>
+        <div class="kick">Janela do Mac</div>
+        <div class="mac">
+          <div class="mb"><i class="r"></i><i class="y"></i><i class="g"></i><span>exemplo.com · página</span></div>
+          <div class="mv"><div style="height:200px;background:var(--grad-brand)"></div></div>
+          <div class="mc">legenda curta do que está na tela.</div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.mac + .grid</div><pre>&lt;div class="<b>grid</b>"&gt;&lt;/div&gt;      <i>quadriculado de fundo</i>
+
+&lt;div class="<b>mac</b>"&gt;
+  &lt;div class="mb"&gt;
+    &lt;i class="r"&gt;&lt;/i&gt;&lt;i class="y"&gt;&lt;/i&gt;&lt;i class="g"&gt;&lt;/i&gt;
+    &lt;span&gt;exemplo.com&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="mv <b>crop</b>"&gt;      <i>crop = altura fixa</i>
+    &lt;img src="/carrosseis/&lt;peça&gt;/arte.jpg"&gt;
+  &lt;/div&gt;
+  &lt;div class="mc"&gt;legenda&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+
+  <div class="k-note">A <b>janela do Mac</b> enquadra imagem ou print de página. É diferente do <code>.term</code>, que é terminal de texto. Máx. <b>uma</b> por peça, mesma regra do terminal. A <b>grade</b> conta como elemento decorativo: não usar junto com <code>.ring</code> ou <code>.glow</code> no mesmo slide.</div>
+
+  <div class="k-note"><b>Clara ou escura é escolha de peça.</b> Por padrão a janela acompanha o fundo do slide; <code>.mac.clara</code> força clara sobre slide escuro e <code>.mac.escura</code> força escura sobre slide claro. Não existe "sempre": decide-se na hora. O <code>.term</code>, esse sim, é sempre escuro.<br><br><b>A imagem encaixa reta</b>, e essa é regra fixa. Dentro da <code>.mv</code>, o <code>.ph</code> perde o arredondamento: foto de cantos redondos flutuando num vidro quadrado não parece janela. O canto arredondado é o de fora, do próprio <code>.mac</code>.</div>
+
+  <div class="k-grid" style="margin-top:34px">
+    <div class="k-stage">
+      <div class="slide cover k-zoom" style="--img:linear-gradient(135deg,var(--support-1),var(--accent))">
+        <div class="hdr"><span class="handle">@perfil</span></div>
+        <div class="body">
+          <div class="kick">Assunto da capa</div>
+          <h1>Capa com imagem <em>sangrando</em>.</h1>
+          <div class="sub">O conteúdo desce pro rodapé, e é o que dá o ar de capa de revista.</div>
+        </div>
+        <div class="ftr"><div class="bar"><i class="agora"></i><i></i><i></i><i></i><i></i></div><span class="count">1/5</span><span class="chev">›</span></div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.slide.cover</div><pre>&lt;div class="slide <b>cover</b>"
+     style="<b>--img</b>:url('/carrosseis/&lt;peça&gt;/capa.jpg')"&gt;
+  &lt;div class="hdr"&gt;…&lt;/div&gt;
+  &lt;div class="body"&gt;
+    &lt;div class="kick"&gt;…&lt;/div&gt;
+    &lt;h1&gt;Título &lt;em&gt;destaque&lt;/em&gt;.&lt;/h1&gt;
+    &lt;div class="sub"&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ftr"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+<i>o caminho do --img é sempre ABSOLUTO a
+partir da raiz do projeto: relativo
+aponta pro lugar errado e a imagem some
+sem erro nenhum</i></pre></div>
+  </div>
+
+  <div class="k-note">A <b>capa</b> é imagem sangrando + véu que escurece de cima pra baixo, com o conteúdo ancorado embaixo. Diferente do <code>.photo</code>, que centraliza. A imagem precisa ter resolução no mínimo igual ao alvo (1080×1350; ideal 2×): imagem pequena esticada borra.</div>
+</section>
+
+<!-- ============ 17 IMAGEM E FECHO ============ -->
+<section class="k-sec" id="imagem">
+  <h2><span class="n">17</span> Imagem no miolo e fecho</h2>
+  <p>Resolvem duas coisas: <b>imagem no meio da peça</b>, não só na capa, e um <b>fecho que puxa ação de verdade</b>. O botãozinho da seção 15 é pequeno demais pro papel que o fecho tem.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">Cards ilustrados</div>
+        <div class="imgcards alta">
+          <div class="imgcard">
+            <div class="ph"><div class="slot"><b>IMG 03-A</b><span>o que precisa aparecer nessa imagem</span><i>mín. 900×1000 · em pé</i></div></div>
+            <div class="txt"><div class="cn">RÓTULO</div><div class="cd">A legenda do card: uma ou duas linhas.</div></div>
+          </div>
+          <div class="imgcard">
+            <div class="ph"><div class="slot"><b>IMG 03-B</b><span>o que precisa aparecer nessa imagem</span><i>mín. 900×1000 · em pé</i></div></div>
+            <div class="txt"><div class="cn">RÓTULO</div><div class="cd">A legenda do card: uma ou duas linhas.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.imgcards.alta + .ph + .slot</div><pre>&lt;div class="<b>imgcards alta</b>"&gt;
+  &lt;div class="imgcard"&gt;
+    &lt;div class="<b>ph</b>"&gt;
+      &lt;img src="/carrosseis/&lt;peça&gt;/03a.jpg" alt=""&gt;
+    &lt;/div&gt;
+    &lt;div class="txt"&gt;
+      &lt;div class="cn"&gt;RÓTULO&lt;/div&gt;
+      &lt;div class="cd"&gt;legenda&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>enquanto a foto não chegou:</i>
+&lt;div class="ph"&gt;
+  &lt;div class="<b>slot</b>"&gt;
+    &lt;b&gt;IMG 03-A&lt;/b&gt;
+    &lt;span&gt;o que vai aqui&lt;/span&gt;
+    &lt;i&gt;mín. 900×1000&lt;/i&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>variantes:</i>
+.imgcards.<b>wide</b>   <i>um card só, foto à esquerda,
+                 texto à direita</i>
+.slot.<b>solo</b>       <i>slot ocupando o slide inteiro
+                 (capa ou imagem cheia sem foto)</i></pre></div>
+  </div>
+
+  <div class="k-note"><b>O <code>.slot</code> é o método de trabalho, não um enfeite.</b> A pessoa da marca é quem traz as imagens: a estrutura nasce com o lugar reservado dizendo o que vai ali e o tamanho mínimo, e tudo fica listado num <code>IMAGENS.md</code> na pasta da peça. Quando a foto chega, o <code>.slot</code> vira <code>&lt;img&gt;</code> e nada muda de posição.<br><br>O <code>.alta</code> sobe a área de foto pra 500px e faz a imagem <b>mandar</b> no slide. Sem ele a foto fica pequena, o olho lê só a legenda e o slide é lido como mais um slide de texto. Máximo <b>dois</b> cards: três espremem a legenda.</div>
+
+  <div class="k-grid" style="margin-top:34px">
+    <div class="k-stage">
+      <div class="slide cta k-zoom">
+        <div class="body" style="align-items:center;text-align:center">
+          <h1>A pergunta que puxa <em>o comentário</em>.</h1>
+          <div class="word"><div class="lb">COMENTA</div><b>PALAVRA</b><small>que eu te mando no direct</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.slide.cta + .word</div><pre>&lt;div class="slide <b>cta</b>"&gt;      <i>cor principal</i>
+&lt;div class="slide <b>cta abismo</b>"&gt;<i>ou a mais fechada</i>
+
+  &lt;div class="body"&gt;
+    &lt;h1&gt;Pergunta &lt;em&gt;curta&lt;/em&gt;.&lt;/h1&gt;
+    &lt;div class="<b>word</b>"&gt;
+      &lt;div class="lb"&gt;COMENTA&lt;/div&gt;
+      &lt;b&gt;PALAVRA&lt;/b&gt;
+      &lt;small&gt;o que ela recebe&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="<b>follow</b>"&gt;
+      &lt;img class="av" src="/.claude/skills/carrossel/marca/logo/logo-<b>clara</b>.png" alt=""&gt;
+      &lt;div&gt;@perfil&lt;small&gt;…&lt;/small&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;</pre></div>
+  </div>
+
+  <div class="k-grid" style="margin-top:34px">
+    <div class="k-stage">
+      <div class="slide cta abismo k-zoom">
+        <div class="body" style="align-items:center;text-align:center">
+          <h1>Se te serviu, <em>faz valer</em>.</h1>
+          <div class="acts">
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Curte</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Comenta</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Compartilha</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>Salva</div>
+          </div>
+          <div class="follow"><div class="k-logo-ph k-sm">LOGO</div><div>E segue o @perfil<small>tem post novo toda semana</small></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.acts + .act + .follow</div><pre>&lt;div class="<b>acts</b>"&gt;
+  &lt;div class="<b>act</b>"&gt;&lt;svg …&gt;&lt;/svg&gt;Curte&lt;/div&gt;
+  &lt;div class="act"&gt;&lt;svg …&gt;&lt;/svg&gt;Comenta&lt;/div&gt;
+  &lt;div class="act"&gt;&lt;svg …&gt;&lt;/svg&gt;Compartilha&lt;/div&gt;
+  &lt;div class="act"&gt;&lt;svg …&gt;&lt;/svg&gt;Salva&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="<b>follow</b>"&gt;
+  &lt;img class="av" src="/.claude/skills/carrossel/marca/logo/logo-<b>clara</b>.png" alt=""&gt;
+  &lt;div&gt;E segue o @perfil
+    &lt;small&gt;linha de apoio&lt;/small&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>sem logo, o .follow fica só com o texto</i></pre></div>
+  </div>
+
+  <div class="k-note"><b>Dois fechos, um por peça.</b> A palavra-gatilho (<code>.word</code>) quando existe material real pra entregar; as quatro ações (<code>.acts</code>) quando o objetivo é alcance. Os dois sempre com a linha de seguir o perfil.<br><br><b>Sem crédito de fonte na arte.</b> Fonte se cita na legenda: dentro da imagem ela rouba espaço da chamada e ninguém lê.<br><br><b>Fundo do fecho: cor cheia, uma só.</b> A principal (<code>.slide.cta</code>) ou a mais fechada (<code>.slide.cta.abismo</code>). "Mesclar" é variar de peça pra peça, <b>nunca</b> as duas cores no mesmo slide. Ícones em traço, jamais emoji.</div>
+
+  <div class="k-note"><b>Imagem cheia (<code>.slide.full</code>):</b> a foto ocupa o quadro todo, sem véu, e só o quadro fixo fica por cima com tarja sólida. Vem sempre logo depois do slide que ela ilustra, uma por peça. Legenda opcional no <code>.cap</code>, ancorada embaixo.</div>
+
+  <h3>Os dois fundos que quase ninguém lembra que existem</h3>
+  <p><code>.slide.photo</code> e <code>.slide.post</code> vivem no <code>componentes.css</code> e é fácil esquecer deles na hora de montar.</p>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide photo k-zoom" style="--img:linear-gradient(135deg,var(--support-1),var(--accent))">
+        <div class="hdr"><span class="handle">@perfil</span></div>
+        <div class="body">
+          <div class="kick">Slide interno com foto</div>
+          <h2>Véu chapado, conteúdo <em>centralizado</em>.</h2>
+          <div class="lead">Diferente da capa: aqui o véu é uniforme e o texto fica no meio.</div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.slide.photo</div><pre>&lt;div class="slide <b>photo</b>"
+     style="--img:url('/carrosseis/&lt;peça&gt;/foto.jpg')"&gt;
+  &lt;div class="body"&gt;
+    &lt;h2&gt;Título&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>cover  = véu em degradê, texto embaixo</i>
+<i>photo  = véu chapado, texto no meio</i>
+<i>full   = sem véu, imagem pura</i></pre></div>
+  </div>
+
+  <div class="k-note"><b><code>.photo</code> é pra slide interno com foto</b> em que o texto precisa dominar: o véu chapado escurece a imagem inteira e o conteúdo fica centralizado. Se a imagem é que importa, use <code>.full</code>; se é capa, use <code>.cover</code>.<br><br><b><code>.post</code> é a peça única</b>, o post avulso fora de carrossel. Só muda o padding pra uniforme (<code>--pad-post</code>) e aumenta o <code>h1</code>. Sem rodapé de progresso, porque não tem próximo.</div>
+</section>
+
+<!-- ============ 18 FIGURA RECORTADA ============ -->
+<section class="k-sec" id="figura">
+  <h2><span class="n">18</span> Figura recortada</h2>
+  <p>Uma pessoa ou personagem em JPEG com <b>fundo transparente</b>: a foto da pessoa da marca recortada, uma ilustração própria, um mascote. O kit não traz figura nenhuma; a pessoa traz a dela. Regras de dosagem em <code>referencias/composicao.md</code>.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark comfigura k-zoom" style="height:640px">
+        <div class="body" style="justify-content:center">
+          <div class="kick">O problema</div>
+          <h2>Título curto, com <em>a figura</em> ao lado.</h2>
+        </div>
+        <div class="figura k-fig-ph" style="width:330px">PNG recortado<br>corpo inteiro</div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.slide.comfigura + .figura</div><pre>&lt;div class="slide dark <b>comfigura</b>"&gt;
+  &lt;div class="body"&gt;
+    &lt;div class="kick"&gt;Kicker&lt;/div&gt;
+    &lt;h2&gt;Título curto&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;img class="<b>figura</b>"
+       src="/carrosseis/&lt;peça&gt;/figura.png" alt=""&gt;
+&lt;/div&gt;
+
+<i>tamanhos:</i>
+.figura        600px  <i>padrão</i>
+.figura.p      470px  <i>discreta</i>
+.figura.g      660px  <i>o teto</i>
+.figura.larga  520px  <i>figura COM CENÁRIO</i>
+
+<i>lado e alinhamento:</i>
+.figura.esq          <i>vai pra esquerda</i>
+.comfigura.textodir  <i>texto alinhado à direita</i>
+.body.alto           <i>sobe o texto pro topo</i></pre></div>
+  </div>
+
+  <h3>Busto apoiado numa caixa · <code>.combusto</code> + <code>.busto</code></h3>
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="body">
+          <div class="kick">O que muda</div>
+          <h2>Um lado contra <em>o outro</em>.</h2>
+          <div class="cards combusto">
+            <div class="card">
+              <div class="cn">Lado A</div>
+              <div class="rule"></div>
+              <div class="cd">Descrição curta do primeiro lado.</div>
+            </div>
+            <div class="card hero">
+              <div class="cn">Lado B</div>
+              <div class="rule"></div>
+              <div class="cd">Descrição curta do lado em foco.</div>
+            </div>
+            <div class="busto c2 k-fig-ph" style="width:150px;background:var(--support-2)">busto</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">busto apoiado na caixa</div><pre>&lt;div class="cards <b>combusto</b>"&gt;
+  &lt;div class="card"&gt;…&lt;/div&gt;
+  &lt;div class="card hero"&gt;…&lt;/div&gt;
+  &lt;img class="<b>busto c2</b>"
+       src="/carrosseis/&lt;peça&gt;/busto.png" alt=""&gt;
+&lt;/div&gt;
+
+<i>tamanhos:</i>
+.busto     180px  <i>padrão: é detalhe</i>
+.busto.p   140px  <i>quase um selo</i>
+.busto.g   240px  <i>o teto</i>
+
+<i>lado:</i>
+.busto.esq   <i>canto esquerdo</i>
+.busto.meio  <i>centro da caixa: SÓ caixa única</i>
+
+<i>numa DUPLA de cards:</i>
+.busto.c1    <i>centro do primeiro card</i>
+.busto.c2    <i>centro do segundo card</i></pre></div>
+  </div>
+
+  <div class="k-note"><b>O busto é meio corpo</b>, cortado na cintura. Passar ele pela <code>.figura</code> de 600px vira cabeça gigante com um corte seco embaixo. O <code>.combusto</code> encosta a base do busto no topo da caixa e afunda 32px pra dentro, de modo que a caixa esconda justamente onde a imagem acaba: o corte deixa de ser defeito e vira o motivo do componente.<br><br><b>O busto fica ATRÁS da caixa.</b> Na frente, a borda passa por baixo e o corte fica à mostra, lendo como adesivo colado no card. O busto está em <code>z-index:1</code> e os filhos da caixa em <code>2</code>.<br><br><b>Numa dupla de cards, <code>.meio</code> não serve</b>: 50% cai no <b>vão entre as duas caixas</b>, e ali não tem nada embaixo pra tapar a cintura. Use <code>.c1</code> / <code>.c2</code>, que centralizam sobre cada card.<br><br><b>Não pendurar dentro do <code>.imgcard</code></b>: aquele card tem <code>overflow:hidden</code> pra cortar a foto no canto arredondado, e corta o busto junto. Em card com overflow, o <code>.combusto</code> vai no envelope, nunca no card.</div>
+
+  <div class="k-note"><b>Dosagem:</b> uma figura por slide, uma pose não se repete na mesma peça, um conjunto (o mesmo personagem, a mesma roupa) por peça. Entra bem no slide de texto que ficaria seco e no slide de comparação (aí como busto, apoiado nos cards). Na capa não entra a não ser que a pessoa peça; no fecho nunca. <b>O <code>.comfigura</code> não é opcional:</b> sem ele o texto passa por baixo da imagem.<br><br><b>Resolução:</b> o render sai em 2×. Uma figura de 600px de altura precisa de PNG com pelo menos 1200px de altura pra não borrar. Ilustração de contorno grosso aguenta um pouco de upscale; foto recortada não aguenta nenhum.</div>
+</section>
+
+
+<!-- ============ 19 AMPLIAÇÕES ============ -->
+<section class="k-sec" id="ampliacoes">
+  <h2><span class="n">19</span> Tratamento de texto, grafismo, dado e foto de meio slide</h2>
+  <p>Oito adições que ampliam o vocabulário sem mexer na contenção do kit: cada uma tem limite por peça e conta numa cota que já existia. Tudo em <code>var()</code>, como o resto.</p>
+  <div class="k-rule"></div>
+
+  <h3>Tratamentos de texto · <code>.sublinhado</code>, <code>.marcatexto</code>, <code>.circulado</code></h3>
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Sobre o claro</div>
+        <h2>Uma palavra <span class="sublinhado">sublinhada</span>, outra <span class="marcatexto">grifada</span> e uma <span class="circulado">circulada</span>.</h2>
+      </div>
+    </div>
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">Sobre o escuro</div>
+        <h2>No escuro a grifa <span class="marcatexto">inverte</span>: faixa cheia, palavra na cor do fundo.</h2>
+      </div>
+    </div>
+  </div>
+  <div class="k-note"><b>Um tratamento por slide</b>, numa palavra ou expressão curta, e <b>nunca no mesmo título que o <code>&lt;em&gt;</code> serifado</b>: dois destaques se anulam. O exemplo acima junta os três só pra mostrar. Sobre fundo escuro a grifa translúcida desatura e a palavra destacada vira a menos legível da frase; por isso o <code>.marcatexto</code> inverte sozinho no <code>.dark</code>, <code>.cta</code>, <code>.cover</code> e <code>.photo</code>.</div>
+
+  <h3>Grafismos · <code>.marcadagua</code>, <code>.numeral</code></h3>
+  <div class="k-fullrow">
+    <figure>
+      <div class="k-stage k-full">
+        <div class="slide dark">
+          <div class="marcadagua">PREÇO</div>
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body"><div class="kick">Marca d'água</div><h1>A palavra do slide, <em>gigante e quase invisível</em>.</h1></div>
+          <div class="ftr"><div class="bar"><i class="feito"></i><i class="agora"></i><i></i><i></i><i></i></div><span class="count">2/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.marcadagua · conta como decoração</figcaption>
+    </figure>
+    <figure>
+      <div class="k-stage k-full k-on-light">
+        <div class="slide light">
+          <div class="numeral">03</div>
+          <div class="hdr"><span class="handle">@perfil</span></div>
+          <div class="body"><div class="kick">Numeral</div><h1>O número do slide <em>só em contorno</em>, no canto.</h1></div>
+          <div class="ftr"><div class="bar"><i class="feito"></i><i class="feito"></i><i class="agora"></i><i></i><i></i></div><span class="count">3/5</span><span class="chev">›</span></div>
+        </div>
+      </div>
+      <figcaption>.numeral · conta como decoração</figcaption>
+    </figure>
+  </div>
+  <div class="k-note">Os dois são <b>fundo, nunca informação</b>: ficam atrás do conteúdo e cortados por uma borda. Entram na mesma cota de <code>.ring</code>, <code>.glow</code>, <code>.star</code> e <code>.grid</code>: <b>uma decoração por peça</b>.</div>
+
+  <h3>Gráfico de barras · <code>.grafico</code></h3>
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Medida por categoria</div>
+        <div class="grafico">
+          <div class="gr-linha"><div class="gr-rot">Categoria A</div><div class="gr-trilho"><span class="gr-barra" style="width:100%"></span></div><div class="gr-val">100</div></div>
+          <div class="gr-linha"><div class="gr-rot">Categoria B</div><div class="gr-trilho"><span class="gr-barra" style="width:50%"></span></div><div class="gr-val">50</div></div>
+          <div class="gr-linha alerta-linha"><div class="gr-rot">Categoria C</div><div class="gr-trilho"><span class="gr-barra alerta" style="width:8%"></span></div><div class="gr-val">8</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.grafico</div><pre>&lt;div class="<b>grafico</b>"&gt;
+  &lt;div class="gr-linha"&gt;
+    &lt;div class="gr-rot"&gt;Categoria A&lt;/div&gt;
+    &lt;div class="gr-trilho"&gt;
+      &lt;span class="gr-barra" style="width:100%"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="gr-val"&gt;100&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="gr-linha <b>alerta-linha</b>"&gt;
+    …
+    &lt;span class="gr-barra <b>alerta</b>" style="width:8%"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<i>· 3 a 6 linhas, sempre horizontal
+· série única = UMA cor; a barra .alerta
+  consome o .alert da peça
+· a escala começa no zero; magnitude
+  independente: o maior enche o trilho;
+  fração de um todo: o trilho é o todo
+· máx. 1 por peça</i></pre></div>
+  </div>
+
+  <h3>Índice · <code>.indice</code></h3>
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">O que vem pela frente</div>
+        <div class="indice">
+          <div class="item"><span class="n">01</span><div><b>Primeiro tópico</b><span>uma linha de apoio</span></div></div>
+          <div class="item"><span class="n">02</span><div><b>Segundo tópico</b><span>uma linha de apoio</span></div></div>
+          <div class="item"><span class="n">03</span><div><b>Terceiro tópico</b><span>uma linha de apoio</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.indice</div><pre>&lt;div class="<b>indice</b>"&gt;
+  &lt;div class="item"&gt;
+    &lt;span class="n"&gt;01&lt;/span&gt;
+    &lt;div&gt;&lt;b&gt;Primeiro tópico&lt;/b&gt;
+    &lt;span&gt;uma linha de apoio&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  …
+&lt;/div&gt;
+
+<i>· sumário no slide 2 ("o que vem pela
+  frente") ou recapitulação no penúltimo
+· 3 a 6 itens, máx. 1 por peça</i></pre></div>
+  </div>
+
+  <h3>Pilha e selo · <code>.pilha</code>, <code>.selo</code></h3>
+  <div class="k-grid">
+    <div class="k-stage">
+      <div class="slide dark k-zoom">
+        <div class="kick">O que era, o que virou</div>
+        <div class="pilha">
+          <div class="card p1"><b>O que era</b><p>Descrição curta do estado anterior.</p></div>
+          <div class="card p2"><b>O que virou</b><p>Descrição curta do estado novo.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="k-stage k-on-light">
+      <div class="slide light k-zoom">
+        <div class="kick">Selo</div>
+        <h2>Um badge de acento, <em>em fluxo</em>.</h2>
+        <span class="selo cheio">NOVO</span>
+      </div>
+    </div>
+  </div>
+  <div class="k-note"><b>Pilha:</b> dois cards em diagonal, o de cima é o que a peça defende. Máx. 1 por peça, e nunca junto com <code>.cards</code> no mesmo slide (é a mesma ideia dita de outro jeito). <b>Selo:</b> conteúdo mono curtíssimo, um por slide, no máximo dois por peça. Sem <code>.cheio</code> fica só o contorno; com, preenche.</div>
+
+  <h3>Foto de meio slide · <code>.fotomeia</code></h3>
+  <div class="k-grid">
+    <div class="k-stage k-on-light">
+      <div class="slide light comfotomeia k-zoom" style="height:700px">
+        <div class="fotomeia dir" style="--img:linear-gradient(135deg,var(--support-1),var(--accent))"></div>
+        <div class="hdr"><span class="handle">@perfil</span></div>
+        <div class="body">
+          <div class="kick">Meia foto</div>
+          <h2>O texto de um lado, <em>a foto do outro</em>.</h2>
+          <div class="lead">A foto sangra por três bordas e o texto fica na coluna livre.</div>
+        </div>
+      </div>
+    </div>
+    <div class="k-panel"><div class="k-cap">.comfotomeia + .fotomeia</div><pre>&lt;div class="slide light <b>comfotomeia</b>"&gt;
+  &lt;div class="<b>fotomeia dir</b>"
+       style="--img:url('/carrosseis/&lt;peça&gt;/foto.jpg')"&gt;&lt;/div&gt;
+  &lt;div class="hdr"&gt;…&lt;/div&gt;
+  &lt;div class="body"&gt;…&lt;/div&gt;
+  &lt;div class="ftr"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+<i>· .dir ou .esq; com .esq, use
+  .comfotomeia.textodir
+· conta como slide de IMAGEM no ritmo
+· mín. 1080×1350 em pé (é meia coluna,
+  mas a altura é inteira)
+· máx. 1 por peça</i></pre></div>
+  </div>
+
+  <div class="k-note"><b>Âncora do corpo:</b> o <code>.body</code> é centralizado por padrão. <code>.body.alto</code> sobe o texto pro topo e <code>.body.base</code> desce pro rodapé (como a capa). É escolha por slide, não sistema de posições, e a margem lateral não muda.</div>
+</section>
+
+
+<!-- ============ 20 REGRAS DE COMPOSIÇÃO ============ -->
+<section class="k-sec" id="regras">
+  <h2><span class="n">20</span> Regras de composição</h2>
+  <p>A identidade é constante; a composição varia. Mínimo <b>dois componentes diferentes</b> por peça, e nunca o mesmo em slides seguidos. A régua completa está em <code>referencias/composicao.md</code>.</p>
+  <div class="k-rule"></div>
+
+  <div class="k-grid">
+    <div class="k-panel"><div class="k-cap">Ritmo visual</div><pre>· nunca três slides de texto seguidos
+· alternar claro/escuro com intenção
+  (sem virar alternância mecânica)
+· margens laterais iguais na sequência
+· a cor de acento NUNCA domina o fundo
+· acento raro no máx. ~8% da peça e nunca
+  competindo com o acento no mesmo elemento
+· capa enxuta comunica mais que lista de tópicos
+· logo na capa OU no fecho, não nos dois
+· máx. UM terminal, UMA janela do Mac e
+  UM elemento decorativo por peça
+· não repetir o mesmo molde entre peças
+
+<b>Grade do feed (sequência de capas):</b>
+  claro, foto/escuro, acento, claro
+  nunca duas capas iguais seguidas
+
+<b>Estrutura padrão:</b>
+  slide 1     capa (foto)
+  internos    variando componentes
+  penúltimo   onde o raciocínio fecha
+  último      fecho em cor cheia
+  total       a quantidade SEGUE o conteúdo:
+              "10 coisas" pede 11 ou 12,
+              um item por slide</pre></div>
+    <div class="k-panel"><div class="k-cap">Render</div><pre><b>1. a linha do tempo se escreve sozinha:</b>
+  node .claude/skills/carrossel/render/linha-do-tempo.mjs \
+    carrosseis/&lt;peça&gt;/carrossel.html
+
+<b>2. os JPEGs:</b>
+  node .claude/skills/carrossel/render/render-carrossel.js \
+    carrosseis/&lt;peça&gt;/carrossel.html
+  saem em carrosseis/&lt;peça&gt;/instagram/
+  2160×2700 (2×), um por .slide
+
+<b>3. antes de publicar:</b>
+  conferir a PROPORÇÃO 4:5 nos JPEGs
+  fonte certa? (a headline tem o tracking
+  apertado da display; se não tem, a fonte
+  não carregou e o render avisa)
+
+<i>instalação do render: render/instalar.md</i></pre></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+/* Editor de paleta: prova ao vivo de que a troca de marca é um bloco só.
+   Escreve os canais RGB no :root; todo o resto se recalcula sozinho. Os
+   valores iniciais vêm do marca/tokens.css carregado na página. */
+const CANAIS = [
+  ['--c-dark',      'Cor principal', '28,28,32'],
+  ['--c-light',     'Fundo claro',   '244,243,240'],
+  ['--c-accent',    'Acento',        '214,120,48'],
+  ['--c-support-1', 'Apoio 1',       '70,70,80'],
+  ['--c-support-2', 'Apoio 2',       '228,228,225'],
+  ['--c-rare',      'Acento raro',   '90,90,90'],
+  ['--c-abyss',     'Abismo',        '14,14,18'],
+  ['--c-ok',        'Concluído',     '140,190,150'],
+];
+
+const PRESETS = {
+  'Demonstração': ['28,28,32','244,243,240','214,120,48','70,70,80','228,228,225','90,90,90','14,14,18','140,190,150'],
+  'Marinho':      ['0,31,53','245,244,243','185,145,91','24,69,96','232,238,242','68,27,27','0,18,32','143,189,240'],
+  'Floresta':     ['12,38,32','244,246,242','198,164,88','32,74,62','226,236,229','74,30,26','6,22,18','150,200,160'],
+  'Tinta':        ['26,22,46','246,244,250','139,124,224','58,50,96','233,230,244','86,28,58','14,12,28','170,160,230'],
+};
+
+const toHex = t => '#' + t.split(',').map(n => (+n).toString(16).padStart(2,'0')).join('');
+const toRgb = h => [1,3,5].map(i => parseInt(h.substr(i,2),16)).join(',');
+const root  = document.documentElement;
+const copia = document.getElementById('copia');
+
+function atualizaCopia(){
+  copia.textContent = CANAIS.map(([v]) => `${v}: ${getComputedStyle(root).getPropertyValue(v).trim()};`).join('\n');
+}
+
+const pickers = document.getElementById('pickers');
+CANAIS.forEach(([varName, label, fallback]) => {
+  const atual = getComputedStyle(root).getPropertyValue(varName).trim() || fallback;
+  const wrap = document.createElement('label');
+  wrap.className = 'k-pick';
+  wrap.innerHTML = `<input type="color" value="${toHex(atual)}" data-var="${varName}">
+                    <div><b>${label}</b><span>${varName}</span></div>`;
+  wrap.querySelector('input').addEventListener('input', e => {
+    root.style.setProperty(varName, toRgb(e.target.value));
+    atualizaCopia();
+  });
+  pickers.appendChild(wrap);
+});
+
+const presets = document.getElementById('presets');
+Object.entries(PRESETS).forEach(([nome, cores]) => {
+  const b = document.createElement('button');
+  b.innerHTML = `<i style="background:rgb(${cores[2]})"></i>${nome}`;
+  b.addEventListener('click', () => {
+    cores.forEach((rgb, i) => root.style.setProperty(CANAIS[i][0], rgb));
+    pickers.querySelectorAll('input').forEach((inp, i) => inp.value = toHex(cores[i]));
+    atualizaCopia();
+  });
+  presets.appendChild(b);
+});
+atualizaCopia();
+</script>
+</body>
+</html>

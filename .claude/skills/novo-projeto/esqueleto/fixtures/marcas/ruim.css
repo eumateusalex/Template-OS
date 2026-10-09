@@ -1,0 +1,5 @@
+/* Uma marca RUIM, de propósito: o texto apagado claro demais para ser lido
+   sobre o fundo. O conferidor `marca` tem que reprovar nomeando o par. */
+:root {
+  --c-apagado: 190,190,190;
+}

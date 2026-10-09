@@ -1,0 +1,281 @@
+{
+  "ai-era-differentiation/dunning-kruger-curve.jpg": {
+    "shows": "The Dunning-Kruger curve: confidence spikes at \"ignorant\", craters at \"cultured\" and climbs toward \"expert\", with a labelled confidence gap"
+  },
+  "ai-era-differentiation/generic-ai-purple-gradient-landing.jpg": {
+    "shows": "Generic AI landing page \"Synthwave.ai — Build the Future With AI Magic\": purple gradients, two CTAs and a stats row (10K+, 99.9%, 50M+)",
+    "why": "the typical slop-design landing page: purple gradients, a generic AI promise, interchangeable stats"
+  },
+  "ai-era-differentiation/saas-hero-section-formula.jpg": {
+    "shows": "\"SaaS Hero Section Formula\": five hero elements (headline, subheadline, primary CTA, secondary CTA, trust bar) with before/after copy"
+  },
+  "behavioral-science-toolkit/analysis-paralysis-staged-payment.png": {
+    "shows": "Mobile checkout labelled \"analysis paralysis\": payment options split into smaller stages, advice to break choices into about four steps"
+  },
+  "behavioral-science-toolkit/delboeuf-illusion-dots.jpg": {
+    "shows": "Delboeuf illusion: two identical black dots, the one inside the small ring reads as bigger"
+  },
+  "behavioral-science-toolkit/destructive-action-button-hierarchy.png": {
+    "shows": "Good/bad confirm dialog: bad = two equally weighted green buttons; good = ghost \"Cancel\" beside a solid red \"Delete now\""
+  },
+  "behavioral-science-toolkit/hotel-scarcity-rooms-left.jpg": {
+    "shows": "Hotel listing using scarcity: \"Only 2 rooms left\""
+  },
+  "behavioral-science-toolkit/organ-donor-opt-out-chart.png": {
+    "shows": "Bar chart of effective organ-donor consent: opt-in countries low (Denmark 4.25%), opt-out countries near 100%"
+  },
+  "behavioral-science-toolkit/precise-number-billboard.jpg": {
+    "shows": "Billboard \"Last year we sold 526 homes. Your cousin sold 2. List responsibly.\""
+  },
+  "checkout-and-forms/avoid-dropdown-use-button-group.jpg": {
+    "shows": "Good/bad mobile form: a \"Tipo de conta\" dropdown (bad) vs a three-option button group (good), captioned \"Evite o drop downs\" for fewer than 6 options",
+    "why": "a boring-screen fix: a dropdown replaced by a visible button group when there are fewer than six options"
+  },
+  "checkout-and-forms/card-deck-store-checkout.jpg": {
+    "shows": "A direct-to-consumer card-deck store's checkout: \"Site Seguro\" header, four fields with a +55 phone mask, order summary with 5% PIX discount and free shipping, guarantees and a testimonial",
+    "why": "the checkout with the coupon field gone, after that one field cost 60% of sales"
+  },
+  "checkout-and-forms/conversion-by-select-boxes-chart.png": {
+    "shows": "Line chart \"Conversion Rate by Number of Select Boxes\": conversion falls from about 16% with one select box to about 13.9% with five",
+    "why": "field-type evidence: conversion drops as select boxes are added"
+  },
+  "checkout-and-forms/four-field-secure-checkout.jpg": {
+    "shows": "Checkout applying the list at once: lock and \"Site Seguro\" header, four fields with a +55 phone mask, product thumbnail, 5% PIX discount and free shipping"
+  },
+  "checkout-and-forms/register-cta-microcopy-good-bad.png": {
+    "shows": "Two signup-form wireframes: bad = bare \"Register\" button; good = the same button with red microcopy \"Registre-se agora e ganhe um ebook grátis\"",
+    "why": "a risk-reducing incentive line under the CTA, one of the known leaks between visit and purchase"
+  },
+  "churn-and-retention/plain-language-contract-clause.jpg": {
+    "shows": "Dense legal contract clause (red X) vs a plain-language rewrite (green check), with an \"easy-speech bias\" callout"
+  },
+  "conversion-and-landing-pages/card-deck-store-linkedin-proof.jpg": {
+    "shows": "A card-deck store's proof section: \"+10,000 professionals\" annotated social-proof bias, a logo bar and testimonials shown as LinkedIn posts with real names and photos"
+  },
+  "conversion-and-landing-pages/card-deck-store-proof-wall.jpg": {
+    "shows": "A card-deck store's proof wall: \"Utilizado por +10.000 profissionais\" annotated social-proof bias, client logos and testimonials as LinkedIn posts with real faces and roles"
+  },
+  "conversion-and-landing-pages/checkout-button-refund-rate-microcopy.jpg": {
+    "shows": "Checkout button \"Checkout • R$95,00\" with a medal and the line \"Menos de 1% dos nossos clientes pedem seu dinheiro de volta\" beneath it",
+    "why": "a click trigger: one line of refund-rate microcopy right under the checkout button"
+  },
+  "conversion-and-landing-pages/conversion-doubles-profit-4x-chart.jpg": {
+    "shows": "Before/after revenue bars: when conversion doubles, revenue doubles, variable costs double, ad and fixed costs stay, profit increases 4x",
+    "why": "doubling conversion doubles revenue but quadruples profit, which is why conversion work pays first"
+  },
+  "conversion-and-landing-pages/cta-contrast-greyed-landing.jpg": {
+    "shows": "Greyed-out travel-health landing page (\"Cuide da sua saúde antes de embarcar\") where only the blue CTAs carry colour"
+  },
+  "conversion-and-landing-pages/demographic-twins-charles-ozzy.jpg": {
+    "shows": "Demographic twins: King Charles and Ozzy Osbourne share the same profile on paper (man, born 1948, raised in England, married twice, lives in a castle, rich and famous)"
+  },
+  "conversion-and-landing-pages/dev-tool-login-bias-annotations.jpg": {
+    "shows": "A developer tool's login screen annotated \"viés de escolha limitada\" (one dominant Google button) and \"superioridade de imagem\" (a large noodle-bowl illustration)"
+  },
+  "conversion-and-landing-pages/eye-tracking-baby-facing-camera.jpg": {
+    "shows": "Eye-tracking heatmap of the same diaper ad with the baby facing the camera: the heat pools on the baby's face and the copy stays cold"
+  },
+  "conversion-and-landing-pages/eye-tracking-baby-looking-at-headline.jpg": {
+    "shows": "Eye-tracking heatmap of a diaper ad with the baby turned toward the headline: the heat spreads to the headline and copy"
+  },
+  "conversion-and-landing-pages/five-awareness-stages-ramp.jpg": {
+    "shows": "\"As 5 etapas da consciência\": the five levels of market awareness (unaware, problem, solution, product, most aware) as a rising yellow ramp"
+  },
+  "conversion-and-landing-pages/five-stages-of-a-market-infographic.jpg": {
+    "shows": "Infographic \"Os 5 estágios de um mercado\": new category, promise escalation, saturated market (unique mechanism), skeptical market (better mechanism), red ocean (sell belonging)",
+    "why": "the five market stages that place the unique mechanism (stage 3) in the hero"
+  },
+  "conversion-and-landing-pages/google-stitch-vs-human-lp.jpg": {
+    "shows": "Side-by-side \"Google Stitch vs Human\" landing-page comparison judged on looks alone"
+  },
+  "conversion-and-landing-pages/highrise-person-photo-ab-test.jpg": {
+    "shows": "Highrise homepage A/B test: the illustrated original vs the version fronted by a real customer's photo and quote, marked +102.5%"
+  },
+  "conversion-and-landing-pages/ugly-but-converts-waterproofing-lp.jpg": {
+    "shows": "\"Ugly but converts\" waterproofing landing page: urgency bar, orange CTAs, short form above the fold, stat row and trust badges"
+  },
+  "conversion-and-landing-pages/vodafone-italy-offer-and-callback-modal.png": {
+    "shows": "Two Vodafone Italy mobile screens: the 29,90€ fibre offer with a \"Ti chiamiamo gratis\" box, and the callback modal asking for a phone number (\"Attiva con un consulente\")",
+    "why": "the two Vodafone Italy screens of the A/B test whose web-vitals variant sold 8% more"
+  },
+  "dashboards-and-data-viz/annotated-repair-shop-dashboard.jpg": {
+    "shows": "Annotated repair-shop dashboard (\"Quadro Geral\") with seven callouts: logo, sidebar, main revenue KPI top-left, average ticket, period filters and more"
+  },
+  "dashboards-and-data-viz/crammed-aesthetic-sales-dashboard.jpg": {
+    "shows": "Aesthetic but crammed sales dashboard (Codename.com \"New report\"): revenue, deals, platforms, sales dynamics and per-seller tables all at once"
+  },
+  "dashboards-and-data-viz/key-number-f-pattern-good-bad.jpg": {
+    "shows": "Good/bad KPI grid: the key number \"13\" small in a corner vs large in the top-left, annotated \"Maior fonte e dentro do padrão F!\""
+  },
+  "dashboards-and-data-viz/raw-data-to-actionable-lego-ladder.jpg": {
+    "shows": "\"Dado bruto → Acionável\": LEGO value ladder from data collection, preparation, visualization and analysis to storytelling (a built house)"
+  },
+  "dashboards-and-data-viz/recurring-expenses-before-after-app.jpg": {
+    "shows": "Finance app before/after: a dense blue \"Transações\" screen vs a cleaner \"Recorrências\" screen with a six-month bar chart and one forward-looking tip (\"Em agosto, 2 parcelas acabam…\")",
+    "why": "a before/after with less information and one forward-looking tip that says what to do"
+  },
+  "design-philosophy-and-method/goal-gradient-two-steps-left.jpg": {
+    "shows": "Booking flow headlined \"Just two steps left for your Bahamas trip!\" with a single primary CTA (goal-gradient effect)"
+  },
+  "design-philosophy-and-method/journey-micro-disappointments-graph.jpg": {
+    "shows": "Journey graph: cumulative score sliding down, green wins and small red micro-disappointments stacking up"
+  },
+  "design-philosophy-and-method/pricing-block-before-after-aov.jpg": {
+    "shows": "Before/after of a pricing block, same product, redesigned tiers, with a \"+68% AOV\" badge on the winning variant"
+  },
+  "design-philosophy-and-method/repair-shop-payments-modal-simple-brief.jpg": {
+    "shows": "A repair-shop SaaS's payment-activation modal from a simple brief: a dark modal over the work-order panel listing four benefits"
+  },
+  "design-philosophy-and-method/repair-shop-payments-screen-full-context.jpg": {
+    "shows": "A repair-shop SaaS's \"Ativar recebimento\" screen from a full-context brief: its own icons, a \"what changes for you\" list and a \"have at hand\" line before Start"
+  },
+  "design-philosophy-and-method/repair-shop-quote-builder.jpg": {
+    "shows": "A repair-shop SaaS's quote builder: parts pre-loaded with photo, code and cost, and a live summary (labor + parts → total)"
+  },
+  "metrics-and-experimentation/brax-landing-heatmap.jpg": {
+    "shows": "Attention heatmap over the Brax landing page (\"Manage All Your Native Ads From a Single Dashboard\"): heat on the headline, CTA and integration logos",
+    "why": "a landing-page heatmap to practise the reading: what to look for inside it, not which tool made it"
+  },
+  "metrics-and-experimentation/cancel-plan-confirmation-modal.jpg": {
+    "shows": "Billing page blurred behind a \"Do you really want to cancel your plan?\" modal, with \"Cancel\" and a red \"Cancel plan\" button",
+    "why": "the cancellation screen: the moment the report records, long after the user stopped getting value"
+  },
+  "metrics-and-experimentation/duolingo-dau-curr-chart.png": {
+    "shows": "Duolingo DAU curve 2018–2022 marked \"Started working on CURR\" at the inflection, with a 4.5x arrow"
+  },
+  "onboarding-and-activation/account-created-welcome-video-modal.jpg": {
+    "shows": "\"Your account was created!\" welcome modal with an intro-video thumbnail and a single \"Next\" CTA"
+  },
+  "onboarding-and-activation/dev-tool-onboarding-bias-annotations.jpg": {
+    "shows": "A developer tool's onboarding step annotated \"Zeigarnik effect\" (progress dots) and \"Default effect\" (B2C card pre-badged \"Mais comum\")"
+  },
+  "onboarding-and-activation/empty-dashboard-zero-state.jpg": {
+    "shows": "L-Nutra Pro dashboard with every card at 0.00, an empty sales chart, a \"Connect Stripe\" prompt and \"Nothing to Show\" in the patient list",
+    "why": "the empty dashboard at first login, which must set expectations instead of hoping"
+  },
+  "onboarding-and-activation/first-run-setup-cards-dashboard.jpg": {
+    "shows": "A repair-shop SaaS's first-run dashboard \"Olá, Lucas!\" with four setup cards (workshop data, mechanics, services, first work order), only the first CTA active",
+    "why": "the first-run dashboard that guides to the next action instead of showing empty data"
+  },
+  "onboarding-and-activation/first-work-order-celebration-screen.jpg": {
+    "shows": "A repair-shop SaaS's celebration screen after the first work order: party popper and \"Primeira OS criada!\" with one line on what it means",
+    "why": "the celebration screen at the activation moment (first work order created)"
+  },
+  "onboarding-and-activation/flow-onboarding-practice-step.jpg": {
+    "shows": "Wispr Flow onboarding: \"Press the keyboard shortcut to use Flow\", a top stepper (Sign up → Personalize) and a practice Slack chat",
+    "why": "a trial step with one concrete, practiced task (press the shortcut and talk) instead of passive access"
+  },
+  "onboarding-and-activation/instagram-five-reels-first-task.jpg": {
+    "shows": "Instagram weekly-progress checklist at 0% whose first item is \"Create 5 new public reels (0/5)\""
+  },
+  "onboarding-and-activation/monthly-time-to-first-sale-message.png": {
+    "shows": "Message with monthly time to first sale: 24.2 → 19.6 → 16.8 → 9.3 → 2.5 days, with accounts created, approved and new sellers per month"
+  },
+  "onboarding-and-activation/repair-shop-ai-assistant-starter-prompts.jpg": {
+    "shows": "A repair-shop SaaS's AI assistant: \"Olá, como podemos te ajudar?\" above an empty prompt box and three starter-prompt cards from different domains"
+  },
+  "onboarding-and-activation/repair-shop-contextual-tooltip.jpg": {
+    "shows": "A repair-shop SaaS's \"Smart Alerts\" card with a \"?\" hovered, opening a panel that explains the feature with a live example"
+  },
+  "onboarding-and-activation/repair-shop-empty-state-modal.jpg": {
+    "shows": "A repair-shop SaaS's \"Quadro Geral\" with every figure faded back and a centred modal (speedometer illustration) explaining what the board will show"
+  },
+  "onboarding-and-activation/repair-shop-first-run-cards.jpg": {
+    "shows": "A repair-shop SaaS's first-run board \"Hello, Lucas!\" with four setup cards, only the first carrying a live orange \"Register now\" button"
+  },
+  "onboarding-and-activation/repair-shop-five-step-checklist.jpg": {
+    "shows": "A repair-shop SaaS's checklist \"Comece a revolução de sua oficina em 5 etapas\": progress bar about a fifth full, step 1 done, step 2 carrying the only live button"
+  },
+  "onboarding-and-activation/repair-shop-goal-selection-screens.jpg": {
+    "shows": "A repair-shop SaaS's goal screens: \"Defina sua principal meta\" with four illustrated options, then \"Escolha o valor\" for the target"
+  },
+  "onboarding-and-activation/repair-shop-product-tour-coachmark.jpg": {
+    "shows": "A repair-shop SaaS's tour: the work-order board dimmed, one sidebar item lit, a coachmark \"Home — Here is where you will find a summary of your workshop!\" with Skip and Next"
+  },
+  "onboarding-and-activation/repair-shop-specialty-card-grid.jpg": {
+    "shows": "A repair-shop SaaS's \"Qual a especialidade de sua oficina?\" six-card illustrated grid (mechanical, bodywork, auto center, performance, AC, radiators) with a progress bar"
+  },
+  "onboarding-and-activation/repair-shop-welcome-modal-video.jpg": {
+    "shows": "A repair-shop SaaS's welcome modal over a dimmed dashboard: \"Account created successfully\", \"Congratulations Lucas!\", a value line and an embedded founder video, the face blurred"
+  },
+  "positioning-icp-and-gtm/bullseye-framework-circles.jpg": {
+    "shows": "Bullseye as nested circles (possible, probable, working) beside a \"Marketing Framework for Startups\" triangle (prioritization, testing, quick iteration)"
+  },
+  "positioning-icp-and-gtm/plg-iceberg.jpg": {
+    "shows": "\"The PLG iceberg\": above water what most build (signup form, pricing, self-serve onboarding), below what drives product-led growth"
+  },
+  "positioning-icp-and-gtm/tam-sam-som-circles.png": {
+    "shows": "TAM/SAM/SOM concentric circles with definitions"
+  },
+  "positioning-icp-and-gtm/tesla-cybercab-own-vs-sell-fleet.jpg": {
+    "shows": "Tesla Cybercab infographic: \"Tesla owns and operates fleet\" (more capital, more complexity) vs \"Tesla sells to fleet operators\" (less capital, more scale), pros and cons for each",
+    "why": "owning the fleet vs selling the depreciating asset and keeping the software margin, side by side"
+  },
+  "pricing-and-monetization/ai-render-locked-feature-paywall.jpg": {
+    "shows": "An AI-render product's paywall modal: \"this feature is locked on the free plan\", three locked renders with hand-drawn arrows and one upgrade CTA"
+  },
+  "pricing-and-monetization/busuu-free-language-limit-ab-test.jpg": {
+    "shows": "Busuu A/B test: variant A shows a free chapter of lessons; variant B locks lessons behind a \"Premium, 7-day free trial\" badge on the first chapter",
+    "why": "the Busuu A/B test where limiting free languages raised conversion 83%"
+  },
+  "pricing-and-monetization/chatgpt-out-of-images-limit-card.png": {
+    "shows": "ChatGPT free-plan card \"You're out of images\": wait until 6:51PM or \"Try Plus free\"",
+    "why": "the ChatGPT limit card: the ceiling shown with a time and an upgrade offer"
+  },
+  "pricing-and-monetization/decoy-three-tier-pricing-page.jpg": {
+    "shows": "Three-tier pricing page (Iniciante R$100, Profissional R$290 highlighted, Super Avançado R$300) with an \"Efeito Chamariz\" decoy-effect callout",
+    "why": "a decoy-effect pricing page: one value axis and a near-identical upper plan pushing the middle one"
+  },
+  "pricing-and-monetization/economist-decoy-subscription.png": {
+    "shows": "The Economist subscription page: removing the decoy drops the combo plan's share from 84% to 32%"
+  },
+  "pricing-and-monetization/four-tier-pricing-hicks-law.jpg": {
+    "shows": "Four-tier pricing ($49, $99, $119 \"Mais popular\" highlighted, $419 anchor) with the note \"Use poucas opções, lembre-se da lei de Hick!\""
+  },
+  "pricing-and-monetization/framing-table-brazil-wins.jpg": {
+    "shows": "Brazil vs Paraguay indicator table chosen so Brazil wins every row (HDI, life expectancy, GDP per capita, PISA, 5G, economy size)"
+  },
+  "pricing-and-monetization/framing-table-paraguay-wins.jpg": {
+    "shows": "Paraguay vs Brazil indicator table chosen so Paraguay wins every row (tax burden, homicides, Gini, time to open a company, poverty)"
+  },
+  "pricing-and-monetization/generic-one-time-pricing.jpg": {
+    "shows": "Generic one-time pricing: Starter $99, Premium $199 \"Popular\", Pro $149, plus a $1,000 Ultimate plan"
+  },
+  "pricing-and-monetization/generic-three-column-pricing.jpg": {
+    "shows": "Generic three-column pricing (Basic $199, Starter $299 highlighted, Pro $599) with near-identical \"what's included\" lists"
+  },
+  "pricing-and-monetization/generic-two-plan-pricing.jpg": {
+    "shows": "Generic two-plan pricing: Launch $299 vs Scale $899 \"Most popular\", with a monthly/annual toggle and a strategy-call box"
+  },
+  "pricing-and-monetization/pricing-card-bold-first-last-row.jpg": {
+    "shows": "Pricing card with a bold first row (core feature) and bold last row (bonus), greyed middle rows"
+  },
+  "product-strategy-and-features/bulk-rename-utility-thirteen-panels.jpg": {
+    "shows": "Bulk Rename Utility: one window with thirteen numbered option panels around a file list"
+  },
+  "product-strategy-and-features/bulk-rename-utility-window.png": {
+    "shows": "Bulk Rename Utility main window, a file list surrounded by thirteen numbered option panels (the cluttered-interface example)",
+    "why": "the cluttered-interface example of feature creep: thirteen option panels in one window"
+  },
+  "product-strategy-and-features/five-ways-100m-business-arpa-chart.png": {
+    "shows": "\"Five Ways to Build a $100M Business\": ARPA vs number of customers on log scales, from elephants (few, high ARPA) to flies (many, low ARPA)",
+    "why": "five ways to $100M, from elephants to flies: the price must follow the market you moved into"
+  },
+  "product-strategy-and-features/porsche-quarterly-margin-collapse.png": {
+    "shows": "Porsche quarterly revenue vs net margin, the margin falling to about −3% in Q3 '25, plus a revenue-to-profit waterfall",
+    "why": "the margin collapse (net margin falling below zero by Q3 '25) as the cost of leaving the core"
+  },
+  "product-strategy-and-features/prioritization-score-table.jpg": {
+    "shows": "Prioritization scoring table: (new users + new revenue + impact) / effort = score"
+  },
+  "product-strategy-and-features/repair-shop-loops-intake-flowchart.jpg": {
+    "shows": "A repair-shop SaaS's intake-loop flowchart: four inputs (Sentry, support, demo/CX, tech debt) feed one Linear queue, then routed to bug, design, feature parking lot, security gate or normal queue",
+    "why": "the intake flowchart where feature requests are routed to a parking lot and counted"
+  },
+  "product-strategy-and-features/swiss-knife-index-curve.jpg": {
+    "shows": "Swiss Knife Index graph: perceived utility peaks at the optimal point (10.3 features, 97) while complexity keeps rising into a decline zone"
+  },
+  "product-strategy-and-features/visual-weight-reading-order-typography.png": {
+    "shows": "Typographic demo \"VOCÊ VAI LER ISSO ANTES\": the eye follows visual weight (huge headline, then the orange line, then the short block), not reading order"
+  }
+}

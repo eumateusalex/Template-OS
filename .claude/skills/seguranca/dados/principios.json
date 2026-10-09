@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "versao": "1.0.0",
+    "atualizado": "2026-10-09",
+    "proposito": "A terceira regua de completude. As cinco propriedades dizem O QUE se protege; as ancoras normativas dizem CONTRA QUE LISTA se mede; os dez principios dizem POR QUE cada controle existe. Esta e a mais funda das tres, e a dimensao 10 do verificador a mede.",
+    "por_que_existe": "Principio que nao e regua de nada fica pela metade sem que nada aponte. O principio 4 ('falha segura, seguro por padrao') e o exemplo: tem duas metades, 'seguro por padrao' e 'quando quebra, fecha', e um catalogo pode sustentar so a primeira, com a busca por falha fechada devolvendo zero. Por isso cada principio lista os requisitos que o sustentam, e o verificador cobra a lista.",
+    "regra_de_leitura": "O mapeamento e por IDENTIFICADOR de requisito, nunca por familia. Por familia o buraco fica escondido: 'ACC cobre o principio 4' e verdade e e inutil. Por identificador, a ausencia aparece.",
+    "o_que_nao_e": "Nao e taxonomia de classificacao: um requisito serve a varios principios, e isso e esperado. A lista de cada principio traz os requisitos que o SUSTENTAM de forma direta, nao todos os que se relacionam com ele de longe.",
+    "fonte": "referencias/fundacao.md, secao 2. Os oito primeiros sao leitura moderna dos principios classicos de projeto seguro, de 1975; o nono e o decimo sao os da pratica."
+  },
+
+  "principios": {
+    "1_confianca_zero": {
+      "nome": "Confianca zero: nenhuma operacao e confiavel por origem",
+      "requisitos": [
+        "ACC-01", "ACC-02", "ACC-07", "AIA-01", "AIA-02", "AIA-08",
+        "BIZ-01", "BIZ-02", "BIZ-07", "BIZ-12",
+        "DAT-04", "INT-03", "OUT-01",
+        "VAL-01", "VAL-02", "VAL-03", "VAL-04", "VAL-05", "VAL-06", "VAL-08",
+        "FIL-01", "FIL-04", "THR-02"
+      ]
+    },
+    "2_defesa_em_profundidade": {
+      "nome": "Defesa em profundidade: nenhum controle sozinho segura",
+      "requisitos": [
+        "ACC-08", "ARQ-01", "DAT-01", "DAT-02", "DAT-03", "DAT-06",
+        "INT-03", "NET-08", "NET-11", "VAL-01", "VER-01", "IDN-05"
+      ]
+    },
+    "3_menor_privilegio": {
+      "nome": "Menor privilegio: o minimo, pelo menor tempo",
+      "requisitos": [
+        "ACC-11", "AIA-03", "AIA-05", "BIZ-10",
+        "DAT-05", "DAT-06", "DAT-07", "ENV-03",
+        "IDN-10", "IDN-12", "PPL-01", "SEC-07", "SES-02", "CMP-05"
+      ]
+    },
+    "4_falha_segura_seguro_por_padrao": {
+      "nome": "Falha segura, seguro por padrao: quando quebra, fecha",
+      "requisitos": [
+        "ARQ-03", "ACC-01", "ACC-04", "ACC-05",
+        "DAT-01", "DAT-02", "IDN-09", "NET-03",
+        "OUT-02", "OUT-03", "SEC-11", "VAL-01", "VAL-07", "VAL-08"
+      ],
+      "nota": "ARQ-03 e SEC-11 completam o principio. Os demais sustentam 'seguro por padrao'; so ARQ-03 sustenta 'quando quebra, fecha'. Se um dia ele sair do catalogo, esta metade fica orfa, e a dimensao 10 do verificador reprova."
+    },
+    "5_separacao_de_responsabilidades": {
+      "nome": "Separacao de responsabilidades: ninguem fecha o ciclo sozinho",
+      "requisitos": [
+        "ACC-06", "ACC-11", "AIA-06", "DAT-07", "ENV-01",
+        "IDN-12", "LOG-05", "PPL-03", "SUP-05", "GOV-01"
+      ]
+    },
+    "6_superficie_minima": {
+      "nome": "Superficie minima: o que nao existe nao e atacavel",
+      "requisitos": [
+        "ARQ-04", "CMP-05", "DAT-09", "DAT-11", "INT-05",
+        "NET-09", "NET-10", "NET-12", "OUT-01", "OUT-03", "OUT-04", "OUT-05",
+        "SEC-06", "LOG-04", "LOG-06", "AIA-07"
+      ]
+    },
+    "7_mediacao_completa": {
+      "nome": "Mediacao completa: toda operacao passa por verificacao",
+      "requisitos": [
+        "ACC-01", "ACC-03", "ACC-07", "ACC-09", "ACC-10",
+        "AIA-08", "ARQ-01", "ARQ-04", "DAT-01", "FIL-03", "FIL-05",
+        "SES-03", "VER-02", "VER-03"
+      ]
+    },
+    "8_projeto_aberto": {
+      "nome": "Projeto aberto: a seguranca vem do controle, nao do segredo da implementacao",
+      "requisitos": [
+        "AIA-07", "ACC-08", "CRY-01", "IDN-09",
+        "SEC-01", "SEC-04", "SEC-06", "ARQ-04", "CMP-04"
+      ]
+    },
+    "9_assuma_comprometimento": {
+      "nome": "Assuma comprometimento: algo vai falhar",
+      "requisitos": [
+        "BCP-01", "BCP-02", "BCP-03", "BCP-04",
+        "IRP-01", "IRP-02", "IRP-03", "IRP-04", "IRP-05",
+        "LOG-01", "LOG-03", "MON-01", "MON-02", "MON-03", "MON-04",
+        "RES-02", "RES-03", "SEC-03", "SEC-08", "SEC-09",
+        "SES-05", "SES-06", "VUL-01", "VUL-02", "AIA-07"
+      ]
+    },
+    "10_aceitabilidade": {
+      "nome": "Aceitabilidade: controle que atrapalha demais e contornado",
+      "requisitos": [
+        "GOV-03", "IDN-02", "IDN-04", "SDL-03",
+        "PPL-02", "MET-01", "ARQ-02", "SES-06"
+      ],
+      "nota": "E o principio com menos requisitos, e isso e coerente: ele orienta COMO os outros sao desenhados, mais do que exige controle proprio. IDN-02 e o exemplo mais direto — politica de senha por comprimento e nao por composicao existe porque regra de composicao e contornada com senha pior."
+    }
+  }
+}
