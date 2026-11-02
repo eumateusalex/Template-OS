@@ -1,0 +1,30 @@
+[project]
+name = "python-minimo"
+version = "1.0.0"
+description = "O projeto Python minimo do teste da fabrica"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# E4, E7 e E9 sao o padrao do ruff, e o padrao NAO inclui E501 (comprimento de
+# linha) de proposito: comprimento e trabalho do formatador, nao do linter.
+#
+# Com "E" inteiro, o E501 reprova a LINHA DE REGISTRO DA
+# MUTACAO, que tem 117 caracteres e nao pode encurtar sem enfraquecer a mutacao
+# (o trecho precisa ser unico no fonte). Ou se desliga o E501, ou toda linha de
+# registro carrega um `# noqa`. Desligar e o idiomatico.
+select = ["E4", "E7", "E9", "F", "I", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.mypy]
+strict = true
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

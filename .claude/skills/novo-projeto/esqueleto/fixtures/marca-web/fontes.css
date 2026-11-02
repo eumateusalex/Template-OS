@@ -1,0 +1,22 @@
+/* ==========================================================================
+   AS FONTES DA MARCA DE EXEMPLO
+   ==========================================================================
+   Marca de EXEMPLO, só para os testes do esqueleto: não é a marca de ninguém.
+   Tem o formato da marca do workspace na web (a que `--marca casa` instala a
+   partir de `identidade/web/`), com cores e fonte neutras. Os testes a acham
+   pela variável FUNDACAO_MARCA_WEB.
+   ========================================================================== */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fontes/inter-latin-400.woff2') format('woff2');
+  font-weight: 100 499;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/fontes/inter-latin-700.woff2') format('woff2');
+  font-weight: 500 900;
+  font-style: normal;
+  font-display: swap;
+}

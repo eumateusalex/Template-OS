@@ -1,0 +1,19 @@
+{
+  "formato": "post",
+  "elementos": {
+    "f1": { "tipo": "folha", "texto": "agenda", "x": 80, "y": 400, "largura": 270 },
+    "f2": { "tipo": "folha", "texto": "WhatsApp", "x": 405, "y": 400, "largura": 270 },
+    "f3": { "tipo": "folha", "texto": "caderno", "x": 730, "y": 400, "largura": 270 },
+    "n1": { "tipo": "no", "texto": "ninguém confirma", "x": 290, "y": 650, "largura": 500 },
+    "s1": { "tipo": "seta", "de": "f1", "para": "n1" },
+    "s2": { "tipo": "seta", "de": "f2", "para": "n1" },
+    "s3": { "tipo": "seta", "de": "f3", "para": "n1" },
+    "r": { "tipo": "elipse", "texto": "horário vazio", "x": 290, "y": 880, "largura": 500 },
+    "s4": { "tipo": "seta", "de": "n1", "para": "r", "rotulo": "sobra" }
+  },
+  "quadros": [
+    { "titulo": "Onde sua agenda perde o horário", "mostrar": ["f1", "f2", "f3", "n1", "s1", "s2", "s3", "r", "s4"],
+      "destaque": { "tipo": "foco", "alvo": "r" },
+      "frase": "Marcar é fácil. O que falta é confirmar.\nUma mensagem na véspera segura o horário." }
+  ]
+}

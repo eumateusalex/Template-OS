@@ -1,0 +1,27 @@
+{
+  "versao": "1.0.0",
+  "base": {
+    "principios": 250,
+    "arquivos": 12,
+    "imagens": 54
+  },
+  "orfas_esperadas": [
+    "ai-era-differentiation/generic-ai-purple-gradient-landing.jpg",
+    "checkout-and-forms/avoid-dropdown-use-button-group.jpg",
+    "checkout-and-forms/card-deck-store-checkout.jpg",
+    "checkout-and-forms/register-cta-microcopy-good-bad.png",
+    "conversion-and-landing-pages/checkout-button-refund-rate-microcopy.jpg",
+    "conversion-and-landing-pages/vodafone-italy-offer-and-callback-modal.png",
+    "dashboards-and-data-viz/recurring-expenses-before-after-app.jpg",
+    "metrics-and-experimentation/cancel-plan-confirmation-modal.jpg",
+    "metrics-and-experimentation/native-ads-landing-heatmap.jpg",
+    "onboarding-and-activation/empty-dashboard-zero-state.jpg",
+    "onboarding-and-activation/first-run-setup-cards-dashboard.jpg",
+    "onboarding-and-activation/first-work-order-celebration-screen.jpg",
+    "onboarding-and-activation/voice-app-onboarding-practice-step.jpg",
+    "pricing-and-monetization/ai-chat-out-of-images-limit-card.png",
+    "pricing-and-monetization/busuu-free-language-limit-ab-test.jpg",
+    "pricing-and-monetization/decoy-three-tier-pricing-page.jpg"
+  ],
+  "entradas": []
+}

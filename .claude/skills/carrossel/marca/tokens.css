@@ -1,0 +1,154 @@
+/* ==========================================================================
+   GERADO por scripts/marca/gerar.mjs a partir de identidade/marca.tokens.json: não edite
+   ==========================================================================
+   ESTADO: nao-configurado
+   Os valores abaixo são a DEMONSTRAÇÃO do molde (identidade/marca.molde.tokens.json),
+   para o catálogo abrir antes da entrevista. O render do carrossel só usa
+   isto com --demo; o vídeo e o Reel param até a marca existir (rode /marca).
+
+   Para trocar a marca: /marca trocar (ou edite identidade/marca.tokens.json e
+   rode node scripts/marca/gerar.mjs). Os canais RGB soltos (`204,110,40`) servem
+   ao sólido `rgb(var(--c-accent))` e à transparência `rgba(var(--c-accent),.13)`.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root{
+
+  /* ---- 1. PALETA: os 8 papéis da marca --------------------------------- */
+  --c-dark:        28,28,32;   /* principal */
+  --c-light:       244,243,240;   /* claro */
+  --c-accent:      204,110,40;   /* acento */
+  --c-support-1:   70,70,80;   /* apoio */
+  --c-support-2:   228,228,225;   /* lavado */
+  --c-rare:        90,90,90;   /* raro */
+  --c-abyss:       14,14,18;   /* abismo */
+  --c-ok:          140,190,150;   /* ok */
+
+  /* ---- os papéis derivados (scripts/marca/derivar.mjs): o texto usa o
+     papel que passa no contraste ------------------------------------------ */
+  --c-on-light:     28,28,32;   /* texto sobre o claro */
+  --c-bg-dark:      28,28,32;   /* o fundo escuro e o fecho */
+  --c-accent-light: 204,110,40;   /* destaque em texto no claro */
+  --c-accent-dark:  204,110,40;   /* destaque em texto no escuro */
+  --c-accent-photo: 244,243,240;   /* destaque em texto sobre foto */
+
+  /* ---- 2. TIPOGRAFIA --------------------------------------------------- */
+  --f-display: 'Bricolage Grotesque', Arial, sans-serif;
+  --f-serif:   'Instrument Serif', Georgia, serif;
+  --f-mono:    'JetBrains Mono', Consolas, monospace;
+  --f-serif-style: italic;
+
+  --w-display-bold: 800;
+  --w-display-med:  500;
+  --w-mono-med:     600;
+
+  /* ---- 3. CORES RESOLVIDAS --------------------------------------------- */
+  --bg-dark:        rgb(var(--c-bg-dark));
+  --bg-light:       rgb(var(--c-light));
+  --bg-abyss:       rgb(var(--c-abyss));
+  --accent:         rgb(var(--c-accent-light));
+  --support-1:      rgb(var(--c-support-1));
+  --support-2:      rgb(var(--c-support-2));
+  --rare:           rgb(var(--c-rare));
+  --ok:             rgb(var(--c-ok));
+
+  --on-dark:        rgb(var(--c-light));
+  --on-dark-90:     rgba(var(--c-light),.90);
+  --on-dark-82:     rgba(var(--c-light),.82);
+  --on-dark-74:     rgba(var(--c-light),.74);
+  --on-dark-60:     rgba(var(--c-light),.60);
+  --on-dark-55:     rgba(var(--c-light),.55);
+  --on-dark-50:     rgba(var(--c-light),.50);
+  --on-dark-40:     rgba(var(--c-light),.40);
+
+  --on-light:       rgb(var(--c-on-light));
+  --on-light-82:    rgba(var(--c-on-light),.82);
+  --on-light-72:    rgba(var(--c-on-light),.72);
+  --on-light-66:    rgba(var(--c-on-light),.66);
+  --on-light-50:    rgba(var(--c-on-light),.50);
+  --on-light-45:    rgba(var(--c-on-light),.49);
+
+  --line-dark:        rgba(var(--c-light),.13);
+  --line-dark-soft:   rgba(var(--c-light),.09);
+  --line-dark-strong: rgba(var(--c-light),.17);
+  --line-light:        rgba(var(--c-on-light),.13);
+  --line-light-soft:   rgba(var(--c-on-light),.10);
+  --line-light-strong: rgba(var(--c-on-light),.15);
+
+  --accent-line:  rgba(var(--c-accent),.55);
+  --accent-ring:  rgba(var(--c-accent),.28);
+  --accent-halo:  rgba(var(--c-accent),.50);
+
+  --track-dark:   rgba(var(--c-light),.16);
+  --track-light:  rgba(var(--c-on-light),.13);
+  --scrim:        rgba(var(--c-bg-dark),.45);
+  --veil-bottom:  rgba(var(--c-bg-dark),.55);
+
+  --shadow-dark:  0px 24px 45px 0px rgba(0,0,0,.26);
+  --shadow-light: 0px 18px 45px 0px rgba(28,28,32,.1);
+
+  --grad-cta:   rgb(var(--c-bg-dark));
+  --grad-brand: rgb(var(--c-support-1));
+
+  /* os semáforos da janela do sistema: chrome, não cor de marca */
+  --mac-r: #ff5f57; /* tecnico */
+  --mac-y: #febc2e; /* tecnico */
+  --mac-g: #28c840; /* tecnico */
+
+  --grid-dark:  rgba(var(--c-light),.07);
+  --grid-light: rgba(var(--c-on-light),.07);
+
+  /* ---- 4. MOVIMENTO, RAIO E MEDIDAS ------------------------------------ */
+  --ease-marca:   cubic-bezier(0.2, 0.65, 0.2, 1);
+  --ease-entrada: cubic-bezier(0, 0, 0.2, 1);
+  --ease-saida:   cubic-bezier(0.4, 0, 1, 1);
+  --dur-rapida:   0.2s;
+  --dur-media:    0.45s;
+  --dur-lenta:    0.8s;
+  --cascata:      0.06s;
+
+  --r-card:    16px;
+  --r-card-lg: 18px;
+  --r-button:  10px;
+  --r-chip:    10px;
+  --r-bar:     3px;
+
+  /* o canvas 4:5 do feed e a escala do kit: medidas técnicas do formato */
+  --canvas-w: 1080px;
+  --canvas-h: 1350px;
+  --pad-x:      90px;
+  --pad-top:    84px;
+  --pad-bottom: 74px;
+  --pad-post:   92px;
+  --fs-h1:       82px;  --lh-h1: 1.02;  --ls-h1: -.035em;
+  --fs-h1-post:  88px;
+  --fs-h1-cta:   76px;
+  --fs-h2:       62px;  --lh-h2: 1.05;  --ls-h2: -.03em;
+  --fs-lead:     30px;
+  --fs-sub:      28px;
+  --fs-list:     33px;
+  --fs-kicker:   20px;
+  --fs-tag:      19px;
+  --fs-handle:   21px;
+  --fs-count:    18px;
+  --fs-term:     25px;
+  --fs-num:     280px;
+  --fs-btn:      24px;
+  --max-h1:   900px;
+  --max-h2:   860px;
+  --max-sub:  820px;
+  --max-body: 840px;
+  --max-term: 880px;
+  --ls-tag:    .28em;
+  --ls-kicker: .28em;
+  --ls-count:  .12em;
+  --ls-label:  .22em;
+}
+
+/* o destaque em texto sobre o fundo escuro (as superfícies de texto claro do kit): o acento, ou o claro quando ele não passa */
+.slide.dark, .slide.cta { --accent: rgb(var(--c-accent-dark)); }
+/* e sobre foto (as superfícies com --img): o acento só se for claro o bastante para o véu ralo, senão o claro */
+.slide.cover, .slide.photo, .slide.full { --accent: rgb(var(--c-accent-photo)); }

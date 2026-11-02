@@ -1,0 +1,24 @@
+{
+  "nome": "marca",
+  "origem": "a ficha padrão: a fonte e o peso de título da marca (--f-display e --w-display-bold do tokens.css), branco com contorno preto para ler sobre qualquer imagem, e o destaque com o sublinhado no acento da marca (--accent); até 4 palavras por bloco, porque com 3 a fala se parte em fragmentos sem sentido sozinhos",
+  "fonte": "marca",
+  "peso": "var(--w-display-bold)",
+  "tamanho": 74,
+  "cor": "#ffffff",
+  "contorno": 10,
+  "contorno_cor": "#000000",
+  "sombra": "0 2px 12px rgba(0,0,0,.45)",
+  "fundo": "none",
+  "caixa": "normal",
+  "posicao_y": 1330,
+  "largura": 960,
+  "max_palavras": 4,
+  "entrada": "sobe",
+  "destaque": {
+    "cor": "#ffffff",
+    "italico": false,
+    "sublinhado": true,
+    "sublinhado_cor": "var(--accent)",
+    "escala": 1
+  }
+}

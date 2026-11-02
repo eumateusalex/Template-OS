@@ -1,0 +1,332 @@
+{
+ "versao": 1,
+ "sobre": "As LUTs do kit (.cube), relativas à raiz de material. Medidas sobre a carta de cor: saturacao é a fração da saturação do espectro que a LUT mantém, pele a dos tons de pele (1 = intacta). Todas tiram de metade a dois terços da cor: a 100% sobre o mundo, apagam a peça. Aplicam-se com o ffmpeg (lut3d) só na camada de matéria (a filmagem, o gerado), antes de ela entrar na peça, nunca sobre a letra e a cor da marca. Os itens com suave: true são as versões suaves.",
+ "familias": {
+  "escape": "quente e esverdeado, contraste médio",
+  "glacier": "frio e quase sem cor; a pele vai ao cinza",
+  "roma": "quente e amarelado, o que mais guarda a cor",
+  "tokyo": "azulado nas sombras, pele preservada na versão -s"
+ },
+ "itens": [
+  {
+   "id": "escape-01-s",
+   "familia": "escape",
+   "suave": true,
+   "arquivo": "lut/lut-1.cube",
+   "saturacao": 0.4,
+   "pele": 0.72
+  },
+  {
+   "id": "escape-01",
+   "familia": "escape",
+   "suave": false,
+   "arquivo": "lut/lut-2.cube",
+   "saturacao": 0.35,
+   "pele": 0.49
+  },
+  {
+   "id": "escape-02-s",
+   "familia": "escape",
+   "suave": true,
+   "arquivo": "lut/lut-3.cube",
+   "saturacao": 0.46,
+   "pele": 0.64
+  },
+  {
+   "id": "escape-02",
+   "familia": "escape",
+   "suave": false,
+   "arquivo": "lut/lut-4.cube",
+   "saturacao": 0.41,
+   "pele": 0.36
+  },
+  {
+   "id": "escape-03-s",
+   "familia": "escape",
+   "suave": true,
+   "arquivo": "lut/lut-5.cube",
+   "saturacao": 0.41,
+   "pele": 0.75
+  },
+  {
+   "id": "escape-03",
+   "familia": "escape",
+   "suave": false,
+   "arquivo": "lut/lut-6.cube",
+   "saturacao": 0.37,
+   "pele": 0.56
+  },
+  {
+   "id": "escape-04-s",
+   "familia": "escape",
+   "suave": true,
+   "arquivo": "lut/lut-7.cube",
+   "saturacao": 0.42,
+   "pele": 0.8
+  },
+  {
+   "id": "escape-04",
+   "familia": "escape",
+   "suave": false,
+   "arquivo": "lut/lut-8.cube",
+   "saturacao": 0.38,
+   "pele": 0.65
+  },
+  {
+   "id": "escape-05-s",
+   "familia": "escape",
+   "suave": true,
+   "arquivo": "lut/lut-9.cube",
+   "saturacao": 0.43,
+   "pele": 0.74
+  },
+  {
+   "id": "escape-05",
+   "familia": "escape",
+   "suave": false,
+   "arquivo": "lut/lut-10.cube",
+   "saturacao": 0.39,
+   "pele": 0.51
+  },
+  {
+   "id": "glacier-01-s",
+   "familia": "glacier",
+   "suave": true,
+   "arquivo": "lut/lut-11.cube",
+   "saturacao": 0.39,
+   "pele": 0.52
+  },
+  {
+   "id": "glacier-01",
+   "familia": "glacier",
+   "suave": false,
+   "arquivo": "lut/lut-12.cube",
+   "saturacao": 0.34,
+   "pele": 0.09
+  },
+  {
+   "id": "glacier-02-s",
+   "familia": "glacier",
+   "suave": true,
+   "arquivo": "lut/lut-13.cube",
+   "saturacao": 0.42,
+   "pele": 0.58
+  },
+  {
+   "id": "glacier-02",
+   "familia": "glacier",
+   "suave": false,
+   "arquivo": "lut/lut-14.cube",
+   "saturacao": 0.37,
+   "pele": 0.18
+  },
+  {
+   "id": "glacier-03-s",
+   "familia": "glacier",
+   "suave": true,
+   "arquivo": "lut/lut-15.cube",
+   "saturacao": 0.47,
+   "pele": 0.49
+  },
+  {
+   "id": "glacier-03",
+   "familia": "glacier",
+   "suave": false,
+   "arquivo": "lut/lut-16.cube",
+   "saturacao": 0.43,
+   "pele": 0.14
+  },
+  {
+   "id": "glacier-04-s",
+   "familia": "glacier",
+   "suave": true,
+   "arquivo": "lut/lut-17.cube",
+   "saturacao": 0.39,
+   "pele": 0.52
+  },
+  {
+   "id": "glacier-04",
+   "familia": "glacier",
+   "suave": false,
+   "arquivo": "lut/lut-18.cube",
+   "saturacao": 0.37,
+   "pele": 0.21
+  },
+  {
+   "id": "glacier-05-s",
+   "familia": "glacier",
+   "suave": true,
+   "arquivo": "lut/lut-19.cube",
+   "saturacao": 0.34,
+   "pele": 0.56
+  },
+  {
+   "id": "glacier-05",
+   "familia": "glacier",
+   "suave": false,
+   "arquivo": "lut/lut-20.cube",
+   "saturacao": 0.28,
+   "pele": 0.2
+  },
+  {
+   "id": "roma-01-s",
+   "familia": "roma",
+   "suave": true,
+   "arquivo": "lut/lut-21.cube",
+   "saturacao": 0.53,
+   "pele": 0.6
+  },
+  {
+   "id": "roma-01",
+   "familia": "roma",
+   "suave": false,
+   "arquivo": "lut/lut-22.cube",
+   "saturacao": 0.49,
+   "pele": 0.3
+  },
+  {
+   "id": "roma-02-s",
+   "familia": "roma",
+   "suave": true,
+   "arquivo": "lut/lut-23.cube",
+   "saturacao": 0.48,
+   "pele": 0.82
+  },
+  {
+   "id": "roma-02",
+   "familia": "roma",
+   "suave": false,
+   "arquivo": "lut/lut-24.cube",
+   "saturacao": 0.45,
+   "pele": 0.67
+  },
+  {
+   "id": "roma-03-s",
+   "familia": "roma",
+   "suave": true,
+   "arquivo": "lut/lut-25.cube",
+   "saturacao": 0.53,
+   "pele": 0.81
+  },
+  {
+   "id": "roma-03",
+   "familia": "roma",
+   "suave": false,
+   "arquivo": "lut/lut-26.cube",
+   "saturacao": 0.5,
+   "pele": 0.63
+  },
+  {
+   "id": "roma-04-s",
+   "familia": "roma",
+   "suave": true,
+   "arquivo": "lut/lut-27.cube",
+   "saturacao": 0.52,
+   "pele": 0.75
+  },
+  {
+   "id": "roma-04",
+   "familia": "roma",
+   "suave": false,
+   "arquivo": "lut/lut-28.cube",
+   "saturacao": 0.49,
+   "pele": 0.54
+  },
+  {
+   "id": "roma-05-s",
+   "familia": "roma",
+   "suave": true,
+   "arquivo": "lut/lut-29.cube",
+   "saturacao": 0.52,
+   "pele": 0.68
+  },
+  {
+   "id": "roma-05",
+   "familia": "roma",
+   "suave": false,
+   "arquivo": "lut/lut-30.cube",
+   "saturacao": 0.48,
+   "pele": 0.42
+  },
+  {
+   "id": "tokyo-01-s",
+   "familia": "tokyo",
+   "suave": true,
+   "arquivo": "lut/lut-31.cube",
+   "saturacao": 0.4,
+   "pele": 0.77
+  },
+  {
+   "id": "tokyo-01",
+   "familia": "tokyo",
+   "suave": false,
+   "arquivo": "lut/lut-32.cube",
+   "saturacao": 0.35,
+   "pele": 0.54
+  },
+  {
+   "id": "tokyo-02-s",
+   "familia": "tokyo",
+   "suave": true,
+   "arquivo": "lut/lut-33.cube",
+   "saturacao": 0.39,
+   "pele": 0.66
+  },
+  {
+   "id": "tokyo-02",
+   "familia": "tokyo",
+   "suave": false,
+   "arquivo": "lut/lut-34.cube",
+   "saturacao": 0.34,
+   "pele": 0.38
+  },
+  {
+   "id": "tokyo-03-s",
+   "familia": "tokyo",
+   "suave": true,
+   "arquivo": "lut/lut-35.cube",
+   "saturacao": 0.34,
+   "pele": 0.74
+  },
+  {
+   "id": "tokyo-03",
+   "familia": "tokyo",
+   "suave": false,
+   "arquivo": "lut/lut-36.cube",
+   "saturacao": 0.3,
+   "pele": 0.51
+  },
+  {
+   "id": "tokyo-04-s",
+   "familia": "tokyo",
+   "suave": true,
+   "arquivo": "lut/lut-37.cube",
+   "saturacao": 0.43,
+   "pele": 0.79
+  },
+  {
+   "id": "tokyo-04",
+   "familia": "tokyo",
+   "suave": false,
+   "arquivo": "lut/lut-38.cube",
+   "saturacao": 0.39,
+   "pele": 0.6
+  },
+  {
+   "id": "tokyo-05-s",
+   "familia": "tokyo",
+   "suave": true,
+   "arquivo": "lut/lut-39.cube",
+   "saturacao": 0.41,
+   "pele": 0.77
+  },
+  {
+   "id": "tokyo-05",
+   "familia": "tokyo",
+   "suave": false,
+   "arquivo": "lut/lut-40.cube",
+   "saturacao": 0.37,
+   "pele": 0.53
+  }
+ ]
+}

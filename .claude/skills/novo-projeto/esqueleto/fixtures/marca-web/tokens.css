@@ -1,0 +1,96 @@
+/* ==========================================================================
+   TOKENS DA MARCA DE EXEMPLO
+   ==========================================================================
+   Marca de EXEMPLO, só para os testes do esqueleto: não é a marca de ninguém.
+   Tem o formato da marca do workspace na web (a que `--marca casa` instala a
+   partir de `identidade/web/`), com cores e fonte neutras. Os testes a acham
+   pela variável FUNDACAO_MARCA_WEB.
+   ========================================================================== */
+
+:root {
+  /* A paleta, em canais RGB (rgb(var(--c-x)) e rgba(var(--c-x), .5)) */
+  --c-dark: 37,99,235;
+  --c-light: 255,255,255;
+  --c-accent: 202,138,4;
+  --c-support-1: 29,78,216;
+  --c-support-2: 219,234,254;
+  --c-rare: 54,54,54;
+  --c-abyss: 23,37,84;
+  --c-ok: 96,165,250;
+  --c-ink: 0,0,0;
+  --c-muted: 110,110,115;
+  --c-border: 210,210,215;
+  --c-surface: 245,245,247;
+  --c-surface-2: 232,232,237;
+  --c-muted-on-dark: 161,161,166;
+  --c-erro: 215,0,21;
+  --c-veil: var(--c-ink);
+  --c-papel: 250,250,250;
+
+  /* As famílias e os pesos */
+  --f-display: 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --f-serif: Georgia, serif;
+  --f-mono: 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --f-codigo: 'JetBrains Mono', Consolas, monospace;
+  --w-display-bold: 700;
+  --w-display-med: 400;
+  --w-display-semi: 700;
+  --w-mono-med: 700;
+  --f-mao: 'Segoe Print', cursive;
+  --f-ios: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --w-mao: 600;
+
+  /* Texto e linha sobre o escuro e sobre o claro */
+  --on-dark: rgb(var(--c-light));
+  --on-dark-90: rgba(var(--c-light),.90);
+  --on-dark-82: rgba(var(--c-light),.82);
+  --on-dark-74: rgba(var(--c-light),.74);
+  --on-dark-60: rgba(var(--c-light),.60);
+  --on-dark-55: rgba(var(--c-light),.55);
+  --on-dark-50: rgba(var(--c-light),.50);
+  --on-dark-40: rgba(var(--c-light),.40);
+  --on-light: rgb(var(--c-ink));
+  --on-light-82: rgba(var(--c-ink),.82);
+  --on-light-72: rgba(var(--c-ink),.72);
+  --on-light-66: rgba(var(--c-ink),.66);
+  --on-light-50: rgba(var(--c-ink),.50);
+  --on-light-45: rgba(var(--c-ink),.45);
+  --line-dark: rgba(var(--c-light),.13);
+  --line-dark-soft: rgba(var(--c-light),.09);
+  --line-dark-strong: rgba(var(--c-light),.17);
+  --line-light: rgba(var(--c-ink),.13);
+  --line-light-soft: rgba(var(--c-ink),.10);
+  --line-light-strong: rgba(var(--c-ink),.15);
+
+  /* Sombra, só em objeto */
+  --shadow-dark: 0 18px 40px rgba(var(--c-ink),.24);
+  --shadow-light: 0 10px 30px rgba(var(--c-ink),.07);
+
+  /* Os semáforos do Mac: sistema, não marca */
+  --mac-r: #ff5f57;
+  --mac-y: #febc2e;
+  --mac-g: #28c840;
+
+  /* Os três raios e a barra */
+  --r-bar: 3px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  /* O espaço, em rem (o kit escreve em px, sobre o quadro de 1080) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.75rem;
+  --sp-8: 4rem;
+
+  /* O tempo do movimento */
+  --ease-brand: cubic-bezier(0.2, 0.65, 0.2, 1);
+  --dur-in: 0.6s;
+  --dur-click: 0.2s;
+  --dur-hover: 0.35s;
+  --stagger: 0.07s;
+}

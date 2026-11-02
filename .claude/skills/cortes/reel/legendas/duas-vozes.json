@@ -1,0 +1,46 @@
+{
+  "nome": "duas-vozes",
+  "origem": "a legenda em duas vozes na marca do workspace: o apoio pequeno na fonte de título da marca e a palavra-chave 2,5 vezes maior, na cor de destaque (--accent do tokens.css), segurando a frase; a razão 2,5 é a mediana medida em legendas desse tipo. O lugar não é fixo: sai do rosto (scripts/reel-falado/legenda-duas-vozes.mjs). A posicao_y abaixo é só a reserva do motor de blocos",
+  "fonte": "marca",
+  "peso": "var(--w-display-med, 500)",
+  "tamanho": 54,
+  "cor": "#ffffff",
+  "contorno": 0,
+  "contorno_cor": "#000000",
+  "sombra": "0 3px 14px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.5)",
+  "fundo": "none",
+  "caixa": "normal",
+  "posicao_y": 1100,
+  "largura": 900,
+  "max_palavras": 5,
+  "entrada": "sobe",
+  "destaque": {
+    "cor": "var(--accent)",
+    "italico": false,
+    "sublinhado": false,
+    "sublinhado_cor": "var(--accent)",
+    "escala": 2.5
+  },
+  "duas_vozes": {
+    "chave": {
+      "fonte": "marca",
+      "peso": "var(--w-display-bold)",
+      "entre_letras_em": -0.03,
+      "cor": "var(--accent)",
+      "razao": 2.5,
+      "razao_min": 2.0,
+      "segura": "ate_o_fim_da_frase",
+      "entrada": { "quadros": 8, "desfoque_px_de": 14, "curva": "esse" },
+      "brilho": { "cor": "var(--accent)", "raio_px": 22, "pico_opacidade": 0.4, "decai_quadros": 18 }
+    },
+    "apoio": {
+      "uma_palavra_por_vez": true,
+      "antecipa_quadros": 1,
+      "max_por_linha": 5,
+      "entrada": { "quadros": 8, "y_de_px": 18, "desfoque_px_de": 10, "curva": "pouso" }
+    },
+    "encaixe": { "antes_da_chave": "em_cima", "depois_da_chave": "embaixo", "entrelinha": 1.25 },
+    "lugar": { "ar_px": 40, "regra": "abaixo do queixo; sem lugar até a base da zona, acima da cabeça; um lugar só na peça; nunca entre o cabelo e o queixo" },
+    "saida": { "quadros": 2, "curva": "saida", "cruza_com_a_proxima": false, "motivo": "no lugar único, a frase que sai por baixo da que entra embaralha as duas; a saída de 2 quadros acaba quando a próxima começa" }
+  }
+}

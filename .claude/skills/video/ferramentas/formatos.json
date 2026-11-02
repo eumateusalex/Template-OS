@@ -1,0 +1,65 @@
+{
+  "reel": {
+    "largura": 1080,
+    "altura": 1920,
+    "topo": 220,
+    "base": 1540,
+    "lateral": 65,
+    "medida": "aproximada",
+    "origem": "o Reel orgânico: ~220 px em cima e ~380 px embaixo cobertos pelo Instagram (nome, legenda do post, botões); aproximado, a medir num print do aplicativo"
+  },
+  "anuncio-reels": {
+    "largura": 1080,
+    "altura": 1920,
+    "topo": 270,
+    "base": 1248,
+    "lateral": 65,
+    "medida": "oficial",
+    "origem": "o anúncio de Reels e de Stories da Meta: 14% em cima, 35% embaixo e 6% nos lados livres (o guia oficial de anúncios da plataforma; confira no dia)"
+  },
+  "shorts": {
+    "largura": 1080,
+    "altura": 1920,
+    "topo": 270,
+    "base": 1248,
+    "lateral": 65,
+    "medida": "prudencia",
+    "origem": "o YouTube Shorts não publica zona segura: vale a do anúncio da Meta, a mais apertada com número oficial, por prudência"
+  },
+  "tiktok": {
+    "largura": 1080,
+    "altura": 1920,
+    "topo": 270,
+    "base": 1248,
+    "lateral": 65,
+    "medida": "prudencia",
+    "origem": "o TikTok não publica zona em px, nem no anúncio: vale a do anúncio da Meta, por prudência"
+  },
+  "meta-feed-4x5": {
+    "largura": 1080,
+    "altura": 1350,
+    "topo": 81,
+    "base": 1269,
+    "lateral": 65,
+    "medida": "hipotese",
+    "origem": "o vídeo 4:5 do feed do Facebook (1440x1800 recomendado, Ads Guide da Meta): a página não dá zona; margem de 6% em volta, a lateral do Reel (HIPÓTESE)"
+  },
+  "quadrado-1x1": {
+    "largura": 1080,
+    "altura": 1080,
+    "topo": 65,
+    "base": 1015,
+    "lateral": 65,
+    "medida": "hipotese",
+    "origem": "o 1:1 do Demand Gen e da Performance Max: sem zona oficial; margem de 6% em volta (HIPÓTESE)"
+  },
+  "yt-16x9": {
+    "largura": 1920,
+    "altura": 1080,
+    "topo": 54,
+    "base": 1026,
+    "lateral": 96,
+    "medida": "hipotese",
+    "origem": "o vídeo longo do YouTube e o in-stream do Google: sem zona oficial; margem de 5% em volta (HIPÓTESE do mapa de estilos § 5); o canto de baixo à direita some sob os cartões finais nos últimos 5 a 20 s (HIPÓTESE)"
+  }
+}

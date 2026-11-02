@@ -1,0 +1,12 @@
+{
+ "raiz": "<pasta do seu material>",
+ "nota": "copie para material.local.json (fora do git), troque a raiz pela pasta onde moram os seus pacotes e declare cada um em pacotes; sem pacote, a busca vai direto ao Mixkit",
+ "pacotes": {
+  "<nome do pacote>": {
+   "raiz": "<pasta do pacote dentro da raiz>",
+   "pastas": { "som": "<pasta dos efeitos>", "musica": "<pasta das músicas>" },
+   "licenca": "<o que a licença do pacote libera, lida no dia>",
+   "clara": false
+  }
+ }
+}

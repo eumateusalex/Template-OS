@@ -1,0 +1,51 @@
+# O teste do próprio kit da fábrica, em Linux: a instalação, o portão num
+# fixture, a matriz de provas e as mutações registradas (o C2, que só roda com
+# CI=true, num worktree ou com --com-mutacoes).
+#
+# Roda só quando o kit da fábrica ou as lentes mudam: com essas pastas paradas,
+# o resultado não muda, e o workflow não gasta minuto de Actions.
+
+name: Fábrica
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.claude/skills/fabrica/**'
+      - '.claude/agents/fabrica/**'
+      - '.github/workflows/fabrica.yml'
+
+  pull_request:
+    paths:
+      - '.claude/skills/fabrica/**'
+      - '.claude/agents/fabrica/**'
+      - '.github/workflows/fabrica.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fabrica-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fabrica:
+    runs-on: ubuntu-latest
+    # o C2 leva minutos; o teto segura job preso sem cortar o verde
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Dependências de scripts/
+        run: npm ci --prefix scripts
+
+      - name: O teste da fábrica
+        run: node .claude/skills/fabrica/scripts/teste-fabrica.mjs --sem-python

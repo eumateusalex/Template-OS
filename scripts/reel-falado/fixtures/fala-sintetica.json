@@ -1,0 +1,162 @@
+{
+ "origem": "fala sintética de 30 palavras, no formato do scripts/transcrever.py --json, com o ritmo de uma fala real de Reel (pausas, palavras curtas e longas); o teste-legenda.mjs e o teste-modelo.mjs a usam",
+ "modelo": "large-v3-turbo",
+ "segmentos": [
+  {
+   "inicio": 0,
+   "fim": 8.76,
+   "palavras": [
+    {
+     "texto": "Você",
+     "inicio": 0,
+     "fim": 0.22
+    },
+    {
+     "texto": "está",
+     "inicio": 0.22,
+     "fim": 0.4
+    },
+    {
+     "texto": "perdendo",
+     "inicio": 0.4,
+     "fim": 0.78
+    },
+    {
+     "texto": "o",
+     "inicio": 0.78,
+     "fim": 0.88
+    },
+    {
+     "texto": "site",
+     "inicio": 0.88,
+     "fim": 1.02
+    },
+    {
+     "texto": "sobre",
+     "inicio": 1.02,
+     "fim": 1.2
+    },
+    {
+     "texto": "3",
+     "inicio": 1.2,
+     "fim": 1.5
+    },
+    {
+     "texto": "%",
+     "inicio": 1.5,
+     "fim": 1.94
+    },
+    {
+     "texto": "e",
+     "inicio": 1.94,
+     "fim": 2.34
+    },
+    {
+     "texto": "acha",
+     "inicio": 2.34,
+     "fim": 2.52
+    },
+    {
+     "texto": "que",
+     "inicio": 2.52,
+     "fim": 2.64
+    },
+    {
+     "texto": "está",
+     "inicio": 2.64,
+     "fim": 2.78
+    },
+    {
+     "texto": "protegido",
+     "inicio": 2.78,
+     "fim": 3.22
+    },
+    {
+     "texto": "em",
+     "inicio": 3.22,
+     "fim": 3.32
+    },
+    {
+     "texto": "relação",
+     "inicio": 3.32,
+     "fim": 3.66
+    },
+    {
+     "texto": "à",
+     "inicio": 3.66,
+     "fim": 3.84
+    },
+    {
+     "texto": "sua",
+     "inicio": 3.84,
+     "fim": 4.04
+    },
+    {
+     "texto": "contabilidade?",
+     "inicio": 4.04,
+     "fim": 4.78
+    },
+    {
+     "texto": "Atenção,",
+     "inicio": 5.12,
+     "fim": 5.56
+    },
+    {
+     "texto": "você",
+     "inicio": 5.7,
+     "fim": 6.1
+    },
+    {
+     "texto": "pode",
+     "inicio": 6.1,
+     "fim": 6.32
+    },
+    {
+     "texto": "estar",
+     "inicio": 6.32,
+     "fim": 6.52
+    },
+    {
+     "texto": "perdendo",
+     "inicio": 6.52,
+     "fim": 6.92
+    },
+    {
+     "texto": "um",
+     "inicio": 6.92,
+     "fim": 7.04
+    },
+    {
+     "texto": "cliente",
+     "inicio": 7.04,
+     "fim": 7.5
+    },
+    {
+     "texto": "que",
+     "inicio": 7.5,
+     "fim": 7.66
+    },
+    {
+     "texto": "nunca",
+     "inicio": 7.66,
+     "fim": 7.88
+    },
+    {
+     "texto": "vai",
+     "inicio": 7.88,
+     "fim": 8.06
+    },
+    {
+     "texto": "voltar",
+     "inicio": 8.06,
+     "fim": 8.34
+    },
+    {
+     "texto": "ou",
+     "inicio": 8.34,
+     "fim": 8.76
+    }
+   ]
+  }
+ ]
+}

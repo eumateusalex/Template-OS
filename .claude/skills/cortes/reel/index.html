@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- O Reel falado. Este arquivo é GERADO por scripts/reel-falado/montar.mjs a partir do
+         modelo em .claude/skills/cortes/reel/index.html: para mudar, mude o modelo, a ficha de
+         estilo (reel/legendas/) ou os JSON da pasta, e monte de novo.
+         A forma: a câmera em tela cheia, punch-in alternado em cada corte (o silêncio cortado não
+         vira pulo), legenda e gancho escrito nas faixas livres do rosto, e o fato com a fonte em tela
+         cheia. Nada recorta o fundo nem sobrepõe cartão à câmera. A marca entra no lugar de MARCA
+         (o _marca/tokens.css da peça, ou a neutra), e o GSAP vem do _vendor local. -->
+    {{MARCA}}
+    <script src="_vendor/gsap.min.js"></script>
+    <!-- as curvas medidas da /mograph (pouso, esse, saida): a montagem copia o
+         .claude/skills/mograph/ferramentas/curvas.js para a pasta da peça -->
+    <script src="curvas.js"></script>
+    <script src="dados.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #quadro { position: absolute; inset: 0; transform-origin: 50% 35%; }
+      #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .fato { position: absolute; inset: 0; z-index: 20; background: #fff; display: flex; align-items: center; justify-content: center; }
+      .fato img { width: 1000px; max-height: 1500px; object-fit: contain; border-radius: 24px; }
+      .texto { position: absolute; left: 50%; z-index: 40; text-align: center; line-height: 1.12; }
+      .texto .caixa { display: inline-block; }
+      .texto span.p { display: inline-block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{END}}" data-width="1080" data-height="1920">
+      <audio id="master" class="clip" src="master.wav" data-start="0" data-duration="{{END}}" data-volume="1"></audio>
+      <div id="quadro" data-layout-allow-overflow>
+        <video id="camera" class="clip" src="camera.mp4" data-start="0" data-duration="{{END}}" data-media-start="0" muted playsinline preload="auto" data-layout-allow-overflow></video>
+      </div>
+      <div id="fatos"></div>
+      <div id="gancho" class="texto" data-layout-allow-overlap></div>
+      <div id="legendas" data-layout-allow-overlap></div>
+    </div>
+    <script>
+      // Ajudantes como function, não arrow: o lint do check lê o corpo de uma arrow sem chaves
+      // até a próxima vírgula (o hyperframes.md do /video).
+      const D = window.DADOS;
+      const F = D.ficha;
+      const DESTAQUE = F.destaque;
+      const tl = gsap.timeline({ paused: true });
+      function q(n) { return n / D.fps; }
+
+      // a ficha de estilo desenha a legenda e o gancho escrito; a fonte "marca" é o --f-display
+      function fonteDaFicha() {
+        return F.fonte === 'marca' ? 'var(--f-display), sans-serif' : "'" + F.fonte + "', var(--f-display), sans-serif";
+      }
+      function estilo(el, escala) {
+        el.style.fontFamily = fonteDaFicha();
+        el.style.fontWeight = F.peso;
+        el.style.fontSize = Math.round(F.tamanho * escala) + 'px';
+        el.style.color = F.cor;
+        el.style.textTransform = F.caixa === 'maiuscula' ? 'uppercase' : 'none';
+        el.style.width = F.largura + 'px';
+        el.style.marginLeft = -F.largura / 2 + 'px';
+      }
+      function caixa(el) {
+        const c = document.createElement('span');
+        c.className = 'caixa';
+        c.style.webkitTextStroke = F.contorno + 'px ' + F.contorno_cor;
+        c.style.paintOrder = 'stroke fill';
+        c.style.textShadow = F.sombra;
+        if (F.fundo !== 'none') {
+          c.style.background = F.fundo;
+          c.style.padding = '0.12em 0.4em';
+          c.style.borderRadius = '0.3em';
+        }
+        el.appendChild(c);
+        return c;
+      }
+      // um trecho por vez: o destaque de várias palavras ("link da bio") num sublinhado só,
+      // e a escala pelo tamanho da letra, que reserva o espaço (transform colava na vizinha)
+      function trecho(c, tok) {
+        const s = document.createElement('span');
+        s.className = 'p';
+        s.textContent = tok.t;
+        if (tok.d) {
+          s.style.color = DESTAQUE.cor;
+          s.style.fontStyle = DESTAQUE.italico ? 'italic' : 'normal';
+          s.style.fontSize = DESTAQUE.escala + 'em';
+          if (DESTAQUE.sublinhado) {
+            s.style.textDecoration = 'underline';
+            s.style.textDecorationColor = DESTAQUE.sublinhado_cor;
+            s.style.textDecorationThickness = '0.11em';
+            s.style.textUnderlineOffset = '0.14em';
+          }
+        }
+        c.appendChild(s);
+        c.appendChild(document.createTextNode(' '));
+      }
+      // as entradas medidas de legenda levam 7 a 9 quadros e limpam o desfoque; 3 quadros
+      // liam como corte
+      function entra(el, inicio) {
+        gsap.set(el, { autoAlpha: 0 });
+        if (F.entrada === 'sobe') {
+          gsap.set(el, { y: 18, filter: 'blur(10px)' });
+          tl.to(el, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: q(8), ease: CURVAS.pouso }, inicio);
+        } else if (F.entrada === 'desfoque') {
+          gsap.set(el, { filter: 'blur(14px)' });
+          tl.to(el, { autoAlpha: 1, filter: 'blur(0px)', duration: q(8), ease: CURVAS.esse }, inicio);
+        } else if (F.entrada === 'pop') {
+          gsap.set(el, { scale: 0.88 });
+          tl.to(el, { autoAlpha: 1, scale: 1, duration: q(4), ease: 'back.out(2)' }, inicio);
+        } else {
+          tl.set(el, { autoAlpha: 1 }, inicio);
+        }
+      }
+
+      // o punch-in alternado nos cortes: o pulo da fala cortada vira mudança de plano. O
+      // enquadramento não troca de novo antes do intervalo mínimo (trocas a cada 1 a 1,5 s cansam);
+      // o corte que cai antes fica seco
+      let perto = false;
+      let ultimaTroca = -1e9;
+      D.cortes.forEach(function (c) {
+        if (c - ultimaTroca < D.troca_min) return;
+        perto = !perto;
+        ultimaTroca = c;
+        tl.set('#quadro', { scale: perto ? D.punch : 1 }, c);
+      });
+
+      // o fato com a fonte: a captura real em tela cheia, pelo tempo da frase
+      D.fatos.forEach(function (f, i) {
+        const el = document.createElement('div');
+        el.className = 'fato';
+        el.id = 'fato-' + (i + 1);
+        const img = document.createElement('img');
+        img.src = f.captura;
+        el.appendChild(img);
+        document.getElementById('fatos').appendChild(el);
+        gsap.set(el, { autoAlpha: 0 });
+        tl.set(el, { autoAlpha: 1 }, f.inicio);
+        tl.set(el, { autoAlpha: 0 }, f.fim);
+      });
+
+      // o gancho escrito: a um terço do topo, legível já no quadro 0, até o fim da primeira frase
+      const gancho = document.getElementById('gancho');
+      gancho.style.top = '300px';
+      estilo(gancho, 1.4);   // o gancho é a maior letra da tela nos 2 primeiros segundos
+      D.gancho.linhas.forEach(function (linha) {
+        trecho(caixa(gancho), { t: linha, d: false });
+        gancho.appendChild(document.createElement('br'));
+      });
+      tl.to(gancho, { autoAlpha: 0, duration: q(4) }, Math.max(0, D.gancho.ate - q(4)));
+
+      // a legenda: um bloco por vez, na faixa livre do rosto (posicao_y da ficha)
+      const legendas = document.getElementById('legendas');
+      D.legendas.forEach(function (b) {
+        if (b.oculta) return;
+        const el = document.createElement('div');
+        el.className = 'texto';
+        el.style.top = F.posicao_y + 'px';
+        el.setAttribute('data-layout-allow-overlap', '');
+        estilo(el, 1);
+        const c = caixa(el);
+        b.trechos.forEach(function (t) { trecho(c, t); });
+        legendas.appendChild(el);
+        entra(el, b.inicio);
+        // a saída em 5 quadros, cruzando com a entrada do bloco seguinte (o corte seco lia como pulo)
+        tl.to(el, { autoAlpha: 0, duration: q(5), ease: CURVAS.saida }, b.fim);
+      });
+
+      // as duas vozes (o modo frase): a montagem grava em D.duasVozes os itens do planejador
+      // (scripts/reel-falado/legenda-duas-vozes.mjs), cada palavra com a entrada, a saída, o y e o
+      // tamanho; a página só executa. Uma linha por frase e posição (o apoio de cima, a chave, o de
+      // baixo); as palavras ocupam o lugar desde o começo, então a linha não reflui ao entrar
+      function rgba(hex, alfa) {
+        // a cor da ficha pode ser token da marca (var(--accent)): aí a transparência vem do color-mix
+        if (hex.charAt(0) !== '#') return 'color-mix(in srgb, ' + hex + ' calc(' + alfa + ' * 100%), transparent)';
+        const n = parseInt(hex.slice(1), 16);
+        return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + alfa + ')';
+      }
+      if (D.duasVozes) {
+        const V = D.duasVozes;
+        const E = V.entrada;
+        const linhas = {};
+        V.itens.forEach(function (it) {
+          const id = it.frase + ':' + (it.voz === 'chave' ? 'chave' : it.linha);
+          let ln = linhas[id];
+          if (!ln) {
+            ln = document.createElement('div');
+            ln.className = 'texto';
+            ln.style.top = it.y + 'px';
+            ln.setAttribute('data-layout-allow-overlap', '');
+            // a frase e a voz marcadas na linha: a /mograph esconde o apoio onde a animação toma a
+            // tela (só a palavra forte) e a frase que a palavra atrás da cabeça já diz
+            ln.setAttribute('data-frase', it.frase);
+            ln.setAttribute('data-voz', it.voz === 'chave' ? 'chave' : 'apoio');
+            estilo(ln, 1);
+            ln.style.fontSize = it.px + 'px';
+            legendas.appendChild(ln);
+            linhas[id] = ln;
+            tl.to(ln, { autoAlpha: 0, duration: q(V.saida.quadros), ease: CURVAS[V.saida.curva] }, it.sai);
+          }
+          const s = document.createElement('span');
+          s.className = 'p';
+          s.textContent = it.txt;
+          s.style.textShadow = F.sombra;
+          if (it.voz === 'chave') {
+            s.style.fontWeight = V.chave.peso;
+            s.style.color = V.chave.cor;
+            s.style.letterSpacing = V.chave.entre_letras_em + 'em';
+            // o brilho nasce com a chave e some em 18 quadros (efeito é evento, não papel de parede)
+            s.style.textShadow = F.sombra + ', 0 0 ' + V.chave.brilho.raio_px + 'px ' + rgba(V.chave.brilho.cor, 'var(--brilho, 0)');
+            // o material da chave (a ficha, duas_vozes.chave.material): titânio (o metal grafite com o
+            // brilho que passa uma vez na entrada), vidro (a pílula de vidro) ou degradê (das duas cores de
+            // destaque da marca, o acento ao acento raro); cor é a cor chapada
+            const M = V.chave.material || 'cor';
+            if (M === 'titanio' || M === 'degrade') {
+              const base = M === 'titanio' ? 'linear-gradient(180deg, rgb(122,125,134) 0%, rgb(58,60,67) 46%, rgb(21,22,26) 54%, rgb(85,88,95) 100%)' : 'linear-gradient(90deg, var(--accent) 0%, var(--rare, var(--accent)) 100%)';
+              s.style.backgroundImage = M === 'titanio' ? 'linear-gradient(100deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.85) 50%, rgba(255,255,255,0) 58%), ' + base : base;
+              s.style.backgroundSize = M === 'titanio' ? '300% 100%, 100% 100%' : '100% 100%';
+              s.style.backgroundRepeat = 'no-repeat';
+              s.style.webkitBackgroundClip = 'text';
+              s.style.backgroundClip = 'text';
+              s.style.color = 'transparent';
+              s.style.textShadow = 'none';
+              if (M === 'titanio') tl.fromTo(s, { backgroundPosition: '110% 0, 0 0' }, { backgroundPosition: '-10% 0, 0 0', duration: q(V.chave.brilho.decai_quadros), ease: CURVAS.esse, immediateRender: true }, it.entra);
+            } else if (M === 'vidro') {
+              s.style.color = 'rgb(10,10,10)';
+              s.style.padding = '0.06em 0.3em 0.1em';
+              s.style.borderRadius = '0.34em';
+              s.style.background = 'rgba(255,255,255,.55)';
+              s.style.backdropFilter = 'blur(20px) saturate(180%)';
+              s.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
+              s.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.95), inset 0 0 0 1px rgba(255,255,255,.55), 0 0 0 1px rgba(10,10,10,.06), 0 18px 40px -16px rgba(10,10,10,.35)';
+              s.style.textShadow = 'none';
+            }
+            gsap.set(s, { autoAlpha: 0, filter: 'blur(' + E.chave.desfoque_de + 'px)' });
+            tl.to(s, { autoAlpha: 1, filter: 'blur(0px)', duration: q(E.chave.quadros), ease: CURVAS[E.chave.curva] }, it.entra);
+            tl.fromTo(s, { '--brilho': V.chave.brilho.pico_opacidade }, { '--brilho': 0, duration: q(V.chave.brilho.decai_quadros), ease: CURVAS.esse }, it.entra);
+          } else {
+            gsap.set(s, { autoAlpha: 0, y: E.apoio.y_de, filter: 'blur(' + E.apoio.desfoque_de + 'px)' });
+            tl.to(s, { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: q(E.apoio.quadros), ease: CURVAS[E.apoio.curva] }, it.entra);
+          }
+          ln.appendChild(s);
+          ln.appendChild(document.createTextNode(' '));
+        });
+      }
+
+      tl.set({}, {}, D.END);
+      window.__timelines = window.__timelines || {};
+      window.__timelines['main'] = tl;
+    </script>
+  </body>
+</html>

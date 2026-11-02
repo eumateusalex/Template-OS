@@ -1,0 +1,81 @@
+<!doctype html>
+<!--
+  O modelo da página de revisão da entrega de vídeo (a /video, estado 12; a /mograph, passo 12).
+  Copie para saidas/<estilo>-<tema>-<data>/index.html e troque cada {{CAMPO}}; nenhum {{ pode
+  sobrar. Os campos: TITULO (2 a 4 palavras, a aba), PERFIL (o @ do perfil que posta, sem o @),
+  LEGENDA (a legenda do post, o texto do LEGENDA.md), CABECA (o nome da peça), SUB (formato, duração,
+  marca, direção escolhida, e se foi publicado), CENAS (um <li> por cena: o que o vídeo faz), MUDOU (o
+  que mudou do que o usuário viu na prancha, um <li> por mudança; sem mudança, apague a seção), DECIDE (um
+  <div class="decide"> por decisão do usuário, com a recomendada), CAPAS (as capas, uma <figure> cada, com a
+  recomendada marcada), PROVA (um <li> por régua: direção, som medido, par de renders, crítico).
+  As cores do :root são as da marca do workspace (o `tokens.css`; o vídeo e a capa já vêm nelas).
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{TITULO}}</title>
+<style>
+  :root { --fundo: #f5f5f7; --tinta: #000; --apoio: #6e6e73; --linha: #d2d2d7; --cartao: #fff; --azul: #0071e3; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fundo: #111113; --tinta: #f5f5f7; --apoio: #a1a1a6; --linha: #2c2c2e; --cartao: #1c1c1e; --azul: #2997ff; } }
+  :root[data-theme="dark"] { --fundo: #111113; --tinta: #f5f5f7; --apoio: #a1a1a6; --linha: #2c2c2e; --cartao: #1c1c1e; --azul: #2997ff; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--fundo); color: var(--tinta); font: 16px/1.5 "Inter", system-ui, sans-serif; padding: 32px 16px 64px; }
+  main { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 40px; align-items: start; }
+  main > * { min-width: 0; }
+  .post { background: var(--cartao); border-radius: 22px; overflow: hidden; border: 1px solid var(--linha); position: sticky; top: 16px; }
+  .topo { display: flex; align-items: center; gap: 10px; padding: 12px 14px; font-weight: 600; font-size: 14px; }
+  .topo i { width: 30px; height: 30px; border-radius: 50%; background: var(--tinta); display: block; }
+  video { width: 100%; max-width: 100%; display: block; aspect-ratio: 9 / 16; background: #ece5da; }
+  .legenda { padding: 12px 14px 16px; font-size: 14px; white-space: pre-line; }
+  h1 { font-size: 30px; letter-spacing: -0.02em; line-height: 1.15; }
+  .sub { color: var(--apoio); margin: 6px 0 22px; }
+  h2 { font-size: 19px; margin: 26px 0 10px; }
+  ol, ul { padding-left: 20px; display: grid; gap: 6px; }
+  .decide { background: var(--cartao); border: 1px solid var(--linha); border-left: 4px solid var(--azul); border-radius: 0 16px 16px 0; padding: 16px 18px; margin: 12px 0; }
+  .decide b { display: block; margin-bottom: 4px; }
+  .capas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .capas figure { margin: 0; }
+  .capas img { width: 100%; border-radius: 12px; border: 1px solid var(--linha); display: block; }
+  .capas figcaption { font-size: 13px; color: var(--apoio); margin-top: 6px; }
+  .nota { color: var(--apoio); font-size: 14px; margin-top: 18px; }
+  a { color: var(--tinta); }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; } .post { position: static; max-width: 380px; margin: 0 auto; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="post">
+    <div class="topo"><i></i>{{PERFIL}}</div>
+    <video src="final.mp4" controls playsinline preload="auto" poster="capa.png"></video>
+    <div class="legenda"><b>{{PERFIL}}</b> {{LEGENDA}}</div>
+  </div>
+  <section>
+    <h1>{{CABECA}}</h1>
+    <p class="sub">{{SUB}}</p>
+
+    <h2>O que a peça faz</h2>
+    <ol>
+      {{CENAS}}
+    </ol>
+
+    <h2>O que mudou do que você viu na prancha</h2>
+    <ul>
+      {{MUDOU}}
+    </ul>
+
+    <h2>Para você decidir</h2>
+    {{DECIDE}}
+    <div class="capas">
+      {{CAPAS}}
+    </div>
+
+    <h2>Como foi provado</h2>
+    <ul>
+      {{PROVA}}
+    </ul>
+    <p class="nota">Ninguém ouviu o som: as réguas medem nível, pico, tom e posição. O relatório completo é o <a href="RELATORIO.md">relatório</a>.</p>
+  </section>
+</main>
+</body>
+</html>

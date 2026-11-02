@@ -1,0 +1,7 @@
+<!-- fundação: semente v1 · é seu. O ícone da aba: sem ele, todo carregamento
+     pede /favicon.ico e o console mostra um 404. O da marca é o
+     identidade/gerado/icone.svg, que o gerador da marca escreve; este é o
+     neutro, até o projeto ter o dele. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#262626"/> <!-- tecnico: neutro sem marca -->
+</svg>

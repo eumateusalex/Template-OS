@@ -1,0 +1,24 @@
+Licença de uso do Template OS
+
+Copyright (c) 2026 Mateus Alex. Todos os direitos reservados.
+
+1. O que você pode fazer. Quem recebeu esta cópia do titular, ou de alguém que ele
+   autorizou por escrito, pode usá-la e alterá-la à vontade no próprio trabalho e no
+   próprio negócio, inclusive em projetos feitos para clientes.
+
+2. O que pede autorização por escrito do titular. Repassar, sublicenciar, vender,
+   revender, publicar ou distribuir o Template OS, no todo ou em parte, inclusive
+   numa versão alterada; e oferecê-lo, ou um produto derivado dele, a terceiros.
+
+3. O que é seu. O que você produz com o Template OS (textos, peças, código dos seus
+   projetos, a sua memória e a sua marca) é seu.
+
+4. Peças baixadas na instalação. As ferramentas que o instalador baixa da fonte
+   oficial de cada uma (a lista está em scripts/terceiros/manifesto.json) seguem a
+   licença de quem as publica, e não esta.
+
+5. Sem garantia. O Template OS é fornecido no estado em que se encontra, sem
+   garantia de nenhum tipo. O titular não responde por dano ou prejuízo decorrente
+   do uso.
+
+6. Fim da licença. O descumprimento destes termos encerra a licença de uso.

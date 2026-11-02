@@ -1,0 +1,109 @@
+# O portão, no CI. Uma linha `run:` só, e ela é a MESMA lista que roda na
+# máquina (`node fabrica/portao.mjs`).
+#
+# 🚨 Lista dupla diverge, e passo fica fora do CI sem ninguém saber. Aqui
+# dentro não existe lista: o workflow chama o portão, e o portão lê
+# `fabrica/stack.mjs`.
+#
+# ⚠️ Sem `paths-ignore` no pull_request, de propósito: check obrigatório que
+# não roda fica pendente para sempre, e pendente para sempre é merge liberado.
+
+name: Portão
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Só leitura, escrito no código: o padrão do token depende da configuração do repositório.
+permissions:
+  contents: read
+
+concurrency:
+  group: portao-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  portao:
+    runs-on: ubuntu-latest
+    # ⚠️ Teto de tempo: job preso não pode comer a cota de minutos do Actions.
+    timeout-minutes: 10
+    env:
+      # O contexto `secrets` não existe dentro de `if:` de passo, então a
+      # presença do segredo vira variável aqui em cima.
+      TEM_BANCO_DE_TESTE: ${{ secrets.BANCO_DE_TESTE_URL != '' }}
+    steps:
+      # 🚨 `fetch-depth: 0`: o histórico inteiro. Sem ele o checkout traz um
+      # commit só, e o segredo commitado e apagado antes fica invisível para o
+      # gitleaks e para o `segredos --historico`.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # O histórico inteiro, pelo gitleaks. Binário FIXADO na versão e
+      # conferido pelo sha256 publicado no release: nenhuma Action de terceiro
+      # no caminho. Achado antigo que já foi revogado, ou que é caso plantado de
+      # teste, se declara no `.gitleaksignore` pela impressão digital, com a
+      # razão numa linha de comentário acima: nada se isenta por pasta.
+      - name: Segredos no histórico (gitleaks)
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/gitleaks.tgz" https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $RUNNER_TEMP/gitleaks.tgz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/gitleaks.tgz" -C "$RUNNER_TEMP" gitleaks
+          "$RUNNER_TEMP/gitleaks" git --redact --no-banner --exit-code 1 .
+
+      # 🚨 `cache: npm` do setup-node EXIGE lockfile e falha o job inteiro sem
+      # ele, ANTES de qualquer passo condicional rodar: "Dependencies lock file
+      # is not found". Projeto de zero dependência é legítimo, então o cache só liga
+      # quando há o que cachear.
+      - name: Tem lockfile?
+        id: lock
+        run: echo "tem=$([ -f package-lock.json ] && echo sim || echo nao)" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: ${{ steps.lock.outputs.tem == 'sim' && 'npm' || '' }}
+
+      # Num projeto PYTHON, descomente os dois passos abaixo.
+      # ⚠️ O caminho do interpretador vai ENTRE ASPAS nos comandos do stack.mjs:
+      # o shell do Windows recusa o caminho sem elas.
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      # - name: Ferramentas do Python
+      #   run: |
+      #     python -m venv .venv
+      #     ".venv/bin/python" -m pip install --upgrade pip
+      #     ".venv/bin/python" -m pip install -r requirements-dev.txt
+
+      # ⚠️ `npm ci` EXIGE package-lock.json e quebra sem ele. Projeto de zero
+      # dependência é legítimo (o Node 24 já traz teste e cobertura), e o passo
+      # diz em voz alta que não instalou nada em vez de falhar.
+      - name: Dependências
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            echo "sem package-lock.json: nada a instalar" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # O portão inteiro, num passo só. Ele imprime o que pulou e por quê, e
+      # escreve isso no resumo do job. Os passos com `precisa: 'CI'` (o
+      # histórico dos segredos e a auditoria de dependências) rodam aqui, e só aqui.
+      - name: Portão
+        run: node fabrica/portao.mjs --ci
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+
+      # ⚠️ Passo pulado tem que ser VISÍVEL. Verde com metade da lista pulada é
+      # o verde mentiroso que o princípio VI proíbe; quem escreve o aviso é o
+      # próprio portão, no $GITHUB_STEP_SUMMARY.
+      - name: O que não foi medido
+        if: always()
+        run: |
+          if [ "${{ env.TEM_BANCO_DE_TESTE }}" != "true" ]; then
+            echo "> ⚠️ Sem o segredo BANCO_DE_TESTE_URL: os passos que falam com o banco se pularam." >> $GITHUB_STEP_SUMMARY
+            echo "> Ausência de medida não é evidência de conformidade." >> $GITHUB_STEP_SUMMARY
+          fi

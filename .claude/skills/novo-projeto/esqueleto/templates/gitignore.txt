@@ -1,0 +1,16 @@
+# fundação
+# O que o npm, o build, o teste de tela e as fotos deixam para trás. Nada disso
+# se versiona: tudo se refaz com um comando. O instalador acrescenta só as
+# linhas que o .gitignore do projeto ainda não tem.
+node_modules/
+.next/
+out/
+next-env.d.ts
+test-results/
+playwright-report/
+blob-report/
+.fotos/
+*.tsbuildinfo
+.env
+.env.*
+!.env*.example

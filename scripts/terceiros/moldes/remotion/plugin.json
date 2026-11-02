@@ -1,0 +1,15 @@
+{
+	"$schema": "{{$schema}}",
+	"name": "{{name}}",
+	"displayName": "{{displayName}}",
+	"version": "{{version}}",
+	"description": "Criar video com React usando Remotion: composicao, animacao, legenda, preview no Studio e render. Videos renderizados saem em saidas/.",
+	"author": {
+		"name": "{{author.name}}",
+		"email": "{{author.email}}",
+		"url": "{{author.url}}"
+	},
+	"homepage": "{{homepage}}",
+	"license": "{{license}}",
+	"keywords": ["remotion", "video", "react", "animation", "render"]
+}

@@ -1,0 +1,1148 @@
+{
+ "versao": 1,
+ "sobre": "As animações 3D do kit, em WebM VP9 com alfa, relativas à raiz de material. Um item por objeto: \"entra\" é a animação de entrada, \"laco\" a que segura em laço, \"inteiro\" a que faz as duas. O uso é o da entrada comum do manual que cita kit:3d: um objeto herói, um evento, nunca papel de parede. Os temas saem do nome; o olho de quem dirige decide o que fica na peça.",
+ "raiz": "3d",
+ "temas": {
+  "icone": 54,
+  "dinheiro": 19,
+  "rede-social": 13,
+  "sinal": 7,
+  "objeto": 19
+ },
+ "itens": [
+  {
+   "id": "dinheiro/card",
+   "tema": "dinheiro",
+   "entra": "dinheiro-1.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "dinheiro-2.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "dinheiro/cartao",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-3.webm",
+   "inteiro_s": 5.17,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/cifrao",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-4.webm",
+   "inteiro_s": 11.83,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/cifrao-2",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-5.webm",
+   "inteiro_s": 31.67,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/coins",
+   "tema": "dinheiro",
+   "entra": "dinheiro-6.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "dinheiro-7.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "dinheiro/credit-card",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-8.webm",
+   "inteiro_s": 10.01,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/dollar-green-shine",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-9.webm",
+   "inteiro_s": 5.08,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/dollar-growth-up",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-10.webm",
+   "inteiro_s": 5.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/money",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-11.webm",
+   "inteiro_s": 11.47,
+   "alfa": false,
+   "largura": 720,
+   "altura": 1280
+  },
+  {
+   "id": "dinheiro/money-bag",
+   "tema": "dinheiro",
+   "entra": "dinheiro-12.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080,
+   "laco": "dinheiro-13.webm",
+   "laco_s": 4.03
+  },
+  {
+   "id": "dinheiro/money-euros-1-4k",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-14.webm",
+   "inteiro_s": 6.88,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/money-euros-2-4k",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-15.webm",
+   "inteiro_s": 6.24,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/money-explosion",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-16.webm",
+   "inteiro_s": 5,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/money-explosion-2",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-17.webm",
+   "inteiro_s": 7.33,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/money-explosion-3",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-18.webm",
+   "inteiro_s": 5.63,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/money-rain-3",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-19.webm",
+   "inteiro_s": 3.05,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/moneybank",
+   "tema": "dinheiro",
+   "entra": "dinheiro-20.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "dinheiro-21.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "dinheiro/stackeddollarsfalling-v3",
+   "tema": "dinheiro",
+   "inteiro": "dinheiro-22.webm",
+   "inteiro_s": 15.57,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "dinheiro/wallet",
+   "tema": "dinheiro",
+   "entra": "dinheiro-23.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "dinheiro-24.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/agenda",
+   "tema": "icone",
+   "inteiro": "icone-1.webm",
+   "inteiro_s": 5.17,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "icone/antenna",
+   "tema": "icone",
+   "entra": "icone-2.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-3.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/auction",
+   "tema": "icone",
+   "entra": "icone-4.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-5.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/bag",
+   "tema": "icone",
+   "entra": "icone-6.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-7.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/barcode",
+   "tema": "icone",
+   "entra": "icone-8.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-9.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/bin",
+   "tema": "icone",
+   "entra": "icone-10.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-11.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/cart",
+   "tema": "icone",
+   "entra": "icone-12.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-13.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/case",
+   "tema": "icone",
+   "entra": "icone-14.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-15.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/chat",
+   "tema": "icone",
+   "entra": "icone-16.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-17.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/clip",
+   "tema": "icone",
+   "entra": "icone-18.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-19.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/clock",
+   "tema": "icone",
+   "entra": "icone-20.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-21.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/compass",
+   "tema": "icone",
+   "entra": "icone-22.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-23.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/countries-1-blue",
+   "tema": "icone",
+   "inteiro": "icone-24.webm",
+   "inteiro_s": 20,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "icone/countries-2-yellow",
+   "tema": "icone",
+   "inteiro": "icone-25.webm",
+   "inteiro_s": 20,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "icone/cup",
+   "tema": "icone",
+   "entra": "icone-26.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-27.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/disk",
+   "tema": "icone",
+   "entra": "icone-28.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-29.webm",
+   "laco_s": 4.03
+  },
+  {
+   "id": "icone/display",
+   "tema": "icone",
+   "entra": "icone-30.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-31.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/download",
+   "tema": "icone",
+   "entra": "icone-32.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-33.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/envelope",
+   "tema": "icone",
+   "entra": "icone-34.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-35.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/gears",
+   "tema": "icone",
+   "entra": "icone-36.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-37.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/giftbox",
+   "tema": "icone",
+   "entra": "icone-38.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-39.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/goal",
+   "tema": "icone",
+   "entra": "icone-40.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080,
+   "laco": "icone-41.webm",
+   "laco_s": 4.03
+  },
+  {
+   "id": "icone/graph",
+   "tema": "icone",
+   "entra": "icone-42.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-43.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/key",
+   "tema": "icone",
+   "entra": "icone-44.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-45.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/lifebuoy",
+   "tema": "icone",
+   "entra": "icone-46.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-47.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/lightbulb",
+   "tema": "icone",
+   "entra": "icone-48.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-49.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/lock",
+   "tema": "icone",
+   "entra": "icone-50.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-51.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/mapa",
+   "tema": "icone",
+   "inteiro": "icone-52.webm",
+   "inteiro_s": 5.17,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "icone/megaphone",
+   "tema": "icone",
+   "entra": "icone-53.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080,
+   "laco": "icone-54.webm",
+   "laco_s": 4,
+   "inteiro": "icone-55.webm",
+   "inteiro_s": 6.03
+  },
+  {
+   "id": "icone/mic",
+   "tema": "icone",
+   "entra": "icone-56.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-57.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/notepad",
+   "tema": "icone",
+   "entra": "icone-58.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-59.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/open",
+   "tema": "icone",
+   "entra": "icone-60.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-61.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/pad",
+   "tema": "icone",
+   "entra": "icone-62.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-63.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/pen",
+   "tema": "icone",
+   "entra": "icone-64.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-65.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/phone",
+   "tema": "icone",
+   "entra": "icone-66.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-67.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/photos",
+   "tema": "icone",
+   "entra": "icone-68.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-69.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/pin",
+   "tema": "icone",
+   "entra": "icone-70.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-71.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/pin-flag",
+   "tema": "icone",
+   "entra": "icone-72.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-73.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/quality",
+   "tema": "icone",
+   "entra": "icone-74.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-75.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/rocket",
+   "tema": "icone",
+   "entra": "icone-76.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-77.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/safe",
+   "tema": "icone",
+   "entra": "icone-78.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-79.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/search",
+   "tema": "icone",
+   "entra": "icone-80.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-81.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/settings",
+   "tema": "icone",
+   "entra": "icone-82.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-83.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/shield",
+   "tema": "icone",
+   "entra": "icone-84.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-85.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/stop",
+   "tema": "icone",
+   "entra": "icone-86.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-87.webm",
+   "laco_s": 4.03
+  },
+  {
+   "id": "icone/tag",
+   "tema": "icone",
+   "entra": "icone-88.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-89.webm",
+   "laco_s": 4.03
+  },
+  {
+   "id": "icone/timer",
+   "tema": "icone",
+   "entra": "icone-90.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-91.webm",
+   "laco_s": 4.03
+  },
+  {
+   "id": "icone/truck",
+   "tema": "icone",
+   "entra": "icone-92.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-93.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/tv",
+   "tema": "icone",
+   "entra": "icone-94.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-95.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/umbrella",
+   "tema": "icone",
+   "entra": "icone-96.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-97.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/upload",
+   "tema": "icone",
+   "entra": "icone-98.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-99.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/wifi",
+   "tema": "icone",
+   "entra": "icone-100.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-101.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/world",
+   "tema": "icone",
+   "entra": "icone-102.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "icone-103.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "icone/xadrez",
+   "tema": "icone",
+   "inteiro": "icone-104.webm",
+   "inteiro_s": 6.88,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/aperto-de-mao",
+   "tema": "objeto",
+   "inteiro": "objeto-1.webm",
+   "inteiro_s": 7.63,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/brain-360-animation",
+   "tema": "objeto",
+   "inteiro": "objeto-2.webm",
+   "inteiro_s": 11.96,
+   "alfa": false,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/butterfly",
+   "tema": "objeto",
+   "inteiro": "objeto-3.webm",
+   "inteiro_s": 21.37,
+   "alfa": false,
+   "largura": 720,
+   "altura": 720
+  },
+  {
+   "id": "objeto/cadeado",
+   "tema": "objeto",
+   "inteiro": "objeto-4.webm",
+   "inteiro_s": 8.03,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/calendario",
+   "tema": "objeto",
+   "inteiro": "objeto-5.webm",
+   "inteiro_s": 25.67,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/chees",
+   "tema": "objeto",
+   "inteiro": "objeto-6.webm",
+   "inteiro_s": 10,
+   "alfa": false,
+   "largura": 720,
+   "altura": 1280
+  },
+  {
+   "id": "objeto/contrato",
+   "tema": "objeto",
+   "inteiro": "objeto-7.webm",
+   "inteiro_s": 7.38,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/eye",
+   "tema": "objeto",
+   "inteiro": "objeto-8.webm",
+   "inteiro_s": 7.1,
+   "alfa": false,
+   "largura": 512,
+   "altura": 512
+  },
+  {
+   "id": "objeto/folha",
+   "tema": "objeto",
+   "inteiro": "objeto-9.webm",
+   "inteiro_s": 4.97,
+   "alfa": true,
+   "largura": 1080,
+   "altura": 1920
+  },
+  {
+   "id": "objeto/golden-chess",
+   "tema": "objeto",
+   "inteiro": "objeto-10.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/headphone-on-alpha",
+   "tema": "objeto",
+   "inteiro": "objeto-11.webm",
+   "inteiro_s": 10.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/holofote",
+   "tema": "objeto",
+   "inteiro": "objeto-12.webm",
+   "inteiro_s": 5.03,
+   "alfa": false,
+   "largura": 720,
+   "altura": 900
+  },
+  {
+   "id": "objeto/mapa",
+   "tema": "objeto",
+   "inteiro": "objeto-13.webm",
+   "inteiro_s": 5.17,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/newspaper",
+   "tema": "objeto",
+   "laco": "objeto-14.webm",
+   "laco_s": 11.17,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/pasta",
+   "tema": "objeto",
+   "inteiro": "objeto-15.webm",
+   "inteiro_s": 6.11,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/presente",
+   "tema": "objeto",
+   "inteiro": "objeto-16.webm",
+   "inteiro_s": 8.28,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/relogio-3d",
+   "tema": "objeto",
+   "inteiro": "objeto-17.webm",
+   "inteiro_s": 3.67,
+   "alfa": true,
+   "largura": 1080,
+   "altura": 1920
+  },
+  {
+   "id": "objeto/tomate",
+   "tema": "objeto",
+   "inteiro": "objeto-18.webm",
+   "inteiro_s": 10,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "objeto/walking",
+   "tema": "objeto",
+   "inteiro": "objeto-19.webm",
+   "inteiro_s": 4.67,
+   "alfa": false,
+   "largura": 720,
+   "altura": 900
+  },
+  {
+   "id": "rede-social/behance",
+   "tema": "rede-social",
+   "inteiro": "rede-social-1.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/dribbble",
+   "tema": "rede-social",
+   "inteiro": "rede-social-2.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/dropbox",
+   "tema": "rede-social",
+   "inteiro": "rede-social-3.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/facebook",
+   "tema": "rede-social",
+   "entra": "rede-social-4.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080,
+   "laco": "rede-social-5.webm",
+   "laco_s": 4,
+   "inteiro": "rede-social-6.webm",
+   "inteiro_s": 8.04
+  },
+  {
+   "id": "rede-social/google-plus",
+   "tema": "rede-social",
+   "inteiro": "rede-social-7.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/instagram",
+   "tema": "rede-social",
+   "inteiro": "rede-social-8.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/linkedin",
+   "tema": "rede-social",
+   "inteiro": "rede-social-9.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/pinterest",
+   "tema": "rede-social",
+   "inteiro": "rede-social-10.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/snapchat",
+   "tema": "rede-social",
+   "inteiro": "rede-social-11.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/spotify",
+   "tema": "rede-social",
+   "inteiro": "rede-social-12.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/twitter",
+   "tema": "rede-social",
+   "entra": "rede-social-13.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "rede-social-14.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "rede-social/whatsapp",
+   "tema": "rede-social",
+   "inteiro": "rede-social-15.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "rede-social/youtube",
+   "tema": "rede-social",
+   "inteiro": "rede-social-16.webm",
+   "inteiro_s": 8.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "sinal/cancel",
+   "tema": "sinal",
+   "entra": "sinal-1.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "sinal-2.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "sinal/check",
+   "tema": "sinal",
+   "inteiro": "sinal-3.webm",
+   "inteiro_s": 6.43,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080,
+   "variacoes": [
+    "sinal-4.webm"
+   ]
+  },
+  {
+   "id": "sinal/closed",
+   "tema": "sinal",
+   "entra": "sinal-5.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "sinal-6.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "sinal/cuidado",
+   "tema": "sinal",
+   "inteiro": "sinal-7.webm",
+   "inteiro_s": 10.01,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1080
+  },
+  {
+   "id": "sinal/done",
+   "tema": "sinal",
+   "entra": "sinal-8.webm",
+   "entra_s": 2.03,
+   "alfa": true,
+   "largura": 1000,
+   "altura": 1000,
+   "laco": "sinal-9.webm",
+   "laco_s": 4
+  },
+  {
+   "id": "sinal/errado-1",
+   "tema": "sinal",
+   "inteiro": "sinal-10.webm",
+   "inteiro_s": 5.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1920
+  },
+  {
+   "id": "sinal/errado-2",
+   "tema": "sinal",
+   "inteiro": "sinal-11.webm",
+   "inteiro_s": 5.04,
+   "alfa": true,
+   "largura": 1920,
+   "altura": 1920
+  }
+ ],
+ "pacote": "kit"
+}

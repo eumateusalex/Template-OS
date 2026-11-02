@@ -1,0 +1,10 @@
+/* novo-projeto: semente · é seu
+   A ÚNICA ENTRADA DA MARCA NO PROJETO. O layout importa este arquivo, e ele
+   traz a marca deste projeto, que mora em src/styles/: os tokens e as fontes
+   foram gerados das cores da entrevista, e o tema diz qual canal cada papel do
+   shadcn usa. Os três são seus. O base.css de fundacao/ continua: ele é
+   acessibilidade, não marca. A ordem importa: o tema vem depois dos tokens. */
+@import "./fontes.css";
+@import "./tokens.css";
+@import "./tema-shadcn.css";
+@import "../../fundacao/base.css";

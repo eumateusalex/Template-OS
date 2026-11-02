@@ -1,0 +1,453 @@
+{
+  "$description": "A marca de quem usa este workspace, no formato W3C Design Tokens (DTCG 2025.10). Este é o MOLDE: os valores são de demonstração (a paleta grafite com acento quente, o trio de fontes) ou sugestão do método, marcados um a um no $description. O /marca copia este arquivo para identidade/marca.tokens.json, preenche pela entrevista e tira o template.estado. Duas camadas: as primitivas (cor.primitiva) e os papéis (cor.papel), que apontam para elas por alias. Os tipos texto, lista e booleano são deste template: o DTCG não tem tipo para frase, lista ou sim e não.",
+  "$extensions": {
+    "template.estado": "nao-configurado"
+  },
+  "cor": {
+    "$type": "color",
+    "primitiva": {
+      "$description": "As cores da marca, com o nome que a pessoa quiser. Demonstração: troque na entrevista do /marca.",
+      "grafite": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1098,
+            0.1098,
+            0.1255
+          ],
+          "hex": "#1c1c20"
+        }
+      },
+      "papel": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9569,
+            0.9529,
+            0.9412
+          ],
+          "hex": "#f4f3f0"
+        }
+      },
+      "laranja": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8,
+            0.4314,
+            0.1569
+          ],
+          "hex": "#cc6e28"
+        }
+      },
+      "chumbo": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2745,
+            0.2745,
+            0.3137
+          ],
+          "hex": "#464650"
+        }
+      },
+      "nevoa": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8941,
+            0.8941,
+            0.8824
+          ],
+          "hex": "#e4e4e1"
+        }
+      },
+      "cinza": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3529,
+            0.3529,
+            0.3529
+          ],
+          "hex": "#5a5a5a"
+        }
+      },
+      "noite": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0549,
+            0.0549,
+            0.0706
+          ],
+          "hex": "#0e0e12"
+        }
+      },
+      "salvia": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.549,
+            0.7451,
+            0.5882
+          ],
+          "hex": "#8cbe96"
+        }
+      }
+    },
+    "papel": {
+      "$description": "O que cada superfície usa. Os oito primeiros são obrigatórios; os de interface (superficie, borda, texto, texto-suave, erro, aviso, sucesso) se derivam quando faltam (scripts/marca/derivar.mjs).",
+      "principal": {
+        "$value": "{cor.primitiva.grafite}",
+        "$description": "A cor que domina a peça: o fundo escuro e o texto sobre o claro, quando passa 4,5:1. Demonstração: troque na entrevista do /marca."
+      },
+      "claro": {
+        "$value": "{cor.primitiva.papel}",
+        "$description": "O fundo claro. Demonstração: troque na entrevista do /marca."
+      },
+      "acento": {
+        "$value": "{cor.primitiva.laranja}",
+        "$description": "O que puxa o olho: destaque, CTA, régua. Demonstração: troque na entrevista do /marca."
+      },
+      "apoio": {
+        "$value": "{cor.primitiva.chumbo}",
+        "$description": "Acompanha a principal sem competir. Demonstração: troque na entrevista do /marca."
+      },
+      "lavado": {
+        "$value": "{cor.primitiva.nevoa}",
+        "$description": "Cartão e respiro sobre o claro. Demonstração: troque na entrevista do /marca."
+      },
+      "raro": {
+        "$value": "{cor.primitiva.cinza}",
+        "$description": "Acento raro, no máximo 8% da peça. Demonstração: troque na entrevista do /marca."
+      },
+      "abismo": {
+        "$value": "{cor.primitiva.noite}",
+        "$description": "A mais fechada: terminal, fecho fechado, e o texto quando a principal não passa sobre o claro. Demonstração: troque na entrevista do /marca."
+      },
+      "ok": {
+        "$value": "{cor.primitiva.salvia}",
+        "$description": "\"Concluído\", sucesso. Demonstração: troque na entrevista do /marca."
+      }
+    }
+  },
+  "fonte": {
+    "$type": "fontFamily",
+    "$description": "Três papéis de letra. Marca de uma família só preenche os três com ela. O trio display + serifada itálica + mono é sugestão do molde: a pessoa confirma ou troca na entrevista do /marca.",
+    "display": {
+      "$value": [
+        "Bricolage Grotesque",
+        "Arial",
+        "sans-serif"
+      ],
+      "$description": "Título e corpo. Demonstração: troque na entrevista do /marca.",
+      "$extensions": {
+        "marca.url": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap"
+      }
+    },
+    "destaque": {
+      "$value": [
+        "Instrument Serif",
+        "Georgia",
+        "serif"
+      ],
+      "$description": "O trecho de destaque dentro do título. Demonstração: troque na entrevista do /marca.",
+      "$extensions": {
+        "marca.url": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap",
+        "marca.estilo": "italic"
+      }
+    },
+    "mono": {
+      "$value": [
+        "JetBrains Mono",
+        "Consolas",
+        "monospace"
+      ],
+      "$description": "Tag, rótulo, terminal, microtexto técnico. Demonstração: troque na entrevista do /marca.",
+      "$extensions": {
+        "marca.url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+      }
+    },
+    "peso": {
+      "$type": "fontWeight",
+      "forte": {
+        "$value": 800,
+        "$description": "Peso do título. Demonstração: troque na entrevista do /marca."
+      },
+      "medio": {
+        "$value": 500,
+        "$description": "Peso do corpo. Demonstração: troque na entrevista do /marca."
+      },
+      "mono": {
+        "$value": 600,
+        "$description": "Peso da letra mono. Demonstração: troque na entrevista do /marca."
+      }
+    }
+  },
+  "raio": {
+    "$type": "dimension",
+    "$description": "Sugestão do molde: a pessoa confirma ou troca na entrevista do /marca.",
+    "sm": {
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      },
+      "$description": "Barra e traço."
+    },
+    "md": {
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      },
+      "$description": "Botão, chip, campo."
+    },
+    "lg": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Cartão."
+    },
+    "cartao": {
+      "$value": {
+        "value": 18,
+        "unit": "px"
+      },
+      "$description": "Cartão grande, janela."
+    },
+    "pilula": {
+      "$type": "booleano",
+      "$value": false,
+      "$description": "true: botão e chip em pílula (raio total)."
+    }
+  },
+  "espaco": {
+    "1": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "2": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "3": {
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "4": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "5": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "6": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      }
+    },
+    "7": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      }
+    },
+    "8": {
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      }
+    },
+    "$type": "dimension",
+    "$description": "A escala de espaço da interface. Sugestão do molde: a pessoa confirma ou troca na entrevista do /marca."
+  },
+  "sombra": {
+    "$type": "shadow",
+    "$description": "Duas sombras difusas: sugestão do molde: a pessoa confirma ou troca na entrevista do /marca.",
+    "clara": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1098,
+            0.1098,
+            0.1255
+          ],
+          "alpha": 0.1,
+          "hex": "#1c1c20"
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 18,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 45,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Sombra sobre o fundo claro."
+    },
+    "escura": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.26,
+          "hex": "#000000"
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 24,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 45,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Sombra sobre o fundo escuro."
+    }
+  },
+  "movimento": {
+    "$description": "A curva e a duração andam juntas por papel. Sugestão do molde: a pessoa confirma ou troca na entrevista do /marca.",
+    "curva": {
+      "$type": "cubicBezier",
+      "principal": {
+        "$value": [
+          0.2,
+          0.65,
+          0.2,
+          1
+        ],
+        "$description": "Sai rápido e assenta devagar. Sugestão do molde: a pessoa confirma ou troca na entrevista do /marca."
+      },
+      "entrada": {
+        "$value": [
+          0,
+          0,
+          0.2,
+          1
+        ],
+        "$description": "O que entra na tela."
+      },
+      "saida": {
+        "$value": [
+          0.4,
+          0,
+          1,
+          1
+        ],
+        "$description": "O que sai da tela."
+      }
+    },
+    "duracao": {
+      "$type": "duration",
+      "rapida": {
+        "$value": {
+          "value": 200,
+          "unit": "ms"
+        },
+        "$description": "Clique, hover, troca pequena."
+      },
+      "media": {
+        "$value": {
+          "value": 450,
+          "unit": "ms"
+        },
+        "$description": "Entrada de elemento."
+      },
+      "lenta": {
+        "$value": {
+          "value": 800,
+          "unit": "ms"
+        },
+        "$description": "Entrada de cena, título grande."
+      }
+    },
+    "cascata": {
+      "$type": "duration",
+      "$value": {
+        "value": 60,
+        "unit": "ms"
+      },
+      "$description": "O atraso entre itens de uma lista que entram em sequência."
+    }
+  },
+  "imagem": {
+    "$type": "texto",
+    "estilo": {
+      "$value": "fotografia editorial, luz natural lateral, cor contida, editorial quality",
+      "$description": "A frase que abre todo prompt de imagem. Sugestão do molde: a pessoa confirma ou troca na entrevista do /marca."
+    },
+    "evitar": {
+      "$type": "lista",
+      "$value": [
+        "texto ou letra dentro da imagem",
+        "pele e superfície com brilho de plástico",
+        "fundo genérico de banco de imagem"
+      ],
+      "$description": "O que o prompt pede para evitar. Sugestão do molde: a pessoa confirma ou troca na entrevista do /marca."
+    }
+  },
+  "som": {
+    "$type": "texto",
+    "$description": "Opcional: vazio até a pessoa escolher.",
+    "voz": {
+      "$value": "",
+      "$description": "A voz de narração, descrita (timbre, ritmo)."
+    },
+    "assinatura": {
+      "$value": "",
+      "$description": "A assinatura sonora: referência do kit da /mograph ou arquivo."
+    },
+    "trilha": {
+      "$value": "",
+      "$description": "O estilo de trilha."
+    }
+  },
+  "recusas": {
+    "$type": "lista",
+    "$value": [
+      "bounce",
+      "elastic",
+      "kicker",
+      "contador",
+      "pilula",
+      "branco-puro",
+      "sombra-dura"
+    ],
+    "$description": "O que as réguas barram. Lista SUGERIDA: a entrevista do /marca pergunta uma a uma, e a pessoa confirma ou apaga. Os identificadores que as réguas leem estão em scripts/marca/marca.mjs (RECUSAS_CONHECIDAS); recusa em prosa mora no marca.md."
+  }
+}

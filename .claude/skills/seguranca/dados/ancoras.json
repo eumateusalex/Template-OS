@@ -1,0 +1,623 @@
+{
+  "meta": {
+    "versao": "1.0.0",
+    "atualizado": "2026-10-09",
+    "proposito": "Reguas externas de completude. O catalogo esta completo quando cada item aqui tem ao menos um requisito correspondente, ou uma justificativa escrita de nao-aplicabilidade.",
+    "aviso": "Numero de padrao so entra depois de conferido em fonte oficial, com a data registrada em 'conferido_em' de cada ancora. O que ainda nao foi conferido fica em 'pendencias_de_verificacao', e enquanto estiver la se cita o assunto, nunca o numero.",
+    "pendencias_de_verificacao": [
+      "Numeracao fina por capitulo do OWASP ASVS 5.0.0. A versao esta conferida; a numeracao dos capitulos nao, e por isso o mapeamento usa asvs_assunto",
+      "Se a OWASP API Security Top 10 tem edicao posterior a 2023",
+      "O Anexo A da ISO/IEC 27001:2022 foi conferido so em fonte secundaria, porque a norma e paga. A contagem por tema e consistente entre fontes, mas nao foi lida no documento original"
+    ],
+    "resolvidas": [
+      {
+        "pendencia": "Se o OWASP Top 10 edicao 2025 saiu como final e o que mudou em relacao a 2021",
+        "resposta": "Publicada como edicao corrente: owasp.org/Top10/ redireciona para a de 2025, a 8a do documento. Novidades: A03 Software Supply Chain Failures (expansao do A06:2021), A10 Mishandling of Exceptional Conditions (categoria nova), SSRF absorvido em A01, A07 e A09 renomeadas.",
+        "fonte": "owasp.org/Top10/2025 e a introducao da edicao",
+        "conferido_em": "2026-09-04"
+      },
+      {
+        "pendencia": "Versao e numeracao de capitulos do OWASP ASVS em vigor",
+        "resposta": "ASVS 5.0.0, lancada em 30/05/2025 na Global AppSec EU. A numeracao fina por capitulo continua sem conferir, por isso o mapeamento segue por assunto.",
+        "fonte": "owasp.org, pagina do projeto ASVS",
+        "conferido_em": "2026-09-04"
+      },
+      {
+        "pendencia": "Numeracao da edicao atual do OWASP Top 10 for LLM Applications",
+        "resposta": "Edicao 2025, publicada em marco de 2025, com 10 itens (LLM01 a LLM10). A ancora daqui segue os 10 reais.",
+        "fonte": "genai.owasp.org/llm-top-10",
+        "conferido_em": "2026-09-04"
+      },
+      {
+        "pendencia": "Contagem exata de controles do Anexo A da ISO/IEC 27001:2022 por tema",
+        "resposta": "93 controles: 37 organizacional, 8 pessoas, 14 fisico, 34 tecnologico.",
+        "fonte": "Fontes secundarias concordantes. A norma e paga e nao foi lida em primeira mao: por isso o mapeamento usa tema, nunca numero de controle.",
+        "conferido_em": "2026-09-04"
+      }
+    ]
+  },
+  "top10_2021": {
+    "fonte": "OWASP Top 10 2021",
+    "confianca": "alta",
+    "itens": {
+      "A01": {
+        "nome": "Broken Access Control",
+        "familias": [
+          "ACC",
+          "FIL"
+        ]
+      },
+      "A02": {
+        "nome": "Cryptographic Failures",
+        "familias": [
+          "CRY",
+          "DAT",
+          "NET"
+        ]
+      },
+      "A03": {
+        "nome": "Injection",
+        "familias": [
+          "VAL"
+        ]
+      },
+      "A04": {
+        "nome": "Insecure Design",
+        "familias": [
+          "THR",
+          "ARQ",
+          "BIZ"
+        ]
+      },
+      "A05": {
+        "nome": "Security Misconfiguration",
+        "familias": [
+          "ENV",
+          "NET",
+          "SEC"
+        ]
+      },
+      "A06": {
+        "nome": "Vulnerable and Outdated Components",
+        "familias": [
+          "SUP"
+        ]
+      },
+      "A07": {
+        "nome": "Identification and Authentication Failures",
+        "familias": [
+          "IDN",
+          "SES"
+        ]
+      },
+      "A08": {
+        "nome": "Software and Data Integrity Failures",
+        "familias": [
+          "SUP",
+          "BIZ",
+          "INT"
+        ]
+      },
+      "A09": {
+        "nome": "Security Logging and Monitoring Failures",
+        "familias": [
+          "LOG",
+          "MON"
+        ]
+      },
+      "A10": {
+        "nome": "Server-Side Request Forgery",
+        "familias": [
+          "VAL"
+        ]
+      }
+    },
+    "conferido_em": "2026-09-04",
+    "nota": "Edicao superada pela de 2025, e mantida de proposito: 117 requisitos mapeiam para ela e boa parte das ferramentas e relatorios do mercado ainda fala nesta numeracao."
+  },
+  "csf_2_0": {
+    "fonte": "NIST Cybersecurity Framework 2.0",
+    "confianca": "alta no nivel de funcao",
+    "funcoes": {
+      "GV": {
+        "nome": "Governar",
+        "familias": [
+          "GOV",
+          "RSK",
+          "AST",
+          "CMP",
+          "TPR",
+          "PPL",
+          "MET"
+        ]
+      },
+      "ID": {
+        "nome": "Identificar",
+        "familias": [
+          "AST",
+          "RSK",
+          "THR",
+          "SUP"
+        ]
+      },
+      "PR": {
+        "nome": "Proteger",
+        "familias": [
+          "IDN",
+          "SES",
+          "ACC",
+          "VAL",
+          "DAT",
+          "INT",
+          "FIL",
+          "OUT",
+          "CRY",
+          "SEC",
+          "NET",
+          "ENV",
+          "PPL",
+          "PHY"
+        ]
+      },
+      "DE": {
+        "nome": "Detectar",
+        "familias": [
+          "LOG",
+          "MON"
+        ]
+      },
+      "RS": {
+        "nome": "Responder",
+        "familias": [
+          "IRP",
+          "VUL"
+        ]
+      },
+      "RC": {
+        "nome": "Recuperar",
+        "familias": [
+          "BCP",
+          "INT"
+        ]
+      }
+    }
+  },
+  "ssdf": {
+    "fonte": "NIST SSDF, SP 800-218",
+    "confianca": "alta no nivel de grupo",
+    "grupos": {
+      "PO": {
+        "nome": "Preparar a organizacao",
+        "familias": [
+          "GOV",
+          "RSK",
+          "SDL",
+          "PPL"
+        ]
+      },
+      "PS": {
+        "nome": "Proteger o software",
+        "familias": [
+          "SUP",
+          "SEC",
+          "ENV"
+        ]
+      },
+      "PW": {
+        "nome": "Produzir software seguro",
+        "familias": [
+          "THR",
+          "ARQ",
+          "SDL",
+          "IDN",
+          "SES",
+          "ACC",
+          "VAL",
+          "BIZ",
+          "DAT",
+          "INT",
+          "FIL",
+          "OUT",
+          "LOG",
+          "CRY",
+          "AIA",
+          "CLI",
+          "RES"
+        ]
+      },
+      "RV": {
+        "nome": "Responder a vulnerabilidade",
+        "familias": [
+          "VUL",
+          "IRP",
+          "MON"
+        ]
+      }
+    }
+  },
+  "samm": {
+    "fonte": "OWASP SAMM v2",
+    "confianca": "alta no nivel de funcao de negocio",
+    "funcoes": {
+      "Governance": {
+        "familias": [
+          "GOV",
+          "RSK",
+          "CMP",
+          "TPR",
+          "PPL",
+          "MET"
+        ]
+      },
+      "Design": {
+        "familias": [
+          "THR",
+          "ARQ",
+          "SDL",
+          "AST"
+        ]
+      },
+      "Implementation": {
+        "familias": [
+          "SDL",
+          "SUP",
+          "ENV",
+          "SEC"
+        ]
+      },
+      "Verification": {
+        "familias": [
+          "VER",
+          "VUL"
+        ]
+      },
+      "Operations": {
+        "familias": [
+          "MON",
+          "IRP",
+          "BCP",
+          "LOG"
+        ]
+      }
+    }
+  },
+  "iso_27001_2022": {
+    "fonte": "ISO/IEC 27001:2022, Anexo A",
+    "confianca": "alta no nivel de tema; contagem por tema PENDENTE_VERIFICACAO",
+    "temas": {
+      "organizacional": {
+        "familias": [
+          "GOV",
+          "RSK",
+          "AST",
+          "CMP",
+          "TPR",
+          "MET",
+          "SDL"
+        ]
+      },
+      "pessoas": {
+        "familias": [
+          "PPL"
+        ]
+      },
+      "fisico": {
+        "familias": [
+          "PHY"
+        ]
+      },
+      "tecnologico": {
+        "familias": [
+          "IDN",
+          "SES",
+          "ACC",
+          "VAL",
+          "BIZ",
+          "DAT",
+          "INT",
+          "FIL",
+          "OUT",
+          "LOG",
+          "SEC",
+          "CRY",
+          "SUP",
+          "ENV",
+          "RES",
+          "NET",
+          "AIA",
+          "CLI",
+          "MON",
+          "BCP",
+          "VER"
+        ]
+      }
+    }
+  },
+  "asvs": {
+    "fonte": "OWASP ASVS",
+    "confianca": "PENDENTE_VERIFICACAO da versao e da numeracao de capitulos",
+    "capitulos_por_assunto": {
+      "arquitetura_e_ameaca": [
+        "THR",
+        "ARQ"
+      ],
+      "autenticacao": [
+        "IDN"
+      ],
+      "sessao": [
+        "SES"
+      ],
+      "controle_de_acesso": [
+        "ACC"
+      ],
+      "validacao_e_codificacao": [
+        "VAL",
+        "OUT"
+      ],
+      "criptografia_armazenada": [
+        "CRY",
+        "DAT"
+      ],
+      "erro_e_registro": [
+        "OUT",
+        "LOG"
+      ],
+      "protecao_de_dados": [
+        "DAT",
+        "OUT",
+        "CMP"
+      ],
+      "comunicacao": [
+        "NET"
+      ],
+      "codigo_malicioso": [
+        "SUP",
+        "ENV"
+      ],
+      "logica_de_negocio": [
+        "BIZ"
+      ],
+      "arquivos_e_recursos": [
+        "FIL"
+      ],
+      "api_e_servico_web": [
+        "NET",
+        "ACC",
+        "VAL",
+        "RES"
+      ],
+      "configuracao": [
+        "ENV",
+        "SUP",
+        "NET"
+      ]
+    }
+  },
+  "top10_llm": {
+    "fonte": "OWASP Top 10 for LLM Applications 2025",
+    "confianca": "alta",
+    "conferido_em": "2026-09-04",
+    "nota": "Conferida a edicao 2025: sao 10 itens, e cada um tem familia correspondente. A lista aproximada esconde item sem requisito: LLM04, LLM07, LLM08 e LLM09 so aparecem na numeracao real.",
+    "assuntos": {
+      "LLM01_injecao_de_prompt": [
+        "AIA"
+      ],
+      "LLM02_vazamento_de_dado_sensivel": [
+        "AIA",
+        "CMP",
+        "TPR",
+        "ACC"
+      ],
+      "LLM03_cadeia_de_suprimento_de_modelo": [
+        "AIA",
+        "SUP"
+      ],
+      "LLM04_envenenamento_de_dado_e_modelo": [
+        "AIA",
+        "SUP",
+        "INT"
+      ],
+      "LLM05_saida_nao_confiavel": [
+        "AIA",
+        "VAL"
+      ],
+      "LLM06_permissao_excessiva_do_agente": [
+        "AIA",
+        "ACC"
+      ],
+      "LLM07_vazamento_da_instrucao_do_sistema": [
+        "AIA",
+        "SEC"
+      ],
+      "LLM08_fraqueza_de_vetor_e_incorporacao": [
+        "AIA",
+        "ACC",
+        "DAT"
+      ],
+      "LLM09_desinformacao": [
+        "AIA",
+        "BIZ"
+      ],
+      "LLM10_consumo_ilimitado": [
+        "AIA",
+        "RES"
+      ]
+    }
+  },
+  "top10_2025": {
+    "fonte": "OWASP Top 10 2025",
+    "confianca": "alta",
+    "conferido_em": "2026-09-04",
+    "nota": "Traducao a partir de 2021: A02->A04, A03->A05, A04->A06, A05->A02, A06->A03 (ampliado para cadeia de suprimento), A10 SSRF absorvido em A01. A10:2025 e categoria nova.",
+    "itens": {
+      "A01": {
+        "nome": "Broken Access Control",
+        "familias": [
+          "ACC",
+          "FIL",
+          "DAT",
+          "VAL",
+          "NET"
+        ]
+      },
+      "A02": {
+        "nome": "Security Misconfiguration",
+        "familias": [
+          "ENV",
+          "NET",
+          "SEC",
+          "OUT"
+        ]
+      },
+      "A03": {
+        "nome": "Software Supply Chain Failures",
+        "familias": [
+          "SUP",
+          "TPR",
+          "ENV"
+        ]
+      },
+      "A04": {
+        "nome": "Cryptographic Failures",
+        "familias": [
+          "CRY",
+          "DAT",
+          "NET"
+        ]
+      },
+      "A05": {
+        "nome": "Injection",
+        "familias": [
+          "VAL",
+          "DAT"
+        ]
+      },
+      "A06": {
+        "nome": "Insecure Design",
+        "familias": [
+          "ARQ",
+          "THR",
+          "BIZ",
+          "SDL"
+        ]
+      },
+      "A07": {
+        "nome": "Authentication Failures",
+        "familias": [
+          "IDN",
+          "SES"
+        ]
+      },
+      "A08": {
+        "nome": "Software or Data Integrity Failures",
+        "familias": [
+          "INT",
+          "SUP",
+          "BIZ"
+        ]
+      },
+      "A09": {
+        "nome": "Security Logging and Alerting Failures",
+        "familias": [
+          "LOG",
+          "MON"
+        ]
+      },
+      "A10": {
+        "nome": "Mishandling of Exceptional Conditions",
+        "familias": [
+          "ARQ",
+          "OUT",
+          "RES",
+          "INT"
+        ]
+      }
+    }
+  },
+  "top10_api": {
+    "fonte": "OWASP API Security Top 10 2023",
+    "confianca": "alta",
+    "conferido_em": "2026-09-04",
+    "nota": "A regua mais proxima de sistema com interface de programacao, que e a forma da maioria dos alvos. E dela que vem o requisito de inventario de interface exposta (API9).",
+    "itens": {
+      "API1": {
+        "nome": "Broken Object Level Authorization",
+        "familias": [
+          "ACC",
+          "DAT",
+          "FIL"
+        ]
+      },
+      "API2": {
+        "nome": "Broken Authentication",
+        "familias": [
+          "IDN",
+          "SES"
+        ]
+      },
+      "API3": {
+        "nome": "Broken Object Property Level Authorization",
+        "familias": [
+          "ACC",
+          "OUT",
+          "VAL"
+        ]
+      },
+      "API4": {
+        "nome": "Unrestricted Resource Consumption",
+        "familias": [
+          "NET",
+          "RES",
+          "BIZ"
+        ]
+      },
+      "API5": {
+        "nome": "Broken Function Level Authorization",
+        "familias": [
+          "ACC",
+          "IDN"
+        ]
+      },
+      "API6": {
+        "nome": "Unrestricted Access to Sensitive Business Flows",
+        "familias": [
+          "BIZ",
+          "NET",
+          "THR"
+        ]
+      },
+      "API7": {
+        "nome": "Server Side Request Forgery",
+        "familias": [
+          "VAL",
+          "NET"
+        ]
+      },
+      "API8": {
+        "nome": "Security Misconfiguration",
+        "familias": [
+          "ENV",
+          "NET",
+          "SEC",
+          "OUT"
+        ]
+      },
+      "API9": {
+        "nome": "Improper Inventory Management",
+        "familias": [
+          "ARQ",
+          "AST",
+          "SUP"
+        ]
+      },
+      "API10": {
+        "nome": "Unsafe Consumption of APIs",
+        "familias": [
+          "TPR",
+          "VAL",
+          "SUP"
+        ]
+      }
+    }
+  }
+}

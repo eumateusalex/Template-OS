@@ -1,0 +1,181 @@
+{
+ "versao": 1,
+ "sobre": "O som de cada gesto do manual (manual/README.md § 4): 3 a 5 arquivos, como pacote:caminho do índice em acervo/ativos/ (a duração, o pico e a nota moram lá). Escolhidos pela medida e pelo nome: cada gesto é proposta até alguém ouvir numa peça aprovada. Varie 2 a 3 da mesma família na peça.",
+ "gestos": {
+  "tecla": {
+   "estado": "proposta",
+   "sons": [
+    "kit:tecla-1.wav",
+    "kit:tecla-2.wav",
+    "kit:tecla-3.wav",
+    "kit:tecla-4.wav",
+    "kit:tecla-5.wav"
+   ]
+  },
+  "clique": {
+   "estado": "proposta",
+   "sons": [
+    "kit:clique-1.wav",
+    "kit:clique-2.wav",
+    "kit:clique-3.wav",
+    "kit:clique-4.wav",
+    "kit:clique-5.wav"
+   ]
+  },
+  "toque": {
+   "estado": "proposta",
+   "sons": [
+    "kit:toque-1.wav",
+    "kit:toque-2.wav",
+    "kit:toque-3.mp3",
+    "kit:toque-4.wav"
+   ]
+  },
+  "notificacao": {
+   "estado": "proposta",
+   "sons": [
+    "kit:notificacao-1.mp3",
+    "kit:notificacao-2.wav",
+    "kit:notificacao-3.wav",
+    "kit:notificacao-4.wav"
+   ]
+  },
+  "pop": {
+   "estado": "proposta",
+   "sons": [
+    "kit:pop-1.mp3",
+    "kit:pop-2.mp3",
+    "kit:pop-3.wav",
+    "kit:pop-4.wav"
+   ]
+  },
+  "plim": {
+   "estado": "proposta",
+   "sons": [
+    "kit:plim-1.wav",
+    "kit:plim-2.mp3",
+    "kit:plim-3.mp3",
+    "kit:plim-4.mp3"
+   ]
+  },
+  "check": {
+   "estado": "proposta",
+   "sons": [
+    "kit:check-1.wav",
+    "kit:check-2.wav",
+    "kit:check-3.wav"
+   ]
+  },
+  "erro": {
+   "estado": "proposta",
+   "sons": [
+    "kit:erro-1.wav",
+    "kit:erro-2.wav",
+    "kit:erro-3.mp3"
+   ]
+  },
+  "registradora": {
+   "estado": "proposta",
+   "sons": [
+    "kit:registradora-1.wav",
+    "kit:registradora-2.mp3",
+    "kit:registradora-3.mp3",
+    "kit:registradora-4.wav"
+   ]
+  },
+  "whoosh-curto": {
+   "estado": "proposta",
+   "sons": [
+    "kit:whoosh-curto-1.wav",
+    "kit:whoosh-curto-2.wav",
+    "kit:whoosh-curto-3.wav",
+    "kit:whoosh-curto-4.wav",
+    "kit:whoosh-curto-5.wav"
+   ]
+  },
+  "whoosh-longo": {
+   "estado": "proposta",
+   "sons": [
+    "kit:whoosh-longo-1.wav",
+    "kit:whoosh-longo-2.wav",
+    "kit:whoosh-longo-3.wav",
+    "kit:whoosh-longo-4.wav"
+   ]
+  },
+  "riser": {
+   "estado": "proposta",
+   "sons": [
+    "kit:riser-1.wav",
+    "kit:riser-2.wav",
+    "kit:riser-3.wav",
+    "kit:riser-4.wav"
+   ]
+  },
+  "impacto": {
+   "estado": "proposta",
+   "sons": [
+    "kit:impacto-1.wav",
+    "kit:impacto-2.wav",
+    "kit:impacto-3.wav",
+    "kit:impacto-4.wav"
+   ]
+  },
+  "glitch": {
+   "estado": "proposta",
+   "sons": [
+    "kit:glitch-1.mp3",
+    "kit:glitch-2.wav",
+    "kit:glitch-3.wav",
+    "kit:glitch-4.wav"
+   ]
+  },
+  "obturador": {
+   "estado": "proposta",
+   "sons": [
+    "kit:obturador-1.wav",
+    "kit:obturador-2.wav",
+    "kit:obturador-3.wav"
+   ]
+  },
+  "rolagem": {
+   "estado": "proposta",
+   "sons": [
+    "kit:rolagem-1.wav",
+    "kit:rolagem-2.wav",
+    "kit:rolagem-3.wav"
+   ]
+  },
+  "contagem": {
+   "estado": "proposta",
+   "sons": [
+    "kit:contagem-1.mp3",
+    "kit:contagem-2.mp3",
+    "kit:contagem-3.wav",
+    "kit:contagem-4.mp3"
+   ]
+  },
+  "cama": {
+   "estado": "proposta",
+   "sons": [
+    "kit:cama-1.wav",
+    "kit:cama-2.wav",
+    "kit:cama-3.mp3"
+   ]
+  },
+  "golpe-tonal": {
+   "estado": "firme",
+   "gerado": "o `tonal.py` da `/video` gera no tom da trilha (os números `GOLPE`)",
+   "sons": []
+  },
+  "drone": {
+   "estado": "firme",
+   "gerado": "o `tonal.py` da `/video` gera no tom da trilha (os números `DRONE`)",
+   "sons": []
+  },
+  "silencio": {
+   "estado": "firme",
+   "gerado": "o som que se tira: 3 a 8 quadros antes do pico",
+   "sons": []
+  }
+ }
+}

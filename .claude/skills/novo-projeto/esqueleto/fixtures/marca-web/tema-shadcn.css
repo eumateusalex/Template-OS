@@ -1,0 +1,90 @@
+/* ==========================================================================
+   O TEMA DO SHADCN NA MARCA DE EXEMPLO
+   ==========================================================================
+   Marca de EXEMPLO, só para os testes do esqueleto: não é a marca de ninguém.
+   Tem o formato da marca do workspace na web (a que `--marca casa` instala a
+   partir de `identidade/web/`), com cores e fonte neutras. Os testes a acham
+   pela variável FUNDACAO_MARCA_WEB.
+   ========================================================================== */
+
+:root {
+  --font-sans: var(--f-display);
+
+  --background: rgb(var(--c-light));
+  --foreground: rgb(var(--c-ink));
+  --card: rgb(var(--c-surface));
+  --card-foreground: rgb(var(--c-ink));
+  --popover: rgb(var(--c-light));
+  --popover-foreground: rgb(var(--c-ink));
+  --primary: rgb(var(--c-dark));
+  --primary-foreground: rgb(var(--c-light));
+  --secondary: rgb(var(--c-surface));
+  --secondary-foreground: rgb(var(--c-ink));
+  --muted: rgb(var(--c-surface));
+  --muted-foreground: rgb(var(--c-muted));
+  --accent: rgb(var(--c-surface-2));
+  --accent-foreground: rgb(var(--c-ink));
+  --destructive: rgb(var(--c-erro));
+  --border: rgb(var(--c-border));
+  --input: rgb(var(--c-border));
+  --ring: rgb(var(--c-dark));
+  --chart-1: rgb(var(--c-dark));
+  --chart-2: rgb(var(--c-ok));
+  --chart-3: rgb(var(--c-support-1));
+  --chart-4: rgb(var(--c-muted));
+  --chart-5: rgb(var(--c-border));
+  --radius: var(--r-md);
+  --sidebar: rgb(var(--c-surface));
+  --sidebar-foreground: rgb(var(--c-ink));
+  --sidebar-primary: rgb(var(--c-dark));
+  --sidebar-primary-foreground: rgb(var(--c-light));
+  --sidebar-accent: rgb(var(--c-surface-2));
+  --sidebar-accent-foreground: rgb(var(--c-ink));
+  --sidebar-border: rgb(var(--c-border));
+  --sidebar-ring: rgb(var(--c-dark));
+
+  /* O ACENTO, o papel que o shadcn não tem: a palavra, o link, o traço. No
+     claro é o azul de ação; no escuro, o azul claro, que passa de 4,5:1 sobre o
+     preto. O `--accent` do shadcn é outra coisa, o fundo do hover. */
+  --acento: rgb(var(--c-dark));
+  --acento-fg: rgb(var(--c-light));
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: rgb(var(--c-ink));
+  --foreground: rgb(var(--c-light));
+  --card: rgba(var(--c-light), .06);
+  --card-foreground: rgb(var(--c-light));
+  --popover: rgb(var(--c-ink));
+  --popover-foreground: rgb(var(--c-light));
+  --primary: rgb(var(--c-ok));
+  --primary-foreground: rgb(var(--c-ink));
+  --secondary: rgba(var(--c-light), .10);
+  --secondary-foreground: rgb(var(--c-light));
+  --muted: rgba(var(--c-light), .06);
+  --muted-foreground: rgb(var(--c-muted-on-dark));
+  --accent: rgba(var(--c-light), .10);
+  --accent-foreground: rgb(var(--c-light));
+  --destructive: var(--mac-r);
+  --border: rgba(var(--c-light), .14);
+  --input: rgba(var(--c-light), .17);
+  --ring: rgb(var(--c-ok));
+  --chart-1: rgb(var(--c-ok));
+  --chart-2: rgb(var(--c-dark));
+  --chart-3: rgb(var(--c-support-1));
+  --chart-4: rgb(var(--c-muted-on-dark));
+  --chart-5: rgb(var(--c-border));
+  --sidebar: rgba(var(--c-light), .06);
+  --sidebar-foreground: rgb(var(--c-light));
+  --sidebar-primary: rgb(var(--c-ok));
+  --sidebar-primary-foreground: rgb(var(--c-ink));
+  --sidebar-accent: rgba(var(--c-light), .10);
+  --sidebar-accent-foreground: rgb(var(--c-light));
+  --sidebar-border: rgba(var(--c-light), .14);
+  --sidebar-ring: rgb(var(--c-ok));
+
+  --acento: rgb(var(--c-ok));
+  --acento-fg: rgb(var(--c-ink));
+}

@@ -1,0 +1,7 @@
+{
+  "name": "node-minimo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "O projeto Node minimo do teste da fabrica: tres camadas, uma area obrigatoria e cobertura de verdade sem instalar nada."
+}

@@ -1,0 +1,1317 @@
+{
+  "versao": 1,
+  "entradas": [
+    {
+      "id": "frase-que-sobe-da-linha",
+      "comportamento": "a frase sobe de dentro de uma linha invisível, palavra por palavra, e assenta",
+      "comunica": "a ideia chegou: leia isto agora",
+      "quando": "o título de uma parte, o gancho escrito, a frase que fecha",
+      "quando_nao": "frase longa, que pede mais de duas linhas",
+      "familia": "STANDARD",
+      "funcao": [
+        "HOOK",
+        "REVEAL"
+      ],
+      "curva": "a da marca; cascata de 2 a 4 quadros entre palavras",
+      "motor": {
+        "hyperframes": [
+          "regra:waterfall-entry",
+          "regra:kinetic-type-beats"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null,
+      "texto_progressivo": true
+    },
+    {
+      "id": "palavra-riscada-e-trocada",
+      "comportamento": "a palavra errada é riscada por um traço que corre, e a certa entra no lugar",
+      "comunica": "o que todo mundo pensa está errado; o certo é isto",
+      "quando": "a virada de uma crença, o antes e depois de uma frase",
+      "quando_nao": "quando não há crença a quebrar",
+      "familia": "STANDARD",
+      "funcao": [
+        "COMPARISON",
+        "TRANSFORMATION"
+      ],
+      "curva": "o traço linear rápido; a palavra nova na curva da marca",
+      "motor": {
+        "hyperframes": [
+          "regra:css-marker-patterns",
+          "regra:svg-path-draw"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "sublinhado-que-se-desenha",
+      "comportamento": "um traço se desenha embaixo da palavra no instante em que ela é dita",
+      "comunica": "esta é a palavra que importa",
+      "quando": "a palavra-chave da frase, uma por frase no máximo",
+      "quando_nao": "duas palavras seguidas, palavra de ligação",
+      "familia": "MICRO",
+      "funcao": [
+        "PROOF",
+        "HOOK"
+      ],
+      "curva": "a da marca",
+      "motor": {
+        "hyperframes": [
+          "regra:css-marker-patterns",
+          "regra:svg-path-draw"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "contador-que-sobe-e-assenta",
+      "comportamento": "o número conta de zero até o valor e freia no fim, sem passar",
+      "comunica": "o tamanho de algo, medido",
+      "quando": "o número dito na frase, com a base dele no roteiro",
+      "quando_nao": "número sem fonte, número decorativo",
+      "familia": "HERO",
+      "funcao": [
+        "PROOF",
+        "DEMONSTRATION"
+      ],
+      "curva": "a da marca; o valor num objeto que o render lê a cada quadro",
+      "motor": {
+        "hyperframes": [
+          "regra:counting-dynamic-scale",
+          "regra:dataviz-countup"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "numero-que-vira-outro",
+      "comportamento": "o número sai rolando e o novo assenta no lugar",
+      "comunica": "a mudança de um valor: antes e depois",
+      "quando": "o dado que é a prova da frase, a virada",
+      "quando_nao": "número decorativo, sem fala que o diga",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROOF",
+        "TRANSFORMATION"
+      ],
+      "curva": "a da marca; o pouso sem passar do ponto",
+      "motor": {
+        "hyperframes": [
+          "regra:vertical-spring-ticker",
+          "regra:discrete-text-sequence"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "celular-que-chega-e-pousa",
+      "comportamento": "o celular entra de baixo, desacelera e pousa no centro, com a tela já viva",
+      "comunica": "isto acontece no celular de quem assiste",
+      "quando": "a cena que mostra uma conversa, um app, uma notificação",
+      "quando_nao": "quando a tela não tem nada a mostrar",
+      "familia": "CAMERA",
+      "funcao": [
+        "DEMONSTRATION",
+        "CONTEXT"
+      ],
+      "curva": "a da marca; o back.out só aqui, com motivo escrito (objeto que pousa)",
+      "motor": {
+        "hyperframes": [
+          "regra:device-surface-showcase",
+          "regra:spring-pop-entrance"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "toque-que-dispara",
+      "comportamento": "o dedo ou o cursor toca, o botão afunda no mesmo quadro, e o toque dispara a próxima coisa",
+      "comunica": "uma ação simples resolve",
+      "quando": "a demonstração de um passo, o botão da oferta",
+      "quando_nao": "toque sem consequência na tela",
+      "familia": "MICRO",
+      "funcao": [
+        "DEMONSTRATION",
+        "CTA"
+      ],
+      "curva": "afunda rápido, volta na curva da marca; a reação começa no quadro do toque",
+      "motor": {
+        "hyperframes": [
+          "regra:cursor-click-ripple",
+          "regra:physics-press-reaction",
+          "regra:press-release-spring"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "conversa-que-sobe",
+      "comportamento": "as mensagens chegam uma a uma e empurram as de cima, como na conversa de verdade",
+      "comunica": "o atendimento acontecendo (ou não acontecendo)",
+      "quando": "a cena do problema ou da virada com cliente e empresa",
+      "quando_nao": "mais de cinco mensagens: a leitura não acompanha",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROBLEM",
+        "DEMONSTRATION"
+      ],
+      "curva": "a da marca; cada mensagem dura o tempo de leitura dela",
+      "motor": {
+        "hyperframes": [
+          "regra:dynamic-content-sequencing",
+          "regra:agent-progress-theater"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "notificacoes-que-se-acumulam",
+      "comportamento": "as notificações caem uma sobre a outra, cada vez mais rápido, até lotar",
+      "comunica": "excesso: coisa demais chegando",
+      "quando": "a tensão do problema (pedidos sem resposta, mensagens perdidas)",
+      "quando_nao": "quando o ponto é uma mensagem só",
+      "familia": "HERO",
+      "funcao": [
+        "TENSION",
+        "PROBLEM"
+      ],
+      "curva": "a da marca, com a cascata encurtando",
+      "motor": {
+        "hyperframes": [
+          "regra:spring-pop-entrance",
+          "regra:overwhelm-surround"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "partes-que-enchem",
+      "comportamento": "o marcador das partes (1, 2, 3) volta a cada parte enchendo a seguinte, e fecha completo",
+      "comunica": "onde estamos na explicação, e que ela acabou",
+      "quando": "peça com partes: três erros, quatro passos",
+      "quando_nao": "peça sem partes",
+      "familia": "STANDARD",
+      "funcao": [
+        "CONTEXT",
+        "BRAND"
+      ],
+      "curva": "a da marca",
+      "motor": {
+        "hyperframes": [
+          "regra:stat-bars-and-fills",
+          "regra:discrete-text-sequence"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "camera-que-empurra-em-camadas",
+      "comportamento": "a câmera avança devagar e as camadas andam em velocidades diferentes (frente, meio, fundo)",
+      "comunica": "profundidade: estamos entrando na cena",
+      "quando": "a espera com destino, a chegada a um detalhe",
+      "quando_nao": "a câmera sem motivo; escala acima de 1,2 fora do macro",
+      "familia": "CAMERA",
+      "funcao": [
+        "CONTEXT",
+        "REVEAL"
+      ],
+      "curva": "a da marca; parallax 1,5 / 1,0 / 0,5",
+      "motor": {
+        "hyperframes": [
+          "regra:viewport-change",
+          "regra:multi-phase-camera",
+          "regra:camera-journey"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "foco-que-troca",
+      "comportamento": "o foco sai de um plano e vai para o outro: o de frente desfoca e o de trás nítida",
+      "comunica": "olhe para cá agora",
+      "quando": "uma vez por peça, na troca que se quer ver",
+      "quando_nao": "como transição padrão; em texto que se precisa ler",
+      "familia": "CAMERA",
+      "funcao": [
+        "REVEAL",
+        "COMPARISON"
+      ],
+      "curva": "10 px de pico em texto, 18 a 20 px em superfície",
+      "motor": {
+        "hyperframes": [
+          "regra:depth-of-field-blur",
+          "registro:rack-focus",
+          "registro:focus-rack"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "cartao-que-vira-a-proxima-cena",
+      "comportamento": "o objeto da cena cresce e se transforma no quadro da cena seguinte, sem corte",
+      "comunica": "uma coisa leva à outra",
+      "quando": "a passagem com causa (o botão vira a conversa, o aviso vira o painel)",
+      "quando_nao": "quando as duas cenas não têm relação de causa",
+      "familia": "CAMERA",
+      "funcao": [
+        "TRANSFORMATION"
+      ],
+      "curva": "a da marca; não conta no orçamento de transições",
+      "motor": {
+        "hyperframes": [
+          "regra:card-morph-anchor",
+          "regra:scale-swap-transition",
+          "regra:cta-morph-press"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "cartao-que-gira-e-troca",
+      "comportamento": "o cartão gira em Y no próprio eixo e, no meio do giro (de perfil), troca de face: a notificação vira o chip, o botão vira a logo, a roupa troca",
+      "comunica": "é a mesma coisa, agora em outro estado",
+      "quando": "a passagem entre dois estados do mesmo objeto (o aviso que vira o resultado, o produto que troca de versão)",
+      "quando_nao": "dois objetos sem relação; mais de uma vez por peça",
+      "familia": "CAMERA",
+      "funcao": [
+        "TRANSFORMATION"
+      ],
+      "curva": "a esse no giro inteiro, a troca no quadro em que a face fica de perfil (90°)",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "etiqueta-que-abre-da-linha",
+      "comportamento": "uma linha curta se estica e abre uma etiqueta com o nome ou o número",
+      "comunica": "o nome disto é (o rótulo que explica o principal)",
+      "quando": "o apoio nas bordas da regra dos três objetos",
+      "quando_nao": "a etiqueta acima do título (o kicker lê como template)",
+      "familia": "MICRO",
+      "funcao": [
+        "EXPLANATION"
+      ],
+      "curva": "a da marca",
+      "motor": {
+        "hyperframes": [
+          "regra:anchored-layout-expand"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "pessoa-recortada-do-fundo-real",
+      "comportamento": "a pessoa da gravação recortada do fundo real e colada sobre outro fundo",
+      "comunica": "nada que valha o defeito",
+      "quando": "nunca",
+      "quando_nao": "sempre",
+      "familia": "STANDARD",
+      "funcao": [],
+      "curva": "",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "linha-que-anda-com-a-voz",
+      "comportamento": "a linha do gráfico se desenha no ritmo da fala, com altos e baixos, e o ponto de agora acende no fim",
+      "comunica": "acompanhar um número no tempo, sem prometer que ele sobe",
+      "quando": "a frase que fala de medir ou acompanhar",
+      "quando_nao": "resultado de cliente ou número inventado como prova",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROCESS",
+        "PROOF"
+      ],
+      "curva": "o traço em power1.inOut, o ponto na curva da marca",
+      "motor": {
+        "hyperframes": [
+          "regra:svg-path-draw",
+          "regra:chart-scrub-readout"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "pagina-que-nao-termina-de-carregar",
+      "comportamento": "a página em esqueleto com a barra de carga que anda e trava; na perda, a página sobe e vai embora",
+      "comunica": "a espera que faz a pessoa desistir",
+      "quando": "site lento, espera, abandono",
+      "quando_nao": "quando a frase não fala de espera",
+      "familia": "STANDARD",
+      "funcao": [
+        "TENSION",
+        "PROBLEM"
+      ],
+      "curva": "a barra em power2.out até travar; a saída em power4.in",
+      "motor": {
+        "hyperframes": [
+          "regra:stat-bars-and-fills"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "leitura-que-varre",
+      "comportamento": "uma barra fina varre o texto de um lado ao outro, como quem lê",
+      "comunica": "alguém (o Google, a máquina) está lendo isto",
+      "quando": "a frase diz que um sistema lê ou usa o texto",
+      "quando_nao": "texto que a pessoa é que lê",
+      "familia": "STANDARD",
+      "funcao": [
+        "EXPLANATION"
+      ],
+      "curva": "power1.inOut, em 0,8 s",
+      "motor": {
+        "hyperframes": [
+          "regra:css-marker-patterns"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "guia-que-mede-o-vao",
+      "comportamento": "duas guias finas se desenham ao longo do próprio caminho e cruzam o quadro, o vão entre elas fica tracejado, e a etiqueta da medida pousa dentro dele",
+      "comunica": "o que falta ou está errado numa coisa que parece pronta, medido no lugar",
+      "quando": "a prova de um furo numa interface ou num documento: o campo vazio, a área em branco, o link que não leva",
+      "quando_nao": "o que não tem medida; decoração de fundo; a guia sem nada para medir",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROOF",
+        "DEMONSTRATION"
+      ],
+      "curva": "a da marca; as guias em cascata de 3 quadros, a horizontal antes da vertical",
+      "motor": {
+        "hyperframes": [
+          "regra:svg-path-draw"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "icone-3d-que-pousa",
+      "comportamento": "o ícone oficial do app pousa com sombra de contato e a luz passa por ele uma vez",
+      "comunica": "o lugar ou a coisa de que a frase fala, com volume",
+      "quando": "o canal nomeado (WhatsApp, Instagram, Google), o app da frase (Relógio, Lupa, Safari, Mapas)",
+      "quando_nao": "ícone de enfeite, sem a frase que o nomeia; dois ícones disputando o quadro; o objeto 3D como enfeite (o 3D do kit entra quando a frase o nomeia: comum.efeito.objeto-3d, no manual)",
+      "familia": "STANDARD",
+      "funcao": [
+        "CONTEXT",
+        "PROOF"
+      ],
+      "curva": "a chegada na molaTarde (o motivo em excecoes), a sombra de contato 2 a 4 quadros depois",
+      "motor": {
+        "hyperframes": [
+          "proprio:falado-midia (o campo \"midia\" da cena no plano.json do falado; ferramentas/falado-extra.mjs)",
+          "registro:badge-pop"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "palavra-em-duas-vozes",
+      "comportamento": "na mesma frase, a palavra-chave entra grande (2,0 a 3,6 vezes o apoio, mediana 2,5), pesada e no azul da marca, e o resto fica pequeno e branco na mesma família (Inter 4); a chave segura a frase inteira enquanto o apoio entra palavra por palavra",
+      "comunica": "esta é a palavra que importa",
+      "quando": "a legenda do falado (L2 com a pessoa na tela, só a chave na tela cheia) e o título do puro, na palavra que carrega a perda ou o valor",
+      "quando_nao": "em toda palavra (o destaque deixa de destacar); palavra de ligação; a chave em serifa solta numa linha sem serifa",
+      "familia": "STANDARD",
+      "funcao": [
+        "HOOK",
+        "PROOF"
+      ],
+      "curva": "a chave em 8 q saindo do desfoque de 14 px na esse, com o brilho que some em 18 q; o apoio em 8 q, desfoque de 10 px e subida de 18 px, na pouso, 1 q antes da fala",
+      "motor": {
+        "hyperframes": [
+          "registro:caption-editorial-emphasis",
+          "registro:caption-weight-shift",
+          "registro:variable-font-flex"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "texto-atras-da-pessoa",
+      "comportamento": "a palavra grande (Inter 900) sobe de trás da cabeça de quem fala: só o contorno da cabeça se recorta, e a pessoa fica no fundo real dela",
+      "comunica": "a palavra está no mesmo espaço da pessoa; peso de capa de revista",
+      "quando": "o momento mais forte do falado, uma vez por Reel",
+      "quando_nao": "mais de uma vez no Reel (vira truque); gravação com câmera tremendo (o recorte pisca); a pessoa tirada do fundo real (é outra coisa, e recusada)",
+      "familia": "HERO",
+      "funcao": [
+        "HOOK",
+        "REVEAL"
+      ],
+      "curva": "sobe de trás da cabeça na heroi (13 q), a dona entra na pouso 3 q depois, a câmera dá o soco de 1,05 na heroi; sai afundando na saida (9 q)",
+      "motor": {
+        "hyperframes": [
+          "proprio:falado-atras (o campo \"atras\" do plano.json; ferramentas/falado-extra.mjs e falado.js, montado pelo montar-falado.mjs)",
+          "registro:caption-parallax-layers"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "brilho-no-instante",
+      "comportamento": "o brilho nasce no quadro em que o objeto ou a palavra pousa, e decai em meio segundo; ou uma faixa de luz atravessa uma vez",
+      "comunica": "aqui: este é o momento",
+      "quando": "o pouso do herói, a palavra-chave, o número que dói, o logo no fecho",
+      "quando_nao": "brilho ligado o tempo todo; em mais de um objeto por quadro",
+      "familia": "MICRO",
+      "funcao": [
+        "REVEAL",
+        "BRAND"
+      ],
+      "curva": "sobe em 2 a 3 quadros, decai na esse; pico de opacidade até 0,45",
+      "motor": {
+        "hyperframes": [
+          "registro:beat-accent",
+          "registro:gloss-sweep",
+          "registro:text-shimmer",
+          "registro:light-sweep-pass"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "luz-que-vaza-na-virada",
+      "comportamento": "uma luz quente vaza pelo quadro no corte e some, e a cena nova já está lá",
+      "comunica": "virou: agora é outra parte",
+      "quando": "a virada do ato, uma vez por peça",
+      "quando_nao": "em todo corte; em marca de tecnologia, laranja sem motivo",
+      "familia": "STANDARD",
+      "funcao": [
+        "TRANSFORMATION"
+      ],
+      "curva": "8 a 14 quadros, sobe rápido e cai na esse",
+      "motor": {
+        "hyperframes": [
+          "registro:light-leak",
+          "registro:organic-light-leak-overlay",
+          "registro:editorial-flash-overlay",
+          "registro:flash-through-white"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "selo-com-o-valor",
+      "comportamento": "o número que dói pousa num selo que passa um pouco do tamanho e volta, com brilho curto",
+      "comunica": "quanto custa, quanto se perde",
+      "quando": "o valor da prova (R$, %, horas), uma vez por peça",
+      "quando_nao": "número decorativo; valor sem fonte",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROOF"
+      ],
+      "curva": "a molaTarde no selo, o número contando na reta com algarismos tabulares",
+      "motor": {
+        "hyperframes": [
+          "registro:spring-pop",
+          "registro:count-up",
+          "registro:number-pop-in"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "pilula-de-acao",
+      "comportamento": "a ação final pousa numa pílula com seta, que afunda uma vez como um botão tocado",
+      "comunica": "o que fazer agora",
+      "quando": "o fecho: \"link na bio\", \"manda direct\"",
+      "quando_nao": "antes do fecho; duas ações",
+      "familia": "STANDARD",
+      "funcao": [
+        "CTA"
+      ],
+      "curva": "a pílula chega na pouso em 9 q e a seta 4 q depois; o toque afunda 4% e volta em 6 quadros",
+      "motor": {
+        "hyperframes": [
+          "registro:cta-close",
+          "registro:cta-lockup",
+          "registro:gesture-tap"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "estrelas-que-enchem",
+      "comportamento": "as estrelas da avaliação enchem da esquerda até a nota, a última pela metade",
+      "comunica": "a nota que o cliente vê",
+      "quando": "a prova no Google, a nota real do negócio",
+      "quando_nao": "nota inventada",
+      "familia": "MICRO",
+      "funcao": [
+        "PROOF"
+      ],
+      "curva": "a reta no enchimento, um clique por estrela",
+      "motor": {
+        "hyperframes": [
+          "registro:star-rating-fill"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "aparelho-real-em-3d",
+      "comportamento": "o celular de verdade, em 3D, gira para a câmera com a tela viva e a luz correndo no vidro",
+      "comunica": "isto acontece no celular do seu cliente",
+      "quando": "a cena que mostra a tela, quando o aparelho é a ideia",
+      "quando_nao": "o aparelho desenhado em CSS (lê como maquete barata); aparelho pequeno no centro do quadro",
+      "familia": "HERO",
+      "funcao": [
+        "DEMONSTRATION",
+        "CONTEXT"
+      ],
+      "curva": "o giro na chicote até pousar, a câmera na deslize",
+      "motor": {
+        "hyperframes": [
+          "registro:vfx-iphone-device",
+          "registro:ios26-liquid-glass"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "objeto-que-cresce-e-vira-o-chao",
+      "comportamento": "o objeto do fim da cena cresce até cobrir o quadro, e a cor dele vira o chão da cena seguinte",
+      "comunica": "a mesma ideia, mais funda; a troca de chão com causa",
+      "quando": "trocar o claro pelo escuro ou entrar num objeto (a tela, o cubo)",
+      "quando_nao": "troca sem objeto na tela",
+      "familia": "CAMERA",
+      "funcao": [
+        "TRANSFORMATION"
+      ],
+      "curva": "cresce na mergulho (1 a 30 em 0,4 s), a cena nova entra na pouso",
+      "motor": {
+        "hyperframes": [
+          "registro:iris-reveal",
+          "registro:zoom-through-transition"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "corte-pelo-objeto",
+      "comportamento": "o objeto que sai e o que entra estão no mesmo lugar, do mesmo tamanho, e o corte cai no meio do movimento",
+      "comunica": "é a mesma coisa, continuando",
+      "quando": "toda costura que pode ter portador",
+      "quando_nao": "quando nada se parece entre as cenas: aí é corte seco na batida",
+      "familia": "CAMERA",
+      "funcao": [
+        "TRANSFORMATION"
+      ],
+      "curva": "a saída acelera (mergulho), a entrada freia (pouso), o corte no pico de velocidade",
+      "motor": {
+        "hyperframes": [
+          "registro:match-cut",
+          "registro:text-match-cut",
+          "registro:type-match-cut",
+          "registro:cut-the-curve"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "tremor-no-impacto",
+      "comportamento": "a câmera treme 3 quadros no impacto e assenta",
+      "comunica": "bateu: isto pesa",
+      "quando": "o impacto principal, 1 a 2 por peça",
+      "quando_nao": "em todo corte; em texto que se lê na hora",
+      "familia": "MICRO",
+      "funcao": [
+        "TENSION"
+      ],
+      "curva": "amplitude que cai a zero em 3 a 5 quadros",
+      "motor": {
+        "hyperframes": [
+          "registro:camera-shake",
+          "registro:beat-accent"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "borrao-de-obturador",
+      "comportamento": "o que anda rápido borra no sentido do movimento, como numa câmera de verdade",
+      "comunica": "velocidade real, não de computador",
+      "quando": "o que anda mais de ~15 px por quadro",
+      "quando_nao": "junto com o borrão direcional (uma gramática por peça)",
+      "familia": "MICRO",
+      "funcao": [
+        "TRANSFORMATION"
+      ],
+      "curva": "a do movimento; 8 subquadros",
+      "motor": {
+        "hyperframes": [
+          "registro:motion-blur",
+          "registro:echo-trail"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "grao-de-pelicula",
+      "comportamento": "um grão fino cobre o quadro inteiro e muda a cada 2 quadros",
+      "comunica": "filmado, não renderizado",
+      "quando": "o filme inteiro, contra a faixa do degradê",
+      "quando_nao": "grão pesado de \"vintage\"; marca chapada de propósito",
+      "familia": "MICRO",
+      "funcao": [
+        "BRAND"
+      ],
+      "curva": "passos secos a 12 a 24 por segundo",
+      "motor": {
+        "hyperframes": [
+          "registro:grain-field",
+          "registro:grain-overlay"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "objeto-3d-na-luz",
+      "comportamento": "o objeto da ideia em 3D gira devagar sob uma luz que corre pela superfície e pousa",
+      "comunica": "isto é real e tem valor",
+      "quando": "o herói físico (a marca em volume, o produto), um evento por peça",
+      "quando_nao": "logo girando sem motivo; 3D em duas batidas seguidas",
+      "familia": "HERO",
+      "funcao": [
+        "REVEAL",
+        "BRAND"
+      ],
+      "curva": "o giro na deslize, o pouso na heroi",
+      "motor": {
+        "hyperframes": [
+          "registro:product-turntable",
+          "registro:extruded-logo",
+          "registro:glass-hero"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "chave-em-serifa",
+      "comportamento": "a palavra-chave numa serifa livre (Instrument Serif, OFL), branca, sem recorte; o azul só no brilho",
+      "comunica": "esta é a palavra que importa, com tom de revista",
+      "quando": "o estilo editorial, se a serifa for a voz de toda chave da peça",
+      "quando_nao": "a serifa numa palavra solta (o tique dos modelos); fonte que não se redistribui",
+      "familia": "STANDARD",
+      "funcao": [
+        "HOOK",
+        "REVEAL"
+      ],
+      "curva": "como a chave das duas vozes: 8 q saindo do desfoque na esse",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "pilula-com-icone-que-pousa",
+      "comportamento": "a palavra-chave numa pílula com o ícone do assunto, que pousa com a mola tarde",
+      "comunica": "a palavra é uma coisa: o canal, o objeto",
+      "quando": "o estilo de interface, quando a palavra tem ícone real (WhatsApp, Google, Instagram)",
+      "quando_nao": "ícone de enfeite; escudo, troféu, foguete, lâmpada",
+      "familia": "STANDARD",
+      "funcao": [
+        "CONTEXT",
+        "PROOF"
+      ],
+      "curva": "a pílula na molaTarde (o motivo em excecoes), o ícone 2 a 4 q depois",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "elemento-vivo",
+      "comportamento": "um agente único que dá causa ao efeito: toca (escala 100 → 70 em 2 q e volta com mola em 0,3 s), liga, desenha a linha, abre a onda; espera no fim da legenda e some em 0,17 s entre cenas",
+      "comunica": "tudo o que acontece tem um toque",
+      "quando": "o puro de interface e a cena de interface do falado",
+      "quando_nao": "mover sem função; dois agentes no quadro",
+      "familia": "STANDARD",
+      "funcao": [
+        "DEMONSTRATION",
+        "PROCESS"
+      ],
+      "curva": "viaja na esse em 0,27 a 0,5 s; renasce no próximo alvo com a cartao",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "push-de-tela",
+      "comportamento": "a tela nova entra de lado, de x 750 para 250, e a velha anda só 150 px (o parallax), com sombra de 16% na borda da nova",
+      "comunica": "o app mudou de tela",
+      "quando": "trocar de tela dentro do aparelho",
+      "quando_nao": "trocar de cena (é o corte ou a continuidade)",
+      "familia": "CAMERA",
+      "funcao": [
+        "DEMONSTRATION",
+        "PROCESS"
+      ],
+      "curva": "camera, 0,46 s",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "clique-que-pula",
+      "comportamento": "o botão afunda 6% em 2 quadros e volta com mola; o cartão tocado desce 18 px em 0,16 s e volta com mola em 0,55 s",
+      "comunica": "foi tocado, e respondeu",
+      "quando": "o toque do elemento vivo, o botão do app",
+      "quando_nao": "texto de leitura",
+      "familia": "MICRO",
+      "funcao": [
+        "DEMONSTRATION"
+      ],
+      "curva": "a volta na cartao, em 0,45 a 0,5 s",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "nasce-da-tela-e-volta",
+      "comportamento": "o objeto sai do aparelho com escala 0 e voa até o lugar; na troca, volta pelo mesmo caminho",
+      "comunica": "isto vem do app e volta para ele",
+      "quando": "os widgets, as clientes, os nichos que saem do celular",
+      "quando_nao": "objeto que não mora no app",
+      "familia": "STANDARD",
+      "funcao": [
+        "DEMONSTRATION",
+        "PROCESS"
+      ],
+      "curva": "o voo em 0,6 s na voo; a volta em 0,42 a 0,46 s na rapida, a escala a 0 em 0,2 s; a saída a 65 a 75% da entrada",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "onda-do-toque",
+      "comportamento": "dois anéis de 3 px abrem do ponto tocado, de 40 px a R e a 0,72 R, com 0,09 s entre eles, e somem em 0,65 s",
+      "comunica": "aqui foi tocado",
+      "quando": "o toque do elemento vivo, uma vez por ação",
+      "quando_nao": "sem toque que a cause (efeito como papel de parede)",
+      "familia": "MICRO",
+      "funcao": [
+        "DEMONSTRATION"
+      ],
+      "curva": "pouso no raio, reta na opacidade",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "ficha-que-apaga-e-acende",
+      "comportamento": "a ficha perde a cor do avatar para o cinza em 0,35 s e ganha um véu de 58% (apaga), ou o véu sai de 55 a 0% em 0,3 s (acende)",
+      "comunica": "este saiu, este entrou",
+      "quando": "a cliente que some, o horário que vaga, a lista que muda",
+      "quando_nao": "troca de texto (é a palavra riscada)",
+      "familia": "MICRO",
+      "funcao": [
+        "COMPARISON",
+        "TRANSFORMATION"
+      ],
+      "curva": "esse; cascata de 0,12 s entre fichas",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "linha-desenhada-pelo-agente",
+      "comportamento": "a linha se desenha de 0 a 100% puxada pelo elemento vivo",
+      "comunica": "uma coisa liga a outra",
+      "quando": "ligar dois pontos da interface, o caminho do cliente",
+      "quando_nao": "linha decorativa sem o que ligar",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROCESS",
+        "EXPLANATION"
+      ],
+      "curva": "esse, em 0,3 a 0,65 s; a linha do tempo, linear",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "tremor-do-nao",
+      "comportamento": "o objeto chacoalha de lado poucas vezes, como a cabeça que diz não",
+      "comunica": "deu errado, não pode",
+      "quando": "o erro, a recusa, a senha errada",
+      "quando_nao": "impacto (é o tremor de câmera)",
+      "familia": "MICRO",
+      "funcao": [
+        "TENSION",
+        "PROBLEM"
+      ],
+      "curva": "amplitude que cai a zero, menos de 0,5 s",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "queda-com-gravidade",
+      "comportamento": "o objeto sobe um pouco e cai acelerando, encolhendo de 46 a 30 e girando",
+      "comunica": "foi descartado",
+      "quando": "o que cai na lixeira, o que se perde",
+      "quando_nao": "saída comum (é a saida)",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROBLEM",
+        "TRANSFORMATION"
+      ],
+      "curva": "0,3 s na voo e 0,26 s na queda",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "pontinhos-digitando",
+      "comportamento": "três bolinhas de 9 px sobem em onda (−3·max(0, sin(9t − 0,9j)) px) até 0,42 s antes da mensagem chegar",
+      "comunica": "alguém está respondendo",
+      "quando": "a conversa do WhatsApp, antes da resposta",
+      "quando_nao": "sem mensagem depois",
+      "familia": "MICRO",
+      "funcao": [
+        "TENSION",
+        "DEMONSTRATION"
+      ],
+      "curva": "a fórmula, pura de t",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "notificacao-que-cresce-do-centro",
+      "comportamento": "o cartão da notificação cresce do centro (escala 0,01 a 1) e o texto entra depois",
+      "comunica": "chegou uma coisa nova",
+      "quando": "a mensagem, o pedido, o pagamento que chega",
+      "quando_nao": "texto que não é notificação",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROOF",
+        "REVEAL"
+      ],
+      "curva": "o cartão em 19 q; o texto 6 a 21 q depois",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "fotos-em-cascata",
+      "comportamento": "fotos com borda branca de 6 a 10 px, inclinadas 5 a 12°, crescem do canto (0,09 a 0,25 → 1), uma depois da outra",
+      "comunica": "tem prova, e é muita",
+      "quando": "resultado real, notícias, o mosaico de clientes",
+      "quando_nao": "foto inventada; uma foto só",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROOF"
+      ],
+      "curva": "23 a 27 q cada, cascata de 13 a 31 q",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "anel-a-mao",
+      "comportamento": "um traço à mão se desenha em volta da palavra",
+      "comunica": "é esta",
+      "quando": "a palavra que a fala aponta, uma vez",
+      "quando_nao": "em toda frase; junto com o sublinhado",
+      "familia": "MICRO",
+      "funcao": [
+        "HOOK",
+        "PROOF"
+      ],
+      "curva": "12 q",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "flash-antes-da-logo",
+      "comportamento": "um retângulo de luz forte acende de 3 a 6 q, a logo branca entra logo depois e o quadro escurece",
+      "comunica": "a marca assina",
+      "quando": "o fecho com a logo",
+      "quando_nao": "no meio da peça",
+      "familia": "HERO",
+      "funcao": [
+        "BRAND"
+      ],
+      "curva": "flash de 3 a 6 q; a logo segura 1 a 1,5 s",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "vitrine-antes-e-depois",
+      "comportamento": "dois cartões: o antes menor e inclinado atrás, o depois maior na frente, o rótulo numa pílula em cima",
+      "comunica": "o trabalho mudou isto",
+      "quando": "o Reel de cliente, com trabalho real e a permissão do cliente",
+      "quando_nao": "trabalho inventado",
+      "familia": "STANDARD",
+      "funcao": [
+        "COMPARISON",
+        "PROOF"
+      ],
+      "curva": "os cartões na pouso; a sombra é uma cópia desfocada (0,16 a 0,48)",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "cursor-que-estaciona",
+      "comportamento": "o cursor anda em curva, para antes do alvo, aperta (0,71 a 0,9) e o alvo responde 1 quadro depois (0,63 a 0,81), sem anel",
+      "comunica": "alguém está usando de verdade",
+      "quando": "a demonstração de produto na tela",
+      "quando_nao": "interface de produto de terceiro inventada",
+      "familia": "MICRO",
+      "funcao": [
+        "DEMONSTRATION"
+      ],
+      "curva": "a viagem na esse, o aperto em 2 a 3 q; de ponto de partida, 10 q até o primeiro alvo e 7 a 8 q entre alvos a 30 qps (a 60 qps, 20 e 15 q)",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "contador-por-quadro",
+      "comportamento": "o número troca um valor por quadro, em passos que diminuem, e o valor de dado termina quebrado",
+      "comunica": "o número é medido, não enfeite",
+      "quando": "o número que a fala diz e que tem fonte",
+      "quando_nao": "número sem fonte (é slide de número)",
+      "familia": "MICRO",
+      "funcao": [
+        "PROOF"
+      ],
+      "curva": "sem curva: um valor por quadro",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "chave-em-2-quadros",
+      "comportamento": "a palavra do gancho entra inteira em 2 a 4 quadros, sem letra por letra",
+      "comunica": "leia já",
+      "quando": "o gancho, a palavra que bate",
+      "quando_nao": "texto com voz (pede 8 a 12 q)",
+      "familia": "MICRO",
+      "funcao": [
+        "HOOK"
+      ],
+      "curva": "heroi, 2 a 4 q",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "estalo-de-camera",
+      "comportamento": "a câmera dá um salto de 1 quadro (de 56 a 77% do caminho) e completa com uma cauda de 9 a 18 q",
+      "comunica": "olhe aqui, agora",
+      "quando": "o golpe de ênfase, uma vez",
+      "quando_nao": "em todo corte; câmera de reenquadrar (é a camera)",
+      "familia": "CAMERA",
+      "funcao": [
+        "REVEAL",
+        "TENSION"
+      ],
+      "curva": "1 q de salto e a cauda na pouso",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "notificacao-de-vidro-tocada",
+      "comportamento": "a notificação do iOS no vidro do iOS (desfoque 20 px, saturação 180%, branco a 62% e a borda acesa) sobe 40 px sobre a foto e assenta; uma faixa de luz a atravessa uma vez; no verbo da ação (clique, toque) ela afunda 3% e escurece, como sob o dedo, e volta",
+      "comunica": "a oferta ou o aviso como coisa que chega no celular de quem assiste",
+      "quando": "o fecho com a chamada, sobre o rosto ou a foto; o aviso de um sistema que a frase nomeia (página indexada, pedido, pagamento)",
+      "quando_nao": "sobre fundo chapado (o vidro precisa de foto atrás); texto que passa do tempo de leitura; vidro acrescentado em ícone de app (o ícone oficial já tem o acabamento dele)",
+      "familia": "STANDARD",
+      "funcao": [
+        "CTA",
+        "PROOF"
+      ],
+      "curva": "a chegada na cartao (a mola de interface, 15 q) com a opacidade em 3 q; o toque na esse (3 q) e a volta na pouso (9 q)",
+      "motor": {
+        "hyperframes": [
+          "registro:liquid-glass-notification"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "emoji-que-toca",
+      "comportamento": "o emoji oficial (160 px, no tamanho dele) pousa ao lado da cabeça na palavra que tem objeto e treme duas vezes (8° em 2 quadros), como o despertador tocando; sai mais curto que entrou",
+      "comunica": "a palavra que tem objeto vira coisa (demora vira despertador)",
+      "quando": "uma palavra com objeto óbvio na cena de legenda, longe da boca e dos olhos, uma vez por peça",
+      "quando_nao": "emoji gerado por IA (lê como genérico); ampliado acima de 160 px; dois ao mesmo tempo",
+      "familia": "MICRO",
+      "funcao": [
+        "EXPLANATION",
+        "TENSION"
+      ],
+      "curva": "a chegada na molaTarde (o motivo em excecoes), as tremidas na esse, a saída na saida (7 q)",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "busca-que-se-digita",
+      "comportamento": "o campo de busca da interface se digita uma letra a cada 2 quadros, com o cursor piscando antes e sumindo quando a página responde, e um clique de tecla por letra (dois cliques alternados, o espaço mudo)",
+      "comunica": "a pessoa do outro lado: o que ela procurou antes de ver o resultado",
+      "quando": "a frase fala de quem busca ou escreve (a pessoa lê, o cliente procura, a mensagem que chega); dentro de uma interface",
+      "quando_nao": "o título solto digitado com cursor (o amador: comum.tipografia.letra-por-letra, no manual); texto que passa de ~20 letras (vira espera)",
+      "familia": "MICRO",
+      "funcao": [
+        "CONTEXT",
+        "DEMONSTRATION"
+      ],
+      "curva": "a letra entra seca (tl.set por letra, sem curva); a barra chega na heroi, em cascata de 3 quadros com o cartão",
+      "motor": {
+        "hyperframes": [
+          "registro:typed-prompt"
+        ]
+      },
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null,
+      "texto_progressivo": true
+    },
+    {
+      "id": "barra-do-safari-que-carrega",
+      "comportamento": "a barra de endereço do Safari no pé da tela, com o cadeado e o endereço; a linha azul de carregamento anda com a medida da cena, na mesma curva, e trava onde a medida trava, pulsando uma vez fraca",
+      "comunica": "a página que não carrega é a nota baixa: a medida vira a experiência de quem abre",
+      "quando": "a frase fala de velocidade, carregamento ou do site aberto no celular",
+      "quando_nao": "sem a medida ao lado (a barra sozinha vira enfeite); em cima, onde mora a legenda",
+      "familia": "STANDARD",
+      "funcao": [
+        "PROOF",
+        "TENSION"
+      ],
+      "curva": "a chegada em escala 0,92 → 1 na heroi depois do empurrão da cena; a linha na chicote da contagem; o pulso na esse",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "frase-empilhada-na-batida",
+      "comportamento": "a frase do gancho se monta uma palavra por batida, empilhada em linhas grandes; a cada batida o fundo inteiro troca de cor e as palavras já na tela trocam a cor com ele; a última palavra leva o degradê da marca",
+      "comunica": "a frase inteira cabe na leitura, e o ritmo da música vira o ritmo da leitura",
+      "quando": "o gancho é uma frase de 4 a 7 palavras e a trilha tem batida marcada nos primeiros 4 s",
+      "quando_nao": "frase longa (passa de 5 linhas) ou trilha sem batida; palavra que some antes do tempo de leitura",
+      "familia": "HERO",
+      "funcao": [
+        "HOOK"
+      ],
+      "curva": "a palavra entra na heroi, de 1,5 com desfoque a 1 em 7 quadros; o fundo troca seco no quadro da batida",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "mergulho-no-cubo-que-vira-tela",
+      "comportamento": "a câmera mergulha no cubo aceso da colmeia (escala 7, a colmeia desfoca atrás) e a tela do site nasce de dentro dele, opaca, do tamanho do cubo, crescendo até o lugar",
+      "comunica": "o site é o que acende o negócio no meio dos outros: o símbolo vira a coisa",
+      "quando": "a virada do problema para a solução, no drop da trilha",
+      "quando_nao": "sem um objeto-símbolo estabelecido antes (o mergulho entra em nada)",
+      "familia": "CAMERA",
+      "funcao": [
+        "REVEAL",
+        "TRANSFORMATION"
+      ],
+      "curva": "a câmera na mergulho em 12 quadros; o site na pouso, de 0,72 a 1",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "adesivo-da-palavra-com-fundo-na-batida",
+      "comportamento": "três palavras curtas entram uma por batida como adesivo (bloco de cor com a palavra, inclinado, de 1,45 a 1) acima do site, e o fundo atrás troca de cor junto; a parte do site que a palavra nomeia sobe ou cresce dentro do cartão",
+      "comunica": "a lista vira ritmo: cada passo tem um nome e uma prova na tela",
+      "quando": "uma lista de 3 passos de uma palavra cada sobre uma interface",
+      "quando_nao": "passo que não cabe numa palavra; a parte do site crescendo para fora do cartão",
+      "familia": "STANDARD",
+      "funcao": [
+        "EXPLANATION",
+        "PROCESS"
+      ],
+      "curva": "o adesivo na batida em 8 quadros, com -4° a 0°; a parte na cartao",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    },
+    {
+      "id": "baloes-que-nascem-do-botao",
+      "comportamento": "o toque no botão do WhatsApp (afunda a 0,95, anel azul que abre) e os balões da conversa nascem do botão, pequenos, e sobem até o lugar deles, a pergunta e depois a resposta",
+      "comunica": "o site leva à conversa: a causa e o efeito na mesma tela",
+      "quando": "o fecho da demonstração, quando a ação do site é chamar no WhatsApp",
+      "quando_nao": "balão saindo do cartão; texto de balão com mais de uma linha",
+      "familia": "MICRO",
+      "funcao": [
+        "DEMONSTRATION",
+        "PROOF"
+      ],
+      "curva": "o botão na deslize e na molaTarde; o balão na cartao, de 0,2 a 1",
+      "motor": {},
+      "estado": "visto, sem decisão",
+      "procura": [],
+      "prova": "",
+      "recusa": null
+    }
+  ]
+}

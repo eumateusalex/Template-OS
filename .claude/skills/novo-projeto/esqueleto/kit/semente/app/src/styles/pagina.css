@@ -1,0 +1,38 @@
+/* fundação: semente v1 · é seu
+   A composição da página: as emendas entre seções e o que o Revela esconde.
+
+   ⚠️ Mora num arquivo próprio, e não no `escala.css`: a escala é provisória
+   (o site refeito a redefine e o --atualizar a troca), e o movimento e as
+   emendas não podem sumir junto com ela sem aviso. O layout importa este
+   arquivo. */
+
+/* ── As emendas entre seções ───────────────────────────────────────────────
+   Duas seções do MESMO registro seguidas levam meio respiro e um fio, e não o
+   respiro inteiro duas vezes: somado, ele abre 231px de branco a 1280 (é a
+   regra "As emendas entre seções" do site). Troca de registro (claro para escuro) já marca a emenda sozinha. */
+[data-registro="claro"] + [data-registro="claro"],
+[data-registro="escuro"] + [data-registro="escuro"] {
+  padding-top: calc(var(--pad-secao) / 2);
+  border-top: 1px solid var(--border);
+}
+
+/* ── Movimento: o que o Revela esconde ─────────────────────────────────────
+   🚨 Quem esconde é o CSS, e só sob `html.js` (regra 1 do `16-movimento.md`
+   do kit). A classe entra pelo vigia do `<head>` do layout, que a TIRA se o
+   código do Revela não chegar em 3 s: com o JavaScript falhando, a página
+   aparece inteira; com ele funcionando, o bloco espera a pessoa chegar nele.
+   Não é uma animação de rede de 4 s: ela revelaria o bloco antes de a pessoa
+   rolar até ele. */
+[data-revela] {
+  transition:
+    opacity var(--dur-in) var(--ease-brand),
+    translate var(--dur-in) var(--ease-brand);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-revela]:not([data-revelado]) {
+    translate: 0 0.75rem;
+  }
+  .js [data-revela="entrar"]:not([data-revelado]) {
+    opacity: 0;
+  }
+}

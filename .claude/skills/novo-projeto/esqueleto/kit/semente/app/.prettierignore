@@ -1,0 +1,25 @@
+# fundação: semente v1 · é seu
+# O que é do registry, da fundação ou gerado não se formata aqui: o registry manda
+# o byte dos componentes, o kit confere o byte de fundacao/ e fabrica/, e o
+# texto dos documentos é escrito à mão.
+node_modules/
+.next/
+out/
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.fotos/
+public/
+fabrica/
+fundacao/
+specs/
+.github/
+src/components/ui/
+src/app/globals.css
+src/lib/tipos/banco.ts
+package-lock.json
+CLAUDE.md
+briefing.md
+README.md
+AGENTS.md

@@ -1,0 +1,7 @@
+# O kit da fábrica se guarda em LF, sempre.
+#
+# 🚨 Sem isto, o git com core.autocrlf=true escreve CRLF no disco do Windows, e
+# o manifesto do kit (que é por conteúdo) passa a acusar todo checkout noutro
+# sistema (num CI real, 12 de 50 arquivos
+# acusaram diferença com o conteúdo idêntico.
+fabrica/** text eol=lf

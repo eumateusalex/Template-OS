@@ -1,0 +1,402 @@
+{
+ "versao": 1,
+ "sobre": "As faixas medidas de cada linguagem de vídeo, pelo medir_ritmo.py. O que cada linguagem é, quando serve e o que muda nas regras mora no linguagens.md da /video; aqui só os números. Toda faixa é calibragem: avisa, e a exceção escrita no plano.json da peça (a regra faixas) cala o aviso por máquina, pelo medir_ritmo.py --plano. O tempo diz quem manda no tempo da peça (voz, musica ou evento) e a dispensa, as regras da /mograph que a linguagem não cobra; os estilos dizem o que cada estilo do estilos.md dispensa e a linguagem que ele traz (o linguagem.mjs da /mograph lê os dois). Movimento é a diferença média entre quadros a 10 qps (0 a 1); calmo é o segundo abaixo de calmo_abaixo. O movimento depende do tamanho do que anda no quadro, então a faixa dele é larga; o fecho parado e a fração de segundos calmos são os sinais mais estáveis. Referência filmada de monitor não entra na faixa de movimento.",
+ "linguagens": {
+  "interface-de-marca": {
+   "nome": "interface de marca sem pessoa: a interface reimaginada como uma pequena história de uso, nada corta, tudo se transforma, música contínua, sem voz",
+   "faixas": {
+    "movimento_mediano": [
+     0.007,
+     0.13
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.18
+    ],
+    "eventos_por_s": [
+     2.3,
+     5
+    ],
+    "LRA_lu": [
+     1.2,
+     5
+    ]
+   },
+   "fecho_parado_max_s": 2,
+   "calmo_abaixo": 0.004,
+   "provisoria": false,
+   "n_referencias": 3,
+   "tempo": "musica",
+   "dispensa": []
+  },
+  "spec-ad-locucao": {
+   "nome": "spec ad com locução: 10 a 25 s, três frases (dor, mecanismo, nome e promessa), cada verbo com um gesto, a voz manda no tempo",
+   "faixas": {
+    "movimento_mediano": [
+     0.008,
+     0.1
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.15
+    ],
+    "eventos_por_s": [
+     3,
+     7
+    ],
+    "LRA_lu": [
+     1.5,
+     6
+    ]
+   },
+   "fecho_parado_max_s": 2.5,
+   "calmo_abaixo": 0.004,
+   "provisoria": false,
+   "n_referencias": 3,
+   "tempo": "voz",
+   "dispensa": []
+  },
+  "promo-denso": {
+   "nome": "promo denso de lançamento (SaaS, produto): ritmo alto, cortes e transformações, música com batida",
+   "faixas": {
+    "movimento_mediano": [
+     0.018,
+     0.09
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.12
+    ],
+    "eventos_por_s": [
+     2.5,
+     6
+    ],
+    "LRA_lu": [
+     1.5,
+     7
+    ]
+   },
+   "fecho_parado_max_s": 3.5,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 1,
+   "tempo": "musica",
+   "dispensa": []
+  },
+  "falado-com-motion": {
+   "nome": "pessoa falando com motion por cima: legenda em dois registros, um objeto por frase perto do rosto, corte a cada 1 a 3 s, o som travado no corte",
+   "faixas": {
+    "movimento_mediano": [
+     0.007,
+     0.07
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.18
+    ],
+    "eventos_por_s": [
+     2.7,
+     5.4
+    ],
+    "cortes_por_s": [
+     0.05,
+     0.7
+    ],
+    "LRA_lu": [
+     1,
+     6
+    ]
+   },
+   "fecho_parado_max_s": 2,
+   "calmo_abaixo": 0.004,
+   "provisoria": false,
+   "n_referencias": 6,
+   "tempo": "voz",
+   "dispensa": [],
+   "gradacao": {
+    "adjust": {
+     "temperature": 0.068
+    },
+    "wheels": {
+     "shadows": {
+      "hue": 30,
+      "amount": 0.06,
+      "level": 0
+     },
+     "midtones": {
+      "hue": 35,
+      "amount": 0.08,
+      "level": 0
+     },
+     "highlights": {
+      "hue": 40,
+      "amount": 0.14,
+      "level": 0
+     }
+    }
+   },
+   "gradacao_aprovada": false,
+   "gradacao_fonte": "o look sugerido para a câmera crua (quente inteiro: as três rodas no quente e a temperatura somada à correção de cada gravação); entra na peça só depois que o usuário o vê no antes e depois e o aprova, e aí gradacao_aprovada passa a true",
+   "cor_entre_tomadas": {
+    "lum": 0.05,
+    "sat": 0.05
+   },
+   "cor_entre_tomadas_fonte": "provisória: numa gravação na mesma sala, a câmera crua salta no máximo perto de 0,022 de luminância e 0,029 de saturação entre tomadas vizinhas (medir_ritmo.py --tomadas); a tolerância é perto do dobro, para pegar a tomada com outra luz ou outro balanço de branco. A próxima gravação medida afina"
+  },
+  "gancho-curto": {
+   "nome": "gancho curto, vinheta ou portfólio em loop: 5 a 15 s, tipografia gigante, zoom de soco, tudo na batida",
+   "faixas": {
+    "duracao": [
+     4,
+     16
+    ],
+    "cortes_por_s": [
+     0.2,
+     1.1
+    ],
+    "movimento_mediano": [
+     0.006,
+     0.07
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.3
+    ],
+    "LRA_lu": [
+     0.5,
+     4.5
+    ]
+   },
+   "fecho_parado_max_s": 1.5,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 2,
+   "tempo": "musica",
+   "dispensa": []
+  },
+  "sobrio-monocromo": {
+   "nome": "sóbrio monocromo com um acento: interface e diagramas lentos, formas que se transformam, serifa itálica num destaque",
+   "faixas": {
+    "movimento_mediano": [
+     0.002,
+     0.06
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.75
+    ],
+    "eventos_por_s": [
+     3,
+     4.5
+    ],
+    "LRA_lu": [
+     2.5,
+     7.5
+    ]
+   },
+   "fecho_parado_max_s": 3.9,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 2,
+   "tempo": "musica",
+   "dispensa": []
+  },
+  "tipografia-cinetica": {
+   "nome": "tipografia cinética e explicativo de texto: a palavra entra no instante dita, uma ênfase só, respiro depois do clímax",
+   "faixas": {
+    "movimento_mediano": [
+     0.012,
+     0.07
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.2
+    ],
+    "eventos_por_s": [
+     2.5,
+     5
+    ]
+   },
+   "fecho_parado_max_s": 2.5,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 2,
+   "tempo": "voz",
+   "dispensa": []
+  },
+  "minimalista-blueprint": {
+   "nome": "minimalista de folha (blueprint, guardanapo): a câmera desce devagar por uma folha, o traço se desenha",
+   "faixas": {
+    "movimento_mediano": [
+     0.002,
+     0.015
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.75
+    ],
+    "eventos_por_s": [
+     3,
+     5.5
+    ]
+   },
+   "fecho_parado_max_s": 1.5,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 2,
+   "tempo": "musica",
+   "dispensa": []
+  },
+  "so-efeitos": {
+   "nome": "só efeitos, sem música (clean sfx): cada evento da tela com o som dele e silêncio de verdade entre eles",
+   "faixas": {
+    "movimento_mediano": [
+     0.009,
+     0.09
+    ],
+    "fracao_silencio": [
+     0.2,
+     0.61
+    ],
+    "LRA_lu": [
+     5.5,
+     14
+    ],
+    "eventos_por_s": [
+     1.3,
+     5
+    ]
+   },
+   "fecho_parado_max_s": 2.5,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 4,
+   "tempo": "evento",
+   "dispensa": [
+    "tipos-de-efeito"
+   ]
+  },
+  "lancamento-premium": {
+   "nome": "lançamento premium de produto digital: um objeto por plano, um acento de cor, o objeto-ponte no lugar do corte, dois atos de gatilho e resultado, respiro e fecho que assenta; sem voz",
+   "faixas": {
+    "duracao": [
+     10.8,
+     70.6
+    ],
+    "movimento_mediano": [
+     0.0074,
+     0.066
+    ],
+    "segundos_calmos_fracao": [
+     0.05,
+     0.4
+    ],
+    "eventos_por_s": [
+     2.6,
+     5.6
+    ],
+    "LRA_lu": [
+     0.6,
+     9.8
+    ],
+    "cortes_por_s": [
+     0,
+     1.08
+    ],
+    "fracao_silencio": [
+     0,
+     0.05
+    ]
+   },
+   "fecho_parado_max_s": 3.1,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 1,
+   "tempo": "musica",
+   "dispensa": []
+  },
+  "lancamento-com-locucao": {
+   "nome": "lançamento de SaaS ou de IA com locução: 30 a 80 s, a voz percorre o produto em 8 a 12 recursos",
+   "faixas": {
+    "duracao": [
+     28,
+     82
+    ],
+    "movimento_mediano": [
+     0.006,
+     0.1
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.39
+    ],
+    "eventos_por_s": [
+     2.9,
+     7
+    ],
+    "LRA_lu": [
+     1.5,
+     6.5
+    ]
+   },
+   "fecho_parado_max_s": 4.7,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 3,
+   "tempo": "voz",
+   "dispensa": []
+  },
+  "documental": {
+   "nome": "minidocumentário vertical com voz em off: a narração manda no tempo, imagem de arquivo, mapa e drone, motion discreto, cor natural, 45 a 120 s",
+   "faixas": {
+    "movimento_mediano": [
+     0.004,
+     0.027
+    ],
+    "segundos_calmos_fracao": [
+     0,
+     0.5
+    ],
+    "eventos_por_s": [
+     3.1,
+     4.4
+    ],
+    "LRA_lu": [
+     1.2,
+     6
+    ],
+    "cortes_por_s": [
+     0,
+     0.3
+    ],
+    "fracao_silencio": [
+     0,
+     0.07
+    ]
+   },
+   "fecho_parado_max_s": 3,
+   "calmo_abaixo": 0.004,
+   "provisoria": true,
+   "n_referencias": 4,
+   "tempo": "voz",
+   "dispensa": [
+    "tipos-de-efeito",
+    "dissolver-com-causa"
+   ],
+   "cor_entre_tomadas": {
+    "lum": 0.27,
+    "sat": 0.32
+   },
+   "cor_entre_tomadas_fonte": "o p90 do |Δ| entre tomadas vizinhas de referências do gênero; os saltos grandes são troca de cena ou de fonte (mapa escuro contra deserto claro), então a tolerância acha a tomada fora do grupo, e não pede gradação igual; a saturação (max-min)/max dispara em quadro escuro e é menos confiável que a luminância"
+  }
+ },
+ "estilos": {
+  "documental": {
+   "dispensa": [
+    "tipos-de-efeito",
+    "dissolver-com-causa"
+   ],
+   "linguagem": "documental"
+  }
+ }
+}

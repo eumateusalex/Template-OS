@@ -1,0 +1,30 @@
+/* fundação: semente v1 · é seu
+   A escala de texto e as medidas de layout do projeto.
+
+   ⚠️ Isto é PONTO DE PARTIDA, não marca: uma escala fluida comum, para o
+   projeto nascer legível no celular e no computador. Mude à vontade.
+
+   Uso no Tailwind: text-(length:--text-h2), max-w-(--measure), px-(--pad-x).
+   Os nomes não colidem com os do Tailwind (text-xs, text-sm...) nem com os do
+   shadcn. */
+:root {
+  --text-h1: clamp(2.75rem, 7vw, 5.5rem);
+  --text-h2: clamp(2rem, 4.6vw, 3rem);
+  --text-h3: clamp(1.0625rem, 2vw, 1.3125rem);
+  --text-lead: clamp(1rem, 1.6vw, 1.15625rem);
+  --text-corpo: 1rem;
+  --text-ui: 0.9375rem;
+  /* Campo de formulário nunca abaixo de 16px: abaixo disso o iPhone dá zoom
+     sozinho ao tocar no campo. */
+  --text-campo: 1rem;
+  --text-pequeno: 0.875rem;
+  --text-micro: 0.8125rem;
+
+  /* ~66 caracteres no corpo de 16px. */
+  --measure: 42rem;
+  --measure-curta: 30rem;
+
+  --container: 72.5rem;
+  --pad-x: clamp(1.25rem, 6vw, 5rem);
+  --pad-secao: clamp(3.625rem, 9vw, 8.75rem);
+}

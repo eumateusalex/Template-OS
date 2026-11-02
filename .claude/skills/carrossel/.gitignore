@@ -1,0 +1,16 @@
+# Dependências do render: cada máquina instala as suas (render/instalar.md)
+node_modules/
+
+# Saída do teste de instalação (render/instalar.md)
+render/teste-render/
+
+# A pasta marca/ não entra nesta lista de propósito: é a saída gerada da marca
+# de quem usa o workspace (identidade/), e o conferir da marca compara o que
+# está no Git com o que o gerador escreve. Para conferir que ela continua no Git:
+#     git check-ignore -v .claude/skills/carrossel/marca/tokens.css
+# Se ele responder alguma coisa, uma regra está ignorando a marca.
+
+# Lixo de sistema
+.DS_Store
+Thumbs.db
+*.log
